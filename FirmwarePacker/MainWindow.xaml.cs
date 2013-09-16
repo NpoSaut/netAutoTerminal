@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using FirmwarePacker.Models;
 
 namespace FirmwarePacker
 {
@@ -19,8 +20,13 @@ namespace FirmwarePacker
     /// </summary>
     public partial class MainWindow : Window
     {
+        public MainModel Model { get; private set; }
+
         public MainWindow()
         {
+            Model = new MainModel();
+            this.DataContext = Model;
+
             InitializeComponent();
         }
     }

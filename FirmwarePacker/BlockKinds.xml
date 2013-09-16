@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<index>
+  <system id="1" name="БЛОК">
+    <block id="1" name="БС-ДПС" channels="2" />
+    <block id="2" name="ВДС" channels="2" />
+    <block id="3" name="Монитор" channels="2" >
+      <module id="1" name="Индикатор" />
+      <module id="2" name="СНС" />
+    </block>
+  </system>
+</index>
