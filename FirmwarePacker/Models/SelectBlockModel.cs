@@ -6,7 +6,7 @@ using FirmwarePacking.SystemsIndexes;
 
 namespace FirmwarePacker.Models
 {
-    public class ModuleSelectorModel : ViewModel
+    public class ModuleSelectorModel : ViewModel, IDataCheck
     {
         private List<SystemKind> _SystemKinds;
         public List<SystemKind> SystemKinds
@@ -191,6 +191,28 @@ namespace FirmwarePacker.Models
             {
                 return string.Format("Канал {0}", Id);
             }
+        }
+
+        public bool Check()
+        {
+            return
+                SelectedSystemKind != null &&
+                SelectedBlockKind != null &&
+                SelectedModuleKind != null &&
+                Modification > 0 &&
+                Channels.Any(ch => ch.IsSelected);
+        }
+
+        public ModuleSelectorModel DeepClone()
+        {
+            return
+                new ModuleSelectorModel(MainModel.Index)
+                {
+                    SelectedSystemKind = SelectedSystemKind,
+                    SelectedBlockKind = SelectedBlockKind,
+                    SelectedModuleKind = SelectedModuleKind,
+                    Modification = Modification
+                };
         }
     }
 }

@@ -16,4 +16,9 @@ namespace FirmwarePacker.Models
                 PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
         }
     }
+
+    public interface IDataCheck
+    {
+        bool Check();
+    }
 }
