@@ -199,7 +199,7 @@ namespace FirmwarePacker.Models
                 SelectedSystemKind != null &&
                 SelectedBlockKind != null &&
                 SelectedModuleKind != null &&
-                Modification > 0 &&
+                Modification >= 0 &&
                 Channels.Any(ch => ch.IsSelected);
         }
 

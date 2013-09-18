@@ -23,7 +23,6 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
                                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                                            MinWidth="{Binding Source={RelativeSource Self}, Path=ActualHeight}"
                                             BorderThickness="1" CornerRadius="1" Padding="2">
                                         <ContentPresenter Content="{TemplateBinding ContentControl.Content}" ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                           ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}" SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"

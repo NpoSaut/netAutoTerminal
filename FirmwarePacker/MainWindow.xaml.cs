@@ -12,7 +12,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FirmwarePacker.Models;
-using System.Windows.Forms;
 
 namespace FirmwarePacker
 {
@@ -25,6 +24,9 @@ namespace FirmwarePacker
 
         public MainWindow()
         {
+            // Необъяснимый костыль для поправки локализации строковых конвертеров
+            Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);
+
             Model = new MainModel();
             this.DataContext = Model;
 
@@ -34,11 +36,12 @@ namespace FirmwarePacker
         private void SelectTreeCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             var component = (sender as FrameworkElement).DataContext as FirmwareComponentModel;
-            var dlg = new FolderBrowserDialog();
+            var dlg = new System.Windows.Forms.FolderBrowserDialog();
             if (component.Tree.RootDirectory != null) dlg.SelectedPath = component.Tree.RootDirectory.FullName;
             if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 component.Tree = new FirmwareTreeModel(dlg.SelectedPath);
+                Model.ReleaseDate = Model.Components.SelectMany(c => c.Tree.GetFiles()).AsParallel().Select(f => f.LastWriteTime).Max();
             }
         }
 
@@ -61,6 +64,18 @@ namespace FirmwarePacker
         private void ComponentPresenter_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
             (sender as FrameworkElement).Focus();
+        }
+
+        private void SavePackageCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        { e.CanExecute = Model.Check(); }
+        private void SavePackageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            var dlg = new Microsoft.Win32.SaveFileDialog() { Filter = "Файл пакета ПО (*.sfp)|*.pck|Все файлы (*.*)|*.*", DefaultExt = "*.sfp" };
+            if (dlg.ShowDialog(this) == true)
+            {
+                var pack = PackageFormatter.Enpack(Model);
+                pack.Save(dlg.FileName);
+            }
         }
     }
 }

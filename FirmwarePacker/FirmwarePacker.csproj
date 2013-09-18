@@ -76,6 +76,7 @@
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\SelectBlockModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="PackageFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

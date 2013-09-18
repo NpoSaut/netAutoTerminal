@@ -32,7 +32,7 @@ namespace FirmwarePacker.Models
             {
                 if (RootDirectory == null) return "";
                 var fl = GetFiles();
-                return string.Format("{0} файл{1} ({2}Б)", fl.Count, GetEnding(fl.Count), GetLetteredCount(fl.Sum(f => f.Length)));
+                return string.Format("{0} файл{1} ({2})", fl.Count, GetEnding(fl.Count), FirmwarePacking.FirmwareFile.GetLetteredFileSize(fl.Sum(f => f.Length)));
             }
         }
 
@@ -43,15 +43,6 @@ namespace FirmwarePacker.Models
             else if (c == 1) return "";
             else if (c >= 2 && c <= 4) return "а";
             else return "ов";
-        }
-
-        private static string GetLetteredCount(double Count)
-        {
-            var letter =
-                (new String[] { "", "К", "М", "Г", "Т" })
-                .Select((l, i) => new { m = Math.Pow(1024, i), l = l })
-                .First(l => Count < 4000 * l.m);
-            return (Math.Round(Count * 10 / letter.m) / 10).ToString() + " " + letter.l;
         }
 
         public override string ToString()
