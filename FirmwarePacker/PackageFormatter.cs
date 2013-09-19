@@ -23,7 +23,7 @@ namespace FirmwarePacker
                         },
                     Components =
                         PackageModel.Components.Select(ComponentModel =>
-                            new FirmwareComponent(ToComponentTargets(ComponentModel.TargetModule))
+                            new FirmwareComponent(ComponentModel.TargetModule.GetTargets().ToList())
                             {
                                 Files = ComponentModel.Tree.GetFiles().Select(f => ToFirmwareFile(f, ComponentModel.Tree.RootDirectory)).ToList()
                             }).ToList()
@@ -37,20 +37,6 @@ namespace FirmwarePacker
             f.OpenRead().Read(buff, 0, buff.Length);
             string relativePath = f.FullName.Substring(root.FullName.Length).TrimStart(new char[] { Path.DirectorySeparatorChar });
             return new FirmwareFile(relativePath, buff);
-        }
-
-        private static IList<ComponentTarget> ToComponentTargets(ModuleSelectorModel TargetModel)
-        {
-            return
-                TargetModel.Channels.Where(c => c.IsSelected).Select(channel =>
-                    new ComponentTarget()
-                    {
-                        SystemId = TargetModel.SelectedSystemKind.Id,
-                        CellId = TargetModel.SelectedBlockKind.Id,
-                        CellModification = TargetModel.Modification,
-                        Module = TargetModel.SelectedModuleKind.Id,
-                        Channel = channel.Id
-                    }).ToList();
         }
     }
 }

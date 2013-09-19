@@ -3,34 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FirmwarePacker"
         Title="Создание пакета ПО" Height="350" Width="525" MaxHeight="600"
-        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" SizeToContent="Height" ResizeMode="CanMinimize">
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
+        SizeToContent="Height" ResizeMode="CanMinimize">
     
     <Window.CommandBindings>
         <CommandBinding Command="SaveAs" Executed="SavePackageCommand_Executed" CanExecute="SavePackageCommand_CanExecute" />
     </Window.CommandBindings>
     
     <Grid>
-        <Grid.Resources>
-            <Style TargetType="Control" x:Key="BasicControlStyle">
-                <Setter Property="Margin" Value="2" />
-            </Style>
-            <Style TargetType="TextBox" BasedOn="{StaticResource BasicControlStyle}" />
-            <Style TargetType="DatePicker" BasedOn="{StaticResource BasicControlStyle}" />
-            <Style TargetType="ComboBox" BasedOn="{StaticResource BasicControlStyle}">
-                <Style.Triggers>
-                    <Trigger Property="ItemsSource" Value="{x:Null}">
-                        <Setter Property="IsEnabled" Value="False" />
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-            <Style TargetType="Label" BasedOn="{StaticResource BasicControlStyle}">
-                <Setter Property="Padding" Value="3,0" />
-                <Setter Property="VerticalContentAlignment" Value="Center" />
-            </Style>
-            <Style TargetType="Button" BasedOn="{StaticResource BasicControlStyle}">
-                <Setter Property="Padding" Value="15,3" />
-            </Style>
-        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

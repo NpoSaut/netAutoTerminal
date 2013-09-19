@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FirmwarePacking.SystemsIndexes;
 using FirmwarePacking;
+using FirmwareBurner.Models;
 
 namespace FirmwarePacker.Models
 {

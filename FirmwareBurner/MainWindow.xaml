@@ -1,0 +1,78 @@
+﻿<Window x:Class="FirmwareBurner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Программирование блока" Width="525"
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" SizeToContent="Height">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" DataContext="{Binding Module}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Система</Label>
+            <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
+            <Label Grid.Row="0" Grid.Column="2" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
+            <Label Grid.Row="0" Grid.Column="3" Target="{Binding ElementName=SystemKindSelector}">Модуль</Label>
+            <Label Grid.Row="0" Grid.Column="4" Target="{Binding ElementName=SystemKindSelector}">П/К</Label>
+
+            <ComboBox Grid.Row="1" Grid.Column="0" Name="SystemKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding SystemKinds}" SelectedItem="{Binding SelectedSystemKind}" />
+            <ComboBox Grid.Row="1" Grid.Column="1" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
+            <TextBox  Grid.Row="1" Grid.Column="2" Name="ModificationEdit" Text="{Binding Modification}" />
+            <ComboBox Grid.Row="1" Grid.Column="3" Name="ModuleKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding ModuleKinds}" SelectedItem="{Binding SelectedModuleKind}"/>
+            <ListBox  Grid.Row="1" Grid.Column="4" Name="ChannelsSelector" ItemsSource="{Binding Channels}" Style="{StaticResource ChannelSelectorStyle}" DisplayMemberPath="Id" SelectionMode="Single" />
+        </Grid>
+        <Grid Grid.Row="1" Margin="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="120" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="4" Name="BurningDataShadow" Fill="#3547A0E8" />
+            <Polygon Grid.Column="2" Grid.RowSpan="4" Points="2,4 0,0 0,8" Stretch="Uniform" HorizontalAlignment="Left" Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
+                <Polygon.Fill>
+                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <GradientStop Color="#3547A0E8" Offset="0" />
+                        <GradientStop Color="#A247A0E8" Offset="1" />
+                    </LinearGradientBrush>
+                </Polygon.Fill>
+            </Polygon>
+
+            <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}" Content="Серийный номер блока" />
+            <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=AssemblyDateEdit}" Content="Дата изготовления" />
+            
+            <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit" />
+            <TextBox Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" />
+
+            <RadioButton Grid.Column="0" Grid.Row="2" Content="Из хранилища" />
+            <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" />
+
+            <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" />
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2">
+                    <Hyperlink>
+                        <Run>Выбрать файл</Run>
+                    </Hyperlink>
+            </TextBlock>
+
+        </Grid>
+    </Grid>
+</Window>
