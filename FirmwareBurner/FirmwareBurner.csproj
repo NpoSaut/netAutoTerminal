@@ -67,12 +67,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\FirmwareSources\ManualFirmwareSource.cs" />
+    <Compile Include="Models\FirmwareSources\RepoFirmwareSource.cs" />
     <Compile Include="Models\MainModel.cs" />
     <Compile Include="Models\SelectBlockModel.cs" />
     <Compile Include="Models\ViewModel.cs" />

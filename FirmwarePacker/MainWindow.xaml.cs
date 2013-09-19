@@ -70,7 +70,7 @@ namespace FirmwarePacker
         { e.CanExecute = Model.Check(); }
         private void SavePackageCommand_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            var dlg = new Microsoft.Win32.SaveFileDialog() { Filter = "Файл пакета ПО (*.sfp)|*.pck|Все файлы (*.*)|*.*", DefaultExt = "*.sfp" };
+            var dlg = new Microsoft.Win32.SaveFileDialog() { Filter = string.Format("Файл пакета ПО (*.{0})|*.{0}|Все файлы (*.*)|*.*", FirmwarePacking.FirmwarePackage.FirmwarePackageExtension), DefaultExt = "*." + FirmwarePacking.FirmwarePackage.FirmwarePackageExtension };
             if (dlg.ShowDialog(this) == true)
             {
                 var pack = PackageFormatter.Enpack(Model);

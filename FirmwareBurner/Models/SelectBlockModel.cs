@@ -115,6 +115,7 @@ namespace FirmwarePacker.Models
         private void OnModuleKindChanged(ModuleKind oldValue, ModuleKind value)
         {
             OnPropertyChanged("SelectedModuleKind");
+            OnSelectionChanged();
         }
 
         private int _Modification;
@@ -127,6 +128,7 @@ namespace FirmwarePacker.Models
                 {
                     _Modification = value;
                     OnPropertyChanged("Modification");
+                    OnSelectionChanged();
                 }
             }
         }
@@ -229,6 +231,16 @@ namespace FirmwarePacker.Models
                         Module = SelectedModuleKind.Id,
                         Channel = channel.Id
                     }).ToList();
+        }
+
+        private void OnSelectionChanged()
+        {
+            if (SelectionChanged != null)
+                SelectionChanged(this, new ModuleSelectedEventArgs());
+        }
+        public event EventHandler<ModuleSelectedEventArgs> SelectionChanged;
+        public class ModuleSelectedEventArgs : EventArgs
+        {
         }
     }
 }
