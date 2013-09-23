@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Threading;
 using System.ComponentModel;
+using Microsoft.Practices.Unity;
 
 namespace FirmwarePacker.Models
 {
-    public class ViewModel : DispatcherObject, INotifyPropertyChanged
+    public abstract class ViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(String PropertyName)

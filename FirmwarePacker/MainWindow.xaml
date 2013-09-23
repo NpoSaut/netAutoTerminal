@@ -6,10 +6,6 @@
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
         SizeToContent="Height" ResizeMode="CanMinimize">
     
-    <Window.CommandBindings>
-        <CommandBinding Command="SaveAs" Executed="SavePackageCommand_Executed" CanExecute="SavePackageCommand_CanExecute" />
-    </Window.CommandBindings>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -44,11 +40,6 @@
                     <DataTemplate>
 
                         <GroupBox Header="Компонент прошивки" Name="ComponentPresenter" Focusable="True" PreviewMouseRightButtonDown="ComponentPresenter_PreviewMouseRightButtonDown">
-                            <GroupBox.CommandBindings>
-                                <CommandBinding Command="Open" Executed="SelectTreeCommand_Executed" />
-                                <CommandBinding Command="Delete" Executed="DeleteComponentCommand_Executed" CanExecute="DeleteComponentCommand_CanExecute" />
-                                <CommandBinding Command="local:Commands.Clone" Executed="CloneComponentCommand_Executed" />
-                            </GroupBox.CommandBindings>
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -79,18 +70,18 @@
                                     <ComboBox Grid.Row="1" Grid.Column="3" Name="ModuleKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding ModuleKinds}" SelectedItem="{Binding SelectedModuleKind}"/>
                                     <ListBox  Grid.Row="1" Grid.Column="4" Name="ChannelsSelector" ItemsSource="{Binding Channels}" Style="{StaticResource ChannelSelectorStyle}" DisplayMemberPath="Id" />
                                 </Grid>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="2" DataContext="{Binding Tree}">
+                                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="2">
                                     <Run>Папка с прошивкой:</Run>
-                                    <Hyperlink Command="Open">
-                                        <Run Text="{Binding Mode=OneWay}" />
+                                    <Hyperlink Command="{Binding SelectTreeCommand}">
+                                        <Run Text="{Binding Tree, Mode=OneWay}" />
                                     </Hyperlink>
-                                    <Run Text="{Binding Totals, Mode=OneWay}" />
+                                    <Run Text="{Binding Tree.Totals, Mode=OneWay}" />
                                 </TextBlock>
                             </Grid>
                             <GroupBox.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Дублировать" Command="local:Commands.Clone" />
-                                    <MenuItem Header="Удалить" Command="Delete" />
+                                    <MenuItem Header="Дублировать" Command="{Binding CloneCommand}" />
+                                    <MenuItem Header="Удалить" Command="{Binding RemoveCommand}" />
                                 </ContextMenu>
                             </GroupBox.ContextMenu>
                         </GroupBox>
@@ -108,7 +99,7 @@
                 </LinearGradientBrush>
             </Border.Background>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Command="SaveAs">Сохранить</Button>
+                <Button Command="{Binding SaveCommand}">Сохранить</Button>
             </StackPanel>
         </Border>
     </Grid>

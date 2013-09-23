@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using FirmwarePacking.SystemsIndexes;
 using FirmwarePacking;
+using Microsoft.Practices.Unity;
 
 namespace FirmwarePacker.Models
 {
@@ -206,14 +207,12 @@ namespace FirmwarePacker.Models
 
         public ModuleSelectorModel DeepClone()
         {
-            return
-                new ModuleSelectorModel(MainModel.Index)
-                {
-                    SelectedSystemKind = SelectedSystemKind,
-                    SelectedBlockKind = SelectedBlockKind,
-                    SelectedModuleKind = SelectedModuleKind,
-                    Modification = Modification
-                };
+            var res = ServiceLocator.Container.Resolve<ModuleSelectorModel>();
+            res.SelectedSystemKind = this.SelectedSystemKind;
+            res.SelectedBlockKind = this.SelectedBlockKind;
+            res.SelectedModuleKind = this.SelectedModuleKind;
+            res.Modification = this.Modification;
+            return res;
         }
 
         public IEnumerable<ComponentTarget> GetTargets(bool SelectedOnly = true)

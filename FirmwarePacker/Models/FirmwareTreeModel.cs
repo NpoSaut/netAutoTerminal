@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Windows.Input;
 
 namespace FirmwarePacker.Models
 {
@@ -18,7 +19,7 @@ namespace FirmwarePacker.Models
             RootDirectory = di;
         }
         public FirmwareTreeModel(String Path)
-            : this(new DirectoryInfo(Path))
+            : this(String.IsNullOrEmpty(Path) ? null : new DirectoryInfo(Path))
         { }
 
         public List<FileInfo> GetFiles()

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using Microsoft.Practices.Unity;
+using System.Windows.Input;
 
 namespace FirmwarePacker.Models
 {
     public class MainModel : ViewModel, IDataCheck
     {
-        public static FirmwarePacking.SystemsIndexes.Index Index { get; private set; }
         public ObservableCollection<FirmwareComponentModel> Components { get; private set; }
 
         private Version _FirmwareVersion;
@@ -39,20 +40,20 @@ namespace FirmwarePacker.Models
             }
         }
 
+        public ICommand SaveCommand { get; private set; }
+        
         public MainModel()
+            : base()
         {
-            Components =
-                new ObservableCollection<FirmwareComponentModel>()
-                {
-                    new FirmwareComponentModel()
-                };
+            Components = new ObservableCollection<FirmwareComponentModel>();
+            Components.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Components_CollectionChanged);
+            
+            Components.Add(ServiceLocator.Container.Resolve<FirmwareComponentModel>());
+
+            SaveCommand = new ActionCommand(Save, Check);
+            
             FirmwareVersion = new Version(0, 0);
             ReleaseDate = DateTime.Now;
-        }
-
-        static MainModel()
-        {
-            Index = new FirmwarePacking.SystemsIndexes.XmlIndex("BlockKinds.xml");
         }
 
         public bool Check()
@@ -60,6 +61,55 @@ namespace FirmwarePacker.Models
             // TODO: Добавить логику проверки покрытия, уникальности и непересекаемости компонентов!
             return
                 Components.All(c => c.Check());
+        }
+
+
+        void Components_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+                foreach (var i in e.NewItems.OfType<FirmwareComponentModel>())
+                {
+                    i.TreeChanged += FirmwareComponent_TreeChanged;
+                    i.CloneCommand = new ActionCommand(() => CloneComponent(i));
+                    i.RemoveCommand = new ActionCommand(() => RemoveComponent(i), () => Components.Count > 1);
+                }
+
+            if (e.OldItems != null)
+                foreach (var i in e.OldItems.OfType<FirmwareComponentModel>())
+                {
+                    i.TreeChanged -= FirmwareComponent_TreeChanged;
+                    i.CloneCommand = null;
+                    i.RemoveCommand = null;
+                }
+        }
+        
+        public void CloneComponent(FirmwareComponentModel component)
+        { Components.Add(component.DeepClone()); }
+        public void RemoveComponent(FirmwareComponentModel component)
+        { Components.Remove(component); }
+
+        void FirmwareComponent_TreeChanged(object sender, EventArgs e)
+        {
+            // Выбираем дату билда прошивки как максимальную дату среди дат последней модификации всех файлов в прошивке
+            this.ReleaseDate = Components.SelectMany(c => c.Tree.GetFiles().Select(f => f.LastWriteTime)).DefaultIfEmpty(DateTime.Now).Max();
+        }
+
+        public void Save()
+        {
+            var selector = ServiceLocator.Container.Resolve<Dialogs.IFileSelector>();
+            selector.Filters =
+                new Dictionary<String, String>()
+                {
+                    { "Файл пакета", "*." + FirmwarePacking.FirmwarePackage.FirmwarePackageExtension },
+                    { "Все файлы", "*.*"}
+                };
+            selector.Message = "Выберите файл для сохранения пакета";
+            var FileName = selector.SelectSave();
+            if (FileName != null)
+            {
+                var pack = PackageFormatter.Enpack(this);
+                pack.Save(FileName);
+            }
         }
     }
 }
