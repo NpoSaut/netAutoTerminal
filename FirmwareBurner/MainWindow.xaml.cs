@@ -29,5 +29,25 @@ namespace FirmwareBurner
 
             InitializeComponent();
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            IntelHex.IntelHexStream h = new IntelHex.IntelHexStream();
+            h.Write(new Byte[] { 0xaa, 0xbb, 0xcc }, 0, 3);
+                                                                    Console.WriteLine(h.ToHexFormat());
+            h.Seek(1, System.IO.SeekOrigin.Current);
+            h.Write(new Byte[] { 0xaa, 0xbb, 0xcc }, 0, 3);
+                                                                    Console.WriteLine(h.ToHexFormat());
+            h.Seek(-1, System.IO.SeekOrigin.Current);
+            h.Write(new Byte[] { 0xaa, 0xbb, 0xcc }, 0, 3);
+                                                                    Console.WriteLine(h.ToHexFormat());
+            h.Seek(1, System.IO.SeekOrigin.Current);
+            h.Write(new Byte[] { 0xaa, 0xbb, 0xcc }, 0, 3);
+                                                                    Console.WriteLine(h.ToHexFormat());
+            h.Seek(2, System.IO.SeekOrigin.Begin);
+            h.Write(new Byte[] { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff }, 0, 9);
+                                                                    Console.WriteLine(h.ToHexFormat());
+        }
     }
 }
