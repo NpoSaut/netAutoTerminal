@@ -7,18 +7,18 @@ using System.Windows.Input;
 
 namespace FirmwarePacker.Models
 {
-    public class FirmwareTreeModel : ViewModel, IDataCheck
+    public class FirmwareTreeViewModel : ViewModel, IDataCheck
     {
         public DirectoryInfo RootDirectory { get; set; }
 
-        public FirmwareTreeModel()
+        public FirmwareTreeViewModel()
         { }
-        public FirmwareTreeModel(DirectoryInfo di)
+        public FirmwareTreeViewModel(DirectoryInfo di)
             : this()
         {
             RootDirectory = di;
         }
-        public FirmwareTreeModel(String Path)
+        public FirmwareTreeViewModel(String Path)
             : this(String.IsNullOrEmpty(Path) ? null : new DirectoryInfo(Path))
         { }
 
@@ -59,11 +59,11 @@ namespace FirmwarePacker.Models
                 GetFiles().Any();
         }
 
-        public FirmwareTreeModel DeepClone()
+        public FirmwareTreeViewModel DeepClone()
         {
             return RootDirectory != null ?
-                new FirmwareTreeModel(RootDirectory.FullName) :
-                new FirmwareTreeModel();
+                new FirmwareTreeViewModel(RootDirectory.FullName) :
+                new FirmwareTreeViewModel();
         }
     }
 }

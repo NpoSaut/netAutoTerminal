@@ -8,9 +8,9 @@ using System.Windows.Input;
 
 namespace FirmwarePacker.Models
 {
-    public class MainModel : ViewModel, IDataCheck
+    public class MainViewModel : ViewModel, IDataCheck
     {
-        public ObservableCollection<FirmwareComponentModel> Components { get; private set; }
+        public ObservableCollection<FirmwareComponentViewModel> Components { get; private set; }
 
         private Version _FirmwareVersion;
         public Version FirmwareVersion
@@ -42,13 +42,13 @@ namespace FirmwarePacker.Models
 
         public ICommand SaveCommand { get; private set; }
         
-        public MainModel()
+        public MainViewModel()
             : base()
         {
-            Components = new ObservableCollection<FirmwareComponentModel>();
+            Components = new ObservableCollection<FirmwareComponentViewModel>();
             Components.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Components_CollectionChanged);
             
-            Components.Add(ServiceLocator.Container.Resolve<FirmwareComponentModel>());
+            Components.Add(ServiceLocator.Container.Resolve<FirmwareComponentViewModel>());
 
             SaveCommand = new ActionCommand(Save, Check);
             
@@ -67,7 +67,7 @@ namespace FirmwarePacker.Models
         void Components_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
-                foreach (var i in e.NewItems.OfType<FirmwareComponentModel>())
+                foreach (var i in e.NewItems.OfType<FirmwareComponentViewModel>())
                 {
                     i.TreeChanged += FirmwareComponent_TreeChanged;
                     i.CloneCommand = new ActionCommand(() => CloneComponent(i));
@@ -75,7 +75,7 @@ namespace FirmwarePacker.Models
                 }
 
             if (e.OldItems != null)
-                foreach (var i in e.OldItems.OfType<FirmwareComponentModel>())
+                foreach (var i in e.OldItems.OfType<FirmwareComponentViewModel>())
                 {
                     i.TreeChanged -= FirmwareComponent_TreeChanged;
                     i.CloneCommand = null;
@@ -83,9 +83,9 @@ namespace FirmwarePacker.Models
                 }
         }
         
-        public void CloneComponent(FirmwareComponentModel component)
+        public void CloneComponent(FirmwareComponentViewModel component)
         { Components.Add(component.DeepClone()); }
-        public void RemoveComponent(FirmwareComponentModel component)
+        public void RemoveComponent(FirmwareComponentViewModel component)
         { Components.Remove(component); }
 
         void FirmwareComponent_TreeChanged(object sender, EventArgs e)

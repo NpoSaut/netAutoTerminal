@@ -21,9 +21,9 @@ namespace FirmwarePacker
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainModel Model { get; private set; }
+        public MainViewModel Model { get; private set; }
 
-        public MainWindow(MainModel Model)
+        public MainWindow(MainViewModel Model)
         {
             // Необъяснимый костыль для поправки локализации строковых конвертеров
             Language = System.Windows.Markup.XmlLanguage.GetLanguage(System.Globalization.CultureInfo.CurrentCulture.IetfLanguageTag);

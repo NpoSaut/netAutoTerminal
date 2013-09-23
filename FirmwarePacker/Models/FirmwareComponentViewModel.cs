@@ -6,7 +6,7 @@ using System.Windows.Input;
 
 namespace FirmwarePacker.Models
 {
-    public class FirmwareComponentModel : ViewModel, IDataCheck
+    public class FirmwareComponentViewModel : ViewModel, IDataCheck
     {
         [Microsoft.Practices.Unity.Dependency]
         public ModuleSelectorModel TargetModule { get; set; }
@@ -15,9 +15,9 @@ namespace FirmwarePacker.Models
         public ICommand CloneCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
 
-        private FirmwareTreeModel _Tree;
+        private FirmwareTreeViewModel _Tree;
         [Microsoft.Practices.Unity.Dependency]
-        public FirmwareTreeModel Tree
+        public FirmwareTreeViewModel Tree
         {
             get { return _Tree; }
             set
@@ -35,7 +35,7 @@ namespace FirmwarePacker.Models
             if (TreeChanged != null) TreeChanged(this, new EventArgs());
         }
 
-        public FirmwareComponentModel()
+        public FirmwareComponentViewModel()
         {
             SelectTreeCommand = new ActionCommand(SelectTree);
         }
@@ -47,10 +47,10 @@ namespace FirmwarePacker.Models
                 Tree.Check();
         }
 
-        public FirmwareComponentModel DeepClone()
+        public FirmwareComponentViewModel DeepClone()
         {
             return
-                new FirmwareComponentModel()
+                new FirmwareComponentViewModel()
                 {
                     selector = selector,
                     TargetModule = TargetModule.DeepClone(),
@@ -65,7 +65,7 @@ namespace FirmwarePacker.Models
             var DirectoryPath = selector.SelectDirectory();
             if (DirectoryPath != null)
             {
-                Tree = new FirmwareTreeModel(DirectoryPath);
+                Tree = new FirmwareTreeViewModel(DirectoryPath);
             }
         }
 

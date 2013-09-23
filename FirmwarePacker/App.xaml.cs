@@ -37,7 +37,7 @@ namespace FirmwarePacker
             _Container = new UnityContainer()
                 .RegisterType<IFileSelector, DialogFileSelector>()
                 .RegisterType<IDirectorySelector, DialogDirectorySelector>()
-                .RegisterType<FirmwareTreeModel>(new InjectionConstructor())
+                .RegisterType<FirmwareTreeViewModel>(new InjectionConstructor())
                 .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>(
                                                                                         new ContainerControlledLifetimeManager(),
                                                                                         new InjectionConstructor("BlockKinds.xml"));

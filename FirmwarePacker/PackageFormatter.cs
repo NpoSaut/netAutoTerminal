@@ -10,7 +10,7 @@ namespace FirmwarePacker
 {
     public static class PackageFormatter
     {
-        public static FirmwarePackage Enpack(MainModel PackageModel)
+        public static FirmwarePackage Enpack(MainViewModel PackageModel)
         {
             var res =
                 new FirmwarePackage()

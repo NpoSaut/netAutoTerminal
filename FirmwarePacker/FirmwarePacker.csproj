@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="VersionToStringConverter.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -67,7 +68,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands.cs" />
     <Compile Include="Dialogs\DialogDirectorySelector.cs" />
     <Compile Include="Dialogs\IDirectorySelector.cs" />
     <Compile Include="Dialogs\IFileSelector.cs" />
@@ -83,10 +83,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ActionCommand.cs" />
-    <Compile Include="Models\FirmwareComponentModel.cs" />
-    <Compile Include="Models\FirmwareTreeModel.cs" />
-    <Compile Include="Models\MainModel.cs" />
-    <Compile Include="Models\SelectBlockModel.cs" />
+    <Compile Include="Models\FirmwareComponentViewModel.cs" />
+    <Compile Include="Models\FirmwareTreeViewModel.cs" />
+    <Compile Include="Models\MainViewModel.cs" />
+    <Compile Include="Models\SelectBlockViewModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="PackageFormatter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
