@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\UnityLib\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -67,21 +70,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BootloaderFormat\BootloaderHeaderFormatter.cs" />
-    <Compile Include="BootloaderFormat\BootloaderHeader.cs" />
-    <Compile Include="BootloaderFormat\FileRecord.cs" />
-    <Compile Include="BootloaderFormat\Format.cs" />
-    <Compile Include="BootloaderFormat\ParamRecord.cs" />
-    <Compile Include="BootloaderFormat\PropertyFormat.cs" />
-    <Compile Include="BootloaderFormat\ElementFormat.cs" />
-    <Compile Include="BootloaderFormat\TableFormat.cs" />
-    <Compile Include="FirmwareFormatter.cs" />
+    <Compile Include="Burning\Pie.cs" />
+    <Compile Include="FirmwareElements\BootloaderBody.cs" />
+    <Compile Include="FirmwareElements\FirmwareImage.cs" />
+    <Compile Include="FirmwareElements\FileRecord.cs" />
+    <Compile Include="Formating\IFirmwareFormatter.cs" />
+    <Compile Include="Formating\XmlFirmwareFormatter.cs" />
+    <Compile Include="Formating\FormatBase.cs" />
+    <Compile Include="FirmwareElements\ParamRecord.cs" />
+    <Compile Include="Formating\PropertyFormat.cs" />
+    <Compile Include="Formating\ElementFormat.cs" />
+    <Compile Include="Formating\TableFormat.cs" />
+    <Compile Include="Burning\Burners\AvrIspBurner.cs" />
+    <Compile Include="Burning\IFirmwareBurner.cs" />
     <Compile Include="IntelHex\IntelHexExAdressLine.cs" />
     <Compile Include="IntelHex\IntelHexFile.cs" />
     <Compile Include="IntelHex\IntelHexStream.cs" />
     <Compile Include="IntelHex\IntelHexDataLine.cs" />
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
+    <Compile Include="Models\ActionCommand.cs" />
     <Compile Include="Models\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -91,8 +99,8 @@
   <ItemGroup>
     <Compile Include="Models\FirmwareSources\ManualFirmwareSource.cs" />
     <Compile Include="Models\FirmwareSources\RepoFirmwareSource.cs" />
-    <Compile Include="Models\MainModel.cs" />
-    <Compile Include="Models\SelectBlockModel.cs" />
+    <Compile Include="Models\MainViewModel.cs" />
+    <Compile Include="Models\SelectBlockViewModel.cs" />
     <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -5,27 +5,30 @@ using System.Text;
 using System.Xml.Linq;
 using System.IO;
 
-namespace FirmwareBurner.BootloaderFormat
+namespace FirmwareBurner.Formating
 {
-    class ElementFormat : Format
+    class ElementFormat : FormatBase
     {
-        private IList<Format> Getters { get; set; }
+        public int? StartAdress { get; set; }
+        private IList<FormatBase> Getters { get; set; }
 
         public ElementFormat(XElement XFormat)
             : base(XFormat)
         {
+            StartAdress = (int?)XFormat.Attribute("StartAdress");
             Getters =
                 XFormat
                     .Elements()
                     .Select(e =>
                         e.HasElements ?
-                        (Format)new TableFormat(e) :
-                        (Format)new PropertyFormat(e))
+                        (FormatBase)new TableFormat(e) :
+                        (FormatBase)new PropertyFormat(e))
                     .ToList();
         }
 
         public override void WriteTo(object Source, Stream output)
         {
+            if (StartAdress != null) output.Seek(StartAdress.Value, SeekOrigin.Begin);
             foreach (var getter in Getters)
                 getter.WriteTo(Source, output);
         }

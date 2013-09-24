@@ -5,11 +5,11 @@ using System.Text;
 using System.IO;
 using System.Xml.Linq;
 
-namespace FirmwareBurner.BootloaderFormat
+namespace FirmwareBurner.Formating
 {
-    abstract class Format
+    abstract class FormatBase
     {
-        protected Format(XElement XFormat) { }
+        protected FormatBase(XElement XFormat) { }
         public abstract void WriteTo(object Source, Stream output);
     }
 }

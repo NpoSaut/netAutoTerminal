@@ -5,7 +5,7 @@ using System.Text;
 using System.Xml.Linq;
 using System.IO;
 
-namespace FirmwareBurner.BootloaderFormat
+namespace FirmwareBurner.Formating
 {
     class TableFormat : ElementFormat
     {

@@ -44,4 +44,5 @@ namespace FirmwareBurner.Models.FirmwareSources
             Ok = SelectedPackage != null && SelectedPackage.Components.Any(c => c.Targets.Any(cTarget => cTarget == target));
         }
     }
+
 }

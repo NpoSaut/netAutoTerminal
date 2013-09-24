@@ -7,7 +7,7 @@ using FirmwareBurner.Models.FirmwareSources;
 
 namespace FirmwareBurner.Models
 {
-    public class MainModel : ViewModel
+    public class MainViewModel : ViewModel
     {
         public static FirmwarePacking.SystemsIndexes.Index Index { get; private set; }
 
@@ -16,7 +16,7 @@ namespace FirmwareBurner.Models
         public RepoFirmwareSource AutoFirmwareSource { get; private set; }
         public ManualFirmwareSource UserFirmwareSource { get; private set; }
 
-        public MainModel()
+        public MainViewModel()
         {
             Module = new ModuleSelectorModel(Index);
             AutoFirmwareSource = new RepoFirmwareSource();
@@ -30,9 +30,11 @@ namespace FirmwareBurner.Models
             AutoFirmwareSource.CheckTarget(Module.GetTargets(true).First());
         }
 
-        static MainModel()
+        static MainViewModel()
         {
             Index = new FirmwarePacking.SystemsIndexes.XmlIndex("BlockKinds.xml");
         }
+
+
     }
 }

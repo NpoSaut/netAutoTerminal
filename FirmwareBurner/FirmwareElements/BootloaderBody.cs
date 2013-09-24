@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace FirmwareBurner
+namespace FirmwareBurner.FirmwareElements
 {
-    public class FirmwareFormatter
+    public class BootloaderBody
     {
+        public Stream Body { get; set; }
     }
 }

@@ -5,9 +5,9 @@ using System.Text;
 using System.Xml.Linq;
 using System.IO;
 
-namespace FirmwareBurner.BootloaderFormat
+namespace FirmwareBurner.Formating
 {
-    class PropertyFormat : Format
+    class PropertyFormat : FormatBase
     {
         public String PropertyName { get; private set; }
         public int FieldLength { get; private set; }

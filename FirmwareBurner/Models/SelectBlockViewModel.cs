@@ -210,7 +210,7 @@ namespace FirmwarePacker.Models
         public ModuleSelectorModel DeepClone()
         {
             return
-                new ModuleSelectorModel(MainModel.Index)
+                new ModuleSelectorModel(MainViewModel.Index)
                 {
                     SelectedSystemKind = SelectedSystemKind,
                     SelectedBlockKind = SelectedBlockKind,

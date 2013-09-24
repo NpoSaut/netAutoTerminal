@@ -52,4 +52,26 @@
         <Setter Property="Padding" Value="15,3" />
     </Style>
     <Style TargetType="RadioButton" BasedOn="{StaticResource BasicControlStyle}" />
+    
+    <Style TargetType="Button" x:Key="CircleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse Name="els" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{Binding BorderThickness}" />
+                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <Grid.RenderTransform>
+                            <ScaleTransform x:Name="s" />
+                        </Grid.RenderTransform>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="White" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
 </ResourceDictionary>
