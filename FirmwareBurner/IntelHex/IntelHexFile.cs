@@ -42,6 +42,7 @@ namespace FirmwareBurner.IntelHex
             return sb.ToString();
         }
 
+        public void SaveTo(String FileName) { SaveTo(new FileInfo(FileName)); }
         public void SaveTo(FileInfo File)
         {
             using (var writer = File.CreateText())

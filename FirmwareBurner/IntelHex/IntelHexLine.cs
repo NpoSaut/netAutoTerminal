@@ -23,11 +23,12 @@ namespace FirmwareBurner.IntelHex
         {
             var DataStream = GetDataStream();
             Byte[] buff = new Byte[DataStream.Length + 5];
-            buff[0] = Key;
+            buff[0] = (Byte)DataStream.Length;
             buff[1] = (Byte)((InternalAdress & 0xff00) >> 8);
             buff[2] = (Byte)(InternalAdress & 0xff);
+            buff[3] = Key;
             DataStream.Seek(0, SeekOrigin.Begin);
-            DataStream.Read(buff, 3, (int)DataStream.Length);
+            DataStream.Read(buff, 4, (int)DataStream.Length);
             buff[buff.Length - 1] = GetChecksum(buff);
 
             return string.Format(":{0}", string.Join("", buff.Select(b => b.ToString("X2"))));

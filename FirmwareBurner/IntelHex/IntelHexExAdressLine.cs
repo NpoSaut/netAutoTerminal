@@ -9,16 +9,16 @@ namespace FirmwareBurner.IntelHex
     {
         public override byte Key { get { return 0x04; } }
 
-        public UInt32 AdressExtension { get; set; }
+        public UInt16 AdressExtension { get; set; }
 
-        public IntelHexExAdressLine(UInt32 AdressExtension)
+        public IntelHexExAdressLine(UInt16 AdressExtension)
         {
             this.AdressExtension = AdressExtension;
         }
 
         protected override byte[] GetDataArray()
         {
-            return BitConverter.GetBytes(AdressExtension);
+            return BitConverter.GetBytes(AdressExtension).Reverse().ToArray();
         }
 
         public override string ToString()
