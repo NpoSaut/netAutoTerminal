@@ -56,7 +56,7 @@ namespace FirmwareBurner
             return res;
         }
 
-        private FirmwareImage Depack(FirmwarePackage Package, ComponentTarget Target)
+        private FirmwareImage Depack(FirmwarePackage Package, ComponentTarget Target, int SerialNumber, DateTime AssemblyDate)
         {
             return
                 new FirmwareImage()
@@ -66,18 +66,28 @@ namespace FirmwareBurner
                     ParamList =
                         new List<ParamRecord>()
                         {
-                            new ParamRecord() { Key = 0x01, Value = 0x0AAAAAAA },
-                            new ParamRecord() { Key = 0x02, Value = 0x0BBBBBBB },
-                            new ParamRecord() { Key = 0x03, Value = 0x0CCCCCCC },
+                            // Информация о блоке
+                            new ParamRecord() { Key = 128, Value = Target.SystemId },
+                            new ParamRecord() { Key = 129, Value = Target.CellId },
+                            new ParamRecord() { Key = 130, Value = Target.CellModification },
+                            new ParamRecord() { Key = 133, Value = Target.Channel },
+                            new ParamRecord() { Key = 131, Value = Target.SystemId },
+                            new ParamRecord() { Key = 131, Value = SerialNumber },
+                            new ParamRecord() { Key = 132, Value = (int)(AssemblyDate.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds },
+
+                            // Информация о прошивке
+                            new ParamRecord() { Key = 1, Value = Package.Information.FirmwareVersion.Major },
+                            new ParamRecord() { Key = 2, Value = Package.Information.FirmwareVersion.Minor },
+                            new ParamRecord() { Key = 3, Value = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds },
                         }
                 };
         }
 
-        public Pie Cook(FirmwarePackage Package, ComponentTarget Target)
+        public Pie Cook(FirmwarePackage Package, ComponentTarget Target, int SerialNumber, DateTime AssemblyDate)
         {
             return
                 GetPie(
-                    Depack(Package, Target),
+                    Depack(Package, Target, SerialNumber, AssemblyDate),
                     Formatter);
         }
     }

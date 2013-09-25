@@ -16,6 +16,7 @@ namespace FirmwareBurner.Models
 
         public FirmwarePackage Firmware { get; set; }
         public ComponentTarget Target { get; set; }
+        public BlockDetailsViewModel BlockDetails { get; set; }
 
         public ActionCommand BurnCommand { get; private set; }
 
@@ -36,11 +37,14 @@ namespace FirmwareBurner.Models
             return
                 Firmware != null &&
                 Target != null &&
+                BlockDetails != null &&
+                BlockDetails.SerialNumber > 0 &&
+                BlockDetails.AssemblyDate <= DateTime.Now &&
                 Firmware.Components.Any(c => c.Targets.Contains(Target));
         }
         private void Burn()
         {
-            Pie p = Coock.Cook(Firmware, Target);
+            Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
             Burner.Burn(p);
         }
     }

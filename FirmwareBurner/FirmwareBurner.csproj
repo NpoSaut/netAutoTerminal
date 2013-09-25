@@ -94,6 +94,7 @@
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
     <Compile Include="Models\ActionCommand.cs" />
+    <Compile Include="Models\BlockDetailsViewModel.cs" />
     <Compile Include="Models\BurningViewModel.cs" />
     <Compile Include="Models\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">

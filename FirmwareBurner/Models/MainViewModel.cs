@@ -16,18 +16,24 @@ namespace FirmwareBurner.Models
         public RepoFirmwareSource AutoFirmwareSource { get; private set; }
         public ManualFirmwareSource UserFirmwareSource { get; private set; }
 
+        public BlockDetailsViewModel BlockDetails { get; set; }
+
         public BurningViewModel Burner { get; set; }
 
         public MainViewModel(
             ModuleSelectorModel ModuleSelector,
             RepoFirmwareSource AutoFirmwareSource,
             ManualFirmwareSource UserFirmwareSource,
-            BurningViewModel Burner)
+            BurningViewModel Burner,
+            BlockDetailsViewModel BlockDetails)
         {
             this.ModuleSelector = ModuleSelector;
             this.AutoFirmwareSource = AutoFirmwareSource;
             this.UserFirmwareSource = UserFirmwareSource;
+            this.BlockDetails = BlockDetails;
             this.Burner = Burner;
+
+            Burner.BlockDetails = BlockDetails;
 
             ModuleSelector.SelectionChanged += Module_SelectionChanged;
             Module_SelectionChanged(ModuleSelector, new ModuleSelectorModel.ModuleSelectedEventArgs());

@@ -54,9 +54,9 @@
 
             <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}" Content="Серийный номер блока" />
             <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=AssemblyDateEdit}" Content="Дата изготовления" />
-            
-            <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit" />
-            <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}" />
+
+            <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit" Text="{Binding Path=BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
+            <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}" SelectedDate="{Binding Path=BlockDetails.AssemblyDate}" />
 
             <RadioButton Grid.Column="0" Grid.Row="2" Content="Из хранилища" IsChecked="True" />
             <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" IsEnabled="False" />
