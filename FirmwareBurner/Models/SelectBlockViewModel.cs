@@ -8,7 +8,7 @@ using FirmwareBurner.Models;
 
 namespace FirmwarePacker.Models
 {
-    public class ModuleSelectorModel : ViewModel, IDataCheck
+    public class ModuleSelectorModel : ViewModelBase, IDataCheck
     {
         private List<SystemKind> _SystemKinds;
         public List<SystemKind> SystemKinds
@@ -164,7 +164,7 @@ namespace FirmwarePacker.Models
             return inList.FirstOrDefault();
         }
 
-        public class ChannelModel : ViewModel
+        public class ChannelModel : ViewModelBase
         {
             public int Id { get; private set; }
 

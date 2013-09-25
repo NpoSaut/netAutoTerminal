@@ -15,5 +15,15 @@ namespace FirmwareBurner.IntelHex
         {
             this.AdressExtension = AdressExtension;
         }
+
+        protected override byte[] GetDataArray()
+        {
+            return BitConverter.GetBytes(AdressExtension);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[{0}] SET ADDR  {1:X4} : {2:X4}", Key, InternalAdress, AdressExtension);
+        }
     }
 }

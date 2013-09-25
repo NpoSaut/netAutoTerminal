@@ -7,7 +7,7 @@ using System.ComponentModel;
 
 namespace FirmwareBurner.Models
 {
-    public class ViewModel : DispatcherObject, INotifyPropertyChanged
+    public class ViewModelBase : DispatcherObject, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(String PropertyName)

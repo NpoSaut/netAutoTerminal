@@ -10,13 +10,13 @@ namespace FirmwareBurner.Formating
 {
     public class XmlFirmwareFormatter : FirmwareBurner.Formating.IFirmwareFormatter
     {
-        private TableFormat FileTableFormat { get; set; }
-        private TableFormat ParamListFormat { get; set; }
+        private ElementFormat FileTableFormat { get; set; }
+        private ElementFormat ParamListFormat { get; set; }
         private ElementFormat BootloaderBodyFormat { get; set; }
 
         private XmlFirmwareFormatter()
         { }
-        private XmlFirmwareFormatter(TableFormat FileTableFormat, TableFormat ParamListFormat, ElementFormat BootloaderBodyFormat)
+        private XmlFirmwareFormatter(ElementFormat FileTableFormat, ElementFormat ParamListFormat, ElementFormat BootloaderBodyFormat)
             : this()
         {
             this.FileTableFormat = FileTableFormat;
@@ -25,9 +25,9 @@ namespace FirmwareBurner.Formating
         }
         public XmlFirmwareFormatter(XElement XFormat)
             : this(
-                new TableFormat(XFormat.Element("FileTable")),
-                new TableFormat(XFormat.Element("ParamList")),
-                new TableFormat(XFormat.Element("BootloaderBody")))
+                new ElementFormat(XFormat.Element("FileTable")),
+                new ElementFormat(XFormat.Element("ParamList")),
+                new ElementFormat(XFormat.Element("BootloaderBody")))
         { }
 
         public static IFirmwareFormatter ReadFormat(String FileName) { return ReadFormat(new FileInfo(FileName)); }

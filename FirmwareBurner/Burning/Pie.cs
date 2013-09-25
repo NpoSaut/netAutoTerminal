@@ -23,14 +23,5 @@ namespace FirmwareBurner.Burning
     {
         public IntelHexFile FlashFile { get; set; }
         public IntelHexFile EepromFile { get; set; }
-
-        public static Pie Get(FirmwareImage Image, IFirmwareFormatter Formatter)
-        {
-            IntelHexStream FlashStream = new IntelHexStream();
-            IntelHexStream EepromStream = new IntelHexStream();
-            Formatter.WriteToStreams(Image, FlashStream, EepromStream);
-
-            return new Pie() { FlashFile = FlashStream.GetHexFile(), EepromFile = EepromStream.GetHexFile() };
-        }
     }
 }

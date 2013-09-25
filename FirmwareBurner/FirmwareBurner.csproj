@@ -70,7 +70,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Burning\BurningOperationStatus.cs" />
+    <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
+    <Compile Include="FirmwareCook.cs" />
     <Compile Include="FirmwareElements\BootloaderBody.cs" />
     <Compile Include="FirmwareElements\FirmwareImage.cs" />
     <Compile Include="FirmwareElements\FileRecord.cs" />
@@ -83,6 +86,7 @@
     <Compile Include="Formating\TableFormat.cs" />
     <Compile Include="Burning\Burners\AvrIspBurner.cs" />
     <Compile Include="Burning\IFirmwareBurner.cs" />
+    <Compile Include="IFirmwareCook.cs" />
     <Compile Include="IntelHex\IntelHexExAdressLine.cs" />
     <Compile Include="IntelHex\IntelHexFile.cs" />
     <Compile Include="IntelHex\IntelHexStream.cs" />
@@ -90,6 +94,7 @@
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
     <Compile Include="Models\ActionCommand.cs" />
+    <Compile Include="Models\BurningViewModel.cs" />
     <Compile Include="Models\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -101,7 +106,7 @@
     <Compile Include="Models\FirmwareSources\RepoFirmwareSource.cs" />
     <Compile Include="Models\MainViewModel.cs" />
     <Compile Include="Models\SelectBlockViewModel.cs" />
-    <Compile Include="Models\ViewModel.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

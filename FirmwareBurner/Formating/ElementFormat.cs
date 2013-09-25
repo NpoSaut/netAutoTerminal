@@ -15,7 +15,9 @@ namespace FirmwareBurner.Formating
         public ElementFormat(XElement XFormat)
             : base(XFormat)
         {
-            StartAdress = (int?)XFormat.Attribute("StartAdress");
+            XAttribute AdressAttribute;
+            if ((AdressAttribute = XFormat.Attribute("StartAdress")) != null)
+                StartAdress = Convert.ToInt32(AdressAttribute.Value, 16);
             Getters =
                 XFormat
                     .Elements()
@@ -23,6 +25,8 @@ namespace FirmwareBurner.Formating
                         e.HasElements ?
                         (FormatBase)new TableFormat(e) :
                         (FormatBase)new PropertyFormat(e))
+                    //.Where(e => !e.HasElements)
+                    //.Select(e => (FormatBase)new ElementFormat(e))
                     .ToList();
         }
 
@@ -31,6 +35,11 @@ namespace FirmwareBurner.Formating
             if (StartAdress != null) output.Seek(StartAdress.Value, SeekOrigin.Begin);
             foreach (var getter in Getters)
                 getter.WriteTo(Source, output);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Item format");
         }
     }
 }

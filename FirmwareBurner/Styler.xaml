@@ -59,7 +59,7 @@
                 <ControlTemplate TargetType="Button">
                     <Grid>
                         <Ellipse Name="els" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{Binding BorderThickness}" />
-                        <ContentPresenter Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <ContentPresenter Name="cnt" Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         <Grid.RenderTransform>
                             <ScaleTransform x:Name="s" />
                         </Grid.RenderTransform>
@@ -67,6 +67,13 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="White" />
+                        </Trigger>
+                        <!--<Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="Gray" />
+                        </Trigger>-->
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="cnt" Property="Opacity" Value="0.7" />
+                            <Setter Property="Background" Value="WhiteSmoke" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

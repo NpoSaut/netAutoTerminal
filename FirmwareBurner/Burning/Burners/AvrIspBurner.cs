@@ -8,7 +8,7 @@ namespace FirmwareBurner.Burning.Burners
 {
     public class AvrIspBurner : IFirmwareBurner
     {
-        public void Burn(Pie pie)
+        public void Burn(Pie pie, IBurningOperationStatusReceiver StatusReceiver)
         {
             throw new NotImplementedException("Процедура прошивания совершенно не написана");
         }

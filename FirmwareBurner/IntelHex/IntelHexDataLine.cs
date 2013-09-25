@@ -25,10 +25,22 @@ namespace FirmwareBurner.IntelHex
             this.Data = DataStream;
         }
 
-
+        protected override byte[] GetDataArray()
+        {
+            var p = Data.Position;
+            var a = new Byte[Data.Length];
+            Data.Read(a, 0, (int)Data.Length);
+            Data.Seek(p, SeekOrigin.Begin);
+            return a;
+        }
         protected override Stream GetDataStream()
         {
             return Data;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("[{0}] DATA      {1:X4} : {2}", Key, InternalAdress, string.Join(" ", GetDataArray().Select(b => b.ToString("X2"))));
         }
     }
 }

@@ -20,13 +20,9 @@ namespace FirmwareBurner
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainViewModel Model { get; set; }
-
-        public MainWindow()
+        public MainWindow(MainViewModel Model)
         {
-            Model = new MainViewModel();
             this.DataContext = Model;
-
             InitializeComponent();
         }
     }

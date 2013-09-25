@@ -7,6 +7,6 @@ namespace FirmwareBurner.Burning
     /// </summary>
     public interface IFirmwareBurner
     {
-        void Burn(Pie pie);
+        void Burn(Pie pie, IBurningOperationStatusReceiver StatusReceiver = null);
     }
 }

@@ -15,5 +15,5 @@
       <Value Length="4" />
     </ParamRecord>
   </ParamList>
-  <BootloaderBody StartAdress="1df00" />
+  <BootloaderBody StartAdress="1e000" />
 </FlashLayout>

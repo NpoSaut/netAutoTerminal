@@ -32,5 +32,9 @@ namespace FirmwareBurner.IntelHex
 
             return string.Format(":{0}", string.Join("", buff.Select(b => b.ToString("X2"))));
         }
+        public override string ToString()
+        {
+            return ToHexString();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace FirmwareBurner.Formating
             var p = st.GetProperty(PropertyName);
             if (p == null) return new Byte[FieldLength];
 
-            var v = (Int64)p.GetValue(Source, new object[0]);
+            var v = Convert.ToInt64(p.GetValue(Source, new object[0]));
             return BitConverter.GetBytes(v).Take(FieldLength).ToArray();
         }
 
@@ -33,6 +33,11 @@ namespace FirmwareBurner.Formating
         {
             var buff = Get(Source);
             output.Write(buff, 0, buff.Length);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Property format: {0}", PropertyName);
         }
     }
 }

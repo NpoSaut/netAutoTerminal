@@ -115,7 +115,7 @@ namespace FirmwareBurner.IntelHex
         public static IEnumerable<IntelHexLine> GetHexSegment(Byte[] Data, int StartAdress) { return GetHexSegment(new MemoryStream(Data), StartAdress); }
         public static IEnumerable<IntelHexLine> GetHexSegment(Stream Data, int StartAdress)
         {
-            int BlockStartAdress = int.MinValue;
+            Int64 BlockStartAdress = Int64.MinValue;
             Data.Seek(0, SeekOrigin.Begin);
             const int MaxLength = byte.MaxValue;
             StringBuilder sb = new StringBuilder();
@@ -124,8 +124,8 @@ namespace FirmwareBurner.IntelHex
                 int FullStartAdress = StartAdress + (int)Data.Position;
                 if (FullStartAdress > BlockStartAdress + UInt16.MaxValue)
                 {
-                    BlockStartAdress = (int)(FullStartAdress & 0xFFFF0000);
-                    yield return new IntelHexExAdressLine((UInt16)BlockStartAdress);
+                    BlockStartAdress = (FullStartAdress & 0xFFFF0000);
+                    yield return new IntelHexExAdressLine((UInt16)(BlockStartAdress >> 16));
                 }
 
                 byte[] buff = new byte[MaxLength];

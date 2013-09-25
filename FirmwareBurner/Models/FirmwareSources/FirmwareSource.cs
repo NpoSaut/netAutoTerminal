@@ -6,8 +6,10 @@ using FirmwarePacking;
 
 namespace FirmwareBurner.Models.FirmwareSources
 {
-    public abstract class FirmwareSource : ViewModel
+    public abstract class FirmwareSource : ViewModelBase
     {
+        public event EventHandler PackageSelected;
+
         private FirmwarePackage _SelectedFirmware;
         public FirmwarePackage SelectedPackage
         {
@@ -18,6 +20,7 @@ namespace FirmwareBurner.Models.FirmwareSources
                 {
                     _SelectedFirmware = value;
                     OnPropertyChanged("SelectedPackage");
+                    if (PackageSelected != null) PackageSelected(this, new EventArgs());
                 }
             }
         }
