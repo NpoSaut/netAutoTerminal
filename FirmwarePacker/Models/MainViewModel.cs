@@ -91,7 +91,7 @@ namespace FirmwarePacker.Models
         void FirmwareComponent_TreeChanged(object sender, EventArgs e)
         {
             // Выбираем дату билда прошивки как максимальную дату среди дат последней модификации всех файлов в прошивке
-            this.ReleaseDate = Components.SelectMany(c => c.Tree.GetFiles().Select(f => f.LastWriteTime)).DefaultIfEmpty(DateTime.Now).Max();
+            this.ReleaseDate = Components.SelectMany(c => c.Tree.Files.Select(f => f.LastWriteTime)).DefaultIfEmpty(DateTime.Now).Max();
         }
 
         public void Save()

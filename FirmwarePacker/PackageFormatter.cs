@@ -25,7 +25,7 @@ namespace FirmwarePacker
                         PackageModel.Components.Select(ComponentModel =>
                             new FirmwareComponent(ComponentModel.TargetModule.GetTargets().ToList())
                             {
-                                Files = ComponentModel.Tree.GetFiles().Select(f => ToFirmwareFile(f, ComponentModel.Tree.RootDirectory)).ToList()
+                                Files = ComponentModel.Tree.Files.Select(f => ToFirmwareFile(f, ComponentModel.Tree.RootDirectory)).ToList()
                             }).ToList()
                 };
             return res;

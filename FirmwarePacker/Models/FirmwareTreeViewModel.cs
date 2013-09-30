@@ -4,27 +4,40 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace FirmwarePacker.Models
 {
     public class FirmwareTreeViewModel : ViewModel, IDataCheck
     {
-        public DirectoryInfo RootDirectory { get; set; }
+        public DirectoryInfo RootDirectory { get; private set; }
+        private List<FileInfo> _Files { get; set; }
+        public ReadOnlyCollection<FileInfo> Files { get; private set; }
 
         public FirmwareTreeViewModel()
         { }
         public FirmwareTreeViewModel(DirectoryInfo di)
             : this()
         {
-            RootDirectory = di;
+            ReScanFiles(di);
         }
         public FirmwareTreeViewModel(String Path)
             : this(String.IsNullOrEmpty(Path) ? null : new DirectoryInfo(Path))
         { }
 
-        public List<FileInfo> GetFiles()
+        private void ReScanFiles(DirectoryInfo di)
         {
-            return RootDirectory.EnumerateFiles("*", SearchOption.AllDirectories).ToList();
+            try
+            {
+                _Files = di.EnumerateFiles("*", SearchOption.AllDirectories).ToList();
+                RootDirectory = di;
+            }
+            catch
+            {
+                _Files = new List<FileInfo>();
+                System.Windows.MessageBox.Show("Нет доступа к файлу или подпапке в выбраной директории.\nНевозможно использовать эту директорию.", "Ошибка доступа");
+            }
+            Files = new ReadOnlyCollection<FileInfo>(_Files);
         }
 
         public string Totals
@@ -32,8 +45,7 @@ namespace FirmwarePacker.Models
             get
             {
                 if (RootDirectory == null) return "";
-                var fl = GetFiles();
-                return string.Format("{0} файл{1} ({2})", fl.Count, GetEnding(fl.Count), FirmwarePacking.FirmwareFile.GetLetteredFileSize(fl.Sum(f => f.Length)));
+                return string.Format("{0} файл{1} ({2})", Files.Count, GetEnding(Files.Count), FirmwarePacking.FirmwareFile.GetLetteredFileSize(Files.Sum(f => f.Length)));
             }
         }
 
@@ -56,7 +68,7 @@ namespace FirmwarePacker.Models
         {
             return
                 RootDirectory != null &&
-                GetFiles().Any();
+                Files.Any();
         }
 
         public FirmwareTreeViewModel DeepClone()
