@@ -45,7 +45,8 @@ namespace FirmwareBurner
                 new FileRecord()
                 {
                     Body = new MemoryStream(file.Content),
-                    FileAdress = Convert.ToInt32(path[1], 16)
+                    FileAdress = Convert.ToInt32(path[1], 16),
+                    Checksum = FudpCrc.CalcCrc(file.Content)
                 };
             switch(path[0])
             {
@@ -69,10 +70,9 @@ namespace FirmwareBurner
                             // Информация о блоке
                             new ParamRecord() { Key = 128, Value = Target.SystemId },
                             new ParamRecord() { Key = 129, Value = Target.CellId },
-                            new ParamRecord() { Key = 130, Value = Target.CellModification },
-                            new ParamRecord() { Key = 133, Value = Target.Channel },
-                            new ParamRecord() { Key = 131, Value = Target.SystemId },
+                            new ParamRecord() { Key = 130, Value = Target.Module },
                             new ParamRecord() { Key = 131, Value = SerialNumber },
+                            new ParamRecord() { Key = 133, Value = Target.Channel },
                             new ParamRecord() { Key = 132, Value = (int)(AssemblyDate.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds },
 
                             // Информация о прошивке
@@ -89,6 +89,30 @@ namespace FirmwareBurner
                 GetPie(
                     Depack(Package, Target, SerialNumber, AssemblyDate),
                     Formatter);
+        }
+    }
+
+
+    public class FudpCrc
+    {
+        public static ushort CalcCrc(Byte[] data)
+        {
+            ushort crc = 0xffff;
+            for (int i = 0; i < data.Length; i++)
+            {
+                crc = crc_ccitt(crc, data[i]);
+            }
+            return crc;
+        }
+        private static ushort crc_ccitt(ushort crc, byte cdata)
+        {
+            byte b = 0xff;
+            cdata ^= (byte)(crc & b);
+            cdata ^= (byte)(cdata << 4);
+
+            return (ushort)(((((ushort)cdata << 8)) | ((crc >> 8))) ^
+                (ushort)(cdata >> 4) ^
+                ((ushort)cdata << 3));
         }
     }
 }

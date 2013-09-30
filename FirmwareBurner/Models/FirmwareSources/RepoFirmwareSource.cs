@@ -15,6 +15,7 @@ namespace FirmwareBurner.Models.FirmwareSources
 
         public RepoFirmwareSource()
         {
+            if (!Directory.Exists("repository")) Directory.CreateDirectory("repository");
             var PackageFiles = (new DirectoryInfo("repository")).EnumerateFiles("*." + FirmwarePackage.FirmwarePackageExtension);
             AllPackages =
                 PackageFiles

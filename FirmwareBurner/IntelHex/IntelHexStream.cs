@@ -117,7 +117,7 @@ namespace FirmwareBurner.IntelHex
         {
             Int64 BlockStartAdress = Int64.MinValue;
             Data.Seek(0, SeekOrigin.Begin);
-            const int MaxLength = byte.MaxValue;
+            const int MaxLength = 0x10;
             StringBuilder sb = new StringBuilder();
             while (Data.Position != Data.Length)
             {

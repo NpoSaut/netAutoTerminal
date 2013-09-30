@@ -16,7 +16,8 @@ namespace FirmwareBurner.IntelHex
 
         private Byte GetChecksum(IEnumerable<Byte> Content)
         {
-            return (byte)(0xff - Content.Aggregate(0, (s, b) => s = unchecked(s + b)));
+            var dop = Content.Aggregate(0, (s, b) => s = unchecked(s + b));
+            return (byte)(0x100 - Content.Aggregate(0, (s, b) => s = unchecked(s + b)));
         }
 
         public String ToHexString()
