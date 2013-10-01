@@ -1,0 +1,6 @@
+avrdude -pUSB -cavrisp2 -pc128 -Uflash:w:{file.name}:h
+
+FUSEs!!!
+l: DF
+h: D8
+e: FD
