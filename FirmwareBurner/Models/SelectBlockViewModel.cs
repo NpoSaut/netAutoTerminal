@@ -74,7 +74,7 @@ namespace FirmwarePacker.Models
         {
             OnPropertyChanged("SelectedBlockKind");
             ModuleKinds = value.Modules;
-            Channels = Enumerable.Range(1, value.ChannelsCount).Select(i => new ChannelModel(i)).ToList();
+            Channels = Enumerable.Range(1, value.ChannelsCount).Select(i => new ChannelModel(this, i)).ToList();
         }
 
 
@@ -167,6 +167,7 @@ namespace FirmwarePacker.Models
         public class ChannelModel : ViewModelBase
         {
             public int Id { get; private set; }
+            private ModuleSelectorModel module { get; set; }
 
             private bool _IsSelected;
             public bool IsSelected
@@ -178,17 +179,19 @@ namespace FirmwarePacker.Models
                     {
                         _IsSelected = value;
                         OnPropertyChanged("IsSelected");
+                        module.OnSelectionChanged();
                     }
                 }
             }
 
-            public ChannelModel(int Id, bool IsSelected)
+            public ChannelModel(ModuleSelectorModel Module, int Id, bool IsSelected)
             {
+                this.module = Module;
                 this.Id = Id;
                 this.IsSelected = IsSelected;
             }
-            public ChannelModel(int Id)
-                : this(Id, true)
+            public ChannelModel(ModuleSelectorModel Module, int Id)
+                : this(Module, Id, true)
             { }
 
             public override string ToString()

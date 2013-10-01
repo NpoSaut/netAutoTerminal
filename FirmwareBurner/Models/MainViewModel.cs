@@ -35,6 +35,8 @@ namespace FirmwareBurner.Models
 
             Burner.BlockDetails = BlockDetails;
 
+            ModuleSelector.Channels.First().IsSelected = true;
+            foreach (var c in ModuleSelector.Channels.Skip(1)) c.IsSelected = false;
             ModuleSelector.SelectionChanged += Module_SelectionChanged;
             Module_SelectionChanged(ModuleSelector, new ModuleSelectorModel.ModuleSelectedEventArgs());
 
