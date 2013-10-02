@@ -20,6 +20,8 @@ namespace FirmwareBurner.Models
 
         public ActionCommand BurnCommand { get; private set; }
 
+        public bool InProgress { get; set; }
+
         private BurningViewModel()
         {
             BurnCommand = new ActionCommand(Burn, CanBurn);
@@ -40,12 +42,21 @@ namespace FirmwareBurner.Models
                 BlockDetails != null &&
                 BlockDetails.SerialNumber > 0 &&
                 BlockDetails.AssemblyDate <= DateTime.Now &&
-                Firmware.Components.Any(c => c.Targets.Contains(Target));
+                Firmware.Components.Any(c => c.Targets.Contains(Target)) &&
+                !InProgress;
         }
         private void Burn()
         {
-            Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
-            Burner.Burn(p);
+            InProgress = true;
+            System.Windows.Input.CommandManager.InvalidateRequerySuggested();
+            System.Threading.Tasks.Task.Factory.StartNew(() =>
+                {
+                    Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
+                    Burner.Burn(p);
+                    InProgress = false;
+                    System.Windows.Input.CommandManager.InvalidateRequerySuggested();
+                    System.Windows.MessageBox.Show(string.Format("Канал {0} записан", Target.Channel), "Готово", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                });
         }
     }
 }

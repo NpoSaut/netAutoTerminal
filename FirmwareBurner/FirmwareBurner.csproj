@@ -70,7 +70,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Burning\Burners\AvrIsp\BurnerNotFoundException.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\ProgrammerIsNotConnectedException.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\stk500\stk500.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500Exception.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500Parameters.cs" />
     <Compile Include="Burning\BurningOperationStatus.cs" />
+    <Compile Include="Burning\Exceptions\BurningException.cs" />
     <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
     <Compile Include="FirmwareCook.cs" />
@@ -84,7 +90,7 @@
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
-    <Compile Include="Burning\Burners\AvrIspBurner.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\Stk500Burner.cs" />
     <Compile Include="Burning\IFirmwareBurner.cs" />
     <Compile Include="IFirmwareCook.cs" />
     <Compile Include="IntelHex\IntelHexExAdressLine.cs" />
@@ -124,6 +130,24 @@
     <Content Include="Bootloader\layout.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Stk500\libdwarf.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stk500\libelf.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stk500\libelfdwarfparser.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stk500\Stk500.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stk500\Stk500Common.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stk500\Upgrade.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -136,6 +160,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Content Include="Stk500\AVRISP-mkII.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Stk500\STK500.ebn">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\FirmwarePacker\BlockKinds.xml">
