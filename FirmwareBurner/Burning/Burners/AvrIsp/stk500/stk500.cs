@@ -12,19 +12,17 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
     /// <summary>
     /// Оболочка над программой STK500.exe
     /// </summary>
-    public class Stk500
+    public class Stk500 : IAvrIspCommandShell
     {
         private static readonly FileInfo _BurnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
         public static FileInfo BurnerFile { get { return _BurnerFile; } }
 
-        public String DeviceName { get; private set; }
+        public String ChipName { get; set; }
 
-        public Stk500(String DeviceName)
+        public Stk500()
         {
             // Проверяем, доступна ли программа-прошивщик
             if (!BurnerFile.Exists) throw new BurnerNotFoundException();
-
-            this.DeviceName = DeviceName;
         }
 
         public Byte[] GetSignature()
@@ -33,7 +31,7 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
                 new List<Stk500Parameter>()
                 {
                     new ConnectionParameter(),
-                    new DeviceNameParameter(DeviceName),
+                    new DeviceNameParameter(ChipName),
                     new GetSignatureParameter()
                 }).ReadToEnd();
             CheckOutputForErrors(output);
@@ -43,7 +41,7 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
             if (m.Success)
                 return m.Groups["byte"].Captures.OfType<Capture>().Select(bc => Convert.ToByte(bc.Value, 16)).ToArray();
             else
-                throw new Stk500Exception("Не наиден интересующий шаблон в выводе. Вывод:\n\n" + output);
+                throw new Stk500Exception("Программатор ответил не стандартным образом:\n\n" + output);
         }
 
         public void WriteFlash(FileInfo FlashFile, bool Erase = true)
@@ -52,18 +50,37 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
                 new List<Stk500Parameter>()
                 {
                     new ConnectionParameter(),
-                    new DeviceNameParameter(DeviceName),
+                    new DeviceNameParameter(ChipName),
                     new ProgramParameter(ProgramParameter.ProgramTarget.flash),
                     new InputFileParameter(FlashFile, InputFileParameter.FilePlacement.flash),
                     Erase ? new EraseParameter() : null,
                 });
             var OutputString = output.ReadToEnd();
+            CheckOutputForErrors(OutputString);
+        }
+
+        public void WriteEeprom(FileInfo EepromFile, bool Erase = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Fuses ReadFuse()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void WriteFuse(Fuses f)
+        {
+            throw new NotImplementedException();
         }
 
         private void CheckOutputForErrors(string output)
         {
             if (output.Contains("Could not connect to AVRISP mkII"))
                 throw new ProgrammerIsNotConnectedException();
+
+            if (output.Contains("Could not enter programming mode"))
+                throw new DeviceIsNotConnectedException();
         }
 
         private StreamReader Execute(IEnumerable<Stk500Parameter> Parameters)

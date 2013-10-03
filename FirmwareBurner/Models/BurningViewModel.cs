@@ -55,13 +55,16 @@ namespace FirmwareBurner.Models
                     {
                         Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
                         Burner.Burn(p);
-                        InProgress = false;
-                        System.Windows.Input.CommandManager.InvalidateRequerySuggested();
                         System.Windows.MessageBox.Show(string.Format("Канал {0} записан", Target.Channel), "Готово", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                     }
                     catch (Burning.Exceptions.BurningException exc)
                     {
                         System.Windows.MessageBox.Show(string.Format("При работе с программатором возникла ошибка:\n{0}", exc.Message), "Ошибка при записи", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    }
+                    finally
+                    {
+                        InProgress = false;
+                        System.Windows.Input.CommandManager.InvalidateRequerySuggested();
                     }
                 });
         }

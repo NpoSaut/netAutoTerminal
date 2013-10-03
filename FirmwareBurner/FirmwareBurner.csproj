@@ -71,8 +71,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Burning\Burners\AvrIsp\BurnerNotFoundException.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\DeviceIsNotConnectedException.cs" />
     <Compile Include="Burning\Burners\AvrIsp\ProgrammerIsNotConnectedException.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\stk500\stk500.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\IAvrIspCommandShell.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500.cs" />
     <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500Exception.cs" />
     <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500Parameters.cs" />
     <Compile Include="Burning\BurningOperationStatus.cs" />
@@ -90,7 +92,7 @@
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\Stk500Burner.cs" />
+    <Compile Include="Burning\Burners\AvrIsp\AvrIspBurner.cs" />
     <Compile Include="Burning\IFirmwareBurner.cs" />
     <Compile Include="IFirmwareCook.cs" />
     <Compile Include="IntelHex\IntelHexExAdressLine.cs" />

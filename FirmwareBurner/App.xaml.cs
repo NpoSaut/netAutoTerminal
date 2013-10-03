@@ -28,7 +28,8 @@ namespace FirmwareBurner
                     .RegisterType<FileInfo>("BootloaderImageFileName", new InjectionConstructor(new InjectionParameter(Path.Combine("Bootloader", "Bootloader"))))
                     .RegisterInstance<IFirmwareFormatter>(XmlFirmwareFormatter.ReadFormat(Path.Combine("Bootloader", "layout.xml")))
                     .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>(new InjectionConstructor(new InjectionParameter("BlockKinds.xml")))
-                    .RegisterType<IFirmwareBurner, Stk500Burner>()
+                    .RegisterType<IFirmwareBurner, AvrIspBurner>()
+                    .RegisterType<IAvrIspCommandShell, FirmwareBurner.Burning.Burners.AvrIsp.stk500.Stk500>()
                     .RegisterType<IFirmwareCook, FirmwareCook>();
 
 
