@@ -24,6 +24,10 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp
             pie.FlashFile.SaveTo(tempFlashFile);
             Shell.WriteFlash(tempFlashFile);
             tempFlashFile.Delete();
+
+#if DEBUG
+            pie.FlashFile.SaveTo("flash.hex");
+#endif
         }
     }
 }
