@@ -68,12 +68,12 @@ namespace FirmwareBurner
                         new List<ParamRecord>()
                         {
                             // Информация о блоке
-                            new ParamRecord() { Key = 128, Value = Target.SystemId },
                             new ParamRecord() { Key = 129, Value = Target.CellId },
                             new ParamRecord() { Key = 130, Value = Target.Module },
                             new ParamRecord() { Key = 131, Value = SerialNumber },
+                            new ParamRecord() { Key = 132, Value = AssemblyDate.Year * 100 + AssemblyDate.Month },
                             new ParamRecord() { Key = 133, Value = Target.Channel },
-                            new ParamRecord() { Key = 132, Value = (int)(AssemblyDate.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalSeconds },
+                            new ParamRecord() { Key = 134, Value = Target.CellModification },
 
                             // Информация о прошивке
                             new ParamRecord() { Key = 1, Value = Package.Information.FirmwareVersion.Major },
