@@ -74,6 +74,7 @@ namespace FirmwarePacker.Models
         {
             OnPropertyChanged("SelectedBlockKind");
             ModuleKinds = value.Modules;
+            Modification = 1;
             Channels = Enumerable.Range(1, value.ChannelsCount).Select(i => new ChannelModel(this, i)).ToList();
         }
 
