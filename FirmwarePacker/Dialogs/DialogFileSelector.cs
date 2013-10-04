@@ -26,6 +26,7 @@ namespace FirmwarePacker.Dialogs
             var Dialog = new OpenFileDialog()
             {
                 Title = Message,
+                FileName = Default,
                 Filter = string.Join("|", Filters.Select(f => string.Format("{0} ({1})|{1}", f.Key, f.Value)))
             };
             return Dialog.ShowDialog() == true ? Dialog.FileName : null;
@@ -35,6 +36,7 @@ namespace FirmwarePacker.Dialogs
             var Dialog = new SaveFileDialog()
             {
                 Title = Message,
+                FileName = Default,
                 Filter = string.Join("|", Filters.Select(f => string.Format("{0}|{1}", f.Key, f.Value)))
             };
             return Dialog.ShowDialog() == true ? Dialog.FileName : null;
