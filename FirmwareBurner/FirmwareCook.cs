@@ -39,7 +39,7 @@ namespace FirmwareBurner
         }
         private FileRecord SortFile(FirmwareFile file)
         {
-            var path = file.RelativePath.Split(new char[] { '\\' });
+            var path = file.RelativePath.Split(new char[] { '/' });
             if (path.Length != 2) throw new Exception("Прошивка содержит файл с именем, не соответствующим стандартам прошивок для AVR-устройств");
             var res =
                 new FileRecord()

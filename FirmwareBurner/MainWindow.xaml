@@ -9,26 +9,34 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" DataContext="{Binding ModuleSelector}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="70" />
-            </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" DataContext="{Binding ModuleSelector}" BorderBrush="#B90CA700" BorderThickness="0,0,0,1">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#330FCB00" Offset="0" />
+                    <GradientStop Color="#920EC700" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="70" />
+                </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Система</Label>
-            <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
-            <Label Grid.Row="0" Grid.Column="2" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
+                <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Система</Label>
+                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
+                <Label Grid.Row="0" Grid.Column="2" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
 
-            <ComboBox Grid.Row="1" Grid.Column="0" Name="SystemKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding SystemKinds}" SelectedItem="{Binding SelectedSystemKind}" />
-            <ComboBox Grid.Row="1" Grid.Column="1" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
-            <TextBox  Grid.Row="1" Grid.Column="2" Name="ModificationEdit" Text="{Binding Modification}" />
-        </Grid>
-        <Grid Grid.Row="1" Margin="2">
+                <ComboBox Grid.Row="1" Grid.Column="0" Name="SystemKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding SystemKinds}" SelectedItem="{Binding SelectedSystemKind}" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
+                <TextBox  Grid.Row="1" Grid.Column="2" Name="ModificationEdit" Text="{Binding Modification}" />
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" Margin="6,2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="120" />
