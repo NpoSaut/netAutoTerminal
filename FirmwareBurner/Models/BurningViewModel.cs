@@ -55,7 +55,8 @@ namespace FirmwareBurner.Models
                     {
                         Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
                         Burner.Burn(p);
-                        System.Windows.MessageBox.Show(string.Format("Канал {0} записан", Target.Channel), "Готово", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
+                        Dispatcher.BeginInvoke((Func<String, String, System.Windows.MessageBoxButton, System.Windows.MessageBoxImage, System.Windows.MessageBoxResult>)System.Windows.MessageBox.Show,
+                            string.Format("Канал {0} записан", Target.Channel), "Готово", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
                     }
                     catch (Burning.Exceptions.BurningException exc)
                     {

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FirmwarePacker"
         xmlns:conv="clr-namespace:Converters"
-        Title="Создание пакета ПО" Height="350" Width="525" MaxHeight="600"
+        Title="Упаковка ПО" Height="350" Width="525" MaxHeight="600"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
         SizeToContent="Height" ResizeMode="CanMinimize">
     

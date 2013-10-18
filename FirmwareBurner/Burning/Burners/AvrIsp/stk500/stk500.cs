@@ -56,7 +56,7 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
                     Erase ? new EraseParameter() : null,
                 });
             var OutputString = output.ReadToEnd();
-            CheckOutputForErrors(OutputString);
+            CheckOutputForErrors(OutputString, "FLASH programmed");
         }
 
         public void WriteEeprom(FileInfo EepromFile, bool Erase = true)
@@ -74,12 +74,18 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
             throw new NotImplementedException();
         }
 
-        private void CheckOutputForErrors(string output)
+        private void CheckOutputForErrors(string Output, string SuccessString)
         {
-            if (output.Contains("Could not connect to AVRISP mkII"))
+            CheckOutputForErrors(Output);
+            if (!Output.Contains(SuccessString))
+                throw new Exceptions.BurningException(Output);
+        }
+        private void CheckOutputForErrors(string Output)
+        {
+            if (Output.Contains("Could not connect to AVRISP mkII"))
                 throw new ProgrammerIsNotConnectedException();
 
-            if (output.Contains("Could not enter programming mode"))
+            if (Output.Contains("Could not enter programming mode"))
                 throw new DeviceIsNotConnectedException();
         }
 
@@ -88,6 +94,7 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
             var psi =
                 new ProcessStartInfo(BurnerFile.FullName, string.Join(" ", Parameters.Where(prm => prm != null).Select(prm => prm.Get())))
                 {
+                    WorkingDirectory = Path.GetDirectoryName(BurnerFile.FullName),
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
