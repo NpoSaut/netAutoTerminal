@@ -3,9 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FirmwarePacker"
         xmlns:conv="clr-namespace:Converters"
-        Title="Упаковка ПО" Height="350" Width="525" MaxHeight="600"
-        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
-        SizeToContent="Height" ResizeMode="CanMinimize">
+        Title="Упаковка ПО" Height="350" Width="462" MaxHeight="600"
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" SizeToContent="Height">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -53,23 +52,20 @@
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="2*" />
-                                        <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="1*" />
                                         <ColumnDefinition Width="2*" />
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Система</Label>
-                                    <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
-                                    <Label Grid.Row="0" Grid.Column="2" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
-                                    <Label Grid.Row="0" Grid.Column="3" Target="{Binding ElementName=SystemKindSelector}">Модуль</Label>
-                                    <Label Grid.Row="0" Grid.Column="4" Target="{Binding ElementName=SystemKindSelector}">П/К</Label>
+                                    <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
+                                    <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
+                                    <Label Grid.Row="0" Grid.Column="2" Target="{Binding ElementName=SystemKindSelector}">Модуль</Label>
+                                    <Label Grid.Row="0" Grid.Column="3" Target="{Binding ElementName=SystemKindSelector}">П/К</Label>
 
-                                    <ComboBox Grid.Row="1" Grid.Column="0" Name="SystemKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding SystemKinds}" SelectedItem="{Binding SelectedSystemKind}" />
-                                    <ComboBox Grid.Row="1" Grid.Column="1" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
-                                    <TextBox  Grid.Row="1" Grid.Column="2" Name="ModificationEdit" Text="{Binding Modification}" />
-                                    <ComboBox Grid.Row="1" Grid.Column="3" Name="ModuleKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding ModuleKinds}" SelectedItem="{Binding SelectedModuleKind}"/>
-                                    <ListBox  Grid.Row="1" Grid.Column="4" Name="ChannelsSelector" ItemsSource="{Binding Channels}" Style="{StaticResource ChannelSelectorStyle}" DisplayMemberPath="Id" />
+                                    <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
+                                    <TextBox  Grid.Row="1" Grid.Column="1" Name="ModificationEdit" Text="{Binding Modification}" IsEnabled="False" />
+                                    <ComboBox Grid.Row="1" Grid.Column="2" Name="ModuleKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding ModuleKinds}" SelectedItem="{Binding SelectedModuleKind}"/>
+                                    <ListBox  Grid.Row="1" Grid.Column="3" Name="ChannelsSelector" ItemsSource="{Binding Channels}" Style="{StaticResource ChannelSelectorStyle}" DisplayMemberPath="Id" />
                                 </Grid>
                                 <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Margin="2">
                                     <Run>Папка с прошивкой:</Run>

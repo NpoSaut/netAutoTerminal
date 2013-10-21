@@ -22,18 +22,15 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="70" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Система</Label>
-                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
-                <Label Grid.Row="0" Grid.Column="2" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
+                <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
+                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
 
-                <ComboBox Grid.Row="1" Grid.Column="0" Name="SystemKindSelector" IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding SystemKinds}" SelectedItem="{Binding SelectedSystemKind}" />
-                <ComboBox Grid.Row="1" Grid.Column="1" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
-                <TextBox  Grid.Row="1" Grid.Column="2" Name="ModificationEdit" Text="{Binding Modification}" />
+                <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
+                <TextBox  Grid.Row="1" Grid.Column="1" Name="ModificationEdit" Text="{Binding Modification}" />
             </Grid>
         </Border>
         <Grid Grid.Row="1" Margin="6,2">

@@ -10,32 +10,6 @@ namespace FirmwarePacker.Models
 {
     public class ModuleSelectorModel : ViewModelBase, IDataCheck
     {
-        private List<SystemKind> _SystemKinds;
-        public List<SystemKind> SystemKinds
-        {
-            get { return _SystemKinds; }
-        }
-
-        private SystemKind _SelectedSystemKind;
-        public SystemKind SelectedSystemKind
-        {
-            get { return _SelectedSystemKind; }
-            set
-            {
-                if (_SelectedSystemKind != value)
-                {
-                    var oldValue = _SelectedSystemKind;
-                    _SelectedSystemKind = value;
-                    OnSystemKindChanged(oldValue, value);
-                }
-            }
-        }
-        private void OnSystemKindChanged(SystemKind oldValue, SystemKind value)
-        {
-            OnPropertyChanged("SelectedSystemKind");
-            BlockKinds = value.Blocks;
-        }
-
         private List<BlockKind> _BlockKinds;
         public List<BlockKind> BlockKinds
         {
@@ -136,8 +110,7 @@ namespace FirmwarePacker.Models
 
         public ModuleSelectorModel(Index index)
         {
-            this._SystemKinds = index.Systems.ToList();
-            SelectedSystemKind = SystemKinds.FirstOrDefault();
+            this.BlockKinds = index.Blocks.ToList();
         }
 
         private List<ChannelModel> _Channels;
@@ -204,7 +177,6 @@ namespace FirmwarePacker.Models
         public bool Check()
         {
             return
-                SelectedSystemKind != null &&
                 SelectedBlockKind != null &&
                 SelectedModuleKind != null &&
                 Modification >= 0 &&
@@ -216,7 +188,6 @@ namespace FirmwarePacker.Models
             return
                 new ModuleSelectorModel(MainViewModel.Index)
                 {
-                    SelectedSystemKind = SelectedSystemKind,
                     SelectedBlockKind = SelectedBlockKind,
                     SelectedModuleKind = SelectedModuleKind,
                     Modification = Modification
@@ -229,7 +200,6 @@ namespace FirmwarePacker.Models
                 Channels.Where(c => !SelectedOnly || c.IsSelected).Select(channel =>
                     new ComponentTarget()
                     {
-                        SystemId = SelectedSystemKind.Id,
                         CellId = SelectedBlockKind.Id,
                         CellModification = Modification,
                         Module = SelectedModuleKind.Id,
