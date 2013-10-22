@@ -48,7 +48,7 @@ namespace FirmwarePacker.Models
         {
             OnPropertyChanged("SelectedBlockKind");
             ModuleKinds = value.Modules;
-            Modification = 1;
+            ModificationKinds = value.Modifications;
             Channels = Enumerable.Range(1, value.ChannelsCount).Select(i => new ChannelModel(this, i)).ToList();
         }
 
@@ -93,19 +93,43 @@ namespace FirmwarePacker.Models
             OnSelectionChanged();
         }
 
-        private int _Modification;
-        public int Modification
+
+        private List<ModificationKind> _ModificationKinds;
+        public List<ModificationKind> ModificationKinds
         {
-            get { return _Modification; }
+            get { return _ModificationKinds; }
             set
             {
-                if (_Modification != value)
+                if (_ModificationKinds != value)
                 {
-                    _Modification = value;
-                    OnPropertyChanged("Modification");
-                    OnSelectionChanged();
+                    var oldValue = _ModificationKinds;
+                    _ModificationKinds = value;
+                    OnModificationKindsListChanged(oldValue, value);
                 }
             }
+        }
+        private void OnModificationKindsListChanged(List<ModificationKind> oldValue, List<ModificationKind> value)
+        {
+            OnPropertyChanged("ModificationKinds");
+            SelectedModificationKind = GetDefault(value);
+        }
+
+        private ModificationKind _SelectedModificationKind;
+        public ModificationKind SelectedModificationKind
+        {
+            get { return _SelectedModificationKind; }
+            set
+            {
+                if (_SelectedModificationKind != value)
+                {
+                    _SelectedModificationKind = value;
+                    OnModificationChanged();
+                }
+            }
+        }
+        private void OnModificationChanged()
+        {
+            OnPropertyChanged("SelectedModificationKind");
         }
 
         public ModuleSelectorModel(Index index)
@@ -179,7 +203,7 @@ namespace FirmwarePacker.Models
             return
                 SelectedBlockKind != null &&
                 SelectedModuleKind != null &&
-                Modification >= 0 &&
+                SelectedModuleKind != null &&
                 Channels.Any(ch => ch.IsSelected);
         }
 
@@ -190,7 +214,7 @@ namespace FirmwarePacker.Models
                 {
                     SelectedBlockKind = SelectedBlockKind,
                     SelectedModuleKind = SelectedModuleKind,
-                    Modification = Modification
+                    SelectedModificationKind = SelectedModificationKind
                 };
         }
 
@@ -201,7 +225,7 @@ namespace FirmwarePacker.Models
                     new ComponentTarget()
                     {
                         CellId = SelectedBlockKind.Id,
-                        CellModification = Modification,
+                        CellModification = SelectedModificationKind.Id,
                         Module = SelectedModuleKind.Id,
                         Channel = channel.Id
                     }).ToList();
