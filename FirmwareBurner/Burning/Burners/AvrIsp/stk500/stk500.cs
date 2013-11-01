@@ -66,12 +66,53 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
 
         public Fuses ReadFuse()
         {
-            throw new NotImplementedException();
+            var output = Execute(
+                new List<Stk500Parameter>()
+                {
+                    new ConnectionParameter(),
+                    new DeviceNameParameter(ChipName),
+                    new ReadFuseParameter()
+                });
+            var outputString = output.ReadToEnd();
+            CheckOutputForErrors(outputString, "Fuse byte 0 read");
+
+            //Regex r = new Regex(@"Fuse byte (?<key>[012]) read (0x(?<byte>[0-9a-fA-F]{2}))");
+            Regex r = new Regex(@"Fuse byte (?<key>[012]) read \(0x(?<byte>[0-9a-fA-F]{2})\)");
+
+            var res = new Fuses();
+            foreach (var m in r.Matches(outputString).OfType<Match>())
+            {
+                int i = int.Parse(m.Groups["key"].Value);
+                byte val = Convert.ToByte(m.Groups["byte"].Value, 16);
+
+                switch (i)
+                {
+                    case 0:
+                        res.FuseL = val;
+                        break;
+                    case 1:
+                        res.FuseH = val;
+                        break;
+                    case 2:
+                        res.FuseE = val;
+                        break;
+                }
+            }
+            return res;
         }
 
         public void WriteFuse(Fuses f)
         {
-            throw new NotImplementedException();
+            var output = Execute(
+                new List<Stk500Parameter>()
+                {
+                    new ConnectionParameter(),
+                    new DeviceNameParameter(ChipName),
+                    new WriteFuseParameter(f.FuseH, f.FuseL),
+                    new WriteExtendedFuseParameter(f.FuseE)
+                });
+            var outputString = output.ReadToEnd();
+            CheckOutputForErrors(outputString, "Fuse bits programmed");
         }
 
         private void CheckOutputForErrors(string Output, string SuccessString)

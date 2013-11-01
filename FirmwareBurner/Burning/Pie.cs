@@ -21,6 +21,13 @@ namespace FirmwareBurner.Burning
     /// </remarks>
     public class Pie
     {
+        #region Magic Fuses
+        // Правильные фьюзы
+        public const byte FuseH = 0xd8;
+        public const byte FuseL = 0xef;
+        public const byte FuseE = 0xfd;
+        #endregion
+
         public IntelHexFile FlashFile { get; set; }
         public IntelHexFile EepromFile { get; set; }
     }

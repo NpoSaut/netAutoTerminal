@@ -69,4 +69,36 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
         }
         protected override string Combine() { return string.Format("p{0}", target.ToString()[0]); }
     }
+
+    class WriteFuseParameter : Stk500Parameter
+    {
+        public Byte High { get; set; }
+        public Byte Low { get; set; }
+
+        public WriteFuseParameter(byte High, byte Low)
+        {
+            this.High = High;
+            this.Low = Low;
+        }
+
+        protected override string Combine() { return string.Format("f{0:X2}{1:X2}", High, Low); }
+    }
+    class WriteExtendedFuseParameter : Stk500Parameter
+    {
+        public Byte Value { get; set; }
+
+        public WriteExtendedFuseParameter(byte FuseE)
+        {
+            this.Value = FuseE;
+        }
+
+        protected override string Combine() { return string.Format("E{0:X2}", Value); }
+    }
+    class ReadFuseParameter : OneKeyParameter
+    {
+        public override string Key
+        {
+            get { return "q"; }
+        }
+    }
 }
