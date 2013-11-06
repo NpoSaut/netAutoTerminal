@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using Microsoft.Practices.Unity;
@@ -15,9 +16,15 @@ namespace FirmwarePacker
     /// </summary>
     public partial class App : Application
     {
+        public String ArgsDirectory { get; set; }
+        public static App CurrentApp { get { return Current as App; } }
+        public String AppDirectory { get { return AppDomain.CurrentDomain.BaseDirectory; } }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            if (e.Args.Length > 0) ArgsDirectory = e.Args[0];
 
             MainWindow mainWindow = ServiceLocator.Container.Resolve<FirmwarePacker.MainWindow>();
             mainWindow.Show();
@@ -40,7 +47,7 @@ namespace FirmwarePacker
                 .RegisterType<FirmwareTreeViewModel>(new InjectionConstructor())
                 .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>(
                                                                                         new ContainerControlledLifetimeManager(),
-                                                                                        new InjectionConstructor("BlockKinds.xml"));
+                                                                                        new InjectionConstructor(Path.Combine(App.CurrentApp.AppDirectory, "BlockKinds.xml")));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
@@ -47,8 +48,12 @@ namespace FirmwarePacker.Models
         {
             Components = new ObservableCollection<FirmwareComponentViewModel>();
             Components.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Components_CollectionChanged);
+
+            FirmwareComponentViewModel model;
+            Components.Add(model = ServiceLocator.Container.Resolve<FirmwareComponentViewModel>());
             
-            Components.Add(ServiceLocator.Container.Resolve<FirmwareComponentViewModel>());
+            if (App.CurrentApp.ArgsDirectory != null)
+                model.Tree = new FirmwareTreeViewModel(App.CurrentApp.ArgsDirectory);
 
             SaveCommand = new ActionCommand(Save, Check);
 
