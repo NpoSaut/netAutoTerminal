@@ -5,26 +5,18 @@ using System.Text;
 using FirmwarePacking;
 using System.Collections.ObjectModel;
 using System.IO;
+using FirmwarePacking.Repositories;
 
 namespace FirmwareBurner.Models.FirmwareSources
 {
     public class RepoFirmwareSource : FirmwareSource
     {
-        private ILookup<ComponentTarget, FirmwarePackage> AllPackages { get; set; }
+        public Repository[] Repositories { get; set; }
         public ObservableCollection<FirmwarePackage> PackagesForTarget { get; private set; }
 
-        public RepoFirmwareSource()
+        public RepoFirmwareSource(Repository[] Repositories)
         {
-            if (!Directory.Exists("repository")) Directory.CreateDirectory("repository");
-            var PackageFiles = (new DirectoryInfo("repository")).EnumerateFiles("*." + FirmwarePackage.FirmwarePackageExtension);
-            AllPackages =
-                PackageFiles
-                    .Select(pf => FirmwarePackage.Open(pf))
-                    .SelectMany(fw => fw.Components
-                        .SelectMany(c => c.Targets.Select(t => new { t, fw })))
-                //.GroupBy(x => x.t)
-                .ToLookup(x => x.t, x => x.fw);
-
+            this.Repositories = Repositories;
             PackagesForTarget = new ObservableCollection<FirmwarePackage>();
         }
 
@@ -32,8 +24,12 @@ namespace FirmwareBurner.Models.FirmwareSources
         {
             base.OnCheckTarget(target);
             PackagesForTarget.Clear();
-            foreach (var p in AllPackages[target].OrderByDescending(fw => fw.Information.FirmwareVersion))
+
+            foreach (var p in
+                    Repositories.SelectMany(repo => repo.GetPackagesForTargets(target))
+                                .OrderByDescending(fw => fw.Information.FirmwareVersion))
                 PackagesForTarget.Add(p);
+            
             SelectedPackage = PackagesForTarget.FirstOrDefault();
         }
     }

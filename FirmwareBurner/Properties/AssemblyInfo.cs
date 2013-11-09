@@ -7,7 +7,7 @@ using System.Windows;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("FirmwareBurner")]
+[assembly: AssemblyTitle("Burner")]
 [assembly: AssemblyDescription("Программа для первичного программирования ячейки - помимо прошивки основной программы записывает в устройство загрузчик и неизменяемые параметры блока")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("НПО САУТ")]
@@ -51,5 +51,5 @@ using System.Windows;
 // Можно задать все значения или принять номер построения и номер редакции по умолчанию, 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.2.*")]
-[assembly: AssemblyFileVersion("0.2.0.0")]
+[assembly: AssemblyVersion("0.3.*")]
+[assembly: AssemblyFileVersion("0.3.0.0")]

@@ -27,7 +27,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
-                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Модиф-я</Label>
+                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Модификация</Label>
 
                 <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
                 <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding ModificationKinds}"  SelectedItem="{Binding SelectedModificationKind}" />
