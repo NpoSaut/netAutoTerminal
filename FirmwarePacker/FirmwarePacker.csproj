@@ -127,6 +127,10 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>rd $(TargetDir)SingleExe /S /Q
+"%25NetZ%25\netz.exe" -s -z $(TargetPath) $(TargetDir)*.dll -o $(TargetDir)SingleExe</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

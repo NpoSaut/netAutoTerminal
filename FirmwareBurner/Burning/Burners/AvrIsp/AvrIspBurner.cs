@@ -29,6 +29,10 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp
                     FuseL = Pie.FuseL
                 };
 
+//#if DEBUG
+            pie.FlashFile.SaveTo("flash.hex");
+//#endif
+
             var onDevFuses = Shell.ReadFuse();
             if (!onDevFuses.Equals(targetFuses))
             {
@@ -39,10 +43,6 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp
             pie.FlashFile.SaveTo(tempFlashFile);
             Shell.WriteFlash(tempFlashFile);
             tempFlashFile.Delete();
-
-#if DEBUG
-            pie.FlashFile.SaveTo("flash.hex");
-#endif
         }
     }
 }
