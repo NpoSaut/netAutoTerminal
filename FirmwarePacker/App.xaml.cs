@@ -45,9 +45,7 @@ namespace FirmwarePacker
                 .RegisterType<IFileSelector, DialogFileSelector>()
                 .RegisterType<IDirectorySelector, DialogDirectorySelector>()
                 .RegisterType<FirmwareTreeViewModel>(new InjectionConstructor())
-                .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>(
-                                                                                        new ContainerControlledLifetimeManager(),
-                                                                                        new InjectionConstructor(Path.Combine(App.CurrentApp.AppDirectory, "BlockKinds.xml")));
+                .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>();
         }
     }
 }
