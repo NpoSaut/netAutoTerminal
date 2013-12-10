@@ -119,12 +119,6 @@
       <Name>FirmwarePacking</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="BlockKinds.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

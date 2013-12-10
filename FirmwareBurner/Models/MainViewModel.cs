@@ -9,8 +9,6 @@ namespace FirmwareBurner.Models
 {
     public class MainViewModel : ViewModelBase
     {
-        public static FirmwarePacking.SystemsIndexes.Index Index { get; private set; }
-
         public ModuleSelectorModel ModuleSelector { get; set; }
 
         public RepoFirmwareSource AutoFirmwareSource { get; private set; }
@@ -54,11 +52,6 @@ namespace FirmwareBurner.Models
             var SelectedTarget = ModuleSelector.GetTargets(true).First();
             AutoFirmwareSource.CheckTarget(SelectedTarget);
             Burner.Target = SelectedTarget;
-        }
-
-        static MainViewModel()
-        {
-            Index = new FirmwarePacking.SystemsIndexes.XmlIndex("BlockKinds.xml");
         }
     }
 }

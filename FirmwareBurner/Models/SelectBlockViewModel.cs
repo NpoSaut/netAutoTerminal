@@ -134,8 +134,11 @@ namespace FirmwarePacker.Models
 
         public ModuleSelectorModel(Index index)
         {
+            this.Index = index;
             this.BlockKinds = index.Blocks.ToList();
         }
+
+        private Index Index { get; set; }
 
         private List<ChannelModel> _Channels;
         public List<ChannelModel> Channels
@@ -210,7 +213,7 @@ namespace FirmwarePacker.Models
         public ModuleSelectorModel DeepClone()
         {
             return
-                new ModuleSelectorModel(MainViewModel.Index)
+                new ModuleSelectorModel(this.Index)
                 {
                     SelectedBlockKind = SelectedBlockKind,
                     SelectedModuleKind = SelectedModuleKind,

@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using FirmwarePacking.Repositories;
 using Microsoft.Practices.Unity;
 using FirmwareBurner.Formating;
 
 using Path = System.IO.Path;
 using FirmwareBurner.Burning;
-using FirmwareBurner.Burning.Burners;
 using System.IO;
 using FirmwareBurner.Burning.Burners.AvrIsp;
 
@@ -30,7 +24,7 @@ namespace FirmwareBurner
                     .RegisterInstance<IFirmwareFormatter>(XmlFirmwareFormatter.ReadFormat(Path.Combine("Bootloader", "layout.xml")))
                     
                     // Конфигурируем индекс
-                    .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>(new InjectionConstructor(new InjectionParameter("BlockKinds.xml")))
+                    .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.ResourceXmlIndex>()
 
                     // Конфигурируем репозитории
                     .RegisterType<Repository, DirectoryRepository>("User Repository", new ContainerControlledLifetimeManager(), new InjectionConstructor(DirectoryRepository.UserRepositoryDirectory))
