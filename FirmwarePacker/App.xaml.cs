@@ -45,7 +45,7 @@ namespace FirmwarePacker
                 .RegisterType<IFileSelector, DialogFileSelector>()
                 .RegisterType<IDirectorySelector, DialogDirectorySelector>()
                 .RegisterType<FirmwareTreeViewModel>(new InjectionConstructor())
-                .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.XmlIndex>();
+                .RegisterType<FirmwarePacking.SystemsIndexes.Index, FirmwarePacking.SystemsIndexes.ResourceXmlIndex>();
         }
     }
 }
