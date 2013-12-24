@@ -67,7 +67,7 @@
             <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" IsEnabled="False" />
 
             <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" DataContext="{Binding AutoFirmwareSource}" ItemsSource="{Binding PackagesForTarget}" SelectedItem="{Binding SelectedPackage}" DisplayMemberPath="Information.FirmwareVersion" ItemStringFormat="Версия {0}" />
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2"  DataContext="{Binding UserFirmwareSource}">
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2"  DataContext="{Binding UserFirmwareSource}" IsEnabled="False">
                     <Hyperlink>
                         <Run>Выбрать файл</Run>
                     </Hyperlink>
