@@ -27,6 +27,20 @@ namespace FirmwarePacker.Models
             }
         }
 
+        private String _FirmwareVersionLabel;
+        public String FirmwareVersionLabel
+        {
+            get { return _FirmwareVersionLabel; }
+            set
+            {
+                if (_FirmwareVersionLabel != value)
+                {
+                    _FirmwareVersionLabel = value;
+                    OnPropertyChanged("FirmwareVersionLabel");
+                }
+            }
+        }
+
         private DateTime _ReleaseDate;
         public DateTime ReleaseDate
         {
@@ -113,11 +127,17 @@ namespace FirmwarePacker.Models
                     { "Все файлы", "*.*"}
                 };
             selector.Message = "Выберите файл для сохранения пакета";
-            var FileName = selector.SelectSave(string.Format("{0} ver. {1}", Components.First().TargetModule.SelectedBlockKind.Name, FirmwareVersion.ToString(2)));
-            if (FileName != null)
+            var fileName =
+                selector.SelectSave(string.Format("{0} ver. {1}{2}",
+                                                  Components.First().TargetModule.SelectedBlockKind.Name,
+                                                  FirmwareVersion.ToString(2),
+                                                  string.IsNullOrWhiteSpace(FirmwareVersionLabel)
+                                                      ? ""
+                                                      : FirmwareVersionLabel));
+            if (fileName != null)
             {
                 var pack = PackageFormatter.Enpack(this);
-                pack.Save(FileName);
+                pack.Save(fileName);
             }
             Properties.Settings.Default.LastMajorVersion = this.FirmwareVersion.Major;
             Properties.Settings.Default.LastMinorVersion = this.FirmwareVersion.Minor;
