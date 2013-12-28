@@ -1,9 +1,13 @@
 ﻿<Window x:Class="FirmwareBurner.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:FirmwareBurner.Models"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="424"
         SizeToContent="Height" ResizeMode="CanMinimize"
-        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
+        d:DataContext="{d:DesignInstance vm:MainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -66,7 +70,17 @@
             <RadioButton Grid.Column="0" Grid.Row="2" Content="Из хранилища" IsChecked="True" />
             <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" IsEnabled="False" />
 
-            <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" DataContext="{Binding AutoFirmwareSource}" ItemsSource="{Binding PackagesForTarget}" SelectedItem="{Binding SelectedPackage}" DisplayMemberPath="Information.FirmwareVersion" ItemStringFormat="Версия {0}" />
+            <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" DataContext="{Binding AutoFirmwareSource}" ItemsSource="{Binding PackagesForTarget}" SelectedItem="{Binding SelectedPackage}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock>
+                            <Run Text="Версия" />
+                            <Run Text="{Binding Path=Information.FirmwareVersion, Mode=OneTime, StringFormat={}{0}}" FontWeight="Medium" />
+                            <Run Text="{Binding Path=Information.FirmwareVersionLabel, Mode=OneTime}" />
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <TextBlock Grid.Column="1" Grid.Row="3" Margin="2"  DataContext="{Binding UserFirmwareSource}">
                     <Hyperlink>
                         <Run>Выбрать файл</Run>
