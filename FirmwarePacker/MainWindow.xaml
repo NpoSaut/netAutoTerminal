@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:FirmwarePacker"
         xmlns:conv="clr-namespace:Converters"
-        Title="Упаковка ПО" Height="350" Width="500" MaxHeight="600"
+        Title="Упаковка ПО" Height="135.525" Width="500" MaxHeight="600"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize" SizeToContent="Height">
     
     <Grid>
@@ -24,13 +24,15 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.0*" />
                     <ColumnDefinition Width="2.0*" />
+                    <ColumnDefinition Width="45" />
                     <ColumnDefinition Width="1.6*" />
                     <ColumnDefinition Width="3.0*" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Target="{Binding ElementName=VersionEdit}" Content="Версия:" />
-                <Label Grid.Column="2" Target="{Binding ElementName=VersionEdit}" Content="Дата релиза:" />
-                <TextBox Grid.Column="1" Name="VersionEdit" Text="{Binding FirmwareVersion, Converter={conv:VersionToStringConverter}, ValidatesOnExceptions=True}" />
-                <DatePicker Grid.Column="3" Name="ReleaseDateEdit" SelectedDate="{Binding ReleaseDate}" BorderBrush="{x:Null}" />
+                <Label Grid.Column="3" Target="{Binding ElementName=VersionEdit}" Content="Дата релиза:" />
+                <TextBox Grid.Column="1" Name="VersionEdit" Text="{Binding FirmwareVersion, Converter={conv:VersionToStringConverter}, ValidatesOnExceptions=True}" TextAlignment="Right" />
+                <TextBox Grid.Column="2" Name="VersionLabelEdit" Text="{Binding FirmwareVersionLabel, ValidatesOnExceptions=True}" MaxLength="4" />
+                <DatePicker Grid.Column="4" Name="ReleaseDateEdit" SelectedDate="{Binding ReleaseDate}" BorderBrush="{x:Null}" />
             </Grid>
         </Border>
         
