@@ -11,7 +11,7 @@ using System.Windows;
 [assembly: AssemblyDescription("Программа для первичного программирования ячейки - помимо прошивки основной программы записывает в устройство загрузчик и неизменяемые параметры блока")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("НПО САУТ")]
-[assembly: AssemblyProduct("FirmwareBurner")]
+[assembly: AssemblyProduct("FmBurner")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -51,5 +51,5 @@ using System.Windows;
 // Можно задать все значения или принять номер построения и номер редакции по умолчанию, 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.*")]
-[assembly: AssemblyFileVersion("0.3.0.0")]
+[assembly: AssemblyVersion("0.4.*")]
+[assembly: AssemblyFileVersion("0.4.0.0")]
