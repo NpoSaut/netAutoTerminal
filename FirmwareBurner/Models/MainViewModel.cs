@@ -44,7 +44,7 @@ namespace FirmwareBurner.Models
 
         void FirmwareSource_PackageSelected(object sender, EventArgs e)
         {
-            Burner.Firmware = (sender as FirmwareSource).SelectedPackage;
+            Burner.Firmware = ((FirmwareSource)sender).SelectedPackage;
         }
 
         void Module_SelectionChanged(object sender, ModuleSelectorModel.ModuleSelectedEventArgs e)

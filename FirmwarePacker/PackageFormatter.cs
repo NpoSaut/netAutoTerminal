@@ -13,12 +13,15 @@ namespace FirmwarePacker
         public static FirmwarePackage Enpack(MainViewModel PackageModel)
         {
             var res =
-                new FirmwarePackage()
+                new FirmwarePackage
                 {
                     Information =
                         new PackageInformation()
                         {
                             FirmwareVersion = PackageModel.FirmwareVersion,
+                            FirmwareVersionLabel = string.IsNullOrWhiteSpace(PackageModel.FirmwareVersionLabel)
+                                                        ? null
+                                                        : PackageModel.FirmwareVersionLabel,
                             ReleaseDate = PackageModel.ReleaseDate
                         },
                     Components =
