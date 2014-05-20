@@ -34,7 +34,7 @@ namespace FirmwarePacker
             InitializeComponent();
 
             var version = System.Reflection.Assembly.GetAssembly(typeof(App)).GetName().Version;
-            Title += string.Format(" (ver. {0})", version);
+            Title += string.Format(" (ver. {0})", version.ToString(2));
         }
 
         private void ComponentPresenter_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

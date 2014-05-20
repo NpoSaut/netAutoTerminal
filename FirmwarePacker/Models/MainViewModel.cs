@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
+using FirmwarePacking;
 using Microsoft.Practices.Unity;
 using System.Windows.Input;
 
@@ -127,13 +128,19 @@ namespace FirmwarePacker.Models
                     { "Все файлы", "*.*"}
                 };
             selector.Message = "Выберите файл для сохранения пакета";
-            var fileName =
-                selector.SelectSave(string.Format("{0} ver. {1}{2}",
-                                                  Components.First().TargetModule.SelectedBlockKind.Name,
-                                                  FirmwareVersion.ToString(2),
-                                                  string.IsNullOrWhiteSpace(FirmwareVersionLabel)
-                                                      ? ""
-                                                      : FirmwareVersionLabel));
+
+            string defaultFileName = string.Format("{0}{1} ver. {2}{3}.{4}",
+                                                   Components.First().TargetModule.SelectedBlockKind.Name,
+                                                   Components.First().TargetModule.ModuleKinds.Count > 1
+                                                       ? " " + Components.First().TargetModule.SelectedModuleKind.Name
+                                                       : "",
+                                                   FirmwareVersion.ToString(2),
+                                                   string.IsNullOrWhiteSpace(FirmwareVersionLabel)
+                                                       ? ""
+                                                       : FirmwareVersionLabel,
+                                                   FirmwarePackage.FirmwarePackageExtension);
+
+            var fileName = selector.SelectSave(defaultFileName);
             if (fileName != null)
             {
                 var pack = PackageFormatter.Enpack(this);
