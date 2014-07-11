@@ -1,0 +1,3 @@
+[submodule "netFirmwarePacking"]
+	path = netFirmwarePacking
+	url = ../netFirmwarePacking.git
