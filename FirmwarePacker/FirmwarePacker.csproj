@@ -117,7 +117,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirmwarePacking\FirmwarePacking.csproj">
+    <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
       <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
       <Name>FirmwarePacking</Name>
     </ProjectReference>

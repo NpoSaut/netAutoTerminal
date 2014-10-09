@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwarePacker", "FirmwarePacker\FirmwarePacker.csproj", "{1514101A-C93D-4343-9B68-765A78C08054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwarePacking", "FirmwarePacking\FirmwarePacking.csproj", "{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwarePacking", "netFirmwarePacking\FirmwarePacking.csproj", "{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFirmwareUpdater", "ConsoleFirmwareUpdater\ConsoleFirmwareUpdater.csproj", "{4057977B-7F88-42F2-A04E-28F7EE67CD6F}"
 EndProject
