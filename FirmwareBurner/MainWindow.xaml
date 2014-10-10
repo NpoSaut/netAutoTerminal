@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:FirmwareBurner.ViewModel"
+        xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
         mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="424"
         SizeToContent="Height" ResizeMode="CanMinimize"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
-        d:DataContext="{d:DesignInstance viewModel:MainViewModel}">
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />

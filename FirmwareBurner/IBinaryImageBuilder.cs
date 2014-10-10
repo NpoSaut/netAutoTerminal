@@ -1,5 +1,5 @@
 ﻿using System;
-using FirmwareBurner.Model.Images.Binary;
+using FirmwareBurner.Models.Images.Binary;
 
 namespace FirmwareBurner
 {
