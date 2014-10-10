@@ -4,35 +4,32 @@ namespace FirmwareBurner.ViewModel
 {
     public class BlockDetailsViewModel : ViewModelBase
     {
-        private int _SerialNumber = 0;
-        /// <summary>
-        /// Серийный номер блока
-        /// </summary>
+        private DateTime _assemblyDate = DateTime.Now;
+        private int _serialNumber;
+
+        /// <summary>Серийный номер блока</summary>
         public int SerialNumber
         {
-            get { return _SerialNumber; }
+            get { return _serialNumber; }
             set
             {
-                if (_SerialNumber != value)
+                if (_serialNumber != value)
                 {
-                    _SerialNumber = value;
+                    _serialNumber = value;
                     OnPropertyChanged("SerialNumber");
                 }
             }
         }
 
-        private DateTime _AssemblyDate = DateTime.Now;
-        /// <summary>
-        /// Дата сборки модуля
-        /// </summary>
+        /// <summary>Дата сборки модуля</summary>
         public DateTime AssemblyDate
         {
-            get { return _AssemblyDate; }
+            get { return _assemblyDate; }
             set
             {
-                if (_AssemblyDate != value)
+                if (_assemblyDate != value)
                 {
-                    _AssemblyDate = value;
+                    _assemblyDate = value;
                     OnPropertyChanged("AssemblyDate");
                 }
             }

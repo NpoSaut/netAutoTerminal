@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using FirmwareBurner.Burning;
+using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Formating;
 using FirmwarePacking;
 
@@ -8,6 +12,16 @@ namespace FirmwareBurner.ViewModel
 {
     public class BurningViewModel : ViewModelBase
     {
+        private BurningViewModel() { BurnCommand = new ActionCommand(Burn, CanBurn); }
+
+        public BurningViewModel(IFirmwareBurner WithBurner, IFirmwareFormatter WithFormatter, IFirmwareCook Coock)
+            : this()
+        {
+            Burner = WithBurner;
+            Formatter = WithFormatter;
+            this.Coock = Coock;
+        }
+
         private IFirmwareBurner Burner { get; set; }
         private IFirmwareFormatter Formatter { get; set; }
         private IFirmwareCook Coock { get; set; }
@@ -20,18 +34,6 @@ namespace FirmwareBurner.ViewModel
 
         public bool InProgress { get; set; }
 
-        private BurningViewModel()
-        {
-            BurnCommand = new ActionCommand(Burn, CanBurn);
-        }
-        public BurningViewModel(IFirmwareBurner WithBurner, IFirmwareFormatter WithFormatter, IFirmwareCook Coock)
-            : this()
-        {
-            this.Burner = WithBurner;
-            this.Formatter = WithFormatter;
-            this.Coock = Coock;
-        }
-
         private bool CanBurn()
         {
             return
@@ -43,29 +45,32 @@ namespace FirmwareBurner.ViewModel
                 Firmware.Components.Any(c => c.Targets.Contains(Target)) &&
                 !InProgress;
         }
+
         private void Burn()
         {
             InProgress = true;
-            System.Windows.Input.CommandManager.InvalidateRequerySuggested();
-            System.Threading.Tasks.Task.Factory.StartNew(() =>
-                {
-                    try
-                    {
-                        Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
-                        Burner.Burn(p);
-                        Dispatcher.BeginInvoke((Func<String, String, System.Windows.MessageBoxButton, System.Windows.MessageBoxImage, System.Windows.MessageBoxResult>)System.Windows.MessageBox.Show,
-                            string.Format("Канал {0} записан", Target.Channel), "Готово", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Information);
-                    }
-                    catch (Burning.Exceptions.BurningException exc)
-                    {
-                        System.Windows.MessageBox.Show(string.Format("При работе с программатором возникла ошибка:\n{0}", exc.Message), "Ошибка при записи", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-                    }
-                    finally
-                    {
-                        InProgress = false;
-                        System.Windows.Input.CommandManager.InvalidateRequerySuggested();
-                    }
-                });
+            CommandManager.InvalidateRequerySuggested();
+            Task.Factory.StartNew(() =>
+                                  {
+                                      try
+                                      {
+                                          Pie p = Coock.Cook(Firmware, Target, BlockDetails.SerialNumber, BlockDetails.AssemblyDate);
+                                          Burner.Burn(p);
+                                          Dispatcher.BeginInvoke((Func<String, String, MessageBoxButton, MessageBoxImage, MessageBoxResult>)MessageBox.Show,
+                                                                 string.Format("Канал {0} записан", Target.Channel), "Готово", MessageBoxButton.OK,
+                                                                 MessageBoxImage.Information);
+                                      }
+                                      catch (BurningException exc)
+                                      {
+                                          MessageBox.Show(string.Format("При работе с программатором возникла ошибка:\n{0}", exc.Message), "Ошибка при записи",
+                                                          MessageBoxButton.OK, MessageBoxImage.Error);
+                                      }
+                                      finally
+                                      {
+                                          InProgress = false;
+                                          CommandManager.InvalidateRequerySuggested();
+                                      }
+                                  });
         }
     }
 }

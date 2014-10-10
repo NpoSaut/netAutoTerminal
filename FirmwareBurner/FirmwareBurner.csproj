@@ -84,8 +84,12 @@
     <Compile Include="Burning\Exceptions\BurningException.cs" />
     <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
+    <Compile Include="Commands\BurnCommand.cs" />
+    <Compile Include="Commands\ParameterCOmmandBase.cs" />
     <Compile Include="FirmwareCook.cs" />
     <Compile Include="IBinaryImageBuilder.cs" />
+    <Compile Include="IBurningReceipt.cs" />
+    <Compile Include="IBurnManager.cs" />
     <Compile Include="Implementations\Avr\IAvrBootloaderInformation.cs" />
     <Compile Include="Implementations\Avr\AvrFuses.cs" />
     <Compile Include="Implementations\Avr\AvrImageFormatter.cs" />

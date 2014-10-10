@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Linq;
 using FirmwareBurner.ViewModel.FirmwareSources;
+using FirmwarePacking;
 
 namespace FirmwareBurner.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        public ModuleSelectorModel ModuleSelector { get; set; }
-
-        public RepoFirmwareSource AutoFirmwareSource { get; private set; }
-        public ManualFirmwareSource UserFirmwareSource { get; private set; }
-
-        public BlockDetailsViewModel BlockDetails { get; set; }
-
-        public BurningViewModel Burner { get; set; }
-
         public MainViewModel(
             ModuleSelectorModel ModuleSelector,
             RepoFirmwareSource AutoFirmwareSource,
@@ -31,7 +23,7 @@ namespace FirmwareBurner.ViewModel
             Burner.BlockDetails = BlockDetails;
 
             ModuleSelector.Channels.First().IsSelected = true;
-            foreach (var c in ModuleSelector.Channels.Skip(1)) c.IsSelected = false;
+            foreach (ModuleSelectorModel.ChannelModel c in ModuleSelector.Channels.Skip(1)) c.IsSelected = false;
             ModuleSelector.SelectionChanged += Module_SelectionChanged;
             Module_SelectionChanged(ModuleSelector, new ModuleSelectorModel.ModuleSelectedEventArgs());
 
@@ -39,16 +31,22 @@ namespace FirmwareBurner.ViewModel
             FirmwareSource_PackageSelected(AutoFirmwareSource, new EventArgs());
         }
 
-        void FirmwareSource_PackageSelected(object sender, EventArgs e)
-        {
-            Burner.Firmware = ((FirmwareSource)sender).SelectedPackage;
-        }
+        public ModuleSelectorModel ModuleSelector { get; set; }
 
-        void Module_SelectionChanged(object sender, ModuleSelectorModel.ModuleSelectedEventArgs e)
+        public RepoFirmwareSource AutoFirmwareSource { get; private set; }
+        public ManualFirmwareSource UserFirmwareSource { get; private set; }
+
+        public BlockDetailsViewModel BlockDetails { get; set; }
+
+        public BurningViewModel Burner { get; set; }
+
+        private void FirmwareSource_PackageSelected(object sender, EventArgs e) { Burner.Firmware = ((FirmwareSource)sender).SelectedPackage; }
+
+        private void Module_SelectionChanged(object sender, ModuleSelectorModel.ModuleSelectedEventArgs e)
         {
-            var SelectedTarget = ModuleSelector.GetTargets(true).First();
-            AutoFirmwareSource.CheckTarget(SelectedTarget);
-            Burner.Target = SelectedTarget;
+            ComponentTarget selectedTarget = ModuleSelector.GetTargets(true).First();
+            AutoFirmwareSource.CheckTarget(selectedTarget);
+            Burner.Target = selectedTarget;
         }
     }
 }
