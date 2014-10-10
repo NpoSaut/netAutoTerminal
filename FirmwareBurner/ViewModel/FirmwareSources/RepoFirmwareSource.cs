@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using FirmwarePacking;
-using System.Collections.ObjectModel;
-using System.IO;
 using FirmwarePacking.Repositories;
 
-namespace FirmwareBurner.Models.FirmwareSources
+namespace FirmwareBurner.ViewModel.FirmwareSources
 {
     public class RepoFirmwareSource : FirmwareSource
     {

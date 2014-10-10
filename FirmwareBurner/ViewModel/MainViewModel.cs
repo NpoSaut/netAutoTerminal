@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using FirmwarePacker.Models;
-using FirmwareBurner.Models.FirmwareSources;
+using FirmwareBurner.ViewModel.FirmwareSources;
 
-namespace FirmwareBurner.Models
+namespace FirmwareBurner.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {

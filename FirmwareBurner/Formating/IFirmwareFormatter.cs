@@ -1,6 +1,7 @@
 ﻿using System;
-using FirmwareBurner.FirmwareElements;
 using System.IO;
+using FirmwareBurner.Model.Images.Binary;
+
 namespace FirmwareBurner.Formating
 {
     public interface IFirmwareFormatter

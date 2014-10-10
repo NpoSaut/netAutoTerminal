@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using FirmwarePacking.SystemsIndexes;
 using FirmwarePacking;
-using FirmwareBurner.Models;
+using FirmwarePacking.SystemsIndexes;
 
-namespace FirmwarePacker.Models
+namespace FirmwareBurner.ViewModel
 {
     public class ModuleSelectorModel : ViewModelBase, IDataCheck
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.IO;
-using FirmwareBurner.FirmwareElements;
+using FirmwareBurner.Model.Images.Binary;
 
 namespace FirmwareBurner.Formating
 {
@@ -25,7 +25,7 @@ namespace FirmwareBurner.Formating
         }
         public XmlFirmwareFormatter(XElement XFormat)
             : this(
-                new ElementFormat(XFormat.Element("FileTable")),
+                new ElementFormat(XFormat.Element("FilesTable")),
                 new ElementFormat(XFormat.Element("ParamList")),
                 new ElementFormat(XFormat.Element("BootloaderBody")))
         { }
@@ -39,7 +39,7 @@ namespace FirmwareBurner.Formating
 
         public void WriteToStreams(FirmwareImage Image, Stream FlashOutput, Stream EepromOutput)
         {
-            foreach (var file in Image.FileTable)
+            foreach (var file in Image.FilesTable)
             {
                 Stream FileOutput;
                 switch(file.Placement)
@@ -48,10 +48,10 @@ namespace FirmwareBurner.Formating
                     case FileStorage.Eeprom: FileOutput = EepromOutput; break;
                     default: continue;
                 }
-                FileOutput.Seek(file.FileAdress, SeekOrigin.Begin);
+                FileOutput.Seek(file.FileAddress, SeekOrigin.Begin);
                 file.Body.CopyTo(FileOutput);
             }
-            FileTableFormat.WriteTo(Image.FileTable, FlashOutput);
+            FileTableFormat.WriteTo(Image.FilesTable, FlashOutput);
             ParamListFormat.WriteTo(Image.ParamList, FlashOutput);
             BootloaderBodyFormat.WriteTo(Image.Bootloader, FlashOutput);
             Image.Bootloader.Body.CopyTo(FlashOutput);

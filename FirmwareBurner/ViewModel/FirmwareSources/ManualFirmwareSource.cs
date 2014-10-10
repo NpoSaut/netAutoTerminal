@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Win32;
 using FirmwarePacking;
+using Microsoft.Win32;
 
-namespace FirmwareBurner.Models.FirmwareSources
+namespace FirmwareBurner.ViewModel.FirmwareSources
 {
     public class ManualFirmwareSource : FirmwareSource
     {

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Threading;
 using System.ComponentModel;
+using System.Windows.Threading;
 
-namespace FirmwareBurner.Models
+namespace FirmwareBurner.ViewModel
 {
     public class ViewModelBase : DispatcherObject, INotifyPropertyChanged
     {

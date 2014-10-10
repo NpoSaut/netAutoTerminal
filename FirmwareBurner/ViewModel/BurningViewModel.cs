@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FirmwareBurner.Burning;
 using FirmwareBurner.Formating;
 using FirmwarePacking;
 
-namespace FirmwareBurner.Models
+namespace FirmwareBurner.ViewModel
 {
     public class BurningViewModel : ViewModelBase
     {

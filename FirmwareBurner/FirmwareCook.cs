@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FirmwareBurner.Burning;
-using FirmwareBurner.FirmwareElements;
 using FirmwareBurner.Formating;
 using FirmwareBurner.IntelHex;
+using FirmwareBurner.Model.Images.Binary;
 using FirmwarePacking;
 using System.IO;
 using Microsoft.Practices.Unity;
@@ -45,7 +45,7 @@ namespace FirmwareBurner
                 new FileRecord()
                 {
                     Body = new MemoryStream(file.Content),
-                    FileAdress = Convert.ToInt32(path[1], 16),
+                    FileAddress = Convert.ToInt32(path[1], 16),
                     Checksum = FudpCrc.CalcCrc(file.Content)
                 };
             switch(path[0])
@@ -63,7 +63,7 @@ namespace FirmwareBurner
                 new FirmwareImage()
                 {
                     Bootloader = new BootloaderBody() { Body = BootloaderFile.OpenRead() },
-                    FileTable = GetComponent(Package, Target).Files.Select(f => SortFile(f)).ToList(),
+                    FilesTable = GetComponent(Package, Target).Files.Select(f => SortFile(f)).ToList(),
                     ParamList =
                         new List<ParamRecord>()
                         {

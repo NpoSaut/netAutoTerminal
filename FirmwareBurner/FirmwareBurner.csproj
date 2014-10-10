@@ -85,13 +85,23 @@
     <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
     <Compile Include="FirmwareCook.cs" />
-    <Compile Include="FirmwareElements\BootloaderBody.cs" />
-    <Compile Include="FirmwareElements\FirmwareImage.cs" />
-    <Compile Include="FirmwareElements\FileRecord.cs" />
+    <Compile Include="IBinaryImageBuilder.cs" />
+    <Compile Include="Implementations\Avr\IAvrBootloaderInformation.cs" />
+    <Compile Include="Implementations\Avr\AvrFuses.cs" />
+    <Compile Include="Implementations\Avr\AvrImageFormatter.cs" />
+    <Compile Include="Implementations\Avr\AvrImage.cs" />
+    <Compile Include="Model\Images\Binary\IBinaryFilesystemFormatter.cs" />
+    <Compile Include="Model\Images\Binary\IBinaryPropertiesTableFormatter.cs" />
+    <Compile Include="Implementations\Cortex\CortexImage.cs" />
+    <Compile Include="Implementations\Cortex\CortexPie.cs" />
+    <Compile Include="Model\IImageFormatter.cs" />
+    <Compile Include="Model\Images\Binary\BootloaderBody.cs" />
+    <Compile Include="Model\Images\Binary\FirmwareImage.cs" />
+    <Compile Include="Model\Images\Binary\FileRecord.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />
     <Compile Include="Formating\XmlFirmwareFormatter.cs" />
     <Compile Include="Formating\FormatBase.cs" />
-    <Compile Include="FirmwareElements\ParamRecord.cs" />
+    <Compile Include="Model\Images\Binary\ParamRecord.cs" />
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
@@ -104,21 +114,28 @@
     <Compile Include="IntelHex\IntelHexDataLine.cs" />
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
-    <Compile Include="Models\ActionCommand.cs" />
-    <Compile Include="Models\BlockDetailsViewModel.cs" />
-    <Compile Include="Models\BurningViewModel.cs" />
-    <Compile Include="Models\FirmwareSources\FirmwareSource.cs" />
+    <Compile Include="ViewModel\ActionCommand.cs" />
+    <Compile Include="ViewModel\BlockDetailsViewModel.cs" />
+    <Compile Include="ViewModel\BurningViewModel.cs" />
+    <Compile Include="ViewModel\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\FirmwareSources\ManualFirmwareSource.cs" />
-    <Compile Include="Models\FirmwareSources\RepoFirmwareSource.cs" />
-    <Compile Include="Models\MainViewModel.cs" />
-    <Compile Include="Models\SelectBlockViewModel.cs" />
-    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="ViewModel\FirmwareSources\ManualFirmwareSource.cs" />
+    <Compile Include="ViewModel\FirmwareSources\RepoFirmwareSource.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\SelectBlockViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Model\Images\Binary\IBinaryImage.cs" />
+    <Compile Include="Model\Images\IImage.cs" />
+    <Compile Include="Model\IPropertiesTableGenerator.cs" />
+    <Compile Include="Model\Project\ModuleInformation.cs" />
+    <Compile Include="Model\Project\ModuleProject.cs" />
+    <Compile Include="Model\Project\FirmwareProject.cs" />
+    <Compile Include="Model\TargetInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -181,6 +198,7 @@
       <Name>FirmwarePacking</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>rd $(TargetDir)SingleExe /S /Q
