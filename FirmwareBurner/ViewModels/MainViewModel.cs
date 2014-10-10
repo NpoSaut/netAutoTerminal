@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using FirmwareBurner.ViewModel.FirmwareSources;
+using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwarePacking;
 
-namespace FirmwareBurner.ViewModel
+namespace FirmwareBurner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {

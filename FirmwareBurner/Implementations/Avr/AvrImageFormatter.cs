@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FirmwareBurner.Model;
-using FirmwareBurner.Model.Project;
+using FirmwareBurner.Models;
+using FirmwareBurner.Models.Project;
 using FirmwarePacking;
 
 namespace FirmwareBurner.Implementations.Avr

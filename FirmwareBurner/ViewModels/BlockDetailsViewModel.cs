@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwareBurner.ViewModel
+namespace FirmwareBurner.ViewModels
 {
     public class BlockDetailsViewModel : ViewModelBase
     {

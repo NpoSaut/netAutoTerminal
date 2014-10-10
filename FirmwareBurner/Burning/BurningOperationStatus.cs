@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace FirmwareBurner.Burning
 {
     public class BurningOperationStatus : IBurningOperationStatusReceiver
     {
         private double _Progress;
-        /// <summary>Возникает каждый раз при изменении доли выполнения операции</summary>
-        public event EventHandler ProgressChanged;
+
+        /// <summary>Говорит о завершении процесса</summary>
+        public bool IsFinished { get; private set; }
+
         /// <summary>Доля выполнения</summary>
         public double Progress
         {
@@ -24,14 +23,12 @@ namespace FirmwareBurner.Burning
             }
         }
 
-        /// <summary>Говорит о завершении процесса</summary>
-        public bool IsFinished { get; private set; }
+        public void OnFinish() { if (Finished != null) Finished(this, new EventArgs()); }
+
+        /// <summary>Возникает каждый раз при изменении доли выполнения операции</summary>
+        public event EventHandler ProgressChanged;
+
         /// <summary>Событие возникает при завершении операции</summary>
         public event EventHandler Finished;
-
-        public void OnFinish()
-        {
-            if (Finished != null) Finished(this, new EventArgs());
-        }
     }
 }

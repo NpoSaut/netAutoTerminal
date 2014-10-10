@@ -1,14 +1,16 @@
 ﻿using System.Reflection;
-using System.Resources;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
+
 [assembly: AssemblyTitle("Burner")]
-[assembly: AssemblyDescription("Программа для первичного программирования ячейки - помимо прошивки основной программы записывает в устройство загрузчик и неизменяемые параметры блока")]
+[assembly:
+    AssemblyDescription(
+        "Программа для первичного программирования ячейки - помимо прошивки основной программы записывает в устройство загрузчик и неизменяемые параметры блока"
+        )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("НПО САУТ")]
 [assembly: AssemblyProduct("FmBurner")]
@@ -19,6 +21,7 @@ using System.Windows;
 // Параметр ComVisible со значением FALSE делает типы в сборке невидимыми 
 // для COM-компонентов.  Если требуется обратиться к типу в этой сборке через 
 // COM, задайте атрибуту ComVisible значение TRUE для этого типа.
+
 [assembly: ComVisible(false)]
 
 //Чтобы начать построение локализованных приложений, задайте 
@@ -30,7 +33,6 @@ using System.Windows;
 
 //[assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.Satellite)]
 
-
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //где расположены словари ресурсов по конкретным тематикам
     //(используется, если ресурс не найден на странице 
@@ -38,8 +40,7 @@ using System.Windows;
     ResourceDictionaryLocation.SourceAssembly //где расположен словарь универсальных ресурсов
     //(используется, если ресурс не найден на странице, 
     // в приложении или в каких-либо словарях ресурсов для конкретной темы)
-)]
-
+    )]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //
@@ -51,5 +52,6 @@ using System.Windows;
 // Можно задать все значения или принять номер построения и номер редакции по умолчанию, 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
+
 [assembly: AssemblyVersion("0.4.*")]
 [assembly: AssemblyFileVersion("0.4.0.0")]

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using FirmwareBurner.Implementations.Avr;
 
-namespace FirmwareBurner.Model.Images.Binary
+namespace FirmwareBurner.Models.Images.Binary
 {
     public interface IBinaryFilesystemFormatter
     {

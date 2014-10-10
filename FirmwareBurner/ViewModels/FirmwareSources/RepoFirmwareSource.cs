@@ -3,29 +3,29 @@ using System.Linq;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
 
-namespace FirmwareBurner.ViewModel.FirmwareSources
+namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     public class RepoFirmwareSource : FirmwareSource
     {
-        public Repository[] Repositories { get; set; }
-        public ObservableCollection<FirmwarePackage> PackagesForTarget { get; private set; }
-
         public RepoFirmwareSource(Repository[] Repositories)
         {
             this.Repositories = Repositories;
             PackagesForTarget = new ObservableCollection<FirmwarePackage>();
         }
 
+        public Repository[] Repositories { get; set; }
+        public ObservableCollection<FirmwarePackage> PackagesForTarget { get; private set; }
+
         protected override void OnCheckTarget(ComponentTarget target)
         {
             base.OnCheckTarget(target);
             PackagesForTarget.Clear();
 
-            foreach (var p in
-                    Repositories.SelectMany(repo => repo.GetPackagesForTargets(target))
-                                .OrderByDescending(fw => fw.Information.FirmwareVersion))
+            foreach (FirmwarePackage p in
+                Repositories.SelectMany(repo => repo.GetPackagesForTargets(target))
+                            .OrderByDescending(fw => fw.Information.FirmwareVersion))
                 PackagesForTarget.Add(p);
-            
+
             SelectedPackage = PackagesForTarget.FirstOrDefault();
         }
     }

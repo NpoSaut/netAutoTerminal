@@ -8,7 +8,7 @@ using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Formating;
 using FirmwarePacking;
 
-namespace FirmwareBurner.ViewModel
+namespace FirmwareBurner.ViewModels
 {
     public class BurningViewModel : ViewModelBase
     {

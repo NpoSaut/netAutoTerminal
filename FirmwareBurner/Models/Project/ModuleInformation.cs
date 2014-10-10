@@ -1,4 +1,4 @@
-﻿namespace FirmwareBurner.Model.Project
+﻿namespace FirmwareBurner.Models.Project
 {
     /// <summary>Информация о модуле</summary>
     public class ModuleInformation

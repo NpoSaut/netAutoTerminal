@@ -1,4 +1,4 @@
-﻿using FirmwareBurner.Model.Project;
+﻿using FirmwareBurner.Models.Project;
 
 namespace FirmwareBurner.Commands
 {

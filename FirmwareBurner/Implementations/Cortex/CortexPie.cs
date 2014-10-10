@@ -4,6 +4,6 @@ namespace FirmwareBurner.Implementations.Cortex
 {
     public class CortexPie
     {
-        public Stream FlashStream { get; private set; } 
+        public Stream FlashStream { get; private set; }
     }
 }

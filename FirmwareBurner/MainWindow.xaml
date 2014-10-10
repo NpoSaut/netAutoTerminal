@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="424"
         SizeToContent="Height" ResizeMode="CanMinimize"
-        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display"
+        Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
@@ -35,8 +36,12 @@
                 <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
                 <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Модификация</Label>
 
-                <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"  SelectedItem="{Binding SelectedBlockKind}" />
-                <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector"  IsEditable="False" DisplayMemberPath="Name" ItemsSource="{Binding ModificationKinds}"  SelectedItem="{Binding SelectedModificationKind}" />
+                <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector" IsEditable="False"
+                          DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"
+                          SelectedItem="{Binding SelectedBlockKind}" />
+                <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector" IsEditable="False"
+                          DisplayMemberPath="Name" ItemsSource="{Binding ModificationKinds}"
+                          SelectedItem="{Binding SelectedModificationKind}" />
             </Grid>
         </Border>
         <Grid Grid.Row="1" Margin="6,2">
@@ -54,7 +59,8 @@
             </Grid.RowDefinitions>
 
             <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="4" Name="BurningDataShadow" Fill="#3547A0E8" />
-            <Polygon Grid.Column="2" Grid.RowSpan="4" Points="2,4 0,0 0,8" Stretch="Fill" Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
+            <Polygon Grid.Column="2" Grid.RowSpan="4" Points="2,4 0,0 0,8" Stretch="Fill"
+                     Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
                 <Polygon.Fill>
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                         <GradientStop Color="#3547A0E8" Offset="0" />
@@ -63,39 +69,49 @@
                 </Polygon.Fill>
             </Polygon>
 
-            <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}" Content="Серийный номер блока" />
-            <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=AssemblyDateEdit}" Content="Дата изготовления" />
+            <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
+                   Content="Серийный номер блока" />
+            <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=AssemblyDateEdit}"
+                   Content="Дата изготовления" />
 
-            <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit" Text="{Binding Path=BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
-            <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}" SelectedDate="{Binding Path=BlockDetails.AssemblyDate}" />
+            <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit"
+                     Text="{Binding Path=BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
+            <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}"
+                        SelectedDate="{Binding Path=BlockDetails.AssemblyDate}" />
 
             <RadioButton Grid.Column="0" Grid.Row="2" Content="Из хранилища" IsChecked="True" />
             <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" IsEnabled="False" />
 
-            <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" DataContext="{Binding AutoFirmwareSource}" ItemsSource="{Binding PackagesForTarget}" SelectedItem="{Binding SelectedPackage}">
+            <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" DataContext="{Binding AutoFirmwareSource}"
+                      ItemsSource="{Binding PackagesForTarget}" SelectedItem="{Binding SelectedPackage}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock>
                             <Run Text="Версия" />
-                            <Run Text="{Binding Path=Information.FirmwareVersion, Mode=OneTime, StringFormat={}{0}}" FontWeight="Medium" />
+                            <Run Text="{Binding Path=Information.FirmwareVersion, Mode=OneTime, StringFormat={}{0}}"
+                                 FontWeight="Medium" />
                             <Run Text="{Binding Path=Information.FirmwareVersionLabel, Mode=OneTime}" />
                         </TextBlock>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2"  DataContext="{Binding UserFirmwareSource}" IsEnabled="False">
-                    <Hyperlink>
-                        <Run>Выбрать файл</Run>
-                    </Hyperlink>
+            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2" DataContext="{Binding UserFirmwareSource}"
+                       IsEnabled="False">
+                <Hyperlink>
+                    <Run>Выбрать файл</Run>
+                </Hyperlink>
             </TextBlock>
 
-            <ListBox  Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" Name="ChannelsSelector"
-                      ItemsSource="{Binding ModuleSelector.Channels}" Style="{StaticResource ChannelSelectorStyle}" DisplayMemberPath="Id" SelectionMode="Single" />
+            <ListBox Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     Name="ChannelsSelector"
+                     ItemsSource="{Binding ModuleSelector.Channels}" Style="{StaticResource ChannelSelectorStyle}"
+                     DisplayMemberPath="Id" SelectionMode="Single" />
 
             <Grid Grid.Column="3" Grid.RowSpan="4" DataContext="{Binding Burner}">
-                <Button Width="60" Height="60" Style="{StaticResource CircleButton}" Command="{Binding BurnCommand}" Content="Начать" />
+                <Button Width="60" Height="60" Style="{StaticResource CircleButton}" Command="{Binding BurnCommand}"
+                        Content="Начать" />
             </Grid>
-            
+
         </Grid>
     </Grid>
 </Window>

@@ -1,5 +1,4 @@
-﻿using FirmwareBurner.Model;
-using FirmwareBurner.Models;
+﻿using FirmwareBurner.Models;
 using FirmwareBurner.Models.Images;
 using FirmwareBurner.Models.Project;
 

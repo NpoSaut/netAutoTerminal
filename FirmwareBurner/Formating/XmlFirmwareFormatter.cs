@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using System.IO;
-using FirmwareBurner.Model.Images.Binary;
+using System.Xml.Linq;
+using FirmwareBurner.Models.Images.Binary;
 
 namespace FirmwareBurner.Formating
 {
-    public class XmlFirmwareFormatter : FirmwareBurner.Formating.IFirmwareFormatter
+    public class XmlFirmwareFormatter : IFirmwareFormatter
     {
-        private ElementFormat FileTableFormat { get; set; }
-        private ElementFormat ParamListFormat { get; set; }
-        private ElementFormat BootloaderBodyFormat { get; set; }
+        private XmlFirmwareFormatter() { }
 
-        private XmlFirmwareFormatter()
-        { }
         private XmlFirmwareFormatter(ElementFormat FileTableFormat, ElementFormat ParamListFormat, ElementFormat BootloaderBodyFormat)
             : this()
         {
@@ -23,30 +16,32 @@ namespace FirmwareBurner.Formating
             this.ParamListFormat = ParamListFormat;
             this.BootloaderBodyFormat = BootloaderBodyFormat;
         }
+
         public XmlFirmwareFormatter(XElement XFormat)
             : this(
                 new ElementFormat(XFormat.Element("FilesTable")),
                 new ElementFormat(XFormat.Element("ParamList")),
-                new ElementFormat(XFormat.Element("BootloaderBody")))
-        { }
+                new ElementFormat(XFormat.Element("BootloaderBody"))) { }
 
-        public static IFirmwareFormatter ReadFormat(String FileName) { return ReadFormat(new FileInfo(FileName)); }
-        public static IFirmwareFormatter ReadFormat(FileInfo File) { return ReadFormat(XDocument.Load(File.OpenRead()).Root); }
-        public static XmlFirmwareFormatter ReadFormat(XElement XFormat)
-        {
-            return new XmlFirmwareFormatter(XFormat);
-        }
+        private ElementFormat FileTableFormat { get; set; }
+        private ElementFormat ParamListFormat { get; set; }
+        private ElementFormat BootloaderBodyFormat { get; set; }
 
         public void WriteToStreams(FirmwareImage Image, Stream FlashOutput, Stream EepromOutput)
         {
-            foreach (var file in Image.FilesTable)
+            foreach (FileRecord file in Image.FilesTable)
             {
                 Stream FileOutput;
-                switch(file.Placement)
+                switch (file.Placement)
                 {
-                    case FileStorage.Flash:  FileOutput = FlashOutput; break;
-                    case FileStorage.Eeprom: FileOutput = EepromOutput; break;
-                    default: continue;
+                    case FileStorage.Flash:
+                        FileOutput = FlashOutput;
+                        break;
+                    case FileStorage.Eeprom:
+                        FileOutput = EepromOutput;
+                        break;
+                    default:
+                        continue;
                 }
                 FileOutput.Seek(file.FileAddress, SeekOrigin.Begin);
                 file.Body.CopyTo(FileOutput);
@@ -56,5 +51,9 @@ namespace FirmwareBurner.Formating
             BootloaderBodyFormat.WriteTo(Image.Bootloader, FlashOutput);
             Image.Bootloader.Body.CopyTo(FlashOutput);
         }
+
+        public static IFirmwareFormatter ReadFormat(String FileName) { return ReadFormat(new FileInfo(FileName)); }
+        public static IFirmwareFormatter ReadFormat(FileInfo File) { return ReadFormat(XDocument.Load(File.OpenRead()).Root); }
+        public static XmlFirmwareFormatter ReadFormat(XElement XFormat) { return new XmlFirmwareFormatter(XFormat); }
     }
 }

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Collections;
 using System.IO;
+using System.Xml.Linq;
 
 namespace FirmwareBurner.Formating
 {
-    class TableFormat : ElementFormat
+    internal class TableFormat : ElementFormat
     {
         //public ElementFormat ItemFormat { get; private set; }
 
@@ -21,13 +18,11 @@ namespace FirmwareBurner.Formating
         public override void WriteTo(object Source, Stream output)
         {
             //base.WriteTo(Source, output);
-            var seq = (System.Collections.IEnumerable)Source;
-            foreach (var element in seq)
+            var seq = (IEnumerable)Source;
+            foreach (object element in seq)
                 base.WriteTo(element, output);
         }
-        public override string ToString()
-        {
-            return string.Format("Table format");
-        }
+
+        public override string ToString() { return string.Format("Table format"); }
     }
 }

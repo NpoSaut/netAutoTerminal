@@ -94,18 +94,18 @@
     <Compile Include="Implementations\Avr\AvrFuses.cs" />
     <Compile Include="Implementations\Avr\AvrImageFormatter.cs" />
     <Compile Include="Implementations\Avr\AvrImage.cs" />
-    <Compile Include="Model\Images\Binary\IBinaryFilesystemFormatter.cs" />
-    <Compile Include="Model\Images\Binary\IBinaryPropertiesTableFormatter.cs" />
+    <Compile Include="Models\Images\Binary\IBinaryFilesystemFormatter.cs" />
+    <Compile Include="Models\Images\Binary\IBinaryPropertiesTableFormatter.cs" />
     <Compile Include="Implementations\Cortex\CortexImage.cs" />
     <Compile Include="Implementations\Cortex\CortexPie.cs" />
-    <Compile Include="Model\IImageFormatter.cs" />
-    <Compile Include="Model\Images\Binary\BootloaderBody.cs" />
-    <Compile Include="Model\Images\Binary\FirmwareImage.cs" />
-    <Compile Include="Model\Images\Binary\FileRecord.cs" />
+    <Compile Include="Models\IImageFormatter.cs" />
+    <Compile Include="Models\Images\Binary\BootloaderBody.cs" />
+    <Compile Include="Models\Images\Binary\FirmwareImage.cs" />
+    <Compile Include="Models\Images\Binary\FileRecord.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />
     <Compile Include="Formating\XmlFirmwareFormatter.cs" />
     <Compile Include="Formating\FormatBase.cs" />
-    <Compile Include="Model\Images\Binary\ParamRecord.cs" />
+    <Compile Include="Models\Images\Binary\ParamRecord.cs" />
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
@@ -118,28 +118,28 @@
     <Compile Include="IntelHex\IntelHexDataLine.cs" />
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
-    <Compile Include="ViewModel\ActionCommand.cs" />
-    <Compile Include="ViewModel\BlockDetailsViewModel.cs" />
-    <Compile Include="ViewModel\BurningViewModel.cs" />
-    <Compile Include="ViewModel\FirmwareSources\FirmwareSource.cs" />
+    <Compile Include="ViewModels\ActionCommand.cs" />
+    <Compile Include="ViewModels\BlockDetailsViewModel.cs" />
+    <Compile Include="ViewModels\BurningViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModel\FirmwareSources\ManualFirmwareSource.cs" />
-    <Compile Include="ViewModel\FirmwareSources\RepoFirmwareSource.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\SelectBlockViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="Model\Images\Binary\IBinaryImage.cs" />
-    <Compile Include="Model\Images\IImage.cs" />
-    <Compile Include="Model\IPropertiesTableGenerator.cs" />
-    <Compile Include="Model\Project\ModuleInformation.cs" />
-    <Compile Include="Model\Project\ModuleProject.cs" />
-    <Compile Include="Model\Project\FirmwareProject.cs" />
-    <Compile Include="Model\TargetInformation.cs" />
+    <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSource.cs" />
+    <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSource.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SelectBlockViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Models\Images\Binary\IBinaryImage.cs" />
+    <Compile Include="Models\Images\IImage.cs" />
+    <Compile Include="Models\IPropertiesTableGenerator.cs" />
+    <Compile Include="Models\Project\ModuleInformation.cs" />
+    <Compile Include="Models\Project\ModuleProject.cs" />
+    <Compile Include="Models\Project\FirmwareProject.cs" />
+    <Compile Include="Models\TargetInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

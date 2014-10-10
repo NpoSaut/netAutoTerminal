@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using FirmwareBurner.Model.Project;
+﻿using System.Collections.Generic;
+using FirmwareBurner.Models.Project;
 using FirmwarePacking;
 
-namespace FirmwareBurner.Model
+namespace FirmwareBurner.Models
 {
     /// <summary>Инструмент по формированию таблицы свойств в прошивке</summary>
     public interface IPropertiesTableGenerator

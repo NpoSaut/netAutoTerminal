@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using System.Diagnostics;
-using FirmwareBurner.Burning.Burners.AvrIsp;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
+using FirmwareBurner.Burning.Exceptions;
 
 namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
 {
-    /// <summary>
-    /// Оболочка над программой STK500.exe
-    /// </summary>
+    /// <summary>Оболочка над программой STK500.exe</summary>
     public class Stk500 : IAvrIspCommandShell
     {
         private static readonly FileInfo _BurnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
-        public static FileInfo BurnerFile { get { return _BurnerFile; } }
-
-        public String ChipName { get; set; }
 
         public Stk500()
         {
@@ -25,10 +19,17 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
             if (!BurnerFile.Exists) throw new BurnerNotFoundException();
         }
 
+        public static FileInfo BurnerFile
+        {
+            get { return _BurnerFile; }
+        }
+
+        public String ChipName { get; set; }
+
         public Byte[] GetSignature()
         {
-            var output = Execute(
-                new List<Stk500Parameter>()
+            string output = Execute(
+                new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
                     new DeviceNameParameter(ChipName),
@@ -36,18 +37,17 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
                 }).ReadToEnd();
             CheckOutputForErrors(output);
 
-            Regex r = new Regex(@"Signature is (0x(?<byte>[0-9a-fA-F]{2})\s+){3}");
-            var m = r.Match(output);
+            var r = new Regex(@"Signature is (0x(?<byte>[0-9a-fA-F]{2})\s+){3}");
+            Match m = r.Match(output);
             if (m.Success)
                 return m.Groups["byte"].Captures.OfType<Capture>().Select(bc => Convert.ToByte(bc.Value, 16)).ToArray();
-            else
-                throw new Stk500Exception("Программатор ответил не стандартным образом:\n\n" + output);
+            throw new Stk500Exception("Программатор ответил не стандартным образом:\n\n" + output);
         }
 
         public void WriteFlash(FileInfo FlashFile, bool Erase = true)
         {
-            var output = Execute(
-                new List<Stk500Parameter>()
+            StreamReader output = Execute(
+                new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
                     new DeviceNameParameter(ChipName),
@@ -55,32 +55,29 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
                     new InputFileParameter(FlashFile, InputFileParameter.FilePlacement.flash),
                     Erase ? new EraseParameter() : null,
                 });
-            var OutputString = output.ReadToEnd();
+            string OutputString = output.ReadToEnd();
             CheckOutputForErrors(OutputString, "FLASH programmed");
         }
 
-        public void WriteEeprom(FileInfo EepromFile, bool Erase = true)
-        {
-            throw new NotImplementedException();
-        }
+        public void WriteEeprom(FileInfo EepromFile, bool Erase = true) { throw new NotImplementedException(); }
 
         public Fuses ReadFuse()
         {
-            var output = Execute(
-                new List<Stk500Parameter>()
+            StreamReader output = Execute(
+                new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
                     new DeviceNameParameter(ChipName),
                     new ReadFuseParameter()
                 });
-            var outputString = output.ReadToEnd();
+            string outputString = output.ReadToEnd();
             CheckOutputForErrors(outputString, "Fuse byte 0 read");
 
             //Regex r = new Regex(@"Fuse byte (?<key>[012]) read (0x(?<byte>[0-9a-fA-F]{2}))");
-            Regex r = new Regex(@"Fuse byte (?<key>[012]) read \(0x(?<byte>[0-9a-fA-F]{2})\)");
+            var r = new Regex(@"Fuse byte (?<key>[012]) read \(0x(?<byte>[0-9a-fA-F]{2})\)");
 
             var res = new Fuses();
-            foreach (var m in r.Matches(outputString).OfType<Match>())
+            foreach (Match m in r.Matches(outputString).OfType<Match>())
             {
                 int i = int.Parse(m.Groups["key"].Value);
                 byte val = Convert.ToByte(m.Groups["byte"].Value, 16);
@@ -103,15 +100,15 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
 
         public void WriteFuse(Fuses f)
         {
-            var output = Execute(
-                new List<Stk500Parameter>()
+            StreamReader output = Execute(
+                new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
                     new DeviceNameParameter(ChipName),
                     new WriteFuseParameter(f.FuseH, f.FuseL),
                     new WriteExtendedFuseParameter(f.FuseE)
                 });
-            var outputString = output.ReadToEnd();
+            string outputString = output.ReadToEnd();
             CheckOutputForErrors(outputString, "Fuse bits programmed");
         }
 
@@ -119,8 +116,9 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
         {
             CheckOutputForErrors(Output);
             if (!Output.Contains(SuccessString))
-                throw new Exceptions.BurningException(Output);
+                throw new BurningException(Output);
         }
+
         private void CheckOutputForErrors(string Output)
         {
             if (Output.Contains("Could not connect to AVRISP mkII"))
@@ -140,8 +138,8 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
                     RedirectStandardOutput = true,
                     CreateNoWindow = true
                 };
-            Process p = 
-                new Process()
+            var p =
+                new Process
                 {
                     StartInfo = psi
                 };

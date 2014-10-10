@@ -1,14 +1,28 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace FirmwareBurner.ViewModel
+namespace FirmwareBurner.ViewModels
 {
     public class ActionCommand : ICommand
     {
-        public bool CanExecute(object parameter)
+        public ActionCommand(Action ExecuteAction)
+            : this(p => ExecuteAction()) { }
+
+        public ActionCommand(Action ExecuteAction, Func<bool> Check)
+            : this(p => ExecuteAction(), p => Check()) { }
+
+        public ActionCommand(Action<object> ExecuteAction)
+            : this(ExecuteAction, p => true) { }
+
+        public ActionCommand(Action<object> ExecuteAction, Func<object, bool> Check)
         {
-            return Check(parameter);
+            Action = ExecuteAction;
+            this.Check = Check;
         }
+
+        public Action<Object> Action { get; private set; }
+        public Func<object, bool> Check { get; private set; }
+        public bool CanExecute(object parameter) { return Check(parameter); }
 
         public event EventHandler CanExecuteChanged
         {
@@ -16,27 +30,6 @@ namespace FirmwareBurner.ViewModel
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public void Execute(object parameter)
-        {
-            Action(parameter);
-        }
-
-        public Action<Object> Action { get; private set; }
-        public Func<object, bool> Check { get; private set; }
-
-        public ActionCommand(Action ExecuteAction)
-            : this(p => ExecuteAction())
-        { }
-        public ActionCommand(Action ExecuteAction, Func<bool> Check)
-            : this(p => ExecuteAction(), p => Check())
-        { }
-        public ActionCommand(Action<object> ExecuteAction)
-            : this(ExecuteAction, p => true)
-        { }
-        public ActionCommand(Action<object> ExecuteAction, Func<object, bool> Check)
-        {
-            this.Action = ExecuteAction;
-            this.Check = Check;
-        }
+        public void Execute(object parameter) { Action(parameter); }
     }
 }

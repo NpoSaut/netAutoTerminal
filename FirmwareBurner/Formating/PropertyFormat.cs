@@ -1,43 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Xml.Linq;
 
 namespace FirmwareBurner.Formating
 {
-    class PropertyFormat : FormatBase
+    internal class PropertyFormat : FormatBase
     {
-        public String PropertyName { get; private set; }
-        public int FieldLength { get; private set; }
-
         public PropertyFormat(XElement XFormatPice)
             : base(XFormatPice)
         {
-            this.PropertyName = XFormatPice.Name.LocalName;
-            this.FieldLength = (int)XFormatPice.Attribute("Length");
+            PropertyName = XFormatPice.Name.LocalName;
+            FieldLength = (int)XFormatPice.Attribute("Length");
         }
+
+        public String PropertyName { get; private set; }
+        public int FieldLength { get; private set; }
 
         public Byte[] Get(Object Source)
         {
-            var st = Source.GetType();
-            var p = st.GetProperty(PropertyName);
+            Type st = Source.GetType();
+            PropertyInfo p = st.GetProperty(PropertyName);
             if (p == null) return new Byte[FieldLength];
 
-            var v = Convert.ToInt64(p.GetValue(Source, new object[0]));
+            long v = Convert.ToInt64(p.GetValue(Source, new object[0]));
             return BitConverter.GetBytes(v).Take(FieldLength).ToArray();
         }
 
         public override void WriteTo(object Source, Stream output)
         {
-            var buff = Get(Source);
+            byte[] buff = Get(Source);
             output.Write(buff, 0, buff.Length);
         }
 
-        public override string ToString()
-        {
-            return string.Format("Property format: {0}", PropertyName);
-        }
+        public override string ToString() { return string.Format("Property format: {0}", PropertyName); }
     }
 }

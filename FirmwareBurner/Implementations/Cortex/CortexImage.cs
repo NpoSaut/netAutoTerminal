@@ -1,7 +1,4 @@
 ﻿namespace FirmwareBurner.Implementations.Cortex
 {
-    public class CortexImage
-    {
-         
-    }
+    public class CortexImage { }
 }

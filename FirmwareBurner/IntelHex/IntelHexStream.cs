@@ -1,49 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.IO;
 
 namespace FirmwareBurner.IntelHex
 {
     public class IntelHexStream : Stream
     {
         #region Параметры Stream
-        public override bool CanRead { get { return false; } }
-        public override bool CanSeek { get { return true; } }
-        public override bool CanWrite { get { return true; } }
+
+        public override bool CanRead
+        {
+            get { return false; }
+        }
+
+        public override bool CanSeek
+        {
+            get { return true; }
+        }
+
+        public override bool CanWrite
+        {
+            get { return true; }
+        }
+
         public override void Flush() { }
-        public override int Read(byte[] buffer, int offset, int count) { throw new NotImplementedException(); } 
+        public override int Read(byte[] buffer, int offset, int count) { throw new NotImplementedException(); }
+
         #endregion
 
-        public class SubStream : MemoryStream
-        {
-            public long StartPosition { get; set; }
-            public SubStream(long StartPosition)
-                : base()
-            {
-                this.StartPosition = StartPosition;
-            }
-            public SubStream(long StartPosition, int Length)
-                : base(Length)
-            {
-                this.StartPosition = StartPosition;
-            }
-
-            public override string ToString()
-            {
-                return string.Format("{0:X4} -- {1:X4}", StartPosition, StartPosition + Length);
-            }
-        }
-
+        private long _Length;
+        public IntelHexStream() { Substreams = new List<SubStream>(); }
         private List<SubStream> Substreams { get; set; }
 
-        public IntelHexStream()
-        {
-            Substreams = new List<SubStream>();
-        }
-
-        private long _Length = 0;
         public override long Length
         {
             get { return _Length; }
@@ -68,10 +58,7 @@ namespace FirmwareBurner.IntelHex
             return Position;
         }
 
-        public override void SetLength(long value)
-        {
-            _Length = value;
-        }
+        public override void SetLength(long value) { _Length = value; }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -82,15 +69,15 @@ namespace FirmwareBurner.IntelHex
                 Substreams.Add(str);
             }
 
-            var overlappedStreams = Substreams.Where(s => s != str && s.StartPosition >= Position && s.StartPosition < Position + count).ToList();
-            foreach (var s in overlappedStreams)
+            List<SubStream> overlappedStreams = Substreams.Where(s => s != str && s.StartPosition >= Position && s.StartPosition < Position + count).ToList();
+            foreach (SubStream s in overlappedStreams)
             {
                 str.Seek(s.StartPosition - str.StartPosition, SeekOrigin.Begin);
                 s.Seek(0, SeekOrigin.Begin);
                 s.CopyTo(str);
                 Substreams.Remove(s);
             }
-            
+
             str.Seek(Position - str.StartPosition, SeekOrigin.Begin);
             str.Write(buffer, offset, count);
 
@@ -100,25 +87,23 @@ namespace FirmwareBurner.IntelHex
         public IntelHexFile GetHexFile()
         {
             return
-                new IntelHexFile()
+                new IntelHexFile
                 {
                     Substreams.SelectMany(ss => GetHexSegment(ss, (int)ss.StartPosition)),
                     new IntelHexEndLine()
                 };
         }
 
-        public String ToHexFormat()
-        {
-            return GetHexFile().ToHexFileString();
-        }
+        public String ToHexFormat() { return GetHexFile().ToHexFileString(); }
 
         public static IEnumerable<IntelHexLine> GetHexSegment(Byte[] Data, int StartAdress) { return GetHexSegment(new MemoryStream(Data), StartAdress); }
+
         public static IEnumerable<IntelHexLine> GetHexSegment(Stream Data, int StartAdress)
         {
             Int64 BlockStartAdress = Int64.MinValue;
             Data.Seek(0, SeekOrigin.Begin);
             const int MaxLength = 0x10;
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             while (Data.Position != Data.Length)
             {
                 int FullStartAdress = StartAdress + (int)Data.Position;
@@ -128,7 +113,7 @@ namespace FirmwareBurner.IntelHex
                     yield return new IntelHexExAdressLine((UInt16)(BlockStartAdress >> 16));
                 }
 
-                byte[] buff = new byte[MaxLength];
+                var buff = new byte[MaxLength];
                 int len = Data.Read(buff, 0, MaxLength);
 
                 var line = new IntelHexDataLine((UInt16)(FullStartAdress - BlockStartAdress), new MemoryStream(buff, 0, len));
@@ -136,10 +121,16 @@ namespace FirmwareBurner.IntelHex
             }
         }
 
+        public class SubStream : MemoryStream
+        {
+            public SubStream(long StartPosition) { this.StartPosition = StartPosition; }
 
+            public SubStream(long StartPosition, int Length)
+                : base(Length) { this.StartPosition = StartPosition; }
+
+            public long StartPosition { get; set; }
+
+            public override string ToString() { return string.Format("{0:X4} -- {1:X4}", StartPosition, StartPosition + Length); }
+        }
     }
-
-
-
-
 }

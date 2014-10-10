@@ -2,13 +2,13 @@
 using System.Linq;
 using FirmwarePacking;
 
-namespace FirmwareBurner.ViewModel.FirmwareSources
+namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     public abstract class FirmwareSource : ViewModelBase
     {
-        public event EventHandler PackageSelected;
-
+        private bool _Ok;
         private FirmwarePackage _SelectedFirmware;
+
         public FirmwarePackage SelectedPackage
         {
             get { return _SelectedFirmware; }
@@ -23,7 +23,6 @@ namespace FirmwareBurner.ViewModel.FirmwareSources
             }
         }
 
-        private bool _Ok;
         public bool Ok
         {
             get { return _Ok; }
@@ -37,6 +36,8 @@ namespace FirmwareBurner.ViewModel.FirmwareSources
             }
         }
 
+        public event EventHandler PackageSelected;
+
         protected virtual void OnCheckTarget(ComponentTarget target) { }
 
         public void CheckTarget(ComponentTarget target)
@@ -45,5 +46,4 @@ namespace FirmwareBurner.ViewModel.FirmwareSources
             Ok = SelectedPackage != null && SelectedPackage.Components.Any(c => c.Targets.Any(cTarget => cTarget == target));
         }
     }
-
 }

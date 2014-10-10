@@ -1,7 +1,7 @@
-﻿using FirmwareBurner.Model.Images;
-using FirmwareBurner.Model.Project;
+﻿using FirmwareBurner.Models.Images;
+using FirmwareBurner.Models.Project;
 
-namespace FirmwareBurner.Model
+namespace FirmwareBurner.Models
 {
     /// <summary>Инструмент по созданию образа из проекта</summary>
     /// <typeparam name="TImage">Тип получаемого образа</typeparam>

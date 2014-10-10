@@ -1,6 +1,6 @@
 ﻿using FirmwarePacking;
 
-namespace FirmwareBurner.Model.Project
+namespace FirmwareBurner.Models.Project
 {
     /// <summary>Проект модуля</summary>
     public class ModuleProject

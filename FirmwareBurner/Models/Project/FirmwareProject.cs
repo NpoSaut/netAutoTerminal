@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FirmwareBurner.Model.Project
+namespace FirmwareBurner.Models.Project
 {
     /// <summary>Проект прошивки</summary>
     public class FirmwareProject

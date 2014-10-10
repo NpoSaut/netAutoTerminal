@@ -1,4 +1,4 @@
-﻿namespace FirmwareBurner.Model.Images.Binary
+﻿namespace FirmwareBurner.Models.Images.Binary
 {
     public class ParamRecord
     {

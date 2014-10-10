@@ -4,11 +4,25 @@ using System.Linq;
 using FirmwarePacking;
 using FirmwarePacking.SystemsIndexes;
 
-namespace FirmwareBurner.ViewModel
+namespace FirmwareBurner.ViewModels
 {
     public class ModuleSelectorModel : ViewModelBase, IDataCheck
     {
         private List<BlockKind> _BlockKinds;
+        private List<ChannelModel> _Channels;
+        private List<ModificationKind> _ModificationKinds;
+        private List<ModuleKind> _ModuleKinds;
+
+        private BlockKind _SelectedBlockKind;
+        private ModificationKind _SelectedModificationKind;
+        private ModuleKind _SelectedModuleKind;
+
+        public ModuleSelectorModel(Index index)
+        {
+            Index = index;
+            BlockKinds = index.Blocks.ToList();
+        }
+
         public List<BlockKind> BlockKinds
         {
             get { return _BlockKinds; }
@@ -16,19 +30,13 @@ namespace FirmwareBurner.ViewModel
             {
                 if (_BlockKinds != value)
                 {
-                    var oldValue = _BlockKinds;
+                    List<BlockKind> oldValue = _BlockKinds;
                     _BlockKinds = value;
                     OnBlockKindsListChanged(oldValue, value);
                 }
             }
         }
-        private void OnBlockKindsListChanged(List<BlockKind> oldValue, List<BlockKind> value)
-        {
-            OnPropertyChanged("BlockKinds");
-            SelectedBlockKind = GetDefault(value);
-        }
 
-        private BlockKind _SelectedBlockKind;
         public BlockKind SelectedBlockKind
         {
             get { return _SelectedBlockKind; }
@@ -36,22 +44,13 @@ namespace FirmwareBurner.ViewModel
             {
                 if (_SelectedBlockKind != value)
                 {
-                    var oldValue = _SelectedBlockKind;
+                    BlockKind oldValue = _SelectedBlockKind;
                     _SelectedBlockKind = value;
                     OnBlockKindChanged(oldValue, value);
                 }
             }
         }
-        private void OnBlockKindChanged(BlockKind oldValue, BlockKind value)
-        {
-            OnPropertyChanged("SelectedBlockKind");
-            ModuleKinds = value.Modules;
-            ModificationKinds = value.Modifications;
-            Channels = Enumerable.Range(1, value.ChannelsCount).Select(i => new ChannelModel(this, i)).ToList();
-        }
 
-
-        private List<ModuleKind> _ModuleKinds;
         public List<ModuleKind> ModuleKinds
         {
             get { return _ModuleKinds; }
@@ -59,19 +58,13 @@ namespace FirmwareBurner.ViewModel
             {
                 if (_ModuleKinds != value)
                 {
-                    var oldValue = _ModuleKinds;
+                    List<ModuleKind> oldValue = _ModuleKinds;
                     _ModuleKinds = value;
                     OnModuleKindsListChanged(oldValue, value);
                 }
             }
         }
-        private void OnModuleKindsListChanged(List<ModuleKind> oldValue, List<ModuleKind> value)
-        {
-            OnPropertyChanged("ModuleKinds");
-            SelectedModuleKind = GetDefault(value);
-        }
 
-        private ModuleKind _SelectedModuleKind;
         public ModuleKind SelectedModuleKind
         {
             get { return _SelectedModuleKind; }
@@ -79,20 +72,13 @@ namespace FirmwareBurner.ViewModel
             {
                 if (_SelectedModuleKind != value)
                 {
-                    var oldValue = _SelectedModuleKind;
+                    ModuleKind oldValue = _SelectedModuleKind;
                     _SelectedModuleKind = value;
                     OnModuleKindChanged(oldValue, value);
                 }
             }
         }
-        private void OnModuleKindChanged(ModuleKind oldValue, ModuleKind value)
-        {
-            OnPropertyChanged("SelectedModuleKind");
-            OnSelectionChanged();
-        }
 
-
-        private List<ModificationKind> _ModificationKinds;
         public List<ModificationKind> ModificationKinds
         {
             get { return _ModificationKinds; }
@@ -100,19 +86,13 @@ namespace FirmwareBurner.ViewModel
             {
                 if (_ModificationKinds != value)
                 {
-                    var oldValue = _ModificationKinds;
+                    List<ModificationKind> oldValue = _ModificationKinds;
                     _ModificationKinds = value;
                     OnModificationKindsListChanged(oldValue, value);
                 }
             }
         }
-        private void OnModificationKindsListChanged(List<ModificationKind> oldValue, List<ModificationKind> value)
-        {
-            OnPropertyChanged("ModificationKinds");
-            SelectedModificationKind = GetDefault(value);
-        }
 
-        private ModificationKind _SelectedModificationKind;
         public ModificationKind SelectedModificationKind
         {
             get { return _SelectedModificationKind; }
@@ -125,20 +105,9 @@ namespace FirmwareBurner.ViewModel
                 }
             }
         }
-        private void OnModificationChanged()
-        {
-            OnPropertyChanged("SelectedModificationKind");
-        }
-
-        public ModuleSelectorModel(Index index)
-        {
-            this.Index = index;
-            this.BlockKinds = index.Blocks.ToList();
-        }
 
         private Index Index { get; set; }
 
-        private List<ChannelModel> _Channels;
         public List<ChannelModel> Channels
         {
             get { return _Channels; }
@@ -146,16 +115,57 @@ namespace FirmwareBurner.ViewModel
             {
                 if (_Channels != value)
                 {
-                    var oldValue = _Channels;
+                    List<ChannelModel> oldValue = _Channels;
                     _Channels = value;
                     OnChannelsListChanged(oldValue, value);
                 }
             }
         }
-        private void OnChannelsListChanged(List<ChannelModel> oldValue, List<ChannelModel> value)
+
+        public bool Check()
         {
-            OnPropertyChanged("Channels");
+            return
+                SelectedBlockKind != null &&
+                SelectedModuleKind != null &&
+                SelectedModuleKind != null &&
+                Channels.Any(ch => ch.IsSelected);
         }
+
+        private void OnBlockKindsListChanged(List<BlockKind> oldValue, List<BlockKind> value)
+        {
+            OnPropertyChanged("BlockKinds");
+            SelectedBlockKind = GetDefault(value);
+        }
+
+        private void OnBlockKindChanged(BlockKind oldValue, BlockKind value)
+        {
+            OnPropertyChanged("SelectedBlockKind");
+            ModuleKinds = value.Modules;
+            ModificationKinds = value.Modifications;
+            Channels = Enumerable.Range(1, value.ChannelsCount).Select(i => new ChannelModel(this, i)).ToList();
+        }
+
+        private void OnModuleKindsListChanged(List<ModuleKind> oldValue, List<ModuleKind> value)
+        {
+            OnPropertyChanged("ModuleKinds");
+            SelectedModuleKind = GetDefault(value);
+        }
+
+        private void OnModuleKindChanged(ModuleKind oldValue, ModuleKind value)
+        {
+            OnPropertyChanged("SelectedModuleKind");
+            OnSelectionChanged();
+        }
+
+        private void OnModificationKindsListChanged(List<ModificationKind> oldValue, List<ModificationKind> value)
+        {
+            OnPropertyChanged("ModificationKinds");
+            SelectedModificationKind = GetDefault(value);
+        }
+
+        private void OnModificationChanged() { OnPropertyChanged("SelectedModificationKind"); }
+
+        private void OnChannelsListChanged(List<ChannelModel> oldValue, List<ChannelModel> value) { OnPropertyChanged("Channels"); }
 
         private T GetDefault<T>(List<T> inList)
         {
@@ -163,12 +173,55 @@ namespace FirmwareBurner.ViewModel
             return inList.FirstOrDefault();
         }
 
+        public ModuleSelectorModel DeepClone()
+        {
+            return
+                new ModuleSelectorModel(Index)
+                {
+                    SelectedBlockKind = SelectedBlockKind,
+                    SelectedModuleKind = SelectedModuleKind,
+                    SelectedModificationKind = SelectedModificationKind
+                };
+        }
+
+        public IEnumerable<ComponentTarget> GetTargets(bool SelectedOnly = true)
+        {
+            return
+                Channels.Where(c => !SelectedOnly || c.IsSelected).Select(channel =>
+                                                                          new ComponentTarget
+                                                                          {
+                                                                              CellId = SelectedBlockKind.Id,
+                                                                              CellModification = SelectedModificationKind.Id,
+                                                                              Module = SelectedModuleKind.Id,
+                                                                              Channel = channel.Id
+                                                                          }).ToList();
+        }
+
+        private void OnSelectionChanged()
+        {
+            if (SelectionChanged != null)
+                SelectionChanged(this, new ModuleSelectedEventArgs());
+        }
+
+        public event EventHandler<ModuleSelectedEventArgs> SelectionChanged;
+
         public class ChannelModel : ViewModelBase
         {
+            private bool _IsSelected;
+
+            public ChannelModel(ModuleSelectorModel Module, int Id, bool IsSelected)
+            {
+                module = Module;
+                this.Id = Id;
+                this.IsSelected = IsSelected;
+            }
+
+            public ChannelModel(ModuleSelectorModel Module, int Id)
+                : this(Module, Id, true) { }
+
             public int Id { get; private set; }
             private ModuleSelectorModel module { get; set; }
 
-            private bool _IsSelected;
             public bool IsSelected
             {
                 get { return _IsSelected; }
@@ -183,63 +236,9 @@ namespace FirmwareBurner.ViewModel
                 }
             }
 
-            public ChannelModel(ModuleSelectorModel Module, int Id, bool IsSelected)
-            {
-                this.module = Module;
-                this.Id = Id;
-                this.IsSelected = IsSelected;
-            }
-            public ChannelModel(ModuleSelectorModel Module, int Id)
-                : this(Module, Id, true)
-            { }
-
-            public override string ToString()
-            {
-                return string.Format("Канал {0}", Id);
-            }
+            public override string ToString() { return string.Format("Канал {0}", Id); }
         }
 
-        public bool Check()
-        {
-            return
-                SelectedBlockKind != null &&
-                SelectedModuleKind != null &&
-                SelectedModuleKind != null &&
-                Channels.Any(ch => ch.IsSelected);
-        }
-
-        public ModuleSelectorModel DeepClone()
-        {
-            return
-                new ModuleSelectorModel(this.Index)
-                {
-                    SelectedBlockKind = SelectedBlockKind,
-                    SelectedModuleKind = SelectedModuleKind,
-                    SelectedModificationKind = SelectedModificationKind
-                };
-        }
-
-        public IEnumerable<ComponentTarget> GetTargets(bool SelectedOnly = true)
-        {
-            return
-                Channels.Where(c => !SelectedOnly || c.IsSelected).Select(channel =>
-                    new ComponentTarget()
-                    {
-                        CellId = SelectedBlockKind.Id,
-                        CellModification = SelectedModificationKind.Id,
-                        Module = SelectedModuleKind.Id,
-                        Channel = channel.Id
-                    }).ToList();
-        }
-
-        private void OnSelectionChanged()
-        {
-            if (SelectionChanged != null)
-                SelectionChanged(this, new ModuleSelectedEventArgs());
-        }
-        public event EventHandler<ModuleSelectedEventArgs> SelectionChanged;
-        public class ModuleSelectedEventArgs : EventArgs
-        {
-        }
+        public class ModuleSelectedEventArgs : EventArgs { }
     }
 }

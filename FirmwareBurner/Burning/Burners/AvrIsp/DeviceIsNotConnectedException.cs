@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Runtime.Serialization;
 using FirmwareBurner.Burning.Exceptions;
 
 namespace FirmwareBurner.Burning.Burners.AvrIsp
@@ -12,9 +10,10 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp
         public DeviceIsNotConnectedException() : base("Программируемая ячейка не подключена") { }
         public DeviceIsNotConnectedException(string message) : base(message) { }
         public DeviceIsNotConnectedException(string message, Exception inner) : base(message, inner) { }
+
         protected DeviceIsNotConnectedException(
-          System.Runtime.Serialization.SerializationInfo info,
-          System.Runtime.Serialization.StreamingContext context)
+            SerializationInfo info,
+            StreamingContext context)
             : base(info, context) { }
     }
 }
