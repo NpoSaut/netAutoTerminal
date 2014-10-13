@@ -31,20 +31,20 @@ namespace FirmwareBurner.Formating
         {
             foreach (FileRecord file in Image.FilesTable)
             {
-                Stream FileOutput;
-                switch (file.Placement)
-                {
-                    case FileStorage.Flash:
-                        FileOutput = FlashOutput;
-                        break;
-                    case FileStorage.Eeprom:
-                        FileOutput = EepromOutput;
-                        break;
-                    default:
-                        continue;
-                }
-                FileOutput.Seek(file.FileAddress, SeekOrigin.Begin);
-                file.Body.CopyTo(FileOutput);
+//                Stream FileOutput;
+//                switch (file.Placement)
+//                {
+//                    case FileStorage.Flash:
+//                        FileOutput = FlashOutput;
+//                        break;
+//                    case FileStorage.Eeprom:
+//                        FileOutput = EepromOutput;
+//                        break;
+//                    default:
+//                        continue;
+//                }
+//                FileOutput.Seek(file.FileAddress, SeekOrigin.Begin);
+//                file.Body.CopyTo(FileOutput);
             }
             FileTableFormat.WriteTo(Image.FilesTable, FlashOutput);
             ParamListFormat.WriteTo(Image.ParamList, FlashOutput);

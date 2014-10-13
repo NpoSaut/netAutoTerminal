@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:FirmwareBurner.ViewModel"
         xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
         mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="424"
@@ -16,7 +15,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" DataContext="{Binding ModuleSelector}" BorderBrush="#B90CA700" BorderThickness="0,0,0,1">
+        <Border Grid.Row="0" BorderBrush="#B90CA700" BorderThickness="0,0,0,1">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#330FCB00" Offset="0" />
@@ -33,15 +32,15 @@
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=SystemKindSelector}">Блок</Label>
-                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=SystemKindSelector}">Модификация</Label>
+                <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=BlockKindSelector}">Блок</Label>
+                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=ModificationKindSelector}">Модификация</Label>
 
                 <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector" IsEditable="False"
-                          DisplayMemberPath="Name" ItemsSource="{Binding BlockKinds}"
-                          SelectedItem="{Binding SelectedBlockKind}" />
+                          DisplayMemberPath="Name" ItemsSource="{Binding CellsCatalog.CellKinds}"
+                          SelectedItem="{Binding Project.TargetSelector.SelectedCellKind}" />
                 <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector" IsEditable="False"
-                          DisplayMemberPath="Name" ItemsSource="{Binding ModificationKinds}"
-                          SelectedItem="{Binding SelectedModificationKind}" />
+                          DisplayMemberPath="Name" ItemsSource="{Binding Project.TargetSelector.SelectedCellKind.Modifications}"
+                          SelectedItem="{Binding Project.TargetSelector.SelectedModificationKind}" />
             </Grid>
         </Border>
         <Grid Grid.Row="1" Margin="6,2">
@@ -75,9 +74,9 @@
                    Content="Дата изготовления" />
 
             <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit"
-                     Text="{Binding Path=BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
+                     Text="{Binding Path=Project.BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
             <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}"
-                        SelectedDate="{Binding Path=BlockDetails.AssemblyDate}" />
+                        SelectedDate="{Binding Path=Project.BlockDetails.AssemblyDate}" />
 
             <RadioButton Grid.Column="0" Grid.Row="2" Content="Из хранилища" IsChecked="True" />
             <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" IsEnabled="False" />
@@ -104,8 +103,9 @@
 
             <ListBox Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Name="ChannelsSelector"
-                     ItemsSource="{Binding ModuleSelector.Channels}" Style="{StaticResource ChannelSelectorStyle}"
-                     DisplayMemberPath="Id" SelectionMode="Single" />
+                     ItemsSource="{Binding Project.TargetSelector.SelectedCellKind.Channels}"
+                     SelectedItem="{Binding Project.TargetSelector.SelectedChannel}"
+                     Style="{StaticResource ChannelSelectorStyle}" />
 
             <Grid Grid.Column="3" Grid.RowSpan="4" DataContext="{Binding Burner}">
                 <Button Width="60" Height="60" Style="{StaticResource CircleButton}" Command="{Binding BurnCommand}"

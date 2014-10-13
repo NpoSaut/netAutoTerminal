@@ -48,7 +48,7 @@ namespace FirmwareBurner.ViewModels
 
         private void Burn()
         {
-            InProgress = true;
+            /*InProgress = true;
             CommandManager.InvalidateRequerySuggested();
             Task.Factory.StartNew(() =>
                                   {
@@ -70,7 +70,7 @@ namespace FirmwareBurner.ViewModels
                                           InProgress = false;
                                           CommandManager.InvalidateRequerySuggested();
                                       }
-                                  });
+                                  });*/
         }
     }
 }

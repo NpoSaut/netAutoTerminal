@@ -1,13 +1,21 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels">
     <Style TargetType="ListBox" x:Key="ChannelSelectorStyle">
+        <Style.Resources>
+            <DataTemplate DataType="{x:Type viewModels:ChannelViewModel}">
+                <TextBlock>
+                    <Run Text="Канал"/>
+                    <Run FontWeight="Bold" Text="{Binding Number, Mode=OneTime}" />
+                </TextBlock>
+            </DataTemplate>
+        </Style.Resources>
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="IsSelected" Value="{Binding IsSelected}" />
                     <Setter Property="Margin" Value="1" />
                     <Setter Property="Template">
                         <Setter.Value>
@@ -18,7 +26,6 @@
                                     <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
                                                       ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                       ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
-                                                      SnapsToDevicePixels="{TemplateBinding UIElement.SnapsToDevicePixels}"
                                                       HorizontalAlignment="{TemplateBinding Control.HorizontalContentAlignment}"
                                                       VerticalAlignment="{TemplateBinding Control.VerticalContentAlignment}" />
                                 </Border>
@@ -26,11 +33,11 @@
                         </Setter.Value>
                     </Setter>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                        <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="Gray" />
                             <Setter Property="BorderBrush" Value="DimGray" />
                             <Setter Property="Foreground" Value="White" />
-                        </DataTrigger>
+                        </Trigger>
                     </Style.Triggers>
                 </Style>
             </Setter.Value>

@@ -4,7 +4,7 @@ using System.Windows.Threading;
 
 namespace FirmwareBurner.ViewModels
 {
-    public class ViewModelBase : DispatcherObject, INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

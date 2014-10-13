@@ -4,6 +4,7 @@ using FirmwareBurner.Burning;
 using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
 using FirmwareBurner.Formating;
+using FirmwareBurner.ViewModels;
 using FirmwarePacking.Repositories;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Unity;
@@ -20,10 +21,11 @@ namespace FirmwareBurner
                 new UnityContainer()
                     .RegisterType<FileInfo>("BootloaderImageFileName",
                                             new InjectionConstructor(new InjectionParameter(Path.Combine("Bootloader", "Bootloader"))))
-                    .RegisterInstance(XmlFirmwareFormatter.ReadFormat(Path.Combine("Bootloader", "layout.xml")))
                     
                     // Конфигурируем индекс
-                    .RegisterType<Index, ResourceXmlIndex>()
+                    .RegisterType<IIndex, ResourceXmlIndex>()
+
+                    .RegisterType<ICellsCatalogProvider, IndexCellsCatalogProvider>(new ContainerControlledLifetimeManager())
 
                     // Конфигурируем репозитории
                     .RegisterType<Repository, DirectoryRepository>("User Repository", new ContainerControlledLifetimeManager(),

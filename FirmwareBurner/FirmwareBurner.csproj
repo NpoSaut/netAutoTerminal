@@ -121,6 +121,8 @@
     <Compile Include="ViewModels\ActionCommand.cs" />
     <Compile Include="ViewModels\BlockDetailsViewModel.cs" />
     <Compile Include="ViewModels\BurningViewModel.cs" />
+    <Compile Include="ViewModels\CellKindViewModel.cs" />
+    <Compile Include="ViewModels\ChannelViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwareSource.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -130,8 +132,14 @@
   <ItemGroup>
     <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSource.cs" />
     <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSource.cs" />
+    <Compile Include="ViewModels\ICellsCatalog.cs" />
+    <Compile Include="ViewModels\ICellsCatalogProvider.cs" />
+    <Compile Include="ViewModels\IndexCellsCatalogProvider.cs" />
+    <Compile Include="ViewModels\ProjectAssembler.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\SelectBlockViewModel.cs" />
+    <Compile Include="ViewModels\TargetSelectorViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="Models\Images\Binary\IBinaryImage.cs" />
     <Compile Include="Models\Images\IImage.cs" />

@@ -56,10 +56,10 @@ namespace FirmwareBurner
             switch (path[0])
             {
                 case "f":
-                    res.Placement = FileStorage.Flash;
+                    //res.Placement = FileStorage.Flash;
                     break;
                 case "e":
-                    res.Placement = FileStorage.Eeprom;
+                    //res.Placement = FileStorage.Eeprom;
                     break;
                 default:
                     throw new Exception("Прошивка содержит файл с расположением, не поддерживаемым AVR-устройствами");
