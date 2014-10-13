@@ -1,9 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels">
+                    xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+                    xmlns:targeting="clr-namespace:FirmwareBurner.ViewModels.Targeting">
     <Style TargetType="ListBox" x:Key="ChannelSelectorStyle">
         <Style.Resources>
-            <DataTemplate DataType="{x:Type viewModels:ChannelViewModel}">
+            <DataTemplate DataType="{x:Type targeting:ChannelViewModel}">
                 <TextBlock>
                     <Run Text="Канал"/>
                     <Run FontWeight="Bold" Text="{Binding Number, Mode=OneTime}" />

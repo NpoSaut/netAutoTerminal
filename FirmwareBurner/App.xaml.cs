@@ -5,6 +5,8 @@ using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
 using FirmwareBurner.Formating;
 using FirmwareBurner.ViewModels;
+using FirmwareBurner.ViewModels.Targeting;
+using FirmwareBurner.ViewModels.Tools;
 using FirmwarePacking.Repositories;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Unity;

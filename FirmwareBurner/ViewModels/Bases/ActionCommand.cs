@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Bases
 {
     public class ActionCommand : ICommand
     {

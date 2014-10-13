@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Targeting
 {
     public class ChannelViewModel
     {

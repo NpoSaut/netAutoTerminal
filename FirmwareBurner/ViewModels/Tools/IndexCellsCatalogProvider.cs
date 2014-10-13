@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using FirmwareBurner.ViewModels.Targeting;
 using FirmwarePacking.SystemsIndexes;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Tools
 {
     /// <summary>Провайдер каталога ячеек, основывающийся на объекте интерфейса <seealso cref="IIndex" />
     /// </summary>

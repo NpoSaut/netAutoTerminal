@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using FirmwareBurner.ViewModels.Bases;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Targeting
 {
     /// <summary>Модель представления для типа ячейки</summary>
     public class CellKindViewModel : ViewModelBase
@@ -25,21 +26,5 @@ namespace FirmwareBurner.ViewModels
 
         /// <summary>Список каналов устройства</summary>
         public IList<ChannelViewModel> Channels { get; private set; }
-    }
-
-    /// <summary>Модель представления для модификации ячейки</summary>
-    public class ModificationKindViewModel
-    {
-        public ModificationKindViewModel(int Id, string Name)
-        {
-            this.Id = Id;
-            this.Name = Name;
-        }
-
-        /// <summary>Номер модификации ячейки</summary>
-        public int Id { get; private set; }
-
-        /// <summary>Назчание модификации</summary>
-        public String Name { get; private set; }
     }
 }

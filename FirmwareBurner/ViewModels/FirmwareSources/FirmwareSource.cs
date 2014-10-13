@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using FirmwareBurner.ViewModels.Bases;
 using FirmwarePacking;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources

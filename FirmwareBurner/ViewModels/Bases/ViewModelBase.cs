@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Threading;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Bases
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

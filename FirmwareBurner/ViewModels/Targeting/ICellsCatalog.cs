@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Targeting
 {
     public interface ICellsCatalog
     {

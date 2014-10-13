@@ -6,6 +6,8 @@ using System.Windows.Input;
 using FirmwareBurner.Burning;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Formating;
+using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.Targeting;
 using FirmwarePacking;
 
 namespace FirmwareBurner.ViewModels

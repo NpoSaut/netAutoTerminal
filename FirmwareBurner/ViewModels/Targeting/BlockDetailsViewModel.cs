@@ -1,6 +1,7 @@
 ﻿using System;
+using FirmwareBurner.ViewModels.Bases;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Targeting
 {
     public class BlockDetailsViewModel : ViewModelBase
     {

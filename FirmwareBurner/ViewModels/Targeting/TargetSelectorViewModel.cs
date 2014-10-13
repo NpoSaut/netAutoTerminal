@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using FirmwareBurner.ViewModels.Bases;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Targeting
 {
     /// <summary>Модель представления выбора цели прошивки</summary>
     public class TargetSelectorViewModel : ViewModelBase
@@ -49,11 +51,19 @@ namespace FirmwareBurner.ViewModels
             }
         }
 
+        public event EventHandler TargetChanged;
+
         private void OnSelectedCellKindChanged()
         {
             if (SelectedCellKind.Modifications.Count == 1)
                 SelectedModificationKind = SelectedCellKind.Modifications.First();
             SelectedChannel = SelectedCellKind.Channels.FirstOrDefault();
+        }
+
+        protected virtual void OnTargetChanged()
+        {
+            EventHandler handler = TargetChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
         }
     }
 }

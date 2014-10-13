@@ -2,7 +2,7 @@
 using FirmwareBurner.Models;
 using FirmwareBurner.Models.Project;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Tools
 {
     public class ProjectAssembler
     {

@@ -1,4 +1,7 @@
-﻿namespace FirmwareBurner.ViewModels
+﻿using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.Targeting;
+
+namespace FirmwareBurner.ViewModels
 {
     public class ProjectViewModel : ViewModelBase
     {

@@ -1,4 +1,7 @@
-﻿using FirmwareBurner.ViewModels.FirmwareSources;
+﻿using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwareBurner.ViewModels.Targeting;
+using FirmwareBurner.ViewModels.Tools;
 
 namespace FirmwareBurner.ViewModels
 {
