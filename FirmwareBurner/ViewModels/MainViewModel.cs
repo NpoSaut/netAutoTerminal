@@ -23,3 +23,4 @@ namespace FirmwareBurner.ViewModels
         public ManualFirmwareSource UserFirmwareSource { get; private set; }
     }
 }
+

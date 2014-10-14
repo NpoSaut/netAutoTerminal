@@ -87,6 +87,9 @@
     <Compile Include="Commands\BurnCommand.cs" />
     <Compile Include="Commands\ParameterCOmmandBase.cs" />
     <Compile Include="FirmwareCook.cs" />
+    <Compile Include="FirmwareProviders\IFirmwareProvider.cs" />
+    <Compile Include="FirmwareProviders\IFirmwaresSet.cs" />
+    <Compile Include="FirmwareProviders\PackageFirmwaresSet.cs" />
     <Compile Include="IBinaryImageBuilder.cs" />
     <Compile Include="IBurningReceipt.cs" />
     <Compile Include="IBurnManager.cs" />
@@ -118,6 +121,7 @@
     <Compile Include="IntelHex\IntelHexDataLine.cs" />
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
+    <Compile Include="Models\TargetHardwareIdentifier.cs" />
     <Compile Include="ViewModels\Bases\ActionCommand.cs" />
     <Compile Include="ViewModels\Targeting\BlockDetailsViewModel.cs" />
     <Compile Include="ViewModels\BurningViewModel.cs" />

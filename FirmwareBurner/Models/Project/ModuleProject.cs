@@ -5,6 +5,13 @@ namespace FirmwareBurner.Models.Project
     /// <summary>Проект модуля</summary>
     public class ModuleProject
     {
+        public ModuleProject(ModuleInformation Information, PackageInformation FirmwareInformation, FirmwareComponent FirmwareContent)
+        {
+            this.Information = Information;
+            this.FirmwareInformation = FirmwareInformation;
+            this.FirmwareContent = FirmwareContent;
+        }
+
         /// <summary>Информация о модуле</summary>
         public ModuleInformation Information { get; private set; }
 
