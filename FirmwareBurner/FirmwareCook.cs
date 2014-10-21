@@ -59,11 +59,12 @@ namespace FirmwareBurner
 
         private FirmwareImage Depack(FirmwarePackage Package, ComponentTarget Target, int SerialNumber, DateTime AssemblyDate)
         {
+            var Component = GetComponent(Package, Target);
             return
                 new FirmwareImage()
                 {
                     Bootloader = new BootloaderBody() { Body = BootloaderFile.OpenRead() },
-                    FileTable = GetComponent(Package, Target).Files.Select(f => SortFile(f)).ToList(),
+                    FileTable = Component.Files.Select(f => SortFile(f)).ToList(),
                     ParamList =
                         new List<ParamRecord>()
                         {
@@ -79,6 +80,7 @@ namespace FirmwareBurner
                             new ParamRecord() { Key = 1, Value = Package.Information.FirmwareVersion.Major },
                             new ParamRecord() { Key = 2, Value = Package.Information.FirmwareVersion.Minor },
                             new ParamRecord() { Key = 3, Value = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds },
+                            new ParamRecord() { Key = 6, Value = Component.Files.Aggregate((UInt16)0, (sum, file) => (UInt16)(sum ^ FudpCrc.CalcCrc(file.Content))) },
                         }
                 };
         }
