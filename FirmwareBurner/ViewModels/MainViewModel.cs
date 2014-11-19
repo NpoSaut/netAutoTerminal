@@ -1,21 +1,18 @@
 ﻿using FirmwareBurner.ViewModels.Bases;
-using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwareBurner.ViewModels.Targeting;
 
 namespace FirmwareBurner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(RepoFirmwareSource AutoFirmwareSource, ManualFirmwareSource UserFirmwareSource, ProjectViewModel Project)
+        public MainViewModel(ProjectViewModel Project, TargetSelectorViewModel TargetSelector)
         {
+            this.TargetSelector = TargetSelector;
             this.Project = Project;
-            this.AutoFirmwareSource = AutoFirmwareSource;
-            this.UserFirmwareSource = UserFirmwareSource;
         }
 
-        public ProjectViewModel Project { get; private set; }
+        public TargetSelectorViewModel TargetSelector { get; private set; }
 
-        public RepoFirmwareSource AutoFirmwareSource { get; private set; }
-        public ManualFirmwareSource UserFirmwareSource { get; private set; }
+        public ProjectViewModel Project { get; private set; }
     }
 }
-

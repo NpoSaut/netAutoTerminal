@@ -85,8 +85,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
-    <Compile Include="Views\TargetSelectorView.xaml.cs">
-      <DependentUpon>TargetSelectorView.xaml</DependentUpon>
+    <Compile Include="Views\CellKindSelector.xaml.cs">
+      <DependentUpon>CellKindSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Page Include="Styler.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -161,7 +164,11 @@
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\TargetSelectorView.xaml">
+    <Page Include="Views\CellKindSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

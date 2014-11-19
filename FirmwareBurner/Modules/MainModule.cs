@@ -2,6 +2,7 @@
 using FirmwareBurner.Burning;
 using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
+using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
 using FirmwareBurner.Views;
 using FirmwarePacking.Repositories;
@@ -39,7 +40,7 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IFirmwareCook, FirmwareCook>();
 
             var regionManager = _container.Resolve<IRegionManager>();
-            regionManager.RegisterViewWithRegion("TargetSelector", typeof (TargetSelectorView));
+            regionManager.RegisterViewWithRegion("Root", typeof (MainView));
         }
     }
 }
