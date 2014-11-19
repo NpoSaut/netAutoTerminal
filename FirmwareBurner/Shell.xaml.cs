@@ -5,10 +5,10 @@ using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner
 {
-    /// <summary>Логика взаимодействия для MainWindow.xaml</summary>
-    public partial class MainWindow : Window
+    /// <summary>Логика взаимодействия для Shell.xaml</summary>
+    public partial class Shell : Window
     {
-        public MainWindow(MainViewModel Model)
+        public Shell(MainViewModel Model)
         {
             DataContext = Model;
             InitializeComponent();
