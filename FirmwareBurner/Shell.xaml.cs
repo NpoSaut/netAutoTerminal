@@ -8,9 +8,8 @@ namespace FirmwareBurner
     /// <summary>Логика взаимодействия для Shell.xaml</summary>
     public partial class Shell : Window
     {
-        public Shell(MainViewModel Model)
+        public Shell()
         {
-            DataContext = Model;
             InitializeComponent();
             Version version = Assembly.GetAssembly(typeof (App)).GetName().Version;
             Title += string.Format(" (ver. {0})", version);

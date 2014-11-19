@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+        xmlns:regions="http://www.codeplex.com/CompositeWPF"
         mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="424"
         SizeToContent="Height" ResizeMode="CanMinimize"
@@ -22,26 +23,7 @@
                     <GradientStop Color="#920EC700" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=BlockKindSelector}">Блок</Label>
-                <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=ModificationKindSelector}">Модификация</Label>
-
-                <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector" IsEditable="False"
-                          DisplayMemberPath="Name" ItemsSource="{Binding CellsCatalog.CellKinds}"
-                          SelectedItem="{Binding Project.TargetSelector.SelectedCellKind}" />
-                <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector" IsEditable="False"
-                          DisplayMemberPath="Name" ItemsSource="{Binding Project.TargetSelector.SelectedCellKind.Modifications}"
-                          SelectedItem="{Binding Project.TargetSelector.SelectedModificationKind}" />
-            </Grid>
+            <ContentControl regions:RegionManager.RegionName="TargetSelector" />
         </Border>
         <Grid Grid.Row="1" Margin="6,2">
             <Grid.ColumnDefinitions>

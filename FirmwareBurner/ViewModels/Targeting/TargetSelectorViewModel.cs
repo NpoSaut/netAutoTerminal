@@ -1,6 +1,9 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
+using FirmwareBurner.Events;
 using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.Tools;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels.Targeting
 {
@@ -11,6 +14,17 @@ namespace FirmwareBurner.ViewModels.Targeting
         private ChannelViewModel _selectedChannel;
         private ModificationKindViewModel _selectedModificationKind;
 
+        private IEventAggregator _eventAggregator;
+
+        public TargetSelectorViewModel(ICellsCatalogProvider CellsCatalogProvider, IEventAggregator EventAggregator)
+        {
+            _eventAggregator = EventAggregator;
+            CellKinds = CellsCatalogProvider.GetCatalog();
+        }
+
+        /// <summary>Известные типы ячеек</summary>
+        public IList<CellKindViewModel> CellKinds { get; private set; }
+
         public CellKindViewModel SelectedCellKind
         {
             get { return _selectedCellKind; }
@@ -20,7 +34,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 {
                     _selectedCellKind = value;
                     OnPropertyChanged("SelectedCellKind");
-                    OnSelectedCellKindChanged();
+                    OnTargetChanged();
                 }
             }
         }
@@ -34,6 +48,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 {
                     _selectedModificationKind = value;
                     OnPropertyChanged("SelectedModificationKind");
+                    OnTargetChanged();
                 }
             }
         }
@@ -47,23 +62,15 @@ namespace FirmwareBurner.ViewModels.Targeting
                 {
                     _selectedChannel = value;
                     OnPropertyChanged("SelectedChannel");
+                    OnTargetChanged();
                 }
             }
         }
 
-        public event EventHandler TargetChanged;
-
-        private void OnSelectedCellKindChanged()
-        {
-            if (SelectedCellKind.Modifications.Count == 1)
-                SelectedModificationKind = SelectedCellKind.Modifications.First();
-            SelectedChannel = SelectedCellKind.Channels.FirstOrDefault();
-        }
-
         protected virtual void OnTargetChanged()
         {
-            EventHandler handler = TargetChanged;
-            if (handler != null) handler(this, EventArgs.Empty);
+            _eventAggregator.GetEvent<TargetSelectedEvent>().Publish(
+                new TargetSelectedArgs());
         }
     }
 }

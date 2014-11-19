@@ -84,6 +84,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Events\TargetSelectedEvent.cs" />
+    <Compile Include="Views\TargetSelectorView.xaml.cs">
+      <DependentUpon>TargetSelectorView.xaml</DependentUpon>
+    </Compile>
     <Page Include="Styler.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -157,11 +161,14 @@
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\TargetSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSource.cs" />
     <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSource.cs" />
-    <Compile Include="ViewModels\Targeting\ICellsCatalog.cs" />
     <Compile Include="ViewModels\Tools\ICellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\IndexCellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\ProjectAssembler.cs" />

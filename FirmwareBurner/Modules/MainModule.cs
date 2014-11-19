@@ -3,9 +3,11 @@ using FirmwareBurner.Burning;
 using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
 using FirmwareBurner.ViewModels.Tools;
+using FirmwareBurner.Views;
 using FirmwarePacking.Repositories;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 
 namespace FirmwareBurner.Modules
@@ -35,6 +37,9 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IFirmwareBurner, AvrIspBurner>()
                 .RegisterType<IAvrIspCommandShell, Stk500>()
                 .RegisterType<IFirmwareCook, FirmwareCook>();
+
+            var regionManager = _container.Resolve<IRegionManager>();
+            regionManager.RegisterViewWithRegion("TargetSelector", typeof (TargetSelectorView));
         }
     }
 }

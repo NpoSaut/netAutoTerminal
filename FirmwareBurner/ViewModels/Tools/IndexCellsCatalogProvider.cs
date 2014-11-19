@@ -12,26 +12,18 @@ namespace FirmwareBurner.ViewModels.Tools
         private readonly IIndex _index;
         public IndexCellsCatalogProvider(IIndex Index) { _index = Index; }
 
-        public ICellsCatalog GetCatalog()
+        public IList<CellKindViewModel> GetCatalog()
         {
-            return
-                new CellsCatalog(
-                    _index.Blocks.Select(
-                        cell => new CellKindViewModel(
-                                    cell.Id,
-                                    cell.Name,
-                                    cell.Modifications.Select(
-                                        modification => new ModificationKindViewModel(
-                                                            modification.Id,
-                                                            modification.Name)).ToList(),
-                                    Enumerable.Range(0, cell.ChannelsCount).Select(i => new ChannelViewModel(i + 1)).ToList()))
-                          .ToList());
-        }
-
-        public class CellsCatalog : ICellsCatalog
-        {
-            public CellsCatalog(IList<CellKindViewModel> CellKinds) { this.CellKinds = CellKinds; }
-            public IList<CellKindViewModel> CellKinds { get; private set; }
+            return _index.Blocks.Select(
+                cell => new CellKindViewModel(
+                            cell.Id,
+                            cell.Name,
+                            cell.Modifications.Select(
+                                modification => new ModificationKindViewModel(
+                                                    modification.Id,
+                                                    modification.Name)).ToList(),
+                            Enumerable.Range(0, cell.ChannelsCount).Select(i => new ChannelViewModel(i + 1)).ToList()))
+                         .ToList();
         }
     }
 }
