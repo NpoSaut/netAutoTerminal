@@ -19,7 +19,7 @@
                  SelectedItem="{Binding SelectedSelector}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Name}"/>
+                    <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
             <ListBox.ItemContainerStyle>
@@ -27,7 +27,8 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <RadioButton Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+                                <RadioButton Content="{TemplateBinding Content}"
+                                             ContentTemplate="{TemplateBinding ContentTemplate}"
                                              IsChecked="{TemplateBinding Selector.IsSelected}" />
                             </ControlTemplate>
                         </Setter.Value>
@@ -36,9 +37,7 @@
             </ListBox.ItemContainerStyle>
             <ListBox.Template>
                 <ControlTemplate>
-                    <ScrollViewer Padding="{TemplateBinding Control.Padding}" Focusable="False">
-                        <ItemsPresenter />
-                    </ScrollViewer>
+                    <ItemsPresenter />
                 </ControlTemplate>
             </ListBox.Template>
         </ListBox>

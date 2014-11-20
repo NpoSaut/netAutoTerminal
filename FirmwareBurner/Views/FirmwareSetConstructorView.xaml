@@ -13,11 +13,26 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <TabControl ItemsSource="{Binding Components}" DisplayMemberPath="ModuleName" SelectedIndex="0">
-        <TabControl.ContentTemplate>
-            <DataTemplate DataType="{x:Type viewModels:FirmwareSetComponentViewModel}">
-                <ContentPresenter Content="{Binding FirmwareSelector}" />
+
+    <ListBox ItemsSource="{Binding Components}" SelectedIndex="0">
+        <ListBox.ItemTemplate>
+            <DataTemplate DataType="viewModels:FirmwareSetComponentViewModel">
+                <HeaderedContentControl Header="{Binding ModuleName}">
+                    <ContentPresenter x:Name="ContentPresenter" Content="{Binding FirmwareSelector}" />
+                </HeaderedContentControl>
+                <DataTemplate.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}"
+                        Value="False">
+                        <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
             </DataTemplate>
-        </TabControl.ContentTemplate>
-    </TabControl>
+        </ListBox.ItemTemplate>
+        <ListBox.Template>
+            <ControlTemplate>
+                <ItemsPresenter />
+            </ControlTemplate>
+        </ListBox.Template>
+    </ListBox>
 </UserControl>

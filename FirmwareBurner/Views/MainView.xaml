@@ -43,7 +43,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="4" Name="BurningDataShadow" Fill="#3547A0E8" />
+            <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="3" Name="BurningDataShadow" Fill="#3547A0E8" />
             <Polygon Grid.Column="2" Grid.RowSpan="3" Points="2,4 0,0 0,8" Stretch="Fill"
                      Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
                 <Polygon.Fill>
@@ -68,7 +68,7 @@
                                               DataContext="{Binding Project.FirmwareSetConstructor}"
                                               d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}"/>
 
-            <ListBox Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <ListBox Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Name="ChannelsSelector"
                      ItemsSource="{Binding Project.TargetSelector.SelectedCellKind.Channels}"
                      SelectedItem="{Binding Project.TargetSelector.SelectedChannel}"
