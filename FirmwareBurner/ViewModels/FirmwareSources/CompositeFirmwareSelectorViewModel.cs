@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FirmwarePacking;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
@@ -27,5 +28,14 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         }
 
         public IList<FirmwareSelectorViewModel> Children { get; private set; }
+
+        public override FirmwarePackage SelectedPackage
+        {
+            get
+            {
+                if (SelectedSelector == null) return null;
+                return SelectedSelector.SelectedPackage;
+            }
+        }
     }
 }

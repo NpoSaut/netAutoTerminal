@@ -6,17 +6,19 @@
              xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
              mc:Ignorable="d" Width="200"
              d:DataContext="{d:DesignInstance firmwareSources:ManualFirmwareSelectorViewModel}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <StackPanel>
         <TextBlock>
             <Hyperlink Command="{Binding OpenPackageCommand}">
                 <Run Text="{Binding FirmwarePath, Mode=OneWay}" />
             </Hyperlink>
         </TextBlock>
-        <TextBlock>
-            <Run Text="Версия" />
-            <Run Text="1.35" FontWeight="SemiBold" />
-            <Run Text="от" />
-            <Run Text="12.04.1978" />
-        </TextBlock>
+        <ContentPresenter Content="{Binding SelectedVersion}" />
     </StackPanel>
 </UserControl>

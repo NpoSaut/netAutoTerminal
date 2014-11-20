@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
 
@@ -14,5 +15,10 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 
         public Repository[] Repositories { get; set; }
         public ObservableCollection<FirmwarePackage> PackagesForTarget { get; private set; }
+
+        public override FirmwarePackage SelectedPackage
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

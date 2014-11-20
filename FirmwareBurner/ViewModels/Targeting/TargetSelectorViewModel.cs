@@ -11,7 +11,6 @@ namespace FirmwareBurner.ViewModels.Targeting
     {
         private readonly IEventAggregator _eventAggregator;
         private CellKindViewModel _selectedCellKind;
-        private ChannelViewModel _selectedChannel;
         private ModificationKindViewModel _selectedModificationKind;
 
         public TargetSelectorViewModel(ICellsCatalogProvider CellsCatalogProvider, IEventAggregator EventAggregator)
@@ -51,26 +50,12 @@ namespace FirmwareBurner.ViewModels.Targeting
             }
         }
 
-        public ChannelViewModel SelectedChannel
-        {
-            get { return _selectedChannel; }
-            set
-            {
-                if (_selectedChannel != value)
-                {
-                    _selectedChannel = value;
-                    RaisePropertyChanged("SelectedChannel");
-                    OnTargetChanged();
-                }
-            }
-        }
-
         protected virtual void OnTargetChanged()
         {
             if (SelectedCellKind != null && SelectedModificationKind != null)
             {
                 _eventAggregator.GetEvent<TargetSelectedEvent>().Publish(
-                    new TargetSelectedArgs(SelectedCellKind.Id, SelectedModificationKind.Id));
+                    new TargetSelectedArgs(SelectedCellKind.Id, SelectedModificationKind.Id, SelectedCellKind.Channels.Count));
             }
         }
     }
