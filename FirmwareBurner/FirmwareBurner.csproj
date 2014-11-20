@@ -85,8 +85,19 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
+    <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
+    <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
+    <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\CellKindSelector.xaml.cs">
       <DependentUpon>CellKindSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirmwareSelectors\CompositeFirmwareSelectorView.xaml.cs">
+      <DependentUpon>CompositeFirmwareSelectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirmwareSelectors\ManualFirmwareSelectorView.xaml.cs">
+      <DependentUpon>ManualFirmwareSelectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -159,12 +170,24 @@
     <Compile Include="ViewModels\BurningViewModel.cs" />
     <Compile Include="ViewModels\Targeting\CellKindViewModel.cs" />
     <Compile Include="ViewModels\Targeting\ChannelViewModel.cs" />
-    <Compile Include="ViewModels\FirmwareSources\FirmwareSource.cs" />
+    <Compile Include="ViewModels\FirmwareSources\FirmwareSelectorViewModel.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\CellKindSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirmwareSelectors\CompositeFirmwareSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirmwareSelectors\FirmwareSelectorsDataTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirmwareSelectors\ManualFirmwareSelectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -174,8 +197,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSource.cs" />
-    <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSource.cs" />
+    <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSelectorViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSelector.cs" />
     <Compile Include="ViewModels\Tools\ICellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\IndexCellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\ProjectAssembler.cs" />

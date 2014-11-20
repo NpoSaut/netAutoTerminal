@@ -5,9 +5,9 @@ using FirmwarePacking.Repositories;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
-    public class RepoFirmwareSource : FirmwareSource
+    public class RepoFirmwareSelector : FirmwareSelectorViewModel
     {
-        public RepoFirmwareSource(Repository[] Repositories)
+        public RepoFirmwareSelector(string Name, Repository[] Repositories) : base(Name)
         {
             this.Repositories = Repositories;
             PackagesForTarget = new ObservableCollection<FirmwarePackage>();

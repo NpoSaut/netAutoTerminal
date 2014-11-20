@@ -33,7 +33,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 if (_selectedCellKind != value)
                 {
                     _selectedCellKind = value;
-                    OnPropertyChanged("SelectedCellKind");
+                    RaisePropertyChanged("SelectedCellKind");
                     OnTargetChanged();
                 }
             }
@@ -47,7 +47,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 if (_selectedModificationKind != value)
                 {
                     _selectedModificationKind = value;
-                    OnPropertyChanged("SelectedModificationKind");
+                    RaisePropertyChanged("SelectedModificationKind");
                     OnTargetChanged();
                 }
             }
@@ -61,7 +61,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 if (_selectedChannel != value)
                 {
                     _selectedChannel = value;
-                    OnPropertyChanged("SelectedChannel");
+                    RaisePropertyChanged("SelectedChannel");
                     OnTargetChanged();
                 }
             }

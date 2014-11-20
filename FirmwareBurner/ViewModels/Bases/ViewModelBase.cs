@@ -1,21 +1,6 @@
-﻿using System;
-using System.ComponentModel;
+﻿using Microsoft.Practices.Prism.ViewModel;
 
 namespace FirmwareBurner.ViewModels.Bases
 {
-    public class ViewModelBase : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(String PropertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(PropertyName));
-        }
-    }
-
-    public interface IDataCheck
-    {
-        bool Check();
-    }
+    public class ViewModelBase : NotificationObject { }
 }

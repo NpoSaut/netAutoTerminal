@@ -20,6 +20,7 @@ namespace FirmwareBurner
         {
             var mc = (ModuleCatalog)ModuleCatalog;
 
+            mc.AddModule(typeof (FirmwareSelectorsModule));
             mc.AddModule(typeof (MainModule));
             base.ConfigureModuleCatalog();
         }

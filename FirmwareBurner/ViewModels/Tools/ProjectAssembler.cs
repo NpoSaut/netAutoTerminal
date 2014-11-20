@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.FirmwareProviders;
 using FirmwareBurner.Models;
@@ -32,12 +33,13 @@ namespace FirmwareBurner.ViewModels.Tools
 
         private TargetInformation ComposeTargetInformation(ProjectViewModel ProjectViewModel)
         {
-            return new TargetInformation(
-                ProjectViewModel.TargetSelector.SelectedChannel.Number,
-                ProjectViewModel.TargetSelector.SelectedCellKind.Id,
-                ProjectViewModel.TargetSelector.SelectedModificationKind.Id,
-                ProjectViewModel.BlockDetails.SerialNumber,
-                ProjectViewModel.BlockDetails.AssemblyDate);
+//            return new TargetInformation(
+//                ProjectViewModel.TargetSelector.SelectedChannel.Number,
+//                ProjectViewModel.TargetSelector.SelectedCellKind.Id,
+//                ProjectViewModel.TargetSelector.SelectedModificationKind.Id,
+//                ProjectViewModel.BlockDetails.SerialNumber,
+//                ProjectViewModel.BlockDetails.AssemblyDate);
+            throw new NotImplementedException();
         }
     }
 }

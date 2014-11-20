@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
+                    xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors">
+
+    <DataTemplate DataType="{x:Type firmwareSources:ManualFirmwareSelectorViewModel}">
+        <firmwareSelectors:ManualFirmwareSelectorView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type firmwareSources:CompositeFirmwareSelectorViewModel}">
+        <firmwareSelectors:CompositeFirmwareSelectorView />
+    </DataTemplate>
+
+</ResourceDictionary>

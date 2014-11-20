@@ -7,6 +7,15 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="FirmwareSelectors/FirmwareSelectorsDataTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -32,11 +41,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="4" Name="BurningDataShadow" Fill="#3547A0E8" />
-            <Polygon Grid.Column="2" Grid.RowSpan="4" Points="2,4 0,0 0,8" Stretch="Fill"
+            <Polygon Grid.Column="2" Grid.RowSpan="3" Points="2,4 0,0 0,8" Stretch="Fill"
                      Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
                 <Polygon.Fill>
                     <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
@@ -56,28 +64,11 @@
             <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}"
                         SelectedDate="{Binding Path=Project.BlockDetails.AssemblyDate}" />
 
-            <RadioButton Grid.Column="0" Grid.Row="2" Content="Из хранилища" IsChecked="True" />
-            <RadioButton Grid.Column="0" Grid.Row="3" Content="Из файла" IsEnabled="False" />
-
-            <ComboBox Grid.Column="1" Grid.Row="2" IsEditable="False" DataContext="{Binding AutoFirmwareSource}"
-                      ItemsSource="{Binding PackagesForTarget}" SelectedItem="{Binding SelectedPackage}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock>
-                            <Run Text="Версия" />
-                            <Run Text="{Binding Path=Information.FirmwareVersion, Mode=OneTime, StringFormat={}{0}}"
-                                 FontWeight="Medium" />
-                            <Run Text="{Binding Path=Information.FirmwareVersionLabel, Mode=OneTime}" />
-                        </TextBlock>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <TextBlock Grid.Column="1" Grid.Row="3" Margin="2" DataContext="{Binding UserFirmwareSource}"
-                       IsEnabled="False">
-                <Hyperlink>
-                    <Run>Выбрать файл</Run>
-                </Hyperlink>
-            </TextBlock>
+            <ContentControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+                            DataContext="{Binding Project.FirmwareSelectorViewModel}"
+                            d:DataContext="{x:Static viewModels:SampleData.FirmwareSelector}">
+                <ContentPresenter Content="{Binding}" />
+            </ContentControl>
 
             <ListBox Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Name="ChannelsSelector"

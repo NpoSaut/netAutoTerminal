@@ -17,7 +17,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 if (_serialNumber != value)
                 {
                     _serialNumber = value;
-                    OnPropertyChanged("SerialNumber");
+                    RaisePropertyChanged("SerialNumber");
                 }
             }
         }
@@ -31,7 +31,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 if (_assemblyDate != value)
                 {
                     _assemblyDate = value;
-                    OnPropertyChanged("AssemblyDate");
+                    RaisePropertyChanged("AssemblyDate");
                 }
             }
         }
