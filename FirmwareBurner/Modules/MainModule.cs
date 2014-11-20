@@ -39,7 +39,9 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IAvrIspCommandShell, Stk500>()
                 .RegisterType<IFirmwareCook, FirmwareCook>()
                 
-                .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager());
+                // Конфигурируем модели представления
+                .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>();
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("Root", typeof (MainView));

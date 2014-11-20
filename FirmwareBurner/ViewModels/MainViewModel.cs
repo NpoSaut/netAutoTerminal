@@ -22,7 +22,7 @@ namespace FirmwareBurner.ViewModels
 
         private void OnTargetSelected(TargetSelectedArgs SelectedArgs)
         {
-            Project = _projectViewModelProvider.GetViewModel();
+            Project = _projectViewModelProvider.GetViewModel(SelectedArgs.CellKindId, SelectedArgs.ModificationId);
             RaisePropertyChanged("Project");
         }
     }

@@ -1,27 +1,28 @@
-﻿using FirmwareBurner.ViewModels.FirmwareSources;
+﻿using FirmwareBurner.Annotations;
 using FirmwareBurner.ViewModels.Targeting;
 
 namespace FirmwareBurner.ViewModels
 {
     public interface IProjectViewModelProvider
     {
-        ProjectViewModel GetViewModel();
+        ProjectViewModel GetViewModel(int CellKindId, int CellModificationId);
     }
 
+    [UsedImplicitly]
     public class ProjectViewModelProvider : IProjectViewModelProvider
     {
-        private readonly IFirmwareSelectorViewModelProvider _firmwareSelectorViewModelProvider;
+        private readonly IFirmwareSetConstructorViewModelProvider _firmwareSetConstructorViewModelProvider;
 
-        public ProjectViewModelProvider(IFirmwareSelectorViewModelProvider FirmwareSelectorViewModelProvider)
+        public ProjectViewModelProvider(IFirmwareSetConstructorViewModelProvider FirmwareSetConstructorViewModelProvider)
         {
-            _firmwareSelectorViewModelProvider = FirmwareSelectorViewModelProvider;
+            _firmwareSetConstructorViewModelProvider = FirmwareSetConstructorViewModelProvider;
         }
 
-        public ProjectViewModel GetViewModel()
+        public ProjectViewModel GetViewModel(int CellKindId, int CellModificationId)
         {
             return new ProjectViewModel(
                 new BlockDetailsViewModel(),
-                _firmwareSelectorViewModelProvider.GetViewModel(1, 1));
+                _firmwareSetConstructorViewModelProvider.GetViewModel(CellKindId, CellModificationId));
         }
     }
 }

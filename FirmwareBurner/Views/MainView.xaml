@@ -64,11 +64,9 @@
             <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}"
                         SelectedDate="{Binding Path=Project.BlockDetails.AssemblyDate}" />
 
-            <ContentControl Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
-                            DataContext="{Binding Project.FirmwareSelectorViewModel}"
-                            d:DataContext="{x:Static viewModels:SampleData.FirmwareSelector}">
-                <ContentPresenter Content="{Binding}" />
-            </ContentControl>
+            <views:FirmwareSetConstructorView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+                                              DataContext="{Binding Project.FirmwareSetConstructor}"
+                                              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}"/>
 
             <ListBox Grid.Column="2" Grid.RowSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Name="ChannelsSelector"

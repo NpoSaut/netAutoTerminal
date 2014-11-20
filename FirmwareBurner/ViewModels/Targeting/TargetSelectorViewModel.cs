@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FirmwareBurner.Events;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.Tools;
@@ -10,11 +9,10 @@ namespace FirmwareBurner.ViewModels.Targeting
     /// <summary>Модель представления выбора цели прошивки</summary>
     public class TargetSelectorViewModel : ViewModelBase
     {
+        private readonly IEventAggregator _eventAggregator;
         private CellKindViewModel _selectedCellKind;
         private ChannelViewModel _selectedChannel;
         private ModificationKindViewModel _selectedModificationKind;
-
-        private IEventAggregator _eventAggregator;
 
         public TargetSelectorViewModel(ICellsCatalogProvider CellsCatalogProvider, IEventAggregator EventAggregator)
         {
@@ -69,8 +67,11 @@ namespace FirmwareBurner.ViewModels.Targeting
 
         protected virtual void OnTargetChanged()
         {
-            _eventAggregator.GetEvent<TargetSelectedEvent>().Publish(
-                new TargetSelectedArgs());
+            if (SelectedCellKind != null && SelectedModificationKind != null)
+            {
+                _eventAggregator.GetEvent<TargetSelectedEvent>().Publish(
+                    new TargetSelectedArgs(SelectedCellKind.Id, SelectedModificationKind.Id));
+            }
         }
     }
 }

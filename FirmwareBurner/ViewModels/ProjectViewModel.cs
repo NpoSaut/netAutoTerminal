@@ -1,18 +1,17 @@
 ﻿using FirmwareBurner.ViewModels.Bases;
-using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwareBurner.ViewModels.Targeting;
 
 namespace FirmwareBurner.ViewModels
 {
     public class ProjectViewModel : ViewModelBase
     {
-        public ProjectViewModel(BlockDetailsViewModel BlockDetails, FirmwareSelectorViewModel FirmwareSelectorViewModel)
+        public ProjectViewModel(BlockDetailsViewModel BlockDetails, FirmwareSetConstructorViewModel FirmwareSetConstructor)
         {
-            this.FirmwareSelectorViewModel = FirmwareSelectorViewModel;
+            this.FirmwareSetConstructor = FirmwareSetConstructor;
             this.BlockDetails = BlockDetails;
         }
 
         public BlockDetailsViewModel BlockDetails { get; private set; }
-        public FirmwareSelectorViewModel FirmwareSelectorViewModel { get; private set; }
+        public FirmwareSetConstructorViewModel FirmwareSetConstructor { get; private set; }
     }
 }

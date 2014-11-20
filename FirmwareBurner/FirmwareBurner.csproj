@@ -86,8 +86,13 @@
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
+    <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\CellKindSelector.xaml.cs">
@@ -98,6 +103,9 @@
     </Compile>
     <Compile Include="Views\FirmwareSelectors\ManualFirmwareSelectorView.xaml.cs">
       <DependentUpon>ManualFirmwareSelectorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirmwareSetConstructorView.xaml.cs">
+      <DependentUpon>FirmwareSetConstructorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -188,6 +196,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FirmwareSelectors\ManualFirmwareSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirmwareSetConstructorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
