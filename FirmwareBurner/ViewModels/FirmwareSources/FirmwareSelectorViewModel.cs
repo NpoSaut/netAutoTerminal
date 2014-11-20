@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Windows.Data;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwarePacking;
 
@@ -8,47 +6,23 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     public abstract class FirmwareSelectorViewModel : ViewModelBase
     {
+        protected FirmwareSelectorViewModel(string Name) { this.Name = Name; }
         public String Name { get; private set; }
 
-        private bool _Ok;
-        private FirmwarePackage _SelectedFirmware;
-        public FirmwareSelectorViewModel(string Name) { this.Name = Name; }
+        public bool IsPackageSelected { get; private set; }
+        public FirmwareVersionViewModel SelectedVersion { get; private set; }
+        public FirmwarePackage SelectedPackage { get; private set; }
 
-        public FirmwarePackage SelectedPackage
+        protected void SelectPackage(FirmwarePackage Package)
         {
-            get { return _SelectedFirmware; }
-            set
-            {
-                if (_SelectedFirmware != value)
-                {
-                    _SelectedFirmware = value;
-                    RaisePropertyChanged("SelectedPackage");
-                    if (PackageSelected != null) PackageSelected(this, new EventArgs());
-                }
-            }
-        }
-
-        public bool Ok
-        {
-            get { return _Ok; }
-            set
-            {
-                if (_Ok != value)
-                {
-                    _Ok = value;
-                    RaisePropertyChanged("Ok");
-                }
-            }
-        }
-
-        public event EventHandler PackageSelected;
-
-        protected virtual void OnCheckTarget(ComponentTarget target) { }
-
-        public void CheckTarget(ComponentTarget target)
-        {
-            OnCheckTarget(target);
-            Ok = SelectedPackage != null && SelectedPackage.Components.Any(c => c.Targets.Any(cTarget => cTarget == target));
+            IsPackageSelected = Package != null;
+            SelectedPackage = Package;
+            SelectedVersion = Package != null
+                                  ? new FirmwareVersionViewModel(Package.Information.FirmwareVersion.ToString(2), Package.Information.FirmwareVersionLabel)
+                                  : null;
+            RaisePropertyChanged("SelectedPackage");
+            RaisePropertyChanged("SelectedVersion");
+            RaisePropertyChanged("IsPackageSelected");
         }
     }
 }

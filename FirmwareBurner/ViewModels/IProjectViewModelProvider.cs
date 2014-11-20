@@ -21,6 +21,7 @@ namespace FirmwareBurner.ViewModels
         public ProjectViewModel GetViewModel(int CellKindId, int CellModificationId)
         {
             return new ProjectViewModel(
+                CellKindId, CellModificationId,
                 new BlockDetailsViewModel(),
                 _firmwareSetConstructorViewModelProvider.GetViewModel(CellKindId, CellModificationId));
         }

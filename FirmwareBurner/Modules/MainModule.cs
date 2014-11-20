@@ -2,6 +2,7 @@
 using FirmwareBurner.Burning;
 using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
+using FirmwareBurner.Models.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
 using FirmwareBurner.Views;
@@ -41,7 +42,10 @@ namespace FirmwareBurner.Modules
                 
                 // Конфигурируем модели представления
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
-                .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>();
+                .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>()
+
+                // Инструменты перехода на уровень бизнес-логики
+                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager());
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("Root", typeof (MainView));

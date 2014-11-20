@@ -85,12 +85,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
+    <Compile Include="Models\Project\FirmwareProjectFactory.cs" />
+    <Compile Include="Models\Project\IFirmwareProjectFactory.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSources\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
@@ -213,7 +216,6 @@
     <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSelector.cs" />
     <Compile Include="ViewModels\Tools\ICellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\IndexCellsCatalogProvider.cs" />
-    <Compile Include="ViewModels\Tools\ProjectAssembler.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\Targeting\ModificationKindViewModel.cs" />

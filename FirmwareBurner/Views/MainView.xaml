@@ -66,7 +66,7 @@
 
             <views:FirmwareSetConstructorView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
                                               DataContext="{Binding Project.FirmwareSetConstructor}"
-                                              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}"/>
+                                              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}" />
 
             <ListBox Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Name="ChannelsSelector"
@@ -74,7 +74,7 @@
                      SelectedItem="{Binding Project.TargetSelector.SelectedChannel}"
                      Style="{StaticResource ChannelSelectorStyle}" />
 
-            <Grid Grid.Column="3" Grid.RowSpan="4" DataContext="{Binding Burner}">
+            <Grid Grid.Column="3" Grid.RowSpan="4">
                 <Button Width="60" Height="60" Style="{StaticResource CircleButton}" Command="{Binding BurnCommand}"
                         Content="Начать" />
             </Grid>

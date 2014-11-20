@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using FirmwarePacking;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
@@ -31,13 +30,11 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 
         public ICommand OpenPackageCommand { get; private set; }
 
-        public void OpenPackage()
+        private void OpenPackage()
         {
             var dlg = new OpenFileDialog();
             if (dlg.ShowDialog() == true)
-                SelectedPackage = FirmwarePackage.Open(dlg.FileName);
+                SelectPackage(FirmwarePackage.Open(dlg.FileName));
         }
-
-        protected override void OnCheckTarget(ComponentTarget target) { throw new NotImplementedException(); }
     }
 }
