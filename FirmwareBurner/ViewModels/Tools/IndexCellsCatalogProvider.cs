@@ -21,7 +21,8 @@ namespace FirmwareBurner.ViewModels.Tools
                             cell.Modifications.Select(
                                 modification => new ModificationKindViewModel(
                                                     modification.Id,
-                                                    modification.Name)).ToList(),
+                                                    modification.Name,
+                                                    modification.DeviceName)).ToList(),
                             Enumerable.Range(0, cell.ChannelsCount).Select(i => new ChannelViewModel(i + 1)).ToList()))
                          .ToList();
         }

@@ -85,6 +85,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
+    <Compile Include="IBurnersRepository.cs" />
+    <Compile Include="IBurnManagerFactory.cs" />
     <Compile Include="Models\Project\FirmwareProjectFactory.cs" />
     <Compile Include="Models\Project\IFirmwareProjectFactory.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />

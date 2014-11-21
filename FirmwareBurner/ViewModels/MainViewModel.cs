@@ -50,8 +50,10 @@ namespace FirmwareBurner.ViewModels
         private void OnTargetSelected(TargetSelectedArgs SelectedArgs)
         {
             Project = _projectViewModelProvider.GetViewModel(SelectedArgs.CellKindId, SelectedArgs.ModificationId);
+            
             Channels = Enumerable.Range(0, SelectedArgs.ChannelsCount).Select(i => new ChannelViewModel(i + 1)).ToList();
             SelectedChannel = Channels.FirstOrDefault();
+
             RaisePropertyChanged("Project");
             RaisePropertyChanged("Channels");
             RaisePropertyChanged("SelectedChannel");
