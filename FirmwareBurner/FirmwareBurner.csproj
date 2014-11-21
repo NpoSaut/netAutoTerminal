@@ -294,6 +294,10 @@
       <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
       <Name>FirmwarePacking</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WpfLib\DesignUtils\DesignUtils.csproj">
+      <Project>{35D6D022-3F5F-47DF-ACBF-5F2723B48384}</Project>
+      <Name>DesignUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

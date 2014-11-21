@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:FirmwareBurner.Views"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+             xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
 
@@ -16,7 +17,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid designUtils:DesignTime.Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

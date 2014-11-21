@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwarePacking", "netFirmw
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner", "FirmwareBurner\FirmwareBurner.csproj", "{8C7FAFEB-0291-44AE-90C1-6E38994D9C1B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{281B3551-87CB-435D-9DD4-4C4F0FE5F3A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignUtils", "WpfLib\DesignUtils\DesignUtils.csproj", "{35D6D022-3F5F-47DF-ACBF-5F2723B48384}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,9 +53,22 @@ Global
 		{8C7FAFEB-0291-44AE-90C1-6E38994D9C1B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{8C7FAFEB-0291-44AE-90C1-6E38994D9C1B}.Release|x86.ActiveCfg = Release|x86
 		{8C7FAFEB-0291-44AE-90C1-6E38994D9C1B}.Release|x86.Build.0 = Release|x86
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35D6D022-3F5F-47DF-ACBF-5F2723B48384} = {281B3551-87CB-435D-9DD4-4C4F0FE5F3A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
