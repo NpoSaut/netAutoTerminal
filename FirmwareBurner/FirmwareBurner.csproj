@@ -129,10 +129,7 @@
     <Compile Include="Burning\BurningOperationStatus.cs" />
     <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
-    <Compile Include="Commands\BurnCommand.cs" />
-    <Compile Include="Commands\ParameterCOmmandBase.cs" />
     <Compile Include="FirmwareCook.cs" />
-    <Compile Include="FirmwareProviders\IFirmwareProvider.cs" />
     <Compile Include="FirmwareProviders\IFirmwaresSet.cs" />
     <Compile Include="FirmwareProviders\PackageFirmwaresSet.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />

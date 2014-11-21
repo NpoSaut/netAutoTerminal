@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using FirmwareBurner.Burning.Exceptions;
 
-namespace FirmwareBurner.Burning.Burners.AvrIsp
+namespace FirmwareBurner.Burning.Exceptions
 {
     [Serializable]
     public class DeviceIsNotConnectedException : BurningException

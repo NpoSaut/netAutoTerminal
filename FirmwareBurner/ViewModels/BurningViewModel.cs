@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FirmwareBurner.Burning;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.Targeting;
 using FirmwarePacking.SystemsIndexes;

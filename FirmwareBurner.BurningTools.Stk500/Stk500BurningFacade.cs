@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.BurningTools.Stk500.Exceptions;
 using FirmwareBurner.BurningTools.Stk500.Parameters;
@@ -12,7 +11,7 @@ using FirmwareBurner.BurningTools.Stk500.Parameters;
 namespace FirmwareBurner.BurningTools.Stk500
 {
     /// <summary>Оболочка над программой STK500.exe</summary>
-    public class Stk500BurningFacade : IAvrIspCommandShell
+    public class Stk500BurningFacade : IAvrIspCommandShell, IDisposable
     {
         private static readonly FileInfo _burnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
 
@@ -114,6 +113,8 @@ namespace FirmwareBurner.BurningTools.Stk500
             string outputString = output.ReadToEnd();
             CheckOutputForErrors(outputString, "Fuse bits programmed");
         }
+
+        public void Dispose() { }
 
         private void CheckOutputForErrors(string Output, string SuccessString)
         {
