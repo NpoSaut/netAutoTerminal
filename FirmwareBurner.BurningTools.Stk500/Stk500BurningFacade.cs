@@ -4,16 +4,19 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Exceptions;
+using FirmwareBurner.BurningTools.Stk500.Exceptions;
+using FirmwareBurner.BurningTools.Stk500.Parameters;
 
-namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
+namespace FirmwareBurner.BurningTools.Stk500
 {
     /// <summary>Оболочка над программой STK500.exe</summary>
-    public class Stk500 : IAvrIspCommandShell
+    public class Stk500BurningFacade : IAvrIspCommandShell
     {
-        private static readonly FileInfo _BurnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
+        private static readonly FileInfo _burnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
 
-        public Stk500()
+        public Stk500BurningFacade()
         {
             // Проверяем, доступна ли программа-прошивщик
             if (!BurnerFile.Exists) throw new BurnerNotFoundException();
@@ -21,7 +24,7 @@ namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
 
         public static FileInfo BurnerFile
         {
-            get { return _BurnerFile; }
+            get { return _burnerFile; }
         }
 
         public String ChipName { get; set; }

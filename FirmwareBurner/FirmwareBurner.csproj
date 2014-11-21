@@ -85,8 +85,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
-    <Compile Include="IBurnersRepository.cs" />
-    <Compile Include="IBurnManagerFactory.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="Properties\Annotations.cs" />
@@ -128,15 +126,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BurnerBootstrapper.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\BurnerNotFoundException.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\DeviceIsNotConnectedException.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\ProgrammerIsNotConnectedException.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\IAvrIspCommandShell.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500Exception.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\stk500\Stk500Parameters.cs" />
     <Compile Include="Burning\BurningOperationStatus.cs" />
-    <Compile Include="Burning\Exceptions\BurningException.cs" />
     <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
     <Compile Include="Commands\BurnCommand.cs" />
@@ -145,15 +135,12 @@
     <Compile Include="FirmwareProviders\IFirmwareProvider.cs" />
     <Compile Include="FirmwareProviders\IFirmwaresSet.cs" />
     <Compile Include="FirmwareProviders\PackageFirmwaresSet.cs" />
-    <Compile Include="IBurningReceipt.cs" />
-    <Compile Include="IBurnManager.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />
     <Compile Include="Formating\XmlFirmwareFormatter.cs" />
     <Compile Include="Formating\FormatBase.cs" />
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
-    <Compile Include="Burning\Burners\AvrIsp\AvrIspBurner.cs" />
     <Compile Include="Burning\IFirmwareBurner.cs" />
     <Compile Include="IFirmwareCook.cs" />
     <Compile Include="IntelHex\IntelHexExAdressLine.cs" />
@@ -231,24 +218,6 @@
     <Content Include="Bootloader\layout.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Stk500\libdwarf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\libelf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\libelfdwarfparser.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\Stk500.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\Stk500Common.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\Upgrade.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -262,12 +231,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Content Include="Stk500\AVRISP-mkII.dat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\STK500.ebn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">

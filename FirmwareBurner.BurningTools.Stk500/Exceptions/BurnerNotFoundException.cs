@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
-using FirmwareBurner.Burning.Exceptions;
 
-namespace FirmwareBurner.Burning.Burners.AvrIsp
+namespace FirmwareBurner.BurningTools.Stk500.Exceptions
 {
     [Serializable]
-    public class BurnerNotFoundException : BurningException
+    public class BurnerNotFoundException : Stk500Exception
     {
-        public BurnerNotFoundException() : base("Не наидена программа stk500.exe, необходимая для прошивки модуля") { }
+        public BurnerNotFoundException() : base("Не найдена программа stk500.exe, необходимая для прошивки модуля") { }
         public BurnerNotFoundException(string message) : base(message) { }
         public BurnerNotFoundException(string message, Exception inner) : base(message, inner) { }
 

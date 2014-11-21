@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Xml.Linq;
-using FirmwareBurner.Models.Images.Binary;
+using FirmwareBurner.Imaging.Binary;
 
 namespace FirmwareBurner.Formating
 {

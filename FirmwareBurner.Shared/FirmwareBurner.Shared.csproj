@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Burning\Exceptions\BurningException.cs" />
+    <Compile Include="Burning\Exceptions\DeviceIsNotConnectedException.cs" />
+    <Compile Include="Burning\IBurnersRepository.cs" />
+    <Compile Include="Burning\IBurningReceipt.cs" />
+    <Compile Include="Burning\IBurnManager.cs" />
+    <Compile Include="Burning\IBurnManagerFactory.cs" />
     <Compile Include="FudpCrc.cs" />
     <Compile Include="Imaging\Binary\BootloaderBody.cs" />
     <Compile Include="Imaging\Binary\FileRecord.cs" />
@@ -67,6 +73,7 @@
       <Name>FirmwarePacking</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

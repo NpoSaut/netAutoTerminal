@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using FirmwareBurner.Burning.Exceptions;
 
-namespace FirmwareBurner.Burning.Burners.AvrIsp.stk500
+namespace FirmwareBurner.BurningTools.Stk500.Exceptions
 {
     [Serializable]
     public class Stk500Exception : BurningException

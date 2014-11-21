@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace FirmwareBurner.Burning.Burners.AvrIsp
+namespace FirmwareBurner.BurningTools.Stk500
 {
     public interface IAvrIspCommandShell
     {

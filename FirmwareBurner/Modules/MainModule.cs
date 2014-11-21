@@ -1,7 +1,4 @@
 ﻿using System.IO;
-using FirmwareBurner.Burning;
-using FirmwareBurner.Burning.Burners.AvrIsp;
-using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
@@ -36,8 +33,6 @@ namespace FirmwareBurner.Modules
                                                                new InjectionConstructor(DirectoryRepository.ApplicatoinRepositoryDirectory))
 
                 // Конфигурируем прожигателей
-                .RegisterType<IFirmwareBurner, AvrIspBurner>()
-                .RegisterType<IAvrIspCommandShell, Stk500>()
                 .RegisterType<IFirmwareCook, FirmwareCook>()
                 
                 // Конфигурируем модели представления
