@@ -71,12 +71,14 @@
 
             <ListBox Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
                      Name="ChannelsSelector"
-                     ItemsSource="{Binding Channels}"
-                     SelectedItem="{Binding SelectedChannel}"
+                     ItemsSource="{Binding Burning.Channels}"
+                     SelectedItem="{Binding Burning.SelectedChannel}"
                      Style="{StaticResource ChannelSelectorStyle}" />
 
             <Grid Grid.Column="3" Grid.RowSpan="4">
-                <Button Width="60" Height="60" Style="{StaticResource CircleButton}" Command="{Binding BurnCommand}"
+                <Button Width="60" Height="60" Style="{StaticResource CircleButton}"
+                        Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
+                        CommandParameter="{Binding Path=Burning.SelectedChannel.Number}"
                         Content="Начать" />
             </Grid>
 

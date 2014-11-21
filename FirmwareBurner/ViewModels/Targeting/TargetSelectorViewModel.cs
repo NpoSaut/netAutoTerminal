@@ -55,7 +55,7 @@ namespace FirmwareBurner.ViewModels.Targeting
             if (SelectedCellKind != null && SelectedModificationKind != null)
             {
                 _eventAggregator.GetEvent<TargetSelectedEvent>().Publish(
-                    new TargetSelectedArgs(SelectedCellKind.Id, SelectedModificationKind.Id, SelectedCellKind.Channels.Count));
+                    new TargetSelectedArgs(SelectedCellKind.Id, SelectedModificationKind.Id));
             }
         }
     }

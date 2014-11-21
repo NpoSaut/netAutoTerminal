@@ -43,6 +43,7 @@ namespace FirmwareBurner.Modules
                 // Конфигурируем модели представления
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>()
+                .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
                 .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager());

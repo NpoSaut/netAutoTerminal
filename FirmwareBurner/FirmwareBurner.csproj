@@ -87,10 +87,12 @@
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="IBurnersRepository.cs" />
     <Compile Include="IBurnManagerFactory.cs" />
+    <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Models\Project\FirmwareProjectFactory.cs" />
     <Compile Include="Models\Project\IFirmwareProjectFactory.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="ViewModels\BurningVariantViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
