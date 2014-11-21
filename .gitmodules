@@ -1,3 +1,6 @@
 [submodule "netFirmwarePacking"]
 	path = netFirmwarePacking
 	url = ../netFirmwarePacking.git
+[submodule "WpfLib"]
+	path = WpfLib
+	url = ../WpfLib.git
