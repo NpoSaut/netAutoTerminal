@@ -1,4 +1,4 @@
-﻿namespace FirmwareBurner.Implementations.Avr
+﻿namespace FirmwareBurner.ImageFormatters.Avr
 {
     public class AvrFuses
     {

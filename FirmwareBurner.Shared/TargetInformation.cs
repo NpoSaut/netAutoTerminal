@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwareBurner.Models
+namespace FirmwareBurner
 {
     /// <summary>Информация о цели прошивки</summary>
     public class TargetInformation : TargetHardwareIdentifier

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwareBurner.Implementations.Avr
+namespace FirmwareBurner.Imaging.Binary
 {
     public class ImageFile
     {

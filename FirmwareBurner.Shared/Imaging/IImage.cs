@@ -1,4 +1,4 @@
-﻿namespace FirmwareBurner.Models.Images
+﻿namespace FirmwareBurner.Imaging
 {
     /// <summary>Модель образа прошивки</summary>
     public interface IImage { }

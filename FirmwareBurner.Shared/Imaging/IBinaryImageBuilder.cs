@@ -1,7 +1,6 @@
 ﻿using System;
-using FirmwareBurner.Models.Images.Binary;
 
-namespace FirmwareBurner
+namespace FirmwareBurner.Imaging
 {
     public interface IBinaryImageBuilder<out TImage> where TImage : IBinaryImage
     {

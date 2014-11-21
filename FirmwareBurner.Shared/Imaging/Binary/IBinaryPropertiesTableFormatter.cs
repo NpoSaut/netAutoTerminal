@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FirmwareBurner.Models.Images.Binary
+namespace FirmwareBurner.Imaging.Binary
 {
     public interface IBinaryPropertiesTableFormatter
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FirmwareBurner.Models.Images.Binary
+namespace FirmwareBurner.Imaging.Binary
 {
     public class FirmwareImage : IBinaryImage
     {

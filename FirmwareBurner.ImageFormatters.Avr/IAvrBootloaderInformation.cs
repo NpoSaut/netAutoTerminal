@@ -1,7 +1,7 @@
 ﻿using System;
-using FirmwareBurner.Models.Images.Binary;
+using FirmwareBurner.Imaging.Binary;
 
-namespace FirmwareBurner.Implementations.Avr
+namespace FirmwareBurner.ImageFormatters.Avr
 {
     /// <summary>Информация о загрузчике для AVR-устройств</summary>
     public interface IAvrBootloaderInformation

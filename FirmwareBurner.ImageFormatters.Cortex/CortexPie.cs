@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace FirmwareBurner.Implementations.Cortex
+namespace FirmwareBurner.ImageFormatters.Cortex
 {
     public class CortexPie
     {

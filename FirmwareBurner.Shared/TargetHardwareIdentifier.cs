@@ -1,4 +1,4 @@
-namespace FirmwareBurner.Models
+namespace FirmwareBurner
 {
     /// <summary>Идентификатор цели прошивки</summary>
     public class TargetHardwareIdentifier

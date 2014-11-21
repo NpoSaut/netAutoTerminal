@@ -1,7 +1,7 @@
 ﻿using System.IO;
-using FirmwareBurner.Models.Images.Binary;
+using FirmwareBurner.Imaging;
 
-namespace FirmwareBurner.Implementations.Avr
+namespace FirmwareBurner.ImageFormatters.Avr
 {
     /// <summary>Образ прошивки для AVR-устройства</summary>
     public class AvrImage : IBinaryImage

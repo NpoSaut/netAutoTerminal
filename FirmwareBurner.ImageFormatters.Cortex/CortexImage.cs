@@ -1,6 +1,6 @@
-﻿using FirmwareBurner.Models.Images.Binary;
+﻿using FirmwareBurner.Imaging;
 
-namespace FirmwareBurner.Implementations.Cortex
+namespace FirmwareBurner.ImageFormatters.Cortex
 {
     public class CortexImage : IBinaryImage { }
 }

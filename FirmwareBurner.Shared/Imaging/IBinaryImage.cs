@@ -1,4 +1,4 @@
-﻿namespace FirmwareBurner.Models.Images.Binary
+﻿namespace FirmwareBurner.Imaging
 {
     public interface IBinaryImage : IImage { }
 }

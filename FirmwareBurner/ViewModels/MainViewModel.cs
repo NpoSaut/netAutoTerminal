@@ -1,5 +1,5 @@
 ﻿using FirmwareBurner.Events;
-using FirmwareBurner.Models.Project;
+using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.Targeting;
 using Microsoft.Practices.Prism.Events;

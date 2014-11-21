@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using FirmwareBurner.Models.Project;
+using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner

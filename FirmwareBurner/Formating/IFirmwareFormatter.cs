@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using FirmwareBurner.Models.Images.Binary;
+using FirmwareBurner.Imaging.Binary;
 
 namespace FirmwareBurner.Formating
 {

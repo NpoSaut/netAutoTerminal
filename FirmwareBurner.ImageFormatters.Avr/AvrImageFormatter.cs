@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using FirmwareBurner.Models;
-using FirmwareBurner.Models.Project;
+using FirmwareBurner.Imaging;
+using FirmwareBurner.Imaging.Binary;
+using FirmwareBurner.Project;
 using FirmwarePacking;
 
-namespace FirmwareBurner.Implementations.Avr
+namespace FirmwareBurner.ImageFormatters.Avr
 {
     public class AvrImageFormatter : IImageFormatter<AvrImage>
     {

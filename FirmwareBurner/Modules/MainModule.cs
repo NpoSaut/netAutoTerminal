@@ -2,7 +2,7 @@
 using FirmwareBurner.Burning;
 using FirmwareBurner.Burning.Burners.AvrIsp;
 using FirmwareBurner.Burning.Burners.AvrIsp.stk500;
-using FirmwareBurner.Models.Project;
+using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
 using FirmwareBurner.Views;

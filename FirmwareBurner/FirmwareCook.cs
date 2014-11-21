@@ -4,8 +4,8 @@ using System.IO;
 using System.Linq;
 using FirmwareBurner.Burning;
 using FirmwareBurner.Formating;
+using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.IntelHex;
-using FirmwareBurner.Models.Images.Binary;
 using FirmwarePacking;
 using Microsoft.Practices.Unity;
 

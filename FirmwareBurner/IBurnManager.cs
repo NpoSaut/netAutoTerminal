@@ -1,6 +1,5 @@
-﻿using FirmwareBurner.Models;
-using FirmwareBurner.Models.Images;
-using FirmwareBurner.Models.Project;
+﻿using FirmwareBurner.Imaging;
+using FirmwareBurner.Project;
 
 namespace FirmwareBurner
 {

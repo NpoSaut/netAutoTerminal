@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using FirmwarePacking;
 
-namespace FirmwareBurner.Models.Project
+namespace FirmwareBurner.Project
 {
     public interface IFirmwareProjectFactory
     {
