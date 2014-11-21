@@ -88,8 +88,6 @@
     <Compile Include="IBurnersRepository.cs" />
     <Compile Include="IBurnManagerFactory.cs" />
     <Compile Include="IProjectAssembler.cs" />
-    <Compile Include="Models\Project\FirmwareProjectFactory.cs" />
-    <Compile Include="Models\Project\IFirmwareProjectFactory.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
@@ -147,25 +145,11 @@
     <Compile Include="FirmwareProviders\IFirmwareProvider.cs" />
     <Compile Include="FirmwareProviders\IFirmwaresSet.cs" />
     <Compile Include="FirmwareProviders\PackageFirmwaresSet.cs" />
-    <Compile Include="IBinaryImageBuilder.cs" />
     <Compile Include="IBurningReceipt.cs" />
     <Compile Include="IBurnManager.cs" />
-    <Compile Include="Implementations\Avr\IAvrBootloaderInformation.cs" />
-    <Compile Include="Implementations\Avr\AvrFuses.cs" />
-    <Compile Include="Implementations\Avr\AvrImageFormatter.cs" />
-    <Compile Include="Implementations\Avr\AvrImage.cs" />
-    <Compile Include="Models\Images\Binary\IBinaryFilesystemFormatter.cs" />
-    <Compile Include="Models\Images\Binary\IBinaryPropertiesTableFormatter.cs" />
-    <Compile Include="Implementations\Cortex\CortexImage.cs" />
-    <Compile Include="Implementations\Cortex\CortexPie.cs" />
-    <Compile Include="Models\IImageFormatter.cs" />
-    <Compile Include="Models\Images\Binary\BootloaderBody.cs" />
-    <Compile Include="Models\Images\Binary\FirmwareImage.cs" />
-    <Compile Include="Models\Images\Binary\FileRecord.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />
     <Compile Include="Formating\XmlFirmwareFormatter.cs" />
     <Compile Include="Formating\FormatBase.cs" />
-    <Compile Include="Models\Images\Binary\ParamRecord.cs" />
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
@@ -178,7 +162,6 @@
     <Compile Include="IntelHex\IntelHexDataLine.cs" />
     <Compile Include="IntelHex\IntelHexEndLine.cs" />
     <Compile Include="IntelHex\IntelHexLine.cs" />
-    <Compile Include="Models\TargetHardwareIdentifier.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="ViewModels\Bases\ActionCommand.cs" />
     <Compile Include="ViewModels\Targeting\BlockDetailsViewModel.cs" />
@@ -229,13 +212,6 @@
     <Compile Include="ViewModels\Targeting\ModificationKindViewModel.cs" />
     <Compile Include="ViewModels\Targeting\TargetSelectorViewModel.cs" />
     <Compile Include="ViewModels\Bases\ViewModelBase.cs" />
-    <Compile Include="Models\Images\Binary\IBinaryImage.cs" />
-    <Compile Include="Models\Images\IImage.cs" />
-    <Compile Include="Models\IPropertiesTableGenerator.cs" />
-    <Compile Include="Models\Project\ModuleInformation.cs" />
-    <Compile Include="Models\Project\ModuleProject.cs" />
-    <Compile Include="Models\Project\FirmwareProject.cs" />
-    <Compile Include="Models\TargetInformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -294,6 +270,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
+      <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
+      <Name>FirmwareBurner.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
       <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
       <Name>FirmwarePacking</Name>
