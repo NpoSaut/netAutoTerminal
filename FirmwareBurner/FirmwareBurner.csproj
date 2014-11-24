@@ -87,7 +87,6 @@
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
@@ -230,6 +229,14 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FirmwareBurner.BurningTools.Stk500\FirmwareBurner.BurningTools.Stk500.csproj">
+      <Project>{89086766-12A5-4536-80C8-4071194E0086}</Project>
+      <Name>FirmwareBurner.BurningTools.Stk500</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Avr\FirmwareBurner.ImageFormatters.Avr.csproj">
+      <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
+      <Name>FirmwareBurner.ImageFormatters.Avr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>
@@ -246,10 +253,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>rd $(TargetDir)SingleExe /S /Q
-"%25NetZ%25\netz.exe" -s -z $(TargetPath) $(TargetDir)*.dll -o $(TargetDir)SingleExe
-xcopy $(TargetDir)Bootloader\* $(TargetDir)SingleExe\Bootloader\
-xcopy $(TargetDir)Stk500\* $(TargetDir)SingleExe\Stk500\</PostBuildEvent>
+    <PostBuildEvent>REM rd $(TargetDir)SingleExe /S /Q
+REM "%25NetZ%25\netz.exe" -s -z $(TargetPath) $(TargetDir)*.dll -o $(TargetDir)SingleExe
+REM xcopy $(TargetDir)Bootloader\* $(TargetDir)SingleExe\Bootloader\
+REM xcopy $(TargetDir)Stk500\* $(TargetDir)SingleExe\Stk500\</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

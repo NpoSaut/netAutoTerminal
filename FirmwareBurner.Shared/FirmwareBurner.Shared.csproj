@@ -39,14 +39,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Burning\BurnersRepository.cs" />
+    <Compile Include="BurningToolFacadeHelper.cs" />
+    <Compile Include="Burning\BurnReceiptsCatalog.cs" />
     <Compile Include="Burning\Exceptions\BurningException.cs" />
     <Compile Include="Burning\Exceptions\DeviceIsNotConnectedException.cs" />
-    <Compile Include="Burning\IBurnersRepository.cs" />
+    <Compile Include="Burning\IBurningReceiptsRepository.cs" />
+    <Compile Include="Burning\IBurningToolFacadeFactory.cs" />
+    <Compile Include="Burning\IBurnReceiptsCatalog.cs" />
+    <Compile Include="Burning\IBurningToolFacade.cs" />
     <Compile Include="Burning\IBurningReceipt.cs" />
-    <Compile Include="Burning\IBurnManager.cs" />
-    <Compile Include="Burning\IBurnManagerFactory.cs" />
-    <Compile Include="Burning\ReceiptedBurnManager.cs" />
+    <Compile Include="Burning\IBurningReceiptFactory.cs" />
+    <Compile Include="Burning\BurningReceipt.cs" />
+    <Compile Include="Imaging\IImageFormatterFactory.cs" />
+    <Compile Include="Imaging\IImageFormattersRepository.cs" />
+    <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Attributes\TargetDeviceAttribute.cs" />
     <Compile Include="FudpCrc.cs" />
     <Compile Include="Imaging\Binary\BootloaderBody.cs" />
     <Compile Include="Imaging\Binary\FileRecord.cs" />

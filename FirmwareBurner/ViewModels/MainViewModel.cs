@@ -8,7 +8,7 @@ namespace FirmwareBurner.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        //private readonly IBurnManager _burnManager;
+        //private readonly IBurningReceipt _burnManager;
         private readonly IBurningViewModelProvider _burningViewModelProvider;
         private readonly IFirmwareProjectFactory _firmwareProjectFactory;
         private readonly IProjectViewModelProvider _projectViewModelProvider;

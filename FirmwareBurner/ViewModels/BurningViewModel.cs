@@ -50,12 +50,12 @@ namespace FirmwareBurner.ViewModels
 
     public class BurningViewModelProvider : IBurningViewModelProvider
     {
-        private readonly IBurnersRepository _burnersRepository;
+        private readonly IBurnReceiptsCatalog _burnReceiptsCatalog;
         private readonly IIndex _index;
 
-        public BurningViewModelProvider(IBurnersRepository BurnersRepository, IIndex Index)
+        public BurningViewModelProvider(IBurnReceiptsCatalog BurnReceiptsCatalog, IIndex Index)
         {
-            _burnersRepository = BurnersRepository;
+            _burnReceiptsCatalog = BurnReceiptsCatalog;
             _index = Index;
         }
 
@@ -68,8 +68,8 @@ namespace FirmwareBurner.ViewModels
             if (modification == null) throw new ArgumentException("Модификация с таким идентификатором отсутствует в каталоге", "ModificationId");
 
             return new BurningViewModel(cellKind.ChannelsCount,
-                                        _burnersRepository.GetBurnManagers(modification.DeviceName)
-                                                          .Select(bmf => new BurningVariantViewModel(bmf.BurnerName, true, bmf, projectAssembler))
+                                        _burnReceiptsCatalog.GetBurningReceipts(modification.DeviceName)
+                                                          .Select(receipt => new BurningVariantViewModel("Рецепт " + receipt.ToString(), true, receipt, projectAssembler))
                                                           .ToList());
         }
     }

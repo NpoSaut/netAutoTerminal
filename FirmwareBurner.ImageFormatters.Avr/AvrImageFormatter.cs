@@ -20,21 +20,20 @@ namespace FirmwareBurner.ImageFormatters.Avr
                 { "e", "EEPROM" }
             };
 
-        private readonly IBinaryImageBuilder<AvrImage> _imageBuilder;
         private readonly IPropertiesTableGenerator _propertiesTableGenerator;
 
-        public AvrImageFormatter(IBinaryImageBuilder<AvrImage> ImageBuilder, IAvrBootloaderInformation BootloaderInformation,
+        public AvrImageFormatter(IAvrBootloaderInformation BootloaderInformation,
                                  IPropertiesTableGenerator PropertiesTableGenerator)
         {
-            _imageBuilder = ImageBuilder;
             _bootloaderInformation = BootloaderInformation;
             _propertiesTableGenerator = PropertiesTableGenerator;
         }
 
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
         /// <param name="Project">Проект прошивки</param>
+        /// <param name="DeviceName"></param>
         /// <returns>Образ прошивки</returns>
-        public AvrImage GetImage(FirmwareProject Project)
+        public AvrImage GetImage(FirmwareProject Project, string DeviceName)
         {
             var flashStream = new MemoryStream();
             var eepromStream = new MemoryStream();

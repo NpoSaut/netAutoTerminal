@@ -5,23 +5,25 @@ namespace FirmwareBurner.Burning
 {
     /// <summary>Менеджер зашивки образа</summary>
     /// <typeparam name="TImage">Тип получаемого образа</typeparam>
-    public class ReceiptedBurnManager<TImage> : IBurnManager where TImage : IImage
+    public class BurningReceipt<TImage> : IBurningReceipt where TImage : IImage
     {
-        private readonly IBurningReceipt<TImage> _burningReceipt;
         private readonly IImageFormatter<TImage> _formatter;
+        private readonly IBurningToolFacade<TImage> _burningToolFacade;
+        private readonly string _deviceName;
 
-        public ReceiptedBurnManager(IImageFormatter<TImage> Formatter, IBurningReceipt<TImage> BurningReceipt)
+        public BurningReceipt(IImageFormatter<TImage> Formatter, IBurningToolFacade<TImage> BurningToolFacade, string DeviceName)
         {
             _formatter = Formatter;
-            _burningReceipt = BurningReceipt;
+            _burningToolFacade = BurningToolFacade;
+            _deviceName = DeviceName;
         }
 
         /// <summary>Прошивает указанный проект</summary>
         /// <param name="Project">Проект для прожигания</param>
         public void Burn(FirmwareProject Project)
         {
-            TImage image = _formatter.GetImage(Project);
-            _burningReceipt.Burn(image);
+            TImage image = _formatter.GetImage(Project, _deviceName);
+            _burningToolFacade.Burn(image);
         }
     }
 }

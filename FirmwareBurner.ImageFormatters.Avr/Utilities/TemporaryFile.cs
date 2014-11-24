@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FirmwareBurner.BurningTools.Stk500.Receipts
+namespace FirmwareBurner.BurningTools.Stk500.Utilities
 {
     /// <summary>Временный файл</summary>
     /// <remarks>

@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using FirmwareBurner.Burning;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
@@ -38,10 +39,12 @@ namespace FirmwareBurner.Modules
                 // Конфигурируем модели представления
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>()
+                .RegisterType<IBurningViewModelProvider, BurningViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
-                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager());
+                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())
+                .RegisterType<IBurnReceiptsCatalog, BurnReceiptsCatalog>();
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("Root", typeof (MainView));

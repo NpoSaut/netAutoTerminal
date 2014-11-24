@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows;
+using FirmwareBurner.BurningTools.Stk500;
+using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Modules;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
@@ -19,6 +21,8 @@ namespace FirmwareBurner
         protected override void ConfigureModuleCatalog()
         {
             var mc = (ModuleCatalog)ModuleCatalog;
+
+            mc.AddModule(typeof(AvrImagesModule));
 
             mc.AddModule(typeof (FirmwareSelectorsModule));
             mc.AddModule(typeof (MainModule));

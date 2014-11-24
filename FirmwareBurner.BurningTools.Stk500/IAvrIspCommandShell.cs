@@ -4,7 +4,6 @@ namespace FirmwareBurner.BurningTools.Stk500
 {
     public interface IAvrIspCommandShell
     {
-        string ChipName { get; set; }
         byte[] GetSignature();
         void WriteFlash(FileInfo FlashFile, bool Erase = true);
         void WriteEeprom(FileInfo EepromFile, bool Erase = true);

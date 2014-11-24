@@ -10,12 +10,12 @@ namespace FirmwareBurner.ViewModels
     /// <summary>Модель представления варианта прошивки устройства</summary>
     public class BurningVariantViewModel : ViewModelBase
     {
-        private readonly IBurnManagerFactory _burnManagerFactory;
+        private readonly IBurningReceipt _burningReceipt;
         private readonly IProjectAssembler _projectAssembler;
 
-        public BurningVariantViewModel(string Name, bool IsDefault, IBurnManagerFactory BurnManagerFactory, IProjectAssembler ProjectAssembler)
+        public BurningVariantViewModel(string Name, bool IsDefault, IBurningReceipt BurningReceipt, IProjectAssembler ProjectAssembler)
         {
-            _burnManagerFactory = BurnManagerFactory;
+            _burningReceipt = BurningReceipt;
             _projectAssembler = ProjectAssembler;
             this.Name = Name;
             this.IsDefault = IsDefault;
@@ -34,9 +34,8 @@ namespace FirmwareBurner.ViewModels
 
         private void Burn(int ChannelNumber)
         {
-            IBurnManager burnManager = _burnManagerFactory.GetBurnManager();
             FirmwareProject project = _projectAssembler.GetProject(ChannelNumber);
-            burnManager.Burn(project);
+            _burningReceipt.Burn(project);
         }
     }
 }

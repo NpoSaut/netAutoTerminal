@@ -1,4 +1,5 @@
-﻿using FirmwareBurner.Project;
+﻿using System;
+using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Imaging
 {
@@ -7,8 +8,9 @@ namespace FirmwareBurner.Imaging
     public interface IImageFormatter<out TImage> where TImage : IImage
     {
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
-        /// <param name="Project">Проект прошивки</param>
+        /// <param name="Project">Проект образа</param>
+        /// <param name="DeviceName">Название устройства, под которое будет собран образ</param>
         /// <returns>Образ прошивки</returns>
-        TImage GetImage(FirmwareProject Project);
+        TImage GetImage(FirmwareProject Project, String DeviceName);
     }
 }

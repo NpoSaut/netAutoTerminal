@@ -11,12 +11,13 @@ using FirmwareBurner.BurningTools.Stk500.Parameters;
 namespace FirmwareBurner.BurningTools.Stk500
 {
     /// <summary>Оболочка над программой STK500.exe</summary>
-    public class Stk500BurningFacade : IAvrIspCommandShell, IDisposable
+    public class Stk500BurningTool : IAvrIspCommandShell, IDisposable
     {
         private static readonly FileInfo _burnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
 
-        public Stk500BurningFacade()
+        public Stk500BurningTool(string ChipName)
         {
+            this._chipName = ChipName;
             // Проверяем, доступна ли программа-прошивщик
             if (!BurnerFile.Exists) throw new BurnerNotFoundException();
         }
@@ -26,7 +27,7 @@ namespace FirmwareBurner.BurningTools.Stk500
             get { return _burnerFile; }
         }
 
-        public String ChipName { get; set; }
+        private readonly String _chipName;
 
         public Byte[] GetSignature()
         {
@@ -34,7 +35,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
-                    new DeviceNameParameter(ChipName),
+                    new DeviceNameParameter(_chipName),
                     new GetSignatureParameter()
                 }).ReadToEnd();
             CheckOutputForErrors(output);
@@ -52,7 +53,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
-                    new DeviceNameParameter(ChipName),
+                    new DeviceNameParameter(_chipName),
                     new ProgramParameter(ProgramParameter.ProgramTarget.flash),
                     new InputFileParameter(FlashFile, InputFileParameter.FilePlacement.flash),
                     Erase ? new EraseParameter() : null,
@@ -69,7 +70,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
-                    new DeviceNameParameter(ChipName),
+                    new DeviceNameParameter(_chipName),
                     new ReadFuseParameter()
                 });
             string outputString = output.ReadToEnd();
@@ -106,7 +107,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 new List<Stk500Parameter>
                 {
                     new ConnectionParameter(),
-                    new DeviceNameParameter(ChipName),
+                    new DeviceNameParameter(_chipName),
                     new WriteFuseParameter(f.FuseH, f.FuseL),
                     new WriteExtendedFuseParameter(f.FuseE)
                 });
