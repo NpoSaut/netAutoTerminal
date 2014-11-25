@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using FirmwareBurner.Attributes;
 using FirmwareBurner.Imaging;
 
 namespace FirmwareBurner.Burning
@@ -7,34 +9,20 @@ namespace FirmwareBurner.Burning
     /// <typeparam name="TImage">Тип создаваемого образа</typeparam>
     public abstract class BurningReceiptFactoryBase<TImage> : IBurningReceiptFactory where TImage : IImage
     {
-        private readonly IImageFormatterFactory<TImage> _imageFormatterFactory;
-        private readonly IBurningToolFacadeFactory<TImage> _toolFacadeFactory;
-
-        public BurningReceiptFactoryBase(IImageFormatterFactory<TImage> ImageFormatterFactory, IBurningToolFacadeFactory<TImage> ToolFacadeFactory)
-        {
-            _imageFormatterFactory = ImageFormatterFactory;
-            _toolFacadeFactory = ToolFacadeFactory;
-        }
-
         /// <summary>Имя изготавливаемого рецепта</summary>
         public string ReceiptName
         {
-            // todo: сделать
-            get { return "блаблаблаблабла " + _toolFacadeFactory; }
+            get { return GetType().GetCustomAttributes(typeof (BurningReceiptFactoryAttribute), false).OfType<BurningReceiptFactoryAttribute>().First().Name; }
         }
 
         /// <summary>Типы устройств, для которых может использоваться этот рецепт</summary>
         public IEnumerable<string> TargetDevices
         {
-            get { return _toolFacadeFactory.GetTargetDeviceNames(); }
+            get { return GetType().GetCustomAttributes(typeof (TargetDeviceAttribute), false).OfType<TargetDeviceAttribute>().Select(a => a.DeviceName); }
         }
 
         /// <summary>Создаёт экземпляр <see cref="IBurningReceipt" />, пригодный для прошивания указанного типа устройства</summary>
         /// <param name="DeviceName">Название типа прошиваемого устройства</param>
-        public IBurningReceipt GetReceipt(string DeviceName)
-        {
-            return new BurningReceipt<TImage>(_imageFormatterFactory.GetFormatter(DeviceName),
-                                              _toolFacadeFactory.GetBurningToolFacade(DeviceName));
-        }
+        public abstract IBurningReceipt GetReceipt(string DeviceName);
     }
 }

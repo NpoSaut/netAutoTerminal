@@ -12,7 +12,7 @@ namespace FirmwareBurner
             return ToolFacade.GetType()
                              .GetCustomAttributes(typeof (TargetDeviceAttribute), false)
                              .OfType<TargetDeviceAttribute>()
-                             .Select(target => target.Name).ToArray();
+                             .Select(target => target.DeviceName).ToArray();
         }
     }
 }

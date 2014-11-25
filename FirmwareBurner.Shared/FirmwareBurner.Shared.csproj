@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\BurningReceiptFactoryAttribute.cs" />
     <Compile Include="BurningToolFacadeHelper.cs" />
     <Compile Include="Burning\BurningReceiptFactoryBase.cs" />
     <Compile Include="Burning\BurningReceiptsCatalog.cs" />
