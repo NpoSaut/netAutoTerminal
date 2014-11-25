@@ -1,6 +1,6 @@
 ﻿namespace FirmwareBurner.IntelHex
 {
-    public class IntelHexEndLine : IntelHexLine
+    internal class IntelHexEndLine : IntelHexLine
     {
         public override byte Key
         {

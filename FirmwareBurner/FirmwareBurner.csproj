@@ -139,12 +139,6 @@
     <Compile Include="Formating\TableFormat.cs" />
     <Compile Include="Burning\IFirmwareBurner.cs" />
     <Compile Include="IFirmwareCook.cs" />
-    <Compile Include="IntelHex\IntelHexExAdressLine.cs" />
-    <Compile Include="IntelHex\IntelHexFile.cs" />
-    <Compile Include="IntelHex\IntelHexStream.cs" />
-    <Compile Include="IntelHex\IntelHexDataLine.cs" />
-    <Compile Include="IntelHex\IntelHexEndLine.cs" />
-    <Compile Include="IntelHex\IntelHexLine.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="ViewModels\Bases\ActionCommand.cs" />
     <Compile Include="ViewModels\Targeting\BlockDetailsViewModel.cs" />
@@ -232,6 +226,10 @@
     <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Avr\FirmwareBurner.ImageFormatters.Avr.csproj">
       <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
       <Name>FirmwareBurner.ImageFormatters.Avr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.IntelHex\FirmwareBurner.IntelHex.csproj">
+      <Project>{3bb47bef-9b6f-408a-ab8a-4b1414492d01}</Project>
+      <Name>FirmwareBurner.IntelHex</Name>
     </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Receipts.Avr\FirmwareBurner.Receipts.Avr.csproj">
       <Project>{461BC597-308C-4C8C-8BB8-80ED6230C386}</Project>

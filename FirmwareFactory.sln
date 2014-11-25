@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Receipts", "Receipts", "{49
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.Receipts.Avr", "FirmwareBurner.Receipts.Avr\FirmwareBurner.Receipts.Avr.csproj", "{461BC597-308C-4C8C-8BB8-80ED6230C386}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.IntelHex", "FirmwareBurner.IntelHex\FirmwareBurner.IntelHex.csproj", "{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -141,6 +143,16 @@ Global
 		{461BC597-308C-4C8C-8BB8-80ED6230C386}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{461BC597-308C-4C8C-8BB8-80ED6230C386}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{461BC597-308C-4C8C-8BB8-80ED6230C386}.Release|x86.ActiveCfg = Release|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +164,7 @@ Global
 		{89086766-12A5-4536-80C8-4071194E0086} = {68890B6A-A57C-431C-B8BA-53F6C320A7D2}
 		{098F7A69-0E75-4BCD-9622-5F3E4ED7C187} = {68890B6A-A57C-431C-B8BA-53F6C320A7D2}
 		{461BC597-308C-4C8C-8BB8-80ED6230C386} = {49BAFDB6-9F31-45A8-877D-7EB29CBC9851}
+		{3BB47BEF-9B6F-408A-AB8A-4B1414492D01} = {281B3551-87CB-435D-9DD4-4C4F0FE5F3A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
