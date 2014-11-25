@@ -62,7 +62,8 @@
   <ItemGroup>
     <Compile Include="AvrReceiptsModule.cs" />
     <Compile Include="BurnerFacades\AvrOverStk500BurningToolFacade.cs" />
-    <Compile Include="gagagagaFactory.cs" />
+    <Compile Include="BurnerFacades\AvrOverStk500BurningToolFacadeFactory.cs" />
+    <Compile Include="AvrOverStk500ReceiptFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

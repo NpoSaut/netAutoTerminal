@@ -5,12 +5,12 @@ namespace FirmwareBurner.Burning
 {
     /// <summary>Фабрика, изготавливающая рецепты прошивки типа ImageToTool (<see cref="BurningReceipt{TImage}" />)</summary>
     /// <typeparam name="TImage">Тип создаваемого образа</typeparam>
-    public abstract class BurningReceiptFactory<TImage> : IBurningReceiptFactory where TImage : IImage
+    public abstract class BurningReceiptFactoryBase<TImage> : IBurningReceiptFactory where TImage : IImage
     {
         private readonly IImageFormatterFactory<TImage> _imageFormatterFactory;
         private readonly IBurningToolFacadeFactory<TImage> _toolFacadeFactory;
 
-        public BurningReceiptFactory(IImageFormatterFactory<TImage> ImageFormatterFactory, IBurningToolFacadeFactory<TImage> ToolFacadeFactory)
+        public BurningReceiptFactoryBase(IImageFormatterFactory<TImage> ImageFormatterFactory, IBurningToolFacadeFactory<TImage> ToolFacadeFactory)
         {
             _imageFormatterFactory = ImageFormatterFactory;
             _toolFacadeFactory = ToolFacadeFactory;
@@ -31,9 +31,10 @@ namespace FirmwareBurner.Burning
 
         /// <summary>Создаёт экземпляр <see cref="IBurningReceipt" />, пригодный для прошивания указанного типа устройства</summary>
         /// <param name="DeviceName">Название типа прошиваемого устройства</param>
-        public IBurningReceipt GetBurnManager(string DeviceName)
+        public IBurningReceipt GetReceipt(string DeviceName)
         {
-            return new BurningReceipt<TImage>(_imageFormatterFactory.GetFormatter(DeviceName), _toolFacadeFactory.GetBurningToolFacade(DeviceName));
+            return new BurningReceipt<TImage>(_imageFormatterFactory.GetFormatter(DeviceName),
+                                              _toolFacadeFactory.GetBurningToolFacade(DeviceName));
         }
     }
 }

@@ -14,6 +14,6 @@ namespace FirmwareBurner.Burning
 
         /// <summary>Создаёт экземпляр <see cref="IBurningReceipt" />, пригодный для прошивания указанного типа устройства</summary>
         /// <param name="DeviceName">Название типа прошиваемого устройства</param>
-        IBurningReceipt GetBurnManager(string DeviceName);
+        IBurningReceipt GetReceipt(string DeviceName);
     }
 }

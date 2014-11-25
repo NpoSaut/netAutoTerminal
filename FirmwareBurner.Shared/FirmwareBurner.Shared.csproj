@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BurningToolFacadeHelper.cs" />
-    <Compile Include="Burning\BurningReceiptFactory.cs" />
+    <Compile Include="Burning\BurningReceiptFactoryBase.cs" />
     <Compile Include="Burning\BurningReceiptsCatalog.cs" />
     <Compile Include="Burning\Exceptions\BurningException.cs" />
     <Compile Include="Burning\Exceptions\DeviceIsNotConnectedException.cs" />

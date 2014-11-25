@@ -21,6 +21,6 @@ namespace FirmwareBurner.Burning
         /// <summary>Находит рецепты, применимые для указанного типа устройства</summary>
         /// <param name="DeviceName">Тип устройства для прошивания</param>
         /// <returns>Фабрики для изготовления нужных <see cref="IBurningReceipt" /></returns>
-        public IEnumerable<IBurningReceipt> GetBurningReceipts(string DeviceName) { return _repo[DeviceName].Select(f => f.GetBurnManager(DeviceName)); }
+        public IEnumerable<IBurningReceipt> GetBurningReceipts(string DeviceName) { return _repo[DeviceName].Select(f => f.GetReceipt(DeviceName)); }
     }
 }
