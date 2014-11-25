@@ -9,20 +9,18 @@ namespace FirmwareBurner.Burning
     {
         private readonly IImageFormatter<TImage> _formatter;
         private readonly IBurningToolFacade<TImage> _burningToolFacade;
-        private readonly string _deviceName;
 
-        public BurningReceipt(IImageFormatter<TImage> Formatter, IBurningToolFacade<TImage> BurningToolFacade, string DeviceName)
+        public BurningReceipt(IImageFormatter<TImage> Formatter, IBurningToolFacade<TImage> BurningToolFacade)
         {
             _formatter = Formatter;
             _burningToolFacade = BurningToolFacade;
-            _deviceName = DeviceName;
         }
 
         /// <summary>Прошивает указанный проект</summary>
         /// <param name="Project">Проект для прожигания</param>
         public void Burn(FirmwareProject Project)
         {
-            TImage image = _formatter.GetImage(Project, _deviceName);
+            TImage image = _formatter.GetImage(Project);
             _burningToolFacade.Burn(image);
         }
     }

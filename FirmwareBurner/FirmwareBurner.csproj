@@ -229,10 +229,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirmwareBurner.BurningTools.Stk500\FirmwareBurner.BurningTools.Stk500.csproj">
-      <Project>{89086766-12A5-4536-80C8-4071194E0086}</Project>
-      <Name>FirmwareBurner.BurningTools.Stk500</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Avr\FirmwareBurner.ImageFormatters.Avr.csproj">
       <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
       <Name>FirmwareBurner.ImageFormatters.Avr</Name>

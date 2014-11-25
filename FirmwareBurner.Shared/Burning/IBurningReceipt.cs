@@ -2,8 +2,8 @@
 
 namespace FirmwareBurner.Burning
 {
-    /// <summary>Менеджер прошивки</summary>
-    /// <remarks>Занимается приготовлением образа прошивки и отправкой его получателю</remarks>
+    /// <summary>Рецепт прошивания устройства</summary>
+    /// <remarks>Содержит в себе весь процесс приготовления образа и прошивки устройства по указанному проекту</remarks>
     public interface IBurningReceipt
     {
         /// <summary>Прошивает указанный проект</summary>

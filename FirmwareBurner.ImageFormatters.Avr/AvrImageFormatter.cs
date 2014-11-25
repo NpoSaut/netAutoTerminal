@@ -31,9 +31,8 @@ namespace FirmwareBurner.ImageFormatters.Avr
 
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
         /// <param name="Project">Проект прошивки</param>
-        /// <param name="DeviceName"></param>
         /// <returns>Образ прошивки</returns>
-        public AvrImage GetImage(FirmwareProject Project, string DeviceName)
+        public AvrImage GetImage(FirmwareProject Project)
         {
             var flashStream = new MemoryStream();
             var eepromStream = new MemoryStream();

@@ -44,7 +44,7 @@ namespace FirmwareBurner.Modules
 
                 // Инструменты перехода на уровень бизнес-логики
                 .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IBurnReceiptsCatalog, BurnReceiptsCatalog>();
+                .RegisterType<IBurningReceiptsCatalog, BurningReceiptsCatalog>();
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("Root", typeof (MainView));

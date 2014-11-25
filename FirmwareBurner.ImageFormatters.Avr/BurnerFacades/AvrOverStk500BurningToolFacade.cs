@@ -12,16 +12,6 @@ namespace FirmwareBurner.ImageFormatters.Avr.BurnerFacades
         private readonly string _deviceName;
         public AvrOverStk500BurningToolFacade(string DeviceName) { _deviceName = DeviceName; }
 
-        /// <summary>Название рецепта прошивки</summary>
-        /// <remarks>
-        ///     Это название будет отображаться в интерфейсе в виде подписи к команде прошивки. Например "Прошить через
-        ///     AvrDude" или "Сохранить в файл"
-        /// </remarks>
-        public string Name
-        {
-            get { return "Прошить через STK500"; }
-        }
-
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
         public void Burn(AvrImage Image)
