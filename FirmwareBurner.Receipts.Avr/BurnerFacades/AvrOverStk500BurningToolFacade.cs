@@ -2,8 +2,9 @@
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.BurningTools.Stk500.Utilities;
+using FirmwareBurner.ImageFormatters.Avr;
 
-namespace FirmwareBurner.ImageFormatters.Avr.BurnerFacades
+namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
     /// <summary>Рецеп по прошивке <see cref="AvrImage" /> через <see cref="Stk500BurningTool" />
     /// </summary>

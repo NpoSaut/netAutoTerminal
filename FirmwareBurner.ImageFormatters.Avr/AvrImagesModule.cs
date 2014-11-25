@@ -1,6 +1,4 @@
-﻿using FirmwareBurner.Burning;
-using FirmwareBurner.ImageFormatters.Avr.BurnerFacades;
-using FirmwareBurner.Imaging;
+﻿using FirmwareBurner.Imaging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
@@ -15,15 +13,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
         {
             _container
                 .RegisterType<IImageFormatterFactory<AvrImage>, AvrImageFormatterFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IPropertiesTableGenerator, PropertiesTableGenerator>(new ContainerControlledLifetimeManager())
-                
-                .RegisterType<IBurningToolFacadeFactory<AvrImage>, AvrOverStk500BurningToolFacadeFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IBurningReceiptFactory, gagagagaFactory>("gagaga", new ContainerControlledLifetimeManager());
+                .RegisterType<IPropertiesTableGenerator, PropertiesTableGenerator>(new ContainerControlledLifetimeManager());
         }
-    }
-
-    public class gagagagaFactory : BurningReceiptFactory<AvrImage>
-    {
-        public gagagagaFactory(IImageFormatterFactory<AvrImage> ImageFormatterFactory, IBurningToolFacadeFactory<AvrImage> ToolFacadeFactory) : base(ImageFormatterFactory, ToolFacadeFactory) { }
     }
 }

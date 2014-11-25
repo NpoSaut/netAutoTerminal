@@ -40,13 +40,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Receipts\AvrToFileToolFacade.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Avr\FirmwareBurner.ImageFormatters.Avr.csproj">
-      <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
-      <Name>FirmwareBurner.ImageFormatters.Avr</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>

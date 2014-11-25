@@ -233,6 +233,10 @@
       <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
       <Name>FirmwareBurner.ImageFormatters.Avr</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.Receipts.Avr\FirmwareBurner.Receipts.Avr.csproj">
+      <Project>{461BC597-308C-4C8C-8BB8-80ED6230C386}</Project>
+      <Name>FirmwareBurner.Receipts.Avr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>
