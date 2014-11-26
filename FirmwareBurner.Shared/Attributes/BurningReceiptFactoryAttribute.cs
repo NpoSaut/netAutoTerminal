@@ -6,7 +6,7 @@ namespace FirmwareBurner.Attributes
 {
     [MeansImplicitUse]
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    [BaseTypeRequired(typeof (IBurningReceiptFactory))]
+    [BaseTypeRequired(typeof (IBurningToolFacadeFactory<>))]
     public class BurningReceiptFactoryAttribute : Attribute
     {
         public BurningReceiptFactoryAttribute(string Name) { this.Name = Name; }

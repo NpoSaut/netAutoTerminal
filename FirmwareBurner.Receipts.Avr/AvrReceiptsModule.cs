@@ -16,8 +16,8 @@ namespace FirmwareBurner.Receipts.Avr
         {
             _container
                 .RegisterType<IBurningToolFacadeFactory<AvrImage>, AvrOverStk500BurningToolFacadeFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IBurningReceiptFactory, AvrOverStk500ReceiptFactory>("Avr over Stk500", new ContainerControlledLifetimeManager())
-                .RegisterType<IBurningReceiptFactory, AvrToHexFileReceiptFactory>("Avr to .hex files", new ContainerControlledLifetimeManager());
+                .RegisterBurningReceiptFactory<AvrImage, AvrOverStk500BurningToolFacadeFactory>()
+                .RegisterBurningReceiptFactory<AvrImage, AvrToHexFileToolFacadeFactory>();
         }
     }
 }

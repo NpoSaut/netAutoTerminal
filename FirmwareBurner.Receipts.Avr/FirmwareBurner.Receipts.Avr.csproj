@@ -61,10 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvrReceiptsModule.cs" />
-    <Compile Include="AvrToHexFileReceiptFactory.cs" />
     <Compile Include="BurnerFacades\AvrOverStk500BurningToolFacade.cs" />
     <Compile Include="BurnerFacades\AvrOverStk500BurningToolFacadeFactory.cs" />
-    <Compile Include="AvrOverStk500ReceiptFactory.cs" />
     <Compile Include="BurnerFacades\AvrToHexFileToolFacade.cs" />
     <Compile Include="BurnerFacades\AvrToHexFileToolFacadeFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

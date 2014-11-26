@@ -5,7 +5,7 @@ using FirmwareBurner.Burning;
 namespace FirmwareBurner.Attributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    [BaseTypeRequired(typeof(IBurningReceiptFactory))]
+    [BaseTypeRequired(typeof(IBurningToolFacadeFactory<>))]
     public class TargetDeviceAttribute : Attribute
     {
         public TargetDeviceAttribute(string DeviceName) { this.DeviceName = DeviceName; }

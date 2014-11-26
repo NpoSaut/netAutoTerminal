@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\BurningReceiptFactoryAttribute.cs" />
-    <Compile Include="Burning\BurningReceiptFactoryBase.cs" />
+    <Compile Include="Burning\BurningReceiptFactory.cs" />
+    <Compile Include="Burning\BurningReceiptFactoryHelper.cs" />
     <Compile Include="Burning\BurningReceiptsCatalog.cs" />
     <Compile Include="Burning\Exceptions\BurningException.cs" />
     <Compile Include="Burning\Exceptions\DeviceIsNotConnectedException.cs" />
