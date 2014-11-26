@@ -6,14 +6,14 @@ using FirmwareBurner.Receipts.Avr.BurnerFacades;
 
 namespace FirmwareBurner.Receipts.Avr
 {
-    [BurningReceiptFactory("Прошить через STK500")]
+    [BurningReceiptFactory("Сохранить в .hex файл")]
     [TargetDevice("at90can128"), TargetDevice("at90can64")]
-    public class AvrOverStk500ReceiptFactory : BurningReceiptFactoryBase<AvrImage>
+    public class AvrToHexFileReceiptFactory : BurningReceiptFactoryBase<AvrImage>
     {
         private readonly IImageFormatterFactory<AvrImage> _imageFormatterFactory;
-        private readonly AvrOverStk500BurningToolFacadeFactory _toolFacadeFactory;
+        private readonly AvrToHexFileToolFacadeFactory _toolFacadeFactory;
 
-        public AvrOverStk500ReceiptFactory(IImageFormatterFactory<AvrImage> ImageFormatterFactory, AvrOverStk500BurningToolFacadeFactory ToolFacadeFactory)
+        public AvrToHexFileReceiptFactory(IImageFormatterFactory<AvrImage> ImageFormatterFactory, AvrToHexFileToolFacadeFactory ToolFacadeFactory)
         {
             _imageFormatterFactory = ImageFormatterFactory;
             _toolFacadeFactory = ToolFacadeFactory;
