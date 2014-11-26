@@ -1,6 +1,8 @@
 ﻿using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
+using FirmwareBurner.ImageFormatters.Avr.Utilities;
+using FirmwareBurner.IntelHex;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
@@ -19,13 +21,19 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             {
                 var fuses = new Fuses { FuseH = Image.Fuses.FuseH, FuseL = Image.Fuses.FuseL, FuseE = Image.Fuses.FuseX };
                 burner.WriteFuse(fuses);
-                // TODO: Сохранить в формате IntelHex
-                //using (TemporaryFile flashFile = new TemporaryFile(Image.FlashBuffer),
-                //                     eepromFile = new TemporaryFile(Image.EepromBuffer))
-                //{
-                //    burner.WriteFlash(flashFile.FileInfo);
-                //    burner.WriteFlash(eepromFile.FileInfo);
-                //}
+
+                IntelHexStream flashHexStream = new IntelHexStream(),
+                               eepromHexStream = new IntelHexStream();
+
+                Image.FlashBuffer.CopyTo(flashHexStream);
+                Image.EepromBuffer.CopyTo(eepromHexStream);
+
+                using (TemporaryFile flashFile = new TemporaryFile(flashHexStream),
+                                     eepromFile = new TemporaryFile(eepromHexStream))
+                {
+                    burner.WriteFlash(flashFile.FileInfo);
+                    burner.WriteFlash(eepromFile.FileInfo);
+                }
             }
         }
     }

@@ -33,6 +33,17 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
             segment.Write(Bytes, 0, Bytes.Length);
         }
 
+        /// <summary>Записывает данные из буфера в указанный поток</summary>
+        /// <param name="DestinationStream">Поток, в который будут записаны данные из буфера</param>
+        public void CopyTo(Stream DestinationStream)
+        {
+            foreach (BufferSegment segment in _segments)
+            {
+                DestinationStream.Seek(segment.StartPosition, SeekOrigin.Begin);
+                segment.CopyTo(DestinationStream);
+            }
+        }
+
         private class BufferSegment : MemoryStream
         {
             public BufferSegment(int StartPosition) { this.StartPosition = StartPosition; }
