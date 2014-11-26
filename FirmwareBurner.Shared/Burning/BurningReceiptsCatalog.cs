@@ -14,13 +14,15 @@ namespace FirmwareBurner.Burning
 
         public BurningReceiptsCatalog(params IBurningReceiptFactory[] BurningReceiptFactories)
         {
-            var xxx = BurningReceiptFactories.SelectMany(f => f.TargetDevices.Select(d => new { f, d })).ToArray();
             _repo = BurningReceiptFactories.SelectMany(f => f.TargetDevices.Select(d => new { f, d })).ToLookup(fx => fx.d, fx => fx.f);
         }
 
-        /// <summary>Находит рецепты, применимые для указанного типа устройства</summary>
+        /// <summary>Находит фабрики рецептов, применимые для указанного типа устройства</summary>
         /// <param name="DeviceName">Тип устройства для прошивания</param>
         /// <returns>Фабрики для изготовления нужных <see cref="IBurningReceipt" /></returns>
-        public IEnumerable<IBurningReceipt> GetBurningReceipts(string DeviceName) { return _repo[DeviceName].Select(f => f.GetReceipt(DeviceName)); }
+        public IEnumerable<IBurningReceiptFactory> GetBurningReceiptFactories(string DeviceName)
+        {
+            return _repo[DeviceName];
+        }
     }
 }

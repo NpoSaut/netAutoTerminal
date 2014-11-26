@@ -79,7 +79,20 @@
                 <Button Width="60" Height="60" Style="{StaticResource CircleButton}"
                         Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
                         CommandParameter="{Binding Path=Burning.SelectedChannel.Number}"
-                        Content="Начать" />
+                        Content="Начать">
+                    <Button.ContextMenu>
+                        <ContextMenu Placement="Right" ItemsSource="{Binding Burning.BurningVariants}">
+                            <ContextMenu.ItemContainerStyle>
+                                <Style TargetType="MenuItem">
+                                    <Setter Property="Header" Value="{Binding Name}" />
+                                    <Setter Property="Command" Value="{Binding BurnCommand}" />
+                                    <Setter Property="CommandParameter"
+                                            Value="{Binding ElementName=ChannelsSelector, Path=SelectedItem.Number}" />
+                                </Style>
+                            </ContextMenu.ItemContainerStyle>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
             </Grid>
 
         </Grid>

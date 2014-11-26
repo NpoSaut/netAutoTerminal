@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FirmwareBurner.BurningTools.Stk500.Utilities
+namespace FirmwareBurner.ImageFormatters.Avr.Utilities
 {
     /// <summary>Временный файл</summary>
     /// <remarks>

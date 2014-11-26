@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Modules;
 using FirmwareBurner.Receipts.Avr;
@@ -23,12 +22,19 @@ namespace FirmwareBurner
         {
             var mc = (ModuleCatalog)ModuleCatalog;
 
-            mc.AddModule(typeof(AvrImagesModule));
+            // Общие модули
+            mc.AddModule(typeof (CommonsModule));
 
+            // Модули сборщиков образов
+            mc.AddModule(typeof (AvrImagesModule));
+
+            // Модули рецептов прошивки
             mc.AddModule(typeof (AvrReceiptsModule));
 
+            // Модули интерфейса
             mc.AddModule(typeof (FirmwareSelectorsModule));
             mc.AddModule(typeof (MainModule));
+
             base.ConfigureModuleCatalog();
         }
 

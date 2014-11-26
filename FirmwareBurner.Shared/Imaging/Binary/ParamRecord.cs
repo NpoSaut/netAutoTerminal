@@ -2,7 +2,13 @@
 {
     public class ParamRecord
     {
-        public int Key { get; set; }
-        public int Value { get; set; }
+        public ParamRecord(byte Key, int Value)
+        {
+            this.Key = Key;
+            this.Value = Value;
+        }
+
+        public byte Key { get; private set; }
+        public int Value { get; private set; }
     }
 }

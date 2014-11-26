@@ -68,9 +68,13 @@ namespace FirmwareBurner.ViewModels
             if (modification == null) throw new ArgumentException("Модификация с таким идентификатором отсутствует в каталоге", "ModificationId");
 
             return new BurningViewModel(cellKind.ChannelsCount,
-                                        _burningReceiptsCatalog.GetBurningReceipts(modification.DeviceName)
-                                                          .Select(receipt => new BurningVariantViewModel("Рецепт " + receipt.ToString(), true, receipt, projectAssembler))
-                                                          .ToList());
+                                        _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
+                                                               .Select(
+                                                                   receiptFactory =>
+                                                                   new BurningVariantViewModel(receiptFactory.ReceiptName, true,
+                                                                                               receiptFactory.GetReceipt(modification.DeviceName),
+                                                                                               projectAssembler))
+                                                               .ToList());
         }
     }
 }

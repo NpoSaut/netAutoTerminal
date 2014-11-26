@@ -20,7 +20,7 @@ namespace FirmwareBurner.ViewModels
             this.Name = Name;
             this.IsDefault = IsDefault;
 
-            BurnCommand = new DelegateCommand<int>(Burn);
+            BurnCommand = new DelegateCommand<int?>(Burn);
         }
 
         /// <summary>Имя варианта прошивки</summary>
@@ -32,9 +32,10 @@ namespace FirmwareBurner.ViewModels
         /// <summary>Команда на прошивку</summary>
         public ICommand BurnCommand { get; private set; }
 
-        private void Burn(int ChannelNumber)
+        private void Burn(int? ChannelNumber)
         {
-            FirmwareProject project = _projectAssembler.GetProject(ChannelNumber);
+            if (!ChannelNumber.HasValue) throw new ArgumentNullException("ChannelNumber");
+            FirmwareProject project = _projectAssembler.GetProject((int)ChannelNumber);
             _burningReceipt.Burn(project);
         }
     }

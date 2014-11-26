@@ -1,5 +1,6 @@
-﻿using System.IO;
-using FirmwareBurner.Imaging;
+﻿using FirmwareBurner.Imaging;
+using FirmwareBurner.Imaging.Binary;
+using FirmwareBurner.Imaging.Binary.Buffers;
 
 namespace FirmwareBurner.ImageFormatters.Avr
 {
@@ -7,7 +8,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
     public class AvrImage : IBinaryImage
     {
         /// <summary>Инициализирует новый экземпляр класса <see cref="T:System.Object" />.</summary>
-        public AvrImage(AvrFuses Fuses, Stream FlashBuffer, Stream EepromBuffer)
+        public AvrImage(AvrFuses Fuses, IBuffer FlashBuffer, IBuffer EepromBuffer)
         {
             this.Fuses = Fuses;
             this.FlashBuffer = FlashBuffer;
@@ -18,9 +19,9 @@ namespace FirmwareBurner.ImageFormatters.Avr
         public AvrFuses Fuses { get; private set; }
 
         /// <summary>Содержимое Flash-памяти</summary>
-        public Stream FlashBuffer { get; private set; }
+        public IBuffer FlashBuffer { get; private set; }
 
         /// <summary>Содержимое EEPROM</summary>
-        public Stream EepromBuffer { get; private set; }
+        public IBuffer EepromBuffer { get; private set; }
     }
 }

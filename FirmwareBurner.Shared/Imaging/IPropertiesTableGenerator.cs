@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Project;
 using FirmwarePacking;
 
 namespace FirmwareBurner.Imaging
 {
-    /// <summary>Инструмент по формированию таблицы свойств в прошивке</summary>
+    /// <summary>Инструмент по формированию таблицы FUDP-свойств в прошивке</summary>
     public interface IPropertiesTableGenerator
     {
-        IDictionary<byte, int> Generate(TargetInformation Target, ModuleInformation Information, PackageInformation FirmwareInformation);
-    }
+        /// <summary>Формирует список FUDP-свойств, связанных с устройством</summary>
+        /// <param name="Target">Целевое устройство</param>
+        IEnumerable<ParamRecord> GetDeviceProperties(TargetInformation Target);
 
-    public class PropertiesTableGenerator : IPropertiesTableGenerator
-    {
-        public IDictionary<byte, int> Generate(TargetInformation Target, ModuleInformation Information, PackageInformation FirmwareInformation)
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>Формирует список FUDP-свойств, связанных с программным модулем</summary>
+        /// <param name="Information">Информация о программном модуле</param>
+        /// <param name="FirmwareInformation">Информация о прошивке</param>
+        IEnumerable<ParamRecord> GetModuleProperties(ModuleInformation Information, PackageInformation FirmwareInformation);
     }
 }

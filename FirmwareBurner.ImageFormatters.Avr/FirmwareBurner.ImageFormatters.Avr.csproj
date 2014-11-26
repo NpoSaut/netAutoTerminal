@@ -60,12 +60,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TablesFormatters\AvrBootloaderFileTableFormatter.cs" />
+    <Compile Include="TablesFormatters\AvrBootloaderPropertiesTableFormatter.cs" />
     <Compile Include="AvrFuses.cs" />
     <Compile Include="AvrImage.cs" />
     <Compile Include="AvrImageFormatter.cs" />
     <Compile Include="AvrImageFormatterFactory.cs" />
     <Compile Include="AvrImagesModule.cs" />
-    <Compile Include="IAvrBootloaderInformation.cs" />
+    <Compile Include="AvrBootloaderInformation.cs" />
+    <Compile Include="IAvrBootloadersCatalog.cs" />
+    <Compile Include="PlacementsInformation.cs" />
+    <Compile Include="StaticAvrBootloadersCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\TemporaryFile.cs" />
   </ItemGroup>
