@@ -70,15 +70,13 @@
                                               d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}" />
 
             <ListBox Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     x:Name="ChannelsSelector"
-                     ItemsSource="{Binding Burning.Channels}"
-                     SelectedItem="{Binding Burning.SelectedChannel}"
+                     ItemsSource="{Binding Burning.ChannelSelector.Channels}"
+                     SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
                      Style="{StaticResource ChannelSelectorStyle}" />
 
             <Grid Grid.Column="3" Grid.RowSpan="4">
                 <Button Width="60" Height="60" Style="{StaticResource CircleButton}"
                         Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
-                        CommandParameter="{Binding Path=Burning.SelectedChannel.Number}"
                         Content="Начать">
                     <Button.ContextMenu>
                         <ContextMenu Placement="Right" ItemsSource="{Binding Burning.BurningVariants}">
@@ -86,8 +84,6 @@
                                 <Style TargetType="MenuItem">
                                     <Setter Property="Header" Value="{Binding Name}" />
                                     <Setter Property="Command" Value="{Binding BurnCommand}" />
-                                    <Setter Property="CommandParameter"
-                                            Value="{Binding ElementName=ChannelsSelector, Path=SelectedItem}" />
                                 </Style>
                             </ContextMenu.ItemContainerStyle>
                         </ContextMenu>

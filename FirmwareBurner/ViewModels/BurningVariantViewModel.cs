@@ -12,15 +12,17 @@ namespace FirmwareBurner.ViewModels
     {
         private readonly IBurningReceipt _burningReceipt;
         private readonly IProjectAssembler _projectAssembler;
+        private readonly IChannelSelector _channelSelector;
 
-        public BurningVariantViewModel(IBurningReceipt BurningReceipt, IProjectAssembler ProjectAssembler, bool IsDefault = false)
+        public BurningVariantViewModel(IBurningReceipt BurningReceipt, IProjectAssembler ProjectAssembler, IChannelSelector ChannelSelector, bool IsDefault = false)
         {
             _burningReceipt = BurningReceipt;
             _projectAssembler = ProjectAssembler;
+            _channelSelector = ChannelSelector;
             this.IsDefault = IsDefault;
 
             Name = BurningReceipt.Name;
-            BurnCommand = new DelegateCommand<int?>(Burn);
+            BurnCommand = new DelegateCommand(Burn);
         }
 
         /// <summary>Имя варианта прошивки</summary>
@@ -32,10 +34,9 @@ namespace FirmwareBurner.ViewModels
         /// <summary>Команда на прошивку</summary>
         public ICommand BurnCommand { get; private set; }
 
-        private void Burn(int? ChannelNumber)
+        private void Burn()
         {
-            if (!ChannelNumber.HasValue) throw new ArgumentNullException("ChannelNumber");
-            FirmwareProject project = _projectAssembler.GetProject((int)ChannelNumber);
+            FirmwareProject project = _projectAssembler.GetProject(_channelSelector.SelectedChannelNumber);
             _burningReceipt.Burn(project);
         }
     }

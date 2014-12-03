@@ -88,12 +88,14 @@
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
+    <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
+    <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
     <Compile Include="ViewModels\SampleData.cs" />

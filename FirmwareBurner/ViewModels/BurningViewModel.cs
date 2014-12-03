@@ -10,28 +10,13 @@ namespace FirmwareBurner.ViewModels
 {
     public class BurningViewModel : ViewModelBase
     {
-        private ChannelViewModel _selectedChannel;
-
-        public BurningViewModel(int ChannelsCount, IList<BurningVariantViewModel> BurningVariants)
+        public BurningViewModel(ChannelSelectorViewModel ChannelSelector, IList<BurningVariantViewModel> BurningVariants)
         {
+            this.ChannelSelector = ChannelSelector;
             this.BurningVariants = BurningVariants;
-
-            Channels = Enumerable.Range(0, ChannelsCount).Select(i => new ChannelViewModel(i + 1)).ToList();
-            SelectedChannel = Channels.FirstOrDefault();
         }
 
-        public IList<ChannelViewModel> Channels { get; private set; }
-
-        public ChannelViewModel SelectedChannel
-        {
-            get { return _selectedChannel; }
-            set
-            {
-                if (Equals(value, _selectedChannel)) return;
-                _selectedChannel = value;
-                RaisePropertyChanged("SelectedChannel");
-            }
-        }
+        public ChannelSelectorViewModel ChannelSelector { get; private set; }
 
         /// <summary>Способ прошивки по-умолчанию</summary>
         public IList<BurningVariantViewModel> BurningVariants { get; private set; }
@@ -67,11 +52,14 @@ namespace FirmwareBurner.ViewModels
             ModificationKind modification = cellKind.Modifications.SingleOrDefault(m => m.Id == ModificationId);
             if (modification == null) throw new ArgumentException("Модификация с таким идентификатором отсутствует в каталоге", "ModificationId");
 
-            return new BurningViewModel(cellKind.ChannelsCount,
+            var channelSelector = new ChannelSelectorViewModel(cellKind.ChannelsCount);
+
+            return new BurningViewModel(channelSelector,
                                         _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
                                                                .Select(receiptFactory =>
                                                                        new BurningVariantViewModel(receiptFactory.GetReceipt(modification.DeviceName),
                                                                                                    projectAssembler,
+                                                                                                   channelSelector,
                                                                                                    true))
                                                                .ToList());
         }
