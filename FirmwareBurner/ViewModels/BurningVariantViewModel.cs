@@ -13,13 +13,13 @@ namespace FirmwareBurner.ViewModels
         private readonly IBurningReceipt _burningReceipt;
         private readonly IProjectAssembler _projectAssembler;
 
-        public BurningVariantViewModel(string Name, bool IsDefault, IBurningReceipt BurningReceipt, IProjectAssembler ProjectAssembler)
+        public BurningVariantViewModel(IBurningReceipt BurningReceipt, IProjectAssembler ProjectAssembler, bool IsDefault = false)
         {
             _burningReceipt = BurningReceipt;
             _projectAssembler = ProjectAssembler;
-            this.Name = Name;
             this.IsDefault = IsDefault;
 
+            Name = BurningReceipt.Name;
             BurnCommand = new DelegateCommand<int?>(Burn);
         }
 

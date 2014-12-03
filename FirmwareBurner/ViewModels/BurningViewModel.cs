@@ -69,11 +69,10 @@ namespace FirmwareBurner.ViewModels
 
             return new BurningViewModel(cellKind.ChannelsCount,
                                         _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
-                                                               .Select(
-                                                                   receiptFactory =>
-                                                                   new BurningVariantViewModel(receiptFactory.ReceiptName, true,
-                                                                                               receiptFactory.GetReceipt(modification.DeviceName),
-                                                                                               projectAssembler))
+                                                               .Select(receiptFactory =>
+                                                                       new BurningVariantViewModel(receiptFactory.GetReceipt(modification.DeviceName),
+                                                                                                   projectAssembler,
+                                                                                                   true))
                                                                .ToList());
         }
     }

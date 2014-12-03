@@ -70,7 +70,8 @@ namespace FirmwareBurner.Burning
         /// <param name="DeviceName">Название типа прошиваемого устройства</param>
         public IBurningReceipt GetReceipt(string DeviceName)
         {
-            return new BurningReceipt<TImage>(_imageFormatterFactory.GetFormatter(DeviceName),
+            return new BurningReceipt<TImage>(ReceiptName,
+                                              _imageFormatterFactory.GetFormatter(DeviceName),
                                               _toolFacadeFactory.GetBurningToolFacade(DeviceName));
         }
     }
