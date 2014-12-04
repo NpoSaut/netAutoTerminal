@@ -25,6 +25,7 @@ namespace FirmwareBurner.Modules
                     
                 // Конфигурируем индекс
                 .RegisterType<IIndex, ResourceXmlIndex>()
+                .RegisterType<IIndexHelper, IndexHelper>()
                 .RegisterType<ICellsCatalogProvider, IndexCellsCatalogProvider>(new ContainerControlledLifetimeManager())
 
                 // Конфигурируем репозитории

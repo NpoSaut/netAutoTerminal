@@ -87,6 +87,13 @@
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="Validation\IProjectValidationRule.cs" />
+    <Compile Include="Validation\IProjectValidator.cs" />
+    <Compile Include="Validation\RulesListProjectValidator.cs" />
+    <Compile Include="Validation\Rules\AssemblyDateNumberValidationRule.cs" />
+    <Compile Include="Validation\Rules\HaveFirmwareValidationRule.cs" />
+    <Compile Include="Validation\Rules\SerialNumberValidationRule.cs" />
+    <Compile Include="Validation\ValidationModule.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
