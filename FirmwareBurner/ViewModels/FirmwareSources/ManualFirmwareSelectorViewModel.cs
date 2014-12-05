@@ -46,9 +46,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         private void SelectPackage(FirmwarePackage Package)
         {
             _selectedPackage = Package;
-            RaisePropertyChanged("SelectedPackage");
-            RaisePropertyChanged("SelectedVersion");
-            RaisePropertyChanged("IsPackageSelected");
+            OnSelectedPackageChanged();
         }
     }
 }

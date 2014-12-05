@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Project;
+using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation.Rules
 {
@@ -13,9 +14,9 @@ namespace FirmwareBurner.Validation.Rules
         /// <summary>Проверяет указанный проект на валидность</summary>
         /// <param name="Project">Проверяемый проект</param>
         /// <returns>Список противоречий правилу в проекте</returns>
-        public IEnumerable<string> ValidateProject(FirmwareProject Project)
+        public IEnumerable<string> ValidateProject(ProjectViewModel Project)
         {
-            if (Project.Target.AssemblyDate > _minimalDateTime) return Enumerable.Empty<String>();
+            if (Project.BlockDetails.AssemblyDate > _minimalDateTime) return Enumerable.Empty<String>();
             return new[] { "Не указана дата сборки ячейки" };
         }
     }

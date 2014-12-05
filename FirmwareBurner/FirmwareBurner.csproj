@@ -105,6 +105,7 @@
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
+    <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\CellKindSelector.xaml.cs">
       <DependentUpon>CellKindSelector.xaml</DependentUpon>

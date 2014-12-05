@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FirmwarePacking;
 
@@ -21,8 +22,12 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
             {
                 if (_selectedSelector != value)
                 {
+                    if (_selectedSelector != null)
+                        _selectedSelector.SelectedPackageChanged -= SelectedSelectorOnSelectedPackageChanged;
                     _selectedSelector = value;
+                    _selectedSelector.SelectedPackageChanged += SelectedSelectorOnSelectedPackageChanged;
                     RaisePropertyChanged("SelectedSelector");
+                    OnSelectedPackageChanged();
                 }
             }
         }
@@ -37,5 +42,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                 return SelectedSelector.SelectedPackage;
             }
         }
+
+        private void SelectedSelectorOnSelectedPackageChanged(object Sender, EventArgs EventArgs) { OnSelectedPackageChanged(); }
     }
 }

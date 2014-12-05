@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FirmwareBurner.Project;
+using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation
 {
@@ -10,6 +11,6 @@ namespace FirmwareBurner.Validation
         /// <summary>Проверяет проект и возвращает список ошибок</summary>
         /// <param name="Project">Проверяемый проект</param>
         /// <returns>Тексты ошибок валидации</returns>
-        IEnumerable<String> GetValidationErrors(FirmwareProject Project);
+        IEnumerable<String> GetValidationErrors(ProjectViewModel Project);
     }
 }

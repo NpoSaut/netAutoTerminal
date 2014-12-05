@@ -15,7 +15,7 @@ namespace FirmwareBurner.Validation
         public void Initialize()
         {
             _container
-                .RegisterType<IProjectValidator, RulesListProjectValidator>();
+                .RegisterType<IProjectValidator, RulesListProjectValidator>(new ContainerControlledLifetimeManager());
 
             foreach (Type ruleType in Assembly.GetAssembly(GetType()).GetTypes().Where(t => t.GetInterfaces().Contains(typeof (IProjectValidationRule))))
                 _container.RegisterType(typeof (IProjectValidationRule), ruleType, ruleType.FullName, new ContainerControlledLifetimeManager());

@@ -25,5 +25,15 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         }
 
         public abstract FirmwarePackage SelectedPackage { get; }
+        public event EventHandler SelectedPackageChanged;
+
+        protected virtual void OnSelectedPackageChanged()
+        {
+            RaisePropertyChanged("SelectedPackage");
+            RaisePropertyChanged("SelectedVersion");
+            RaisePropertyChanged("IsPackageSelected");
+            EventHandler handler = SelectedPackageChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Project;
+using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation.Rules
 {
@@ -11,9 +12,9 @@ namespace FirmwareBurner.Validation.Rules
         /// <summary>Проверяет указанный проект на валидность</summary>
         /// <param name="Project">Проверяемый проект</param>
         /// <returns>Список противоречий правилу в проекте</returns>
-        public IEnumerable<String> ValidateProject(FirmwareProject Project)
+        public IEnumerable<string> ValidateProject(ProjectViewModel Project)
         {
-            if (Project.Target.SerialNumber > 0) return Enumerable.Empty<String>();
+            if (Project.BlockDetails.SerialNumber > 0) return Enumerable.Empty<String>();
             return new [] { "Не введён серийный номер ячейки" };
         }
     }

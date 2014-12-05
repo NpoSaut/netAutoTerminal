@@ -1,27 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FirmwareBurner.Project;
-using FirmwarePacking.SystemsIndexes;
+using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation.Rules
 {
     /// <summary>Проверяет наличие прошивки в проекте</summary>
     public class HaveFirmwareValidationRule : IProjectValidationRule
     {
-        private readonly IIndexHelper _index;
-        public HaveFirmwareValidationRule(IIndexHelper Index) { _index = Index; }
-
         /// <summary>Проверяет указанный проект на валидность</summary>
         /// <param name="Project">Проверяемый проект</param>
         /// <returns>Список противоречий правилу в проекте</returns>
-        public IEnumerable<string> ValidateProject(FirmwareProject Project)
+        public IEnumerable<string> ValidateProject(ProjectViewModel Project)
         {
-            return Project.Modules
-                          .Where(m => m.FirmwareInformation == null || m.FirmwareContent == null)
-                          .Select(m => String.Format("Отсутствует прошивка для модуля {0}", GetModuleName(Project.Target.CellId, m.Information.ModuleId)));
+            return Project.FirmwareSetConstructor.Components
+                          .Where(c => !c.FirmwareSelector.IsPackageSelected)
+                          .Select(m => String.Format("Не выбрана для прошивка модуля \"{0}\"", m.ModuleName));
         }
-
-        private string GetModuleName(int CellId, int ModuleId) { return _index.GetModuleName(CellId, ModuleId); }
     }
 }

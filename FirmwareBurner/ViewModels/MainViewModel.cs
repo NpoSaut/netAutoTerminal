@@ -12,14 +12,17 @@ namespace FirmwareBurner.ViewModels
         private readonly IBurningViewModelProvider _burningViewModelProvider;
         private readonly IFirmwareProjectFactory _firmwareProjectFactory;
         private readonly IProjectViewModelProvider _projectViewModelProvider;
+        private readonly IProjectValidatorViewModelProvider _validatorViewModelProvider;
 
         public MainViewModel(TargetSelectorViewModel TargetSelector, IEventAggregator EventAggregator, IProjectViewModelProvider ProjectViewModelProvider,
-                             IBurningViewModelProvider BurningViewModelProvider, IFirmwareProjectFactory FirmwareProjectFactory)
+                             IBurningViewModelProvider BurningViewModelProvider, IFirmwareProjectFactory FirmwareProjectFactory,
+                             IProjectValidatorViewModelProvider ValidatorViewModelProvider)
         {
             this.TargetSelector = TargetSelector;
             _projectViewModelProvider = ProjectViewModelProvider;
             _burningViewModelProvider = BurningViewModelProvider;
             _firmwareProjectFactory = FirmwareProjectFactory;
+            _validatorViewModelProvider = ValidatorViewModelProvider;
 
             EventAggregator.GetEvent<TargetSelectedEvent>().Subscribe(OnTargetSelected);
         }
@@ -27,15 +30,18 @@ namespace FirmwareBurner.ViewModels
         public TargetSelectorViewModel TargetSelector { get; private set; }
         public ProjectViewModel Project { get; private set; }
         public BurningViewModel Burning { get; private set; }
+        public ProjectValidatorViewModel Validator { get; private set; }
 
         private void OnTargetSelected(TargetSelectedArgs SelectedArgs)
         {
             Project = _projectViewModelProvider.GetViewModel(SelectedArgs.CellKindId, SelectedArgs.ModificationId);
             Burning = _burningViewModelProvider.GetViewModel(SelectedArgs.CellKindId, SelectedArgs.ModificationId,
                                                              new ViewModelProjectAssembler(Project, _firmwareProjectFactory));
+            Validator = _validatorViewModelProvider.GetViewModel(Project);
 
             RaisePropertyChanged("Project");
             RaisePropertyChanged("Burning");
+            RaisePropertyChanged("Validator");
         }
     }
 }

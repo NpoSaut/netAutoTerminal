@@ -41,6 +41,7 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>()
                 .RegisterType<IBurningViewModelProvider, BurningViewModelProvider>(new ContainerControlledLifetimeManager())
+                .RegisterType<IProjectValidatorViewModelProvider, ProjectValidatorViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
