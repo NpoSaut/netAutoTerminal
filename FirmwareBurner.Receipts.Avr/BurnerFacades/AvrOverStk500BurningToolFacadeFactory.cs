@@ -14,7 +14,7 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 
         public IBurningToolFacade<AvrImage> GetBurningToolFacade(string DeviceName)
         {
-            return new AvrOverStk500BurningToolFacade(_burningToolFactory.GetBurningTool(DeviceName));
+            return new AvrOverStk500BurningToolFacade(_burningToolFactory, DeviceName);
         }
     }
 }

@@ -10,15 +10,22 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
     /// </summary>
     public class AvrOverStk500BurningToolFacade : IBurningToolFacade<AvrImage>
     {
-        private readonly Stk500BurningTool _burner;
-        public AvrOverStk500BurningToolFacade(Stk500BurningTool Burner) { _burner = Burner; }
+        private readonly Stk500BurningToolFactory _burningToolFactory;
+        private readonly string _chipName;
+
+        public AvrOverStk500BurningToolFacade(Stk500BurningToolFactory BurningToolFactory, string ChipName)
+        {
+            _burningToolFactory = BurningToolFactory;
+            _chipName = ChipName;
+        }
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
         public void Burn(AvrImage Image)
         {
+            Stk500BurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
             var fuses = new Fuses { FuseH = Image.Fuses.FuseH, FuseL = Image.Fuses.FuseL, FuseE = Image.Fuses.FuseX };
-            _burner.WriteFuse(fuses);
+            burner.WriteFuse(fuses);
 
             IntelHexStream flashHexStream = new IntelHexStream(),
                            eepromHexStream = new IntelHexStream();
@@ -29,8 +36,8 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             using (TemporaryFile flashFile = new TemporaryFile(flashHexStream),
                                  eepromFile = new TemporaryFile(eepromHexStream))
             {
-                _burner.WriteFlash(flashFile.FileInfo);
-                _burner.WriteFlash(eepromFile.FileInfo);
+                burner.WriteFlash(flashFile.FileInfo);
+                burner.WriteFlash(eepromFile.FileInfo);
             }
         }
     }

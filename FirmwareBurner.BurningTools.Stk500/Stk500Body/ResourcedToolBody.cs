@@ -13,8 +13,6 @@ namespace FirmwareBurner.BurningTools.Stk500.Stk500Body
 
         public ResourcedToolBody()
         {
-            //var rm = new ResourceManager(typeof (Stk500BurningTool));
-            //rm.
             Assembly assembly = Assembly.GetAssembly(typeof (Stk500BurningTool));
             string bodyResourcesPath = GetType().Namespace;
             IEnumerable<string> resourceNames = assembly

@@ -64,7 +64,9 @@
     <Compile Include="Exceptions\ProgrammerIsNotConnectedException.cs" />
     <Compile Include="IAvrIspCommandShell.cs" />
     <Compile Include="Launching\IToolBody.cs" />
+    <Compile Include="Launching\IToolBodyFactory.cs" />
     <Compile Include="Launching\IToolLauncher.cs" />
+    <Compile Include="Stk500Body\SingletonResourceToolBodyFactory.cs" />
     <Compile Include="Stk500Body\ResourcedToolBody.cs" />
     <Compile Include="Parameters\ConnectionParameter.cs" />
     <Compile Include="Parameters\DeviceNameParameter.cs" />
@@ -82,6 +84,7 @@
     <Compile Include="Parameters\WriteFuseParameter.cs" />
     <Compile Include="Launching\ToolLauncher.cs" />
     <Compile Include="Launching\ToolLauncherHelper.cs" />
+    <Compile Include="Stk500BurningToolFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Stk500Body\AVRISP-mkII.dat" />

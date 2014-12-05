@@ -18,7 +18,7 @@ namespace FirmwareBurner.Receipts.Avr
         {
             _container
                 .RegisterType<IBurningToolFacadeFactory<AvrImage>, AvrOverStk500BurningToolFacadeFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IToolBody, ResourcedToolBody>(new ContainerControlledLifetimeManager())
+                .RegisterType<IToolBodyFactory, SingletonResourceToolBodyFactory>(new ContainerControlledLifetimeManager())
                 .RegisterType<IToolLauncher, ToolLauncher>(new ContainerControlledLifetimeManager())
 
                 .RegisterBurningReceiptFactory<AvrImage, AvrOverStk500BurningToolFacadeFactory>()

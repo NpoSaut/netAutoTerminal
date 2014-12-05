@@ -113,18 +113,4 @@ namespace FirmwareBurner.BurningTools.Stk500
                 throw new DeviceIsNotConnectedException();
         }
     }
-
-    public class Stk500BurningToolFactory
-    {
-        private readonly IToolBody _toolBody;
-        private readonly IToolLauncher _toolLauncher;
-
-        public Stk500BurningToolFactory(IToolBody ToolBody, IToolLauncher ToolLauncher)
-        {
-            _toolBody = ToolBody;
-            _toolLauncher = ToolLauncher;
-        }
-
-        public Stk500BurningTool GetBurningTool(string ChipName) { return new Stk500BurningTool(ChipName, _toolBody, _toolLauncher); }
-    }
 }
