@@ -63,6 +63,9 @@
     <Compile Include="Exceptions\BurnerNotFoundException.cs" />
     <Compile Include="Exceptions\ProgrammerIsNotConnectedException.cs" />
     <Compile Include="IAvrIspCommandShell.cs" />
+    <Compile Include="Launching\IToolBody.cs" />
+    <Compile Include="Launching\IToolLauncher.cs" />
+    <Compile Include="Stk500Body\ResourcedToolBody.cs" />
     <Compile Include="Parameters\ConnectionParameter.cs" />
     <Compile Include="Parameters\DeviceNameParameter.cs" />
     <Compile Include="Parameters\EraseParameter.cs" />
@@ -77,34 +80,20 @@
     <Compile Include="Parameters\Stk500Parameter.cs" />
     <Compile Include="Parameters\WriteExtendedFuseParameter.cs" />
     <Compile Include="Parameters\WriteFuseParameter.cs" />
+    <Compile Include="Launching\ToolLauncher.cs" />
+    <Compile Include="Launching\ToolLauncherHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Stk500\AVRISP-mkII.dat">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\libdwarf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\libelf.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\libelfdwarfparser.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\Stk500.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\Stk500Common.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Stk500\Upgrade.exe">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Stk500Body\AVRISP-mkII.dat" />
+    <EmbeddedResource Include="Stk500Body\libdwarf.dll" />
+    <EmbeddedResource Include="Stk500Body\libelf.dll" />
+    <EmbeddedResource Include="Stk500Body\libelfdwarfparser.dll" />
+    <EmbeddedResource Include="Stk500Body\Stk500.exe" />
+    <EmbeddedResource Include="Stk500Body\Stk500Common.dll" />
+    <EmbeddedResource Include="Stk500Body\Upgrade.exe" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Stk500\STK500.ebn">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <EmbeddedResource Include="Stk500Body\STK500.ebn" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">

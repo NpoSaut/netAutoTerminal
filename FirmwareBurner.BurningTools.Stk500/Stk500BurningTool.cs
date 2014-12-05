@@ -1,43 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.BurningTools.Stk500.Exceptions;
+using FirmwareBurner.BurningTools.Stk500.Launching;
 using FirmwareBurner.BurningTools.Stk500.Parameters;
 
 namespace FirmwareBurner.BurningTools.Stk500
 {
     /// <summary>Оболочка над программой STK500.exe</summary>
-    public class Stk500BurningTool : IAvrIspCommandShell, IDisposable
+    public class Stk500BurningTool : IAvrIspCommandShell
     {
-        private static readonly FileInfo _burnerFile = new FileInfo(Path.Combine("stk500", "stk500.exe"));
-
-        public Stk500BurningTool(string ChipName)
-        {
-            this._chipName = ChipName;
-            // Проверяем, доступна ли программа-прошивщик
-            if (!BurnerFile.Exists) throw new BurnerNotFoundException();
-        }
-
-        public static FileInfo BurnerFile
-        {
-            get { return _burnerFile; }
-        }
-
         private readonly String _chipName;
+        private readonly IToolBody _toolBody;
+        private readonly IToolLauncher _toolLauncher;
+
+        public Stk500BurningTool(string ChipName, IToolBody ToolBody, IToolLauncher ToolLauncher)
+        {
+            _chipName = ChipName;
+            _toolBody = ToolBody;
+            _toolLauncher = ToolLauncher;
+        }
 
         public Byte[] GetSignature()
         {
-            string output = Execute(
-                new List<Stk500Parameter>
-                {
-                    new ConnectionParameter(),
-                    new DeviceNameParameter(_chipName),
-                    new GetSignatureParameter()
-                }).ReadToEnd();
+            string output = _toolLauncher.Execute(
+                _toolBody,
+                new ConnectionParameter(),
+                new DeviceNameParameter(_chipName),
+                new GetSignatureParameter()).ReadToEnd();
             CheckOutputForErrors(output);
 
             var r = new Regex(@"Signature is (0x(?<byte>[0-9a-fA-F]{2})\s+){3}");
@@ -49,38 +41,31 @@ namespace FirmwareBurner.BurningTools.Stk500
 
         public void WriteFlash(FileInfo FlashFile, bool Erase = true)
         {
-            StreamReader output = Execute(
-                new List<Stk500Parameter>
-                {
-                    new ConnectionParameter(),
-                    new DeviceNameParameter(_chipName),
-                    new ProgramParameter(ProgramParameter.ProgramTarget.flash),
-                    new InputFileParameter(FlashFile, InputFileParameter.FilePlacement.flash),
-                    Erase ? new EraseParameter() : null,
-                });
-            string OutputString = output.ReadToEnd();
-            CheckOutputForErrors(OutputString, "FLASH programmed");
+            string output = _toolLauncher.Execute(
+                _toolBody,
+                new ConnectionParameter(),
+                new DeviceNameParameter(_chipName),
+                new ProgramParameter(ProgramParameter.ProgramTarget.flash),
+                new InputFileParameter(FlashFile, InputFileParameter.FilePlacement.flash),
+                Erase ? new EraseParameter() : null).ReadToEnd();
+            CheckOutputForErrors(output, "FLASH programmed");
         }
 
         public void WriteEeprom(FileInfo EepromFile, bool Erase = true) { throw new NotImplementedException(); }
 
         public Fuses ReadFuse()
         {
-            StreamReader output = Execute(
-                new List<Stk500Parameter>
-                {
-                    new ConnectionParameter(),
-                    new DeviceNameParameter(_chipName),
-                    new ReadFuseParameter()
-                });
-            string outputString = output.ReadToEnd();
-            CheckOutputForErrors(outputString, "Fuse byte 0 read");
+            string output = _toolLauncher.Execute(
+                _toolBody,
+                new ConnectionParameter(),
+                new DeviceNameParameter(_chipName),
+                new ReadFuseParameter()).ReadToEnd();
+            CheckOutputForErrors(output, "Fuse byte 0 read");
 
-            //Regex r = new Regex(@"Fuse byte (?<key>[012]) read (0x(?<byte>[0-9a-fA-F]{2}))");
             var r = new Regex(@"Fuse byte (?<key>[012]) read \(0x(?<byte>[0-9a-fA-F]{2})\)");
 
             var res = new Fuses();
-            foreach (Match m in r.Matches(outputString).OfType<Match>())
+            foreach (Match m in r.Matches(output).OfType<Match>())
             {
                 int i = int.Parse(m.Groups["key"].Value);
                 byte val = Convert.ToByte(m.Groups["byte"].Value, 16);
@@ -103,19 +88,14 @@ namespace FirmwareBurner.BurningTools.Stk500
 
         public void WriteFuse(Fuses f)
         {
-            StreamReader output = Execute(
-                new List<Stk500Parameter>
-                {
-                    new ConnectionParameter(),
-                    new DeviceNameParameter(_chipName),
-                    new WriteFuseParameter(f.FuseH, f.FuseL),
-                    new WriteExtendedFuseParameter(f.FuseE)
-                });
-            string outputString = output.ReadToEnd();
-            CheckOutputForErrors(outputString, "Fuse bits programmed");
+            string output = _toolLauncher.Execute(
+                _toolBody,
+                new ConnectionParameter(),
+                new DeviceNameParameter(_chipName),
+                new WriteFuseParameter(f.FuseH, f.FuseL),
+                new WriteExtendedFuseParameter(f.FuseE)).ReadToEnd();
+            CheckOutputForErrors(output, "Fuse bits programmed");
         }
-
-        public void Dispose() { }
 
         private void CheckOutputForErrors(string Output, string SuccessString)
         {
@@ -132,24 +112,19 @@ namespace FirmwareBurner.BurningTools.Stk500
             if (Output.Contains("Could not enter programming mode"))
                 throw new DeviceIsNotConnectedException();
         }
+    }
 
-        private StreamReader Execute(IEnumerable<Stk500Parameter> Parameters)
+    public class Stk500BurningToolFactory
+    {
+        private readonly IToolBody _toolBody;
+        private readonly IToolLauncher _toolLauncher;
+
+        public Stk500BurningToolFactory(IToolBody ToolBody, IToolLauncher ToolLauncher)
         {
-            var psi =
-                new ProcessStartInfo(BurnerFile.FullName, string.Join(" ", Parameters.Where(prm => prm != null).Select(prm => prm.Get())))
-                {
-                    WorkingDirectory = Path.GetDirectoryName(BurnerFile.FullName),
-                    UseShellExecute = false,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
-                };
-            var p =
-                new Process
-                {
-                    StartInfo = psi
-                };
-            p.Start();
-            return p.StandardOutput;
+            _toolBody = ToolBody;
+            _toolLauncher = ToolLauncher;
         }
+
+        public Stk500BurningTool GetBurningTool(string ChipName) { return new Stk500BurningTool(ChipName, _toolBody, _toolLauncher); }
     }
 }
