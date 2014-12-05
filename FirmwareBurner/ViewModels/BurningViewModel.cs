@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Burning;
+using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
-using FirmwareBurner.ViewModels.Targeting;
 using FirmwarePacking.SystemsIndexes;
 
 namespace FirmwareBurner.ViewModels
 {
     public class BurningViewModel : ViewModelBase
     {
-        public BurningViewModel(ChannelSelectorViewModel ChannelSelector, IList<BurningVariantViewModel> BurningVariants)
+        private readonly IProjectAssembler _projectAssembler;
+
+        public BurningViewModel(IProjectAssembler ProjectAssembler, ChannelSelectorViewModel ChannelSelector, IList<BurningVariantViewModel> BurningVariants)
         {
             this.ChannelSelector = ChannelSelector;
             this.BurningVariants = BurningVariants;
+            _projectAssembler = ProjectAssembler;
+            foreach (BurningVariantViewModel burningVariant in BurningVariants)
+                burningVariant.Activated += BurningVariantOnActivated;
         }
 
         public ChannelSelectorViewModel ChannelSelector { get; private set; }
@@ -25,6 +30,12 @@ namespace FirmwareBurner.ViewModels
         public BurningVariantViewModel DefaultVariant
         {
             get { return BurningVariants.FirstOrDefault(v => v.IsDefault); }
+        }
+
+        private void BurningVariantOnActivated(object Sender, BurningVariantActivatedEventArgs e)
+        {
+            FirmwareProject project = _projectAssembler.GetProject(ChannelSelector.SelectedChannel.Number);
+            e.BurningReceipt.Burn(project);
         }
     }
 
@@ -54,13 +65,11 @@ namespace FirmwareBurner.ViewModels
 
             var channelSelector = new ChannelSelectorViewModel(cellKind.ChannelsCount);
 
-            return new BurningViewModel(channelSelector,
+            return new BurningViewModel(projectAssembler, channelSelector,
                                         _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
-                                                               .Select(receiptFactory =>
-                                                                       new BurningVariantViewModel(receiptFactory.GetReceipt(modification.DeviceName),
-                                                                                                   projectAssembler,
-                                                                                                   channelSelector,
-                                                                                                   true))
+                                                               .Select(
+                                                                   receiptFactory =>
+                                                                   new BurningVariantViewModel(receiptFactory.GetReceipt(modification.DeviceName), true))
                                                                .ToList());
         }
     }

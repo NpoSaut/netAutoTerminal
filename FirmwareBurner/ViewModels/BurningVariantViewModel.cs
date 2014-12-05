@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
 using FirmwareBurner.Burning;
-using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
 using Microsoft.Practices.Prism.Commands;
 
@@ -11,14 +10,10 @@ namespace FirmwareBurner.ViewModels
     public class BurningVariantViewModel : ViewModelBase
     {
         private readonly IBurningReceipt _burningReceipt;
-        private readonly IProjectAssembler _projectAssembler;
-        private readonly IChannelSelector _channelSelector;
 
-        public BurningVariantViewModel(IBurningReceipt BurningReceipt, IProjectAssembler ProjectAssembler, IChannelSelector ChannelSelector, bool IsDefault = false)
+        public BurningVariantViewModel(IBurningReceipt BurningReceipt, bool IsDefault = false)
         {
             _burningReceipt = BurningReceipt;
-            _projectAssembler = ProjectAssembler;
-            _channelSelector = ChannelSelector;
             this.IsDefault = IsDefault;
 
             Name = BurningReceipt.Name;
@@ -34,10 +29,20 @@ namespace FirmwareBurner.ViewModels
         /// <summary>Команда на прошивку</summary>
         public ICommand BurnCommand { get; private set; }
 
-        private void Burn()
+        private void Burn() { OnActivated(new BurningVariantActivatedEventArgs(_burningReceipt)); }
+
+        public event EventHandler<BurningVariantActivatedEventArgs> Activated;
+
+        private void OnActivated(BurningVariantActivatedEventArgs E)
         {
-            FirmwareProject project = _projectAssembler.GetProject(_channelSelector.SelectedChannelNumber);
-            _burningReceipt.Burn(project);
+            EventHandler<BurningVariantActivatedEventArgs> handler = Activated;
+            if (handler != null) handler(this, E);
         }
+    }
+
+    public class BurningVariantActivatedEventArgs : EventArgs
+    {
+        public BurningVariantActivatedEventArgs(IBurningReceipt BurningReceipt) { this.BurningReceipt = BurningReceipt; }
+        public IBurningReceipt BurningReceipt { get; private set; }
     }
 }

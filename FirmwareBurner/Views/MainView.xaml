@@ -6,6 +6,7 @@
              xmlns:views="clr-namespace:FirmwareBurner.Views"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
 
@@ -90,6 +91,9 @@
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger SourceObject="{Binding Burning}" EventName="" />
+                </i:Interaction.Triggers>
             </Grid>
 
             <ItemsControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
