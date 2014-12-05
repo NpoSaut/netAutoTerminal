@@ -138,7 +138,6 @@
     <Compile Include="Burning\BurningOperationStatus.cs" />
     <Compile Include="Burning\IBurningOperationStatus.cs" />
     <Compile Include="Burning\Pie.cs" />
-    <Compile Include="FirmwareCook.cs" />
     <Compile Include="FirmwareProviders\IFirmwaresSet.cs" />
     <Compile Include="FirmwareProviders\PackageFirmwaresSet.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />
@@ -148,7 +147,6 @@
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
     <Compile Include="Burning\IFirmwareBurner.cs" />
-    <Compile Include="IFirmwareCook.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="ViewModels\Bases\ActionCommand.cs" />
     <Compile Include="ViewModels\Targeting\BlockDetailsViewModel.cs" />
@@ -215,16 +213,10 @@
     <Resource Include="..\!res\Burner-Icon\icon.ico">
       <Link>icon.ico</Link>
     </Resource>
-    <Content Include="Bootloader\layout.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="Bootloader\bootloader">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -33,9 +33,6 @@ namespace FirmwareBurner.Modules
                                                                new InjectionConstructor(DirectoryRepository.UserRepositoryDirectory))
                 .RegisterType<Repository, DirectoryRepository>("Local Repository", new ContainerControlledLifetimeManager(),
                                                                new InjectionConstructor(DirectoryRepository.ApplicatoinRepositoryDirectory))
-
-                // Конфигурируем прожигателей
-                .RegisterType<IFirmwareCook, FirmwareCook>()
                 
                 // Конфигурируем модели представления
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
