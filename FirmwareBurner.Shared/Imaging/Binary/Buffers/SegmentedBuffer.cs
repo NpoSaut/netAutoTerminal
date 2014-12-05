@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -37,17 +38,22 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
         /// <param name="DestinationStream">Поток, в который будут записаны данные из буфера</param>
         public void CopyTo(Stream DestinationStream)
         {
-            foreach (BufferSegment segment in _segments)
+            foreach (BufferSegment segment in _segments.OrderBy(s => s.StartPosition))
             {
+                segment.Seek(0, SeekOrigin.Begin);
                 DestinationStream.Seek(segment.StartPosition, SeekOrigin.Begin);
                 segment.CopyTo(DestinationStream);
             }
         }
 
+        public override string ToString() { return String.Format("SegmentedBuffer: {0} сегментов на {1} Байт", _segments.Count, _segments.Sum(s => s.Length)); }
+
         private class BufferSegment : MemoryStream
         {
             public BufferSegment(int StartPosition) { this.StartPosition = StartPosition; }
             public int StartPosition { get; private set; }
+
+            public override string ToString() { return String.Format("{0:X4} -> {1} Байт", StartPosition, Length); }
         }
     }
 
