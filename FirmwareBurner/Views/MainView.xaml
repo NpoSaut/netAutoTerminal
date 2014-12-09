@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
 
@@ -101,4 +102,9 @@
 
         </Grid>
     </Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger SourceObject="{Binding Path=FileRequestServiceViewModel.SaveFileRequest}" EventName="Raised">
+            <triggerActions:ShowSaveFileDialog />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </UserControl>

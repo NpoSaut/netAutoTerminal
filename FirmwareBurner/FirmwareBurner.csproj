@@ -87,6 +87,7 @@
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="Validation\IProjectValidationRule.cs" />
     <Compile Include="Validation\IProjectValidator.cs" />
     <Compile Include="Validation\RulesListProjectValidator.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Validation\ValidationModule.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
+    <Compile Include="ViewModels\FileRequestServiceViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />

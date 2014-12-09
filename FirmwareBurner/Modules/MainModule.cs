@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using FirmwareBurner.Burning;
+using FirmwareBurner.Interaction;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
@@ -40,6 +41,7 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IBurningViewModelProvider, BurningViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectValidatorViewModelProvider, ProjectValidatorViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
+                .RegisterType<IFileSelectorService, FileRequestServiceViewModel>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
                 .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())

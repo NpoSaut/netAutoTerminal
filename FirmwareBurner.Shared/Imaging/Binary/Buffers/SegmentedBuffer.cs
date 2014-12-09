@@ -9,6 +9,9 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
     {
         private readonly IList<BufferSegment> _segments = new List<BufferSegment>();
 
+        /// <summary>Проверяет, пуст ли буфер</summary>
+        public bool IsEmpty { get { return !_segments.Any(s => s.Length > 0); } }
+
         /// <summary>Записывает массив байт в указанное место буфера</summary>
         /// <param name="Position">Адрес, по которому следует разместить первый байт</param>
         /// <param name="Bytes">Данные для записи</param>

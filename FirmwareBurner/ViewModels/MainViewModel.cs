@@ -16,17 +16,19 @@ namespace FirmwareBurner.ViewModels
 
         public MainViewModel(TargetSelectorViewModel TargetSelector, IEventAggregator EventAggregator, IProjectViewModelProvider ProjectViewModelProvider,
                              IBurningViewModelProvider BurningViewModelProvider, IFirmwareProjectFactory FirmwareProjectFactory,
-                             IProjectValidatorViewModelProvider ValidatorViewModelProvider)
+                             IProjectValidatorViewModelProvider ValidatorViewModelProvider, FileRequestServiceViewModel FileRequestServiceViewModel)
         {
             this.TargetSelector = TargetSelector;
             _projectViewModelProvider = ProjectViewModelProvider;
             _burningViewModelProvider = BurningViewModelProvider;
             _firmwareProjectFactory = FirmwareProjectFactory;
             _validatorViewModelProvider = ValidatorViewModelProvider;
+            this.FileRequestServiceViewModel = FileRequestServiceViewModel;
 
             EventAggregator.GetEvent<TargetSelectedEvent>().Subscribe(OnTargetSelected);
         }
 
+        public FileRequestServiceViewModel FileRequestServiceViewModel { get; private set; }
         public TargetSelectorViewModel TargetSelector { get; private set; }
         public ProjectViewModel Project { get; private set; }
         public BurningViewModel Burning { get; private set; }

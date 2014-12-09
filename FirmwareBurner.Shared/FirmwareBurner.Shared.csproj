@@ -81,6 +81,9 @@
     <Compile Include="Imaging\IImageFormatterFactory.cs" />
     <Compile Include="Imaging\IImageFormattersRepository.cs" />
     <Compile Include="Imaging\PropertiesTableGenerator.cs" />
+    <Compile Include="Interaction\FileRequestArguments.cs" />
+    <Compile Include="Interaction\IFileSelectorService.cs" />
+    <Compile Include="Interaction\SaveFileRequestArguments.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Attributes\TargetDeviceAttribute.cs" />
     <Compile Include="FudpCrc.cs" />

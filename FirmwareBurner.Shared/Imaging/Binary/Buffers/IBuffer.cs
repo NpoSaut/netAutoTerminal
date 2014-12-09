@@ -6,6 +6,9 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
     /// <summary>Буфер бинарных данных</summary>
     public interface IBuffer
     {
+        /// <summary>Проверяет, пуст ли буфер</summary>
+        bool IsEmpty { get; }
+
         /// <summary>Записывает массив байт в указанное место буфера</summary>
         /// <param name="Position">Адрес, по которому следует разместить первый байт</param>
         /// <param name="Bytes">Данные для записи</param>
