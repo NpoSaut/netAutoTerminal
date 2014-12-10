@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
-using FirmwareBurner.BurningTools.Stk500.Parameters;
 
-namespace FirmwareBurner.BurningTools.Stk500.Launching
+namespace ExternalTools.Interfaces
 {
     /// <summary>Лаунчер программатора</summary>
     public interface IToolLauncher
@@ -11,6 +10,6 @@ namespace FirmwareBurner.BurningTools.Stk500.Launching
         /// <param name="ToolBody">Место хранения файлов программатора</param>
         /// <param name="Parameters">Параметры для запуска программатора</param>
         /// <returns>Поток, который программатор выводит на консоль</returns>
-        StreamReader Execute(IToolBody ToolBody, IEnumerable<Stk500Parameter> Parameters);
+        StreamReader Execute(IToolBody ToolBody, IEnumerable<ILaunchParameter> Parameters);
     }
 }

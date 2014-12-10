@@ -1,6 +1,7 @@
 ﻿using FirmwareBurner.Attributes;
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
+using FirmwareBurner.BurningTools.Stk500.Stk500Body;
 using FirmwareBurner.ImageFormatters.Avr;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades

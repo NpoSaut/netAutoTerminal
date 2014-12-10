@@ -1,4 +1,4 @@
-namespace FirmwareBurner.BurningTools.Stk500.Launching
+namespace ExternalTools.Interfaces
 {
     public interface IToolBodyFactory
     {

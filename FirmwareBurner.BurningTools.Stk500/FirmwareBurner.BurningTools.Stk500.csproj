@@ -63,11 +63,6 @@
     <Compile Include="Exceptions\BurnerNotFoundException.cs" />
     <Compile Include="Exceptions\ProgrammerIsNotConnectedException.cs" />
     <Compile Include="IAvrIspCommandShell.cs" />
-    <Compile Include="Launching\IToolBody.cs" />
-    <Compile Include="Launching\IToolBodyFactory.cs" />
-    <Compile Include="Launching\IToolLauncher.cs" />
-    <Compile Include="Stk500Body\SingletonResourceToolBodyFactory.cs" />
-    <Compile Include="Stk500Body\ResourcedToolBody.cs" />
     <Compile Include="Parameters\ConnectionParameter.cs" />
     <Compile Include="Parameters\DeviceNameParameter.cs" />
     <Compile Include="Parameters\EraseParameter.cs" />
@@ -77,13 +72,12 @@
     <Compile Include="Parameters\ProgramParameter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parameters\ReadFuseParameter.cs" />
+    <Compile Include="Stk500Body\IStk500BodyMarker.cs" />
     <Compile Include="Stk500BurningTool.cs" />
     <Compile Include="Exceptions\Stk500Exception.cs" />
     <Compile Include="Parameters\Stk500Parameter.cs" />
     <Compile Include="Parameters\WriteExtendedFuseParameter.cs" />
     <Compile Include="Parameters\WriteFuseParameter.cs" />
-    <Compile Include="Launching\ToolLauncher.cs" />
-    <Compile Include="Launching\ToolLauncherHelper.cs" />
     <Compile Include="Stk500BurningToolFactory.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +93,10 @@
     <EmbeddedResource Include="Stk500Body\STK500.ebn" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExternalTools\ExternalTools.csproj">
+      <Project>{61C24D4C-9079-4E7C-8B59-023890A7A8CD}</Project>
+      <Name>ExternalTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>

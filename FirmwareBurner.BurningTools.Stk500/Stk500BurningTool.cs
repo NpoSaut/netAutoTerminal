@@ -2,9 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using ExternalTools.Interfaces;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.BurningTools.Stk500.Exceptions;
-using FirmwareBurner.BurningTools.Stk500.Launching;
 using FirmwareBurner.BurningTools.Stk500.Parameters;
 
 namespace FirmwareBurner.BurningTools.Stk500

@@ -1,5 +1,6 @@
 ﻿using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
+using FirmwareBurner.BurningTools.Stk500.Stk500Body;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.ImageFormatters.Avr.Utilities;
 using FirmwareBurner.IntelHex;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwareBurner.BurningTools.Stk500.Launching
+namespace ExternalTools.Interfaces
 {
     /// <summary>Место хранения файлов программатора</summary>
     public interface IToolBody : IDisposable

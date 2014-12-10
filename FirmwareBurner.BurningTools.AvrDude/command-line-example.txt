@@ -1,0 +1,1 @@
+﻿avrdude.exe -Pusb -cavrisp2 -pc128 -Uflash:w:"c:\flash.hex":i

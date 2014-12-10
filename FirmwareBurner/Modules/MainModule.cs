@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using ExternalTools.Implementations;
+using ExternalTools.Interfaces;
 using FirmwareBurner.Burning;
 using FirmwareBurner.Interaction;
 using FirmwareBurner.Project;
@@ -21,8 +22,7 @@ namespace FirmwareBurner.Modules
         public void Initialize()
         {
             _container
-                .RegisterType<FileInfo>("BootloaderImageFileName",
-                                        new InjectionConstructor(new InjectionParameter(Path.Combine("Bootloader", "Bootloader"))))
+                .RegisterType<IToolLauncher, ToolLauncher>(new ContainerControlledLifetimeManager())
                     
                 // Конфигурируем индекс
                 .RegisterType<IIndex, ResourceXmlIndex>()

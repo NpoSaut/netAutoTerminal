@@ -1,5 +1,4 @@
 ﻿using FirmwareBurner.Burning;
-using FirmwareBurner.BurningTools.Stk500.Launching;
 using FirmwareBurner.BurningTools.Stk500.Stk500Body;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Receipts.Avr.BurnerFacades;
@@ -18,8 +17,6 @@ namespace FirmwareBurner.Receipts.Avr
         {
             _container
                 .RegisterType<IBurningToolFacadeFactory<AvrImage>, AvrOverStk500BurningToolFacadeFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IToolBodyFactory, SingletonResourceToolBodyFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IToolLauncher, ToolLauncher>(new ContainerControlledLifetimeManager())
 
                 .RegisterBurningReceiptFactory<AvrImage, AvrOverStk500BurningToolFacadeFactory>()
                 .RegisterBurningReceiptFactory<AvrImage, AvrToHexFileToolFacadeFactory>();

@@ -227,6 +227,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ExternalTools\ExternalTools.csproj">
+      <Project>{61C24D4C-9079-4E7C-8B59-023890A7A8CD}</Project>
+      <Name>ExternalTools</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Avr\FirmwareBurner.ImageFormatters.Avr.csproj">
       <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
       <Name>FirmwareBurner.ImageFormatters.Avr</Name>
