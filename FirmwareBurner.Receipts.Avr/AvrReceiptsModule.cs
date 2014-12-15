@@ -1,5 +1,5 @@
 ﻿using FirmwareBurner.Burning;
-using FirmwareBurner.BurningTools.Stk500.Stk500Body;
+using FirmwareBurner.BurningTools.AvrDude;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Receipts.Avr.BurnerFacades;
 using Microsoft.Practices.Prism.Modularity;
@@ -16,9 +16,11 @@ namespace FirmwareBurner.Receipts.Avr
         public void Initialize()
         {
             _container
+                .RegisterType<IChipPseudonameProvider, ResourceFileChipPseudonameProvider>()
                 .RegisterType<IBurningToolFacadeFactory<AvrImage>, AvrOverStk500BurningToolFacadeFactory>(new ContainerControlledLifetimeManager())
 
                 .RegisterBurningReceiptFactory<AvrImage, AvrOverStk500BurningToolFacadeFactory>()
+                .RegisterBurningReceiptFactory<AvrImage, AvrOverAvrDudeBurningToolFacadeFactory>()
                 .RegisterBurningReceiptFactory<AvrImage, AvrToHexFileToolFacadeFactory>();
         }
     }

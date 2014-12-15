@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvrDudeBody\AvrDudeBodyMarker.cs" />
     <Compile Include="AvrDudeBurningTool.cs" />
+    <Compile Include="AvrDudeBurningToolFactory.cs" />
     <Compile Include="Fuses.cs" />
     <Compile Include="IChipPseudonameProvider.cs" />
     <Compile Include="Parameters\AvrDudeParameter.cs" />
@@ -58,7 +60,9 @@
     <Compile Include="ResourceFileChipPseudonameProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AvrDudeBody\avrdude.exe" />
     <Content Include="command-line-example.txt" />
+    <EmbeddedResource Include="AvrDudeBody\avrdude.conf" />
     <None Include="Resources\ChipPseudonames.txt" />
   </ItemGroup>
   <ItemGroup>

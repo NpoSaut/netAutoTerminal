@@ -1,30 +1,28 @@
 ﻿using FirmwareBurner.Burning;
-using FirmwareBurner.BurningTools.Stk500;
+using FirmwareBurner.BurningTools.AvrDude;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.IntelHex;
 using FirmwareBurner.Receipts.Avr.Utilities;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
-    /// <summary>Рецеп по прошивке <see cref="AvrImage" /> через <see cref="Stk500BurningTool" />
-    /// </summary>
-    public class AvrOverStk500BurningToolFacade : IBurningToolFacade<AvrImage>
+    public class AvrOverAvrDudeBurningToolFacade : IBurningToolFacade<AvrImage>
     {
-        private readonly Stk500BurningToolFactory _burningToolFactory;
+        private readonly AvrDudeBurningToolFactory _burningToolFactory;
         private readonly string _chipName;
 
-        public AvrOverStk500BurningToolFacade(Stk500BurningToolFactory BurningToolFactory, string ChipName)
+        public AvrOverAvrDudeBurningToolFacade(string ChipName, AvrDudeBurningToolFactory BurningToolFactory)
         {
-            _burningToolFactory = BurningToolFactory;
             _chipName = ChipName;
+            _burningToolFactory = BurningToolFactory;
         }
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
         public void Burn(AvrImage Image)
         {
-            Stk500BurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
-            var fuses = new Fuses { FuseH = Image.Fuses.FuseH, FuseL = Image.Fuses.FuseL, FuseE = Image.Fuses.FuseX };
+            AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
+            var fuses = new Fuses(Image.Fuses.FuseH, Image.Fuses.FuseL, Image.Fuses.FuseX);
             burner.WriteFuse(fuses);
 
             IntelHexStream flashHexStream = new IntelHexStream(),

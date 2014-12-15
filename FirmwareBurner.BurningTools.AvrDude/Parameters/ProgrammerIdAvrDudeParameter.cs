@@ -9,7 +9,7 @@ namespace FirmwareBurner.BurningTools.AvrDude.Parameters
     }
 
     /// <summary>Параметр идентификатора программатора</summary>
-    [ParameterKey('a')]
+    [ParameterKey('c')]
     public class ProgrammerIdAvrDudeParameter : AvrDudeParameter
     {
         private readonly Dictionary<ProgrammerType, string> _programerIdPseudonames =

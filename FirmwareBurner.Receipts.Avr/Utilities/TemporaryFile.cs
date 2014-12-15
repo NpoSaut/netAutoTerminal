@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FirmwareBurner.ImageFormatters.Avr.Utilities
+namespace FirmwareBurner.Receipts.Avr.Utilities
 {
     /// <summary>Временный файл</summary>
     /// <remarks>

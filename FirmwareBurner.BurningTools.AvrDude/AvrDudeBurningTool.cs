@@ -8,15 +8,15 @@ namespace FirmwareBurner.BurningTools.AvrDude
 {
     public class AvrDudeBurningTool
     {
-        private readonly String _chipName;
+        private readonly String _chipPseudoname;
         private readonly IToolBody _toolBody;
         private readonly IToolLauncher _toolLauncher;
 
-        public AvrDudeBurningTool(string ChipName, IToolBody ToolBody, IToolLauncher ToolLauncher)
+        public AvrDudeBurningTool(string ChipPseudoname, IToolBody ToolBody, IToolLauncher ToolLauncher)
         {
             _toolBody = ToolBody;
             _toolLauncher = ToolLauncher;
-            _chipName = ChipName;
+            _chipPseudoname = ChipPseudoname;
         }
 
         public void WriteFlash(FileInfo FlashFile)
@@ -41,19 +41,22 @@ namespace FirmwareBurner.BurningTools.AvrDude
                         };
 
             foreach (var fuse in fuses)
-                LaunchAvrDude(fuse.Key, AvrDudeMemoryOperationType.Write, String.Format("0x{0:x2}", fuse.Value), AvrDudeInputFormat.IntelHex);
+            {
+                var res = LaunchAvrDude(fuse.Key, AvrDudeMemoryOperationType.Write, String.Format("0x{0:x2}", fuse.Value), AvrDudeInputFormat.Manual);
+            }
         }
 
         private string LaunchAvrDude(AvrDudeMemoryType MemoryType, AvrDudeMemoryOperationType Operation, string Input, AvrDudeInputFormat InputFormat)
         {
-            _toolLauncher.Execute(_toolBody,
-                                  new ConnectionAvrDudeParameter(AvrIspConnectionType.Usb),
-                                  new ProgrammerIdAvrDudeParameter(ProgrammerType.AvrIsp),
-                                  new ChipIdAvrDudeParameter(_chipName),
-                                  new UCommandParameter(MemoryType,
-                                                        Operation,
-                                                        Input,
-                                                        InputFormat));
+            return _toolLauncher.Execute(_toolBody,
+                                         new ConnectionAvrDudeParameter(AvrIspConnectionType.Usb),
+                                         new ProgrammerIdAvrDudeParameter(ProgrammerType.AvrIsp),
+                                         new ChipIdAvrDudeParameter(_chipPseudoname),
+                                         new UCommandParameter(MemoryType,
+                                                               Operation,
+                                                               Input,
+                                                               InputFormat))
+                                .ReadToEnd();
         }
     }
 }

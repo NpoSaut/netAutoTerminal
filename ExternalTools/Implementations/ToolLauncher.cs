@@ -20,6 +20,7 @@ namespace ExternalTools.Implementations
                     WorkingDirectory = ToolBody.WorkingDirectoryPath,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 };
             var p = new Process { StartInfo = processStartInfo };

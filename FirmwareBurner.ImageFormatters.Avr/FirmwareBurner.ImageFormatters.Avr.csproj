@@ -72,7 +72,6 @@
     <Compile Include="PlacementsInformation.cs" />
     <Compile Include="StaticAvrBootloadersCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\TemporaryFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Bootloaders\bootloader">

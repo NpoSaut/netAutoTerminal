@@ -14,12 +14,12 @@ namespace FirmwareBurner.BurningTools.AvrDude
         public ResourceFileChipPseudonameProvider()
         {
             _dictionary = Resources.ChipPseudonames.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-                                   .Select(line => line.Split(' '))
-                                   .ToDictionary(line => line[1], line => line[0]);
+                                   .Select(line => line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
+                                   .ToDictionary(line => line[1].ToLower(), line => line[0]);
         }
 
         /// <summary>Получает псевдоним названия процессора для указанного устройства</summary>
         /// <param name="DeviceName">Имя устройства</param>
-        public string GetChipPseudoname(string DeviceName) { return _dictionary[DeviceName]; }
+        public string GetChipPseudoname(string DeviceName) { return _dictionary[DeviceName.ToLower()]; }
     }
 }
