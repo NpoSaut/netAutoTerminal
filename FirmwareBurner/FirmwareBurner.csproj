@@ -85,6 +85,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\TargetSelectedEvent.cs" />
+    <Compile Include="ImageScroller.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
+    <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\CellKindSelector.xaml.cs">
@@ -164,6 +166,10 @@
       <DependentUpon>Shell.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CellKindSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -266,6 +272,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Background.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

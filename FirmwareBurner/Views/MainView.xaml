@@ -8,8 +8,9 @@
              xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
+             xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              mc:Ignorable="d"
-             Width="400" MinHeight="200"
+             MinWidth="400" MinHeight="200"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
 
     <UserControl.Resources>
@@ -25,7 +26,19 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
+        <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="2" Source="../Background.JPG" ClipToBounds="True">
+            <firmwareBurner:ImageScroller.Triggers>
+                <EventTrigger RoutedEvent="Loaded">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="VerticalOffset" From="0" To="1" Duration="0:0:15" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </firmwareBurner:ImageScroller.Triggers>
+        </firmwareBurner:ImageScroller>
+
         <Border Grid.Row="0" BorderBrush="#B90CA700" BorderThickness="0,0,0,1">
             <Border.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

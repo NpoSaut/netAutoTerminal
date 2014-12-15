@@ -6,7 +6,7 @@
         xmlns:regions="http://www.codeplex.com/CompositeWPF"
         mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="424"
-        SizeToContent="WidthAndHeight" ResizeMode="CanMinimize"
+        SizeToContent="WidthAndHeight"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display"
         Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
     <ContentControl regions:RegionManager.RegionName="Root" />
