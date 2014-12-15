@@ -23,22 +23,6 @@ namespace FirmwareBurner.BurningTools.Stk500
             _toolLauncher = ToolLauncher;
         }
 
-        public Byte[] GetSignature()
-        {
-            string output = _toolLauncher.Execute(
-                _toolBody,
-                new ConnectionParameter(),
-                new DeviceNameParameter(_chipName),
-                new GetSignatureParameter()).ReadToEnd();
-            CheckOutputForErrors(output);
-
-            var r = new Regex(@"Signature is (0x(?<byte>[0-9a-fA-F]{2})\s+){3}");
-            Match m = r.Match(output);
-            if (m.Success)
-                return m.Groups["byte"].Captures.OfType<Capture>().Select(bc => Convert.ToByte(bc.Value, 16)).ToArray();
-            throw new Stk500Exception("Программатор ответил не стандартным образом:\n\n" + output);
-        }
-
         public void WriteFlash(FileInfo FlashFile, bool Erase = true)
         {
             string output = _toolLauncher.Execute(
