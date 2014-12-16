@@ -276,6 +276,9 @@
   <ItemGroup>
     <Resource Include="Background.JPG" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Background-blur.JPG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM rd $(TargetDir)SingleExe /S /Q
