@@ -72,7 +72,7 @@
             </i:Interaction.Triggers>
         </Grid>
 
-        <ItemsControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+        <ItemsControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed"
                           ItemsSource="{Binding Path=Validator.ValidationErrors}" />
 
     </Grid>

@@ -94,5 +94,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <PowerEase x:Key="PowerEaseOut" EasingMode="EaseOut" />
 
 </ResourceDictionary>

@@ -7,11 +7,12 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              mc:Ignorable="d"
-             MinWidth="400" MinHeight="200"
-             d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+             d:DesignWidth="400" d:DesignHeight="250">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -24,10 +25,12 @@
 
     <Grid designUtils:DesignTime.Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
+        
+        <Rectangle Name="TopperStub" Height="50" />
 
         <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="3" Source="../Background.JPG" ClipToBounds="True"
                                       Uniter="{StaticResource BackgroundScrollerUniter}" />
@@ -45,15 +48,38 @@
         </Rectangle>
 
         <Border Grid.Row="1" Background="#6689FF89">
-            <views:CellKindSelector DataContext="{Binding TargetSelector}" Margin="4,8" />
+            <views:CellKindSelector x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
         </Border>
-        <views:ProjectManagerView DataContext="{Binding ProjectManager}" Grid.Row="1" Margin="6,2"
-                                  Visibility="Collapsed" />
+
+        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}"  Margin="4">
+                <views:ProjectManagerView.RenderTransform>
+                    <TranslateTransform />
+                </views:ProjectManagerView.RenderTransform>
+            </views:ProjectManagerView>
+        </Border>
+
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=FileRequestServiceViewModel.SaveFileRequest}" EventName="Raised">
             <triggerActions:ShowSaveFileDialog />
         </i:EventTrigger>
+        <ei:DataTrigger Binding="{Binding ProjectManager}" Value="{x:Null}" Comparison="NotEqual">
+            <ei:ControlStoryboardAction>
+                <ei:ControlStoryboardAction.Storyboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
+                                         To="0" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                        <ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
+                                         To="2" Duration="0:0:0.2" />
+                        <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel" Storyboard.TargetProperty="Opacity"
+                                         To="1" BeginTime="0:0:0.2" Duration="0:0:0.5" />
+                        <DoubleAnimation Storyboard.TargetName="ProjectManager" Storyboard.TargetProperty="RenderTransform.Y"
+                                         From="50" BeginTime="0:0:0.2" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                    </Storyboard>
+                </ei:ControlStoryboardAction.Storyboard>
+            </ei:ControlStoryboardAction>
+        </ei:DataTrigger>
     </i:Interaction.Triggers>
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="Loaded">
@@ -61,10 +87,7 @@
                 <Storyboard>
                     <DoubleAnimation Storyboard.Target="{StaticResource BackgroundScrollerUniter}"
                                      Storyboard.TargetProperty="VerticalOffset" From="0" To="1"
-                                     Duration="0:0:45">
-                        <DoubleAnimation.EasingFunction>
-                            <PowerEase EasingMode="EaseOut"/>
-                        </DoubleAnimation.EasingFunction>
+                                     Duration="0:1:45" EasingFunction="{StaticResource PowerEaseOut}">
                     </DoubleAnimation>
                 </Storyboard>
             </BeginStoryboard>
