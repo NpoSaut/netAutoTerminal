@@ -54,7 +54,7 @@
         <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}"  Margin="4">
                 <views:ProjectManagerView.RenderTransform>
-                    <TranslateTransform />
+                    <TranslateTransform Y="50" />
                 </views:ProjectManagerView.RenderTransform>
             </views:ProjectManagerView>
         </Border>
@@ -69,13 +69,13 @@
                 <ei:ControlStoryboardAction.Storyboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
-                                         To="0" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                                         To="0" Duration="0:0:0.7" EasingFunction="{StaticResource PowerEaseOut}" />
                         <ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
-                                         To="2" Duration="0:0:0.2" />
+                                         To="2" Duration="0:0:0.4" />
                         <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel" Storyboard.TargetProperty="Opacity"
                                          To="1" BeginTime="0:0:0.2" Duration="0:0:0.5" />
                         <DoubleAnimation Storyboard.TargetName="ProjectManager" Storyboard.TargetProperty="RenderTransform.Y"
-                                         From="50" BeginTime="0:0:0.2" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                                         To="0" BeginTime="0:0:0.2" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
                     </Storyboard>
                 </ei:ControlStoryboardAction.Storyboard>
             </ei:ControlStoryboardAction>
