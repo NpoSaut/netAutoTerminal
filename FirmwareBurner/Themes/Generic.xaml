@@ -5,13 +5,13 @@
 
 
     <Style TargetType="{x:Type local:ImageScroller}">
+        <Setter Property="ClipToBounds" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:ImageScroller}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                    </Border>
+                            BorderThickness="{TemplateBinding BorderThickness}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

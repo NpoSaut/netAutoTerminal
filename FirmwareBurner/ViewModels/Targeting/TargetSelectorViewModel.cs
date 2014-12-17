@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FirmwareBurner.Events;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.Tools;
@@ -31,7 +32,10 @@ namespace FirmwareBurner.ViewModels.Targeting
                 {
                     _selectedCellKind = value;
                     RaisePropertyChanged("SelectedCellKind");
-                    OnTargetChanged();
+                    if (_selectedCellKind.Modifications.Count == 1)
+                        SelectedModificationKind = _selectedCellKind.Modifications.First();
+                    else
+                        OnTargetChanged();
                 }
             }
         }

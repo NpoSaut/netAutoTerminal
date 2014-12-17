@@ -112,8 +112,8 @@
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
-    <Compile Include="Views\CellKindSelector.xaml.cs">
-      <DependentUpon>CellKindSelector.xaml</DependentUpon>
+    <Compile Include="Views\TargetSelectorView.xaml.cs">
+      <DependentUpon>TargetSelectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FirmwareSelectors\CompositeFirmwareSelectorView.xaml.cs">
       <DependentUpon>CompositeFirmwareSelectorView.xaml</DependentUpon>
@@ -170,7 +170,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\CellKindSelector.xaml">
+    <Page Include="Views\TargetSelectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
