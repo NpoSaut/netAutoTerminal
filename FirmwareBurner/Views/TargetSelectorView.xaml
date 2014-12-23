@@ -18,9 +18,9 @@
                              Storyboard.TargetProperty="LayoutTransform.ScaleX"
                              To="1" Duration="0:0:0.35" EasingFunction="{StaticResource PowerEaseOut}" />
             <DoubleAnimation Storyboard.TargetName="ModificationKindSelector" Storyboard.TargetProperty="Opacity"
-                             To="1" Duration="0:0:0.15" />
+                             To="1" BeginTime="0:0:0.10" Duration="0:0:0.15" />
             <DoubleAnimation Storyboard.TargetName="ModificationLabel" Storyboard.TargetProperty="Opacity"
-                             To="1" Duration="0:0:0.15" />
+                             To="1" BeginTime="0:0:0.10" Duration="0:0:0.15" />
         </Storyboard>
         <Storyboard x:Key="CollapseModificationStoryboard">
             <DoubleAnimation Storyboard.TargetName="ModificationKindSelector"
