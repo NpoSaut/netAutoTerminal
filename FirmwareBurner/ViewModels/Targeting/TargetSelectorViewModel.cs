@@ -32,10 +32,7 @@ namespace FirmwareBurner.ViewModels.Targeting
                 {
                     _selectedCellKind = value;
                     RaisePropertyChanged("SelectedCellKind");
-                    if (_selectedCellKind.Modifications.Count == 1)
-                        SelectedModificationKind = _selectedCellKind.Modifications.First();
-                    else
-                        OnTargetChanged();
+                    SelectedModificationKind = _selectedCellKind.Modifications.FirstOrDefault();
                 }
             }
         }
