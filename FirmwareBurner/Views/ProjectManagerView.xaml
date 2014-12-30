@@ -6,24 +6,21 @@
              xmlns:views="clr-namespace:FirmwareBurner.Views"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
 
-        <Rectangle Grid.ColumnSpan="2" Grid.RowSpan="3" Name="BurningDataShadow" Fill="#3547A0E8" />
-        <Polygon Grid.Column="2" Grid.RowSpan="3" Points="2,4 0,0 0,8" Stretch="Fill"
+        <Rectangle Grid.Column="0" Name="BurningDataShadow" Fill="#3547A0E8" />
+        <Polygon Grid.Column="1" Points="2,4 0,0 0,8" Stretch="Fill"
                      Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
             <Polygon.Fill>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
@@ -33,26 +30,15 @@
             </Polygon.Fill>
         </Polygon>
 
-        <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
-                   Content="Серийный номер блока" />
-        <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=AssemblyDateEdit}"
-                   Content="Дата изготовления" />
-
-        <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit"
-                     Text="{Binding Path=Project.BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
-        <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}"
-                        SelectedDate="{Binding Path=Project.BlockDetails.AssemblyDate}" />
-
-        <views:FirmwareSetConstructorView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
-                                              DataContext="{Binding Project.FirmwareSetConstructor}"
-                                              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}" />
-
-        <ListBox Grid.Column="2" Grid.RowSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
+        <views:ProjectView Grid.Row="0" Grid.Column="0" DataContext="{Binding Project}"
+                           d:DataContext="{x:Static viewModels:SampleData.Project}"/>
+        
+        <ListBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                      ItemsSource="{Binding Burning.ChannelSelector.Channels}"
                      SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
                      Style="{StaticResource ChannelSelectorStyle}" />
 
-        <Grid Grid.Column="3" Grid.RowSpan="4" IsEnabled="{Binding Path=Validator.IsValid}">
+        <Grid Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=Validator.IsValid}">
             <Button Width="60" Height="60" Style="{StaticResource CircleButton}"
                         Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
                         Content="Начать">
@@ -72,7 +58,7 @@
             </i:Interaction.Triggers>
         </Grid>
 
-        <ItemsControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Collapsed"
+        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Visibility="Collapsed"
                           ItemsSource="{Binding Path=Validator.ValidationErrors}" />
 
     </Grid>

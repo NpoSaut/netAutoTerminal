@@ -1,4 +1,5 @@
 ﻿using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwareBurner.ViewModels.Targeting;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -19,6 +20,9 @@ namespace FirmwareBurner.ViewModels
                                                     new FirmwareSetComponentViewModel(1, "Модуль 2", _firmwareSelector)
                                                 });
 
+        private static readonly ProjectViewModel _project =
+            new ProjectViewModel(30, 1, new BlockDetailsViewModel() { SerialNumber = 10007 }, _firmwareSetConstructor);
+
         public static CompositeFirmwareSelectorViewModel FirmwareSelector
         {
             get { return _firmwareSelector; }
@@ -27,6 +31,11 @@ namespace FirmwareBurner.ViewModels
         public static FirmwareSetConstructorViewModel FirmwareSetConstructor
         {
             get { return _firmwareSetConstructor; }
+        }
+
+        public static ProjectViewModel Project
+        {
+            get { return _project; }
         }
     }
 }
