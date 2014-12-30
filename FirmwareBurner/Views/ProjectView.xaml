@@ -7,9 +7,15 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              mc:Ignorable="d" d:DataContext="{x:Static viewModels:SampleData.Project}">
     <Grid>
+        <Grid.Resources>
+            <Style x:Key="InputBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="Padding" Value="3" />
+            </Style>
+        </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,15 +24,15 @@
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
                Content="Серийный номер блока" />
-        <Label Grid.Column="0" Grid.Row="1" Target="{Binding ElementName=AssemblyDateEdit}"
+        <Label Grid.Column="1" Grid.Row="0" Target="{Binding ElementName=AssemblyDateEdit}"
                Content="Дата изготовления" />
 
-        <TextBox Grid.Column="1" Grid.Row="0" Name="SerialNumberEdit"
+        <TextBox Grid.Column="0" Grid.Row="1" Name="SerialNumberEdit" Style="{StaticResource InputBoxStyle}"
                  Text="{Binding Path=BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
-        <DatePicker Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" BorderBrush="{x:Null}"
-                    SelectedDate="{Binding Path=BlockDetails.AssemblyDate}" />
+        <TextBox Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
+                 Text="{Binding Path=BlockDetails.AssemblyDate, StringFormat=MM.yyy}" />
 
         <views:FirmwareSetConstructorView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
-                                              DataContext="{Binding Path=FirmwareSetConstructor}" />
+                                          DataContext="{Binding Path=FirmwareSetConstructor}" />
     </Grid>
 </UserControl>
