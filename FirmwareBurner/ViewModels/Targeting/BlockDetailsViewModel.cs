@@ -12,16 +12,18 @@ namespace FirmwareBurner.ViewModels.Targeting
         public BlockDetailsViewModel(int SerialNumber, DateTime AssemblyDate)
         {
             this.SerialNumber = new ValidateableTextPropertyViewModel<int>(SerialNumber,
-                new IntTextValueConverter(),
-                new SerialNumberValidationRule());
-            
-            this.AssemblyDate = new ValidateablePropertyViewModel<DateTime>(AssemblyDate);
+                                                                           new IntTextValueConverter(),
+                                                                           new SerialNumberValidationRule());
+
+            this.AssemblyDate = new ValidateableTextPropertyViewModel<DateTime>(AssemblyDate,
+                                                                                new DateTimeTextValueConverter("M.yyyy"),
+                                                                                new AssemblyDateValidationRule());
         }
 
         /// <summary>Серийный номер блока</summary>
         public ValidateableTextPropertyViewModel<int> SerialNumber { get; private set; }
 
         /// <summary>Дата сборки модуля</summary>
-        public ValidateablePropertyViewModel<DateTime> AssemblyDate { get; private set; }
+        public ValidateableTextPropertyViewModel<DateTime> AssemblyDate { get; private set; }
     }
 }

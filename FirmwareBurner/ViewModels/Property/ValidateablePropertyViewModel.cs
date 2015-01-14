@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Validation;
 using FirmwareBurner.ViewModels.Bases;
@@ -34,6 +35,11 @@ namespace FirmwareBurner.ViewModels.Property
         public virtual IEnumerable<string> ValidationErrors
         {
             get { return _validationRules.SelectMany(rule => rule.GetValidationErrors(Value)); }
+        }
+
+        public string ValidationErrorsText
+        {
+            get { return string.Join(Environment.NewLine, ValidationErrors); }
         }
     }
 }

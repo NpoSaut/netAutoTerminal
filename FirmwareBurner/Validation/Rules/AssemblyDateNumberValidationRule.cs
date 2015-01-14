@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using FirmwareBurner.Project;
-using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation.Rules
 {
     /// <summary>Проверяет правильность даты производства ячейки</summary>
-    public class AssemblyDateValidationRule : IProjectValidationRule
+    public class AssemblyDateValidationRule : IValidationRule<DateTime>
     {
         private static readonly DateTime _minimalDateTime = new DateTime(1991, 1, 1);
 
-        /// <summary>Проверяет указанный проект на валидность</summary>
-        /// <param name="Project">Проверяемый проект</param>
-        /// <returns>Список противоречий правилу в проекте</returns>
-        public IEnumerable<string> ValidateProject(ProjectViewModel Project)
+        /// <summary>Проверяет значение свойства и возвращает список ошибок</summary>
+        /// <param name="PropertyValue">Значение проверяемого свойство</param>
+        /// <returns>Тексты ошибок валидации</returns>
+        public IEnumerable<string> GetValidationErrors(DateTime PropertyValue)
         {
-            //if (Project.BlockDetails.AssemblyDate > _minimalDateTime)
-            return Enumerable.Empty<String>();
-            return new[] { "Не указана дата сборки ячейки" };
+            if (PropertyValue < _minimalDateTime)
+                yield return String.Format("Дата сборки слишком мала");
+            if (PropertyValue > DateTime.Now)
+                yield return String.Format("Дата сборки не может быть в будущем");
         }
     }
 }

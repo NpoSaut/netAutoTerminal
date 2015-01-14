@@ -31,13 +31,19 @@
                Content="Дата изготовления" />
 
         <TextBox Grid.Column="0" Grid.Row="1" Name="SerialNumberEdit" Style="{StaticResource InputBoxStyle}"
-                 Text="{Binding Path=BlockDetails.SerialNumber.ValueText, UpdateSourceTrigger=PropertyChanged}">
+                 Text="{Binding Path=BlockDetails.SerialNumber.ValueText, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding Path=BlockDetails.SerialNumber.ValidationErrorsText}">
             <TextBox.RenderTransform>
                 <TranslateTransform />
             </TextBox.RenderTransform>
         </TextBox>
         <TextBox Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
-                 Text="{Binding Path=BlockDetails.AssemblyDate.Value, StringFormat=MM.yyy}" />
+                 Text="{Binding Path=BlockDetails.AssemblyDate.ValueText, UpdateSourceTrigger=PropertyChanged}"
+                 ToolTip="{Binding Path=BlockDetails.AssemblyDate.ValidationErrorsText}">
+            <TextBox.RenderTransform>
+                <TranslateTransform />
+            </TextBox.RenderTransform>
+        </TextBox>
 
         <views:FirmwareSetConstructorView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
                                           DataContext="{Binding Path=FirmwareSetConstructor}" />
@@ -60,6 +66,24 @@
         </ei:DataTrigger>
         <ei:DataTrigger Binding="{Binding BlockDetails.SerialNumber.IsValid}" Value="True">
             <ei:ChangePropertyAction TargetName="SerialNumberEdit" PropertyName="Background" Value="White" />
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding BlockDetails.AssemblyDate.IsValid}" Value="False">
+            <ei:ChangePropertyAction TargetName="AssemblyDateEdit" PropertyName="Background" Value="Tomato" />
+            <ei:ControlStoryboardAction>
+                <ei:ControlStoryboardAction.Storyboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetName="AssemblyDateEdit" Storyboard.TargetProperty="RenderTransform.X"
+                                         From="-5" To="0" Duration="0:0:0.7">
+                            <DoubleAnimation.EasingFunction>
+                                <ElasticEase />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </ei:ControlStoryboardAction.Storyboard>
+            </ei:ControlStoryboardAction>
+        </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding BlockDetails.AssemblyDate.IsValid}" Value="True">
+            <ei:ChangePropertyAction TargetName="AssemblyDateEdit" PropertyName="Background" Value="White" />
         </ei:DataTrigger>
     </i:Interaction.Triggers>
 </UserControl>

@@ -112,6 +112,7 @@
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
+    <Compile Include="ViewModels\Property\IntTextValueConverter.cs" />
     <Compile Include="ViewModels\Property\ITextValueConverter.cs" />
     <Compile Include="ViewModels\Property\ValidateablePropertyViewModel.cs" />
     <Compile Include="ViewModels\Property\ValidateableTextPropertyViewModel.cs" />

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace FirmwareBurner.ViewModels.Property
 {
@@ -8,9 +9,16 @@ namespace FirmwareBurner.ViewModels.Property
         string GetText(TValue Value);
     }
 
-    public class IntTextValueConverter : ITextValueConverter<int>
+    public class DateTimeTextValueConverter : ITextValueConverter<DateTime>
     {
-        public bool TryConvert(string Text, out int Value) { return Int32.TryParse(Text, out Value); }
-        public string GetText(int Value) { return Value.ToString(); }
+        private readonly string _formatString;
+        public DateTimeTextValueConverter(string FormatString) { _formatString = FormatString; }
+
+        public bool TryConvert(string Text, out DateTime Value)
+        {
+            return DateTime.TryParseExact(Text, _formatString, CultureInfo.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out Value);
+        }
+
+        public string GetText(DateTime Value) { return Value.ToString(_formatString); }
     }
 }
