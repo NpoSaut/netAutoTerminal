@@ -1,39 +1,24 @@
 ﻿using System;
+using FirmwareBurner.Validation.Rules;
 using FirmwareBurner.ViewModels.Bases;
 
 namespace FirmwareBurner.ViewModels.Targeting
 {
     public class BlockDetailsViewModel : ViewModelBase
     {
-        private DateTime _assemblyDate = DateTime.Now;
-        private int _serialNumber;
+        public BlockDetailsViewModel() : this(0, DateTime.Now) { }
+
+        public BlockDetailsViewModel(int SerialNumber, DateTime AssemblyDate)
+        {
+            this.SerialNumber = new ValidateablePropertyViewModel<int>(SerialNumber,
+                new SerialNumberValidationRule());
+            this.AssemblyDate = new ValidateablePropertyViewModel<DateTime>(AssemblyDate);
+        }
 
         /// <summary>Серийный номер блока</summary>
-        public int SerialNumber
-        {
-            get { return _serialNumber; }
-            set
-            {
-                if (_serialNumber != value)
-                {
-                    _serialNumber = value;
-                    RaisePropertyChanged("SerialNumber");
-                }
-            }
-        }
+        public ValidateablePropertyViewModel<int> SerialNumber { get; private set; }
 
         /// <summary>Дата сборки модуля</summary>
-        public DateTime AssemblyDate
-        {
-            get { return _assemblyDate; }
-            set
-            {
-                if (_assemblyDate != value)
-                {
-                    _assemblyDate = value;
-                    RaisePropertyChanged("AssemblyDate");
-                }
-            }
-        }
+        public ValidateablePropertyViewModel<DateTime> AssemblyDate { get; private set; }
     }
 }

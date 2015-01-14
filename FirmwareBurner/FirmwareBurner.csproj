@@ -91,6 +91,7 @@
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="Validation\IProjectValidationRule.cs" />
     <Compile Include="Validation\IProjectValidator.cs" />
+    <Compile Include="Validation\IValidationRule.cs" />
     <Compile Include="Validation\RulesListProjectValidator.cs" />
     <Compile Include="Validation\Rules\AssemblyDateNumberValidationRule.cs" />
     <Compile Include="Validation\Rules\HaveFirmwareValidationRule.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
+    <Compile Include="ViewModels\ValidateablePropertyViewModel.cs" />
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>

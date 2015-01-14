@@ -16,7 +16,8 @@ namespace FirmwareBurner.Validation.Rules
         /// <returns>Список противоречий правилу в проекте</returns>
         public IEnumerable<string> ValidateProject(ProjectViewModel Project)
         {
-            if (Project.BlockDetails.AssemblyDate > _minimalDateTime) return Enumerable.Empty<String>();
+            //if (Project.BlockDetails.AssemblyDate > _minimalDateTime)
+            return Enumerable.Empty<String>();
             return new[] { "Не указана дата сборки ячейки" };
         }
     }

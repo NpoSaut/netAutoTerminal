@@ -1,4 +1,5 @@
-﻿using FirmwareBurner.ViewModels.FirmwareSources;
+﻿using System;
+using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwareBurner.ViewModels.Targeting;
 
 namespace FirmwareBurner.ViewModels
@@ -21,7 +22,7 @@ namespace FirmwareBurner.ViewModels
                                                 });
 
         private static readonly ProjectViewModel _project =
-            new ProjectViewModel(30, 1, new BlockDetailsViewModel() { SerialNumber = 10007 }, _firmwareSetConstructor);
+            new ProjectViewModel(30, 1, new BlockDetailsViewModel(10007, DateTime.Now), _firmwareSetConstructor);
 
         public static CompositeFirmwareSelectorViewModel FirmwareSelector
         {
