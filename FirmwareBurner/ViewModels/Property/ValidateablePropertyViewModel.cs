@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Validation;
 using FirmwareBurner.ViewModels.Bases;
 
-namespace FirmwareBurner.ViewModels
+namespace FirmwareBurner.ViewModels.Property
 {
     public class ValidateablePropertyViewModel<TValue> : ViewModelBase
     {
@@ -32,7 +31,7 @@ namespace FirmwareBurner.ViewModels
             get { return !ValidationErrors.Any(); }
         }
 
-        public IEnumerable<String> ValidationErrors
+        public virtual IEnumerable<string> ValidationErrors
         {
             get { return _validationRules.SelectMany(rule => rule.GetValidationErrors(Value)); }
         }
