@@ -9,13 +9,16 @@ namespace FirmwareBurner.ViewModels.Property
     public class ValidateablePropertyViewModel<TValue> : ViewModelBase
     {
         private readonly IList<IValidationRule<TValue>> _validationRules;
+        private bool _initialized;
         private TValue _value;
 
-        public ValidateablePropertyViewModel(TValue Value, params IValidationRule<TValue>[] ValidationRules)
+        public ValidateablePropertyViewModel(params IValidationRule<TValue>[] ValidationRules)
         {
-            _value = Value;
+            _initialized = false;
             _validationRules = ValidationRules;
         }
+
+        public ValidateablePropertyViewModel(TValue Value, params IValidationRule<TValue>[] ValidationRules) : this(ValidationRules) { this.Value = Value; }
 
         public TValue Value
         {
@@ -23,13 +26,19 @@ namespace FirmwareBurner.ViewModels.Property
             set
             {
                 _value = value;
+                _initialized = true;
                 RaisePropertyChanged(string.Empty);
             }
         }
 
+        public bool IsInitialized
+        {
+            get { return _initialized; }
+        }
+
         public bool IsValid
         {
-            get { return !ValidationErrors.Any(); }
+            get { return IsInitialized && !ValidationErrors.Any(); }
         }
 
         public virtual IEnumerable<string> ValidationErrors

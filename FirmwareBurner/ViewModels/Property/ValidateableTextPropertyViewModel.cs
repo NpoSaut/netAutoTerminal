@@ -9,6 +9,13 @@ namespace FirmwareBurner.ViewModels.Property
         private bool _valueConverted;
         private string _valueText;
 
+        public ValidateableTextPropertyViewModel(ITextValueConverter<TValue> Converter, params IValidationRule<TValue>[] ValidationRules)
+            : base(ValidationRules)
+        {
+            _converter = Converter;
+            _valueText = string.Empty;
+        }
+
         public ValidateableTextPropertyViewModel(TValue Value, ITextValueConverter<TValue> Converter, params IValidationRule<TValue>[] ValidationRules)
             : base(Value, ValidationRules)
         {
