@@ -1,5 +1,6 @@
 ﻿using System;
 using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwareBurner.ViewModels.Property;
 using FirmwareBurner.ViewModels.Targeting;
 
 namespace FirmwareBurner.ViewModels
@@ -24,6 +25,9 @@ namespace FirmwareBurner.ViewModels
         private static readonly ProjectViewModel _project =
             new ProjectViewModel(30, 1, new BlockDetailsViewModel(10007, DateTime.Now), _firmwareSetConstructor);
 
+        private static readonly ValidateableTextPropertyViewModel<int> _validateableTextProperty =
+            new ValidateableTextPropertyViewModel<int>(new IntTextValueConverter());
+
         public static CompositeFirmwareSelectorViewModel FirmwareSelector
         {
             get { return _firmwareSelector; }
@@ -37,6 +41,11 @@ namespace FirmwareBurner.ViewModels
         public static ProjectViewModel Project
         {
             get { return _project; }
+        }
+
+        public static ValidateableTextPropertyViewModel<int> ValidateableTextProperty
+        {
+            get { return _validateableTextProperty; }
         }
     }
 }
