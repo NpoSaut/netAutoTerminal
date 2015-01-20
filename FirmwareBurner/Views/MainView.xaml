@@ -17,6 +17,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SharedResources.xaml"/>
                 <ResourceDictionary Source="FirmwareSelectors/FirmwareSelectorsDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <firmwareBurner:ImageScrollerUniter x:Key="BackgroundScrollerUniter" />
@@ -46,6 +47,11 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+
+        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                   Style="{StaticResource TextIconStyle}" FontFamily="/Fonts/#saut-font"
+                   Text="a" FontSize="50" Foreground="White" Opacity="0.3" Margin="8,-14"
+                   TextOptions.TextFormattingMode="Ideal" TextOptions.TextHintingMode="Animated" />
 
         <Border Grid.Row="1" Background="#6689FF89">
             <views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
