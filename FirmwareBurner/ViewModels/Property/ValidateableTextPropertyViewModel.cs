@@ -33,7 +33,6 @@ namespace FirmwareBurner.ViewModels.Property
                 TValue val;
                 _valueConverted = _converter.TryConvert(_valueText, out val);
                 Value = val;
-                RaisePropertyChanged(string.Empty);
             }
         }
 
