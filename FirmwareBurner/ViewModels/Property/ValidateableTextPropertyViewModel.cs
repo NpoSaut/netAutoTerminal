@@ -21,6 +21,7 @@ namespace FirmwareBurner.ViewModels.Property
         {
             _converter = Converter;
             _valueText = _converter.GetText(Value);
+            _valueConverted = true;
         }
 
         public string ValueText

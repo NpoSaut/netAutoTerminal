@@ -11,8 +11,7 @@ namespace FirmwareBurner.ViewModels.Targeting
 
         public BlockDetailsViewModel(int SerialNumber, DateTime AssemblyDate)
         {
-            this.SerialNumber = new ValidateableTextPropertyViewModel<int>(SerialNumber,
-                                                                           new IntTextValueConverter(),
+            this.SerialNumber = new ValidateableTextPropertyViewModel<int>(new IntTextValueConverter(),
                                                                            new SerialNumberValidationRule());
 
             this.AssemblyDate = new ValidateableTextPropertyViewModel<DateTime>(AssemblyDate,
