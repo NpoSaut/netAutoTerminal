@@ -6,6 +6,21 @@
                     xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
                     xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
                     mc:Ignorable="d">
+
+
+    <Style TargetType="{x:Type Run}" x:Key="IconRunStyle">
+        <Setter Property="FontFamily" Value="/Fonts/#burner" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextIconStyle">
+        <Setter Property="FontFamily" Value="/Fonts/#burner" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextIconStyle}" x:Key="TextIconBoxStyle">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <DataTemplate DataType="{x:Type firmwareSources:FirmwareVersionViewModel}">
         <TextBlock>
             <Run Text="Версия" />
@@ -17,36 +32,75 @@
     </DataTemplate>
 
     <Style TargetType="ContentControl" x:Key="ValidateableControlStyle">
+        <Style.Resources>
+            <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter">
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5" To="0"
+                                 Duration="0:0:0.7">
+                    <DoubleAnimation.EasingFunction>
+                        <ElasticEase />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Key="DisplayErrorIconStoryboard" TargetName="WarningIcon">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.7" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <PowerEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Key="HideErrorIconStoryboard" TargetName="WarningIcon">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.4"
+                                 To="20">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase EasingMode="EaseIn" Amplitude="0.4" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </Style.Resources>
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
                     <Border Name="Holder" d:DataContext="{x:Static viewModels:SampleData.ValidateableTextProperty}"
                             Margin="{TemplateBinding Margin}" Padding="1">
-                        <ContentPresenter Name="Presenter" Content="{TemplateBinding Content}">
-                            <ContentPresenter.RenderTransform>
+                        <Grid Name="Presenter">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                            <TextBlock Name="WarningIcon" Text="!" FontSize="14"
+                                       Style="{StaticResource TextIconStyle}" TextOptions.TextFormattingMode="Ideal"
+                                       VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4"
+                                       Opacity="0" IsHitTestVisible="False">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Grid.RenderTransform>
                                 <TranslateTransform />
-                            </ContentPresenter.RenderTransform>
-                        </ContentPresenter>
+                            </Grid.RenderTransform>
+                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding IsValid}" Value="False">
-                            <Setter TargetName="Holder" Property="Background" Value="Violet" />
+                            <Setter Property="ToolTip" Value="{Binding ValidationErrorsText}"/>
+                            <Setter TargetName="WarningIcon" Property="Foreground" Value="#FF3410" />
                             <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="Presenter"
-                                                         Storyboard.TargetProperty="RenderTransform.X"
-                                                         From="-5" To="0" Duration="0:0:0.7">
-                                            <DoubleAnimation.EasingFunction>
-                                                <ElasticEase />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
+                                <BeginStoryboard Storyboard="{StaticResource ShakeInputStoryboard}" />
+                                <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
                             </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
+                            </DataTrigger.ExitActions>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsInitialized}" Value="False">
-                            <Setter TargetName="Holder" Property="Background" Value="Aqua" />
+                            <Setter TargetName="WarningIcon" Property="Foreground" Value="#0061C5" />
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
+                            </DataTrigger.ExitActions>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

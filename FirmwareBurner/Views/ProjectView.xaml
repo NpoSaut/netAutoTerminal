@@ -31,23 +31,23 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ContentControl Grid.Row="0" Grid.Column="0" Margin="1"
-                        DataContext="{Binding Path=BlockDetails.SerialNumber}"
-                        Style="{StaticResource ValidateableControlStyle}">
-            <HeaderedContentControl Header="Серийный номер блока">
+        <HeaderedContentControl Grid.Row="0" Grid.Column="0" Margin="1" IsTabStop="False"
+                                Header="Серийный номер блока">
+            <ContentControl Style="{StaticResource ValidateableControlStyle}"
+                            DataContext="{Binding Path=BlockDetails.SerialNumber}">
                 <TextBox Style="{StaticResource InputBoxStyle}" Margin="0"
                          Text="{Binding ValueText, UpdateSourceTrigger=PropertyChanged}" />
-            </HeaderedContentControl>
-        </ContentControl>
+            </ContentControl>
+        </HeaderedContentControl>
 
-        <ContentControl Grid.Row="0" Grid.Column="1" Margin="1"
-                        DataContext="{Binding Path=BlockDetails.AssemblyDate}"
-                        Style="{StaticResource ValidateableControlStyle}">
-            <HeaderedContentControl Header="Дата изготовления">
+        <HeaderedContentControl Grid.Row="0" Grid.Column="1" Margin="1" IsTabStop="False"
+                                Header="Дата изготовления">
+            <ContentControl Style="{StaticResource ValidateableControlStyle}"
+                            DataContext="{Binding Path=BlockDetails.AssemblyDate}">
                 <TextBox Style="{StaticResource InputBoxStyle}" Margin="0"
                          Text="{Binding Path=ValueText, UpdateSourceTrigger=PropertyChanged}" />
-            </HeaderedContentControl>
-        </ContentControl>
+            </ContentControl>
+        </HeaderedContentControl>
 
         <views:FirmwareSetConstructorView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
                                           DataContext="{Binding Path=FirmwareSetConstructor}" />
