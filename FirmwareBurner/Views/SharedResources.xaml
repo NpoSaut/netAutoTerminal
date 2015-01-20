@@ -33,7 +33,7 @@
 
     <Style TargetType="ContentControl" x:Key="ValidateableControlStyle">
         <Style.Resources>
-            <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter">
+            <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5" To="0"
                                  Duration="0:0:0.7">
                     <DoubleAnimation.EasingFunction>
@@ -43,13 +43,13 @@
             </Storyboard>
             <Storyboard x:Key="DisplayErrorIconStoryboard" TargetName="WarningIcon">
                 <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.7" />
-                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.3">
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="10" Duration="0:0:0.3">
                     <DoubleAnimation.EasingFunction>
                         <PowerEase EasingMode="EaseOut" />
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
-            <Storyboard x:Key="HideErrorIconStoryboard" TargetName="WarningIcon">
+            <Storyboard x:Key="HideErrorIconStoryboard" TargetName="WarningIcon" FillBehavior="Stop">
                 <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" />
                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.4"
                                  To="20">
