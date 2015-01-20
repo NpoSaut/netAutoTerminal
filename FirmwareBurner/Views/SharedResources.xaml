@@ -50,7 +50,7 @@
                 </DoubleAnimation>
             </Storyboard>
             <Storyboard x:Key="HideErrorIconStoryboard" TargetName="WarningIcon" FillBehavior="Stop">
-                <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="0:0:0.4" />
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.4" />
                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.4"
                                  To="20">
                     <DoubleAnimation.EasingFunction>
@@ -82,17 +82,21 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsValid}" Value="False">
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsInitialized}" Value="True"/>
+                                <Condition Binding="{Binding IsValid}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
                             <Setter Property="ToolTip" Value="{Binding ValidationErrorsText}"/>
                             <Setter TargetName="WarningIcon" Property="Foreground" Value="#FF3410" />
-                            <DataTrigger.EnterActions>
+                            <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard Storyboard="{StaticResource ShakeInputStoryboard}" />
                                 <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
-                            </DataTrigger.EnterActions>
-                            <DataTrigger.ExitActions>
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
                                 <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
-                            </DataTrigger.ExitActions>
-                        </DataTrigger>
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
                         <DataTrigger Binding="{Binding IsInitialized}" Value="False">
                             <Setter TargetName="WarningIcon" Property="Foreground" Value="#0061C5" />
                             <DataTrigger.EnterActions>
