@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+             xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
              mc:Ignorable="d" d:DesignWidth="300"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}">
     <UserControl.Resources>
@@ -17,8 +18,8 @@
 
     <ListBox ItemsSource="{Binding Components}" SelectedIndex="0">
         <ListBox.ItemTemplate>
-            <DataTemplate>
-                <ContentControl Style="{StaticResource ValidateableControlStyle}">
+            <DataTemplate DataType="{x:Type property:ValidateableFirmwareSetComponentViewModel}">
+                <ContentControl Style="{StaticResource ValidateableControlStyle}" HorizontalAlignment="Stretch">
                     <HeaderedContentControl Header="{Binding Value.ModuleName}">
                         <ContentPresenter x:Name="ContentPresenter" Content="{Binding Value.FirmwareSelector}" />
                     </HeaderedContentControl>
@@ -32,6 +33,11 @@
                 </DataTemplate.Triggers>
             </DataTemplate>
         </ListBox.ItemTemplate>
+        <ListBox.ItemContainerStyle>
+            <Style TargetType="{x:Type ListBoxItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            </Style>
+        </ListBox.ItemContainerStyle>
         <ListBox.Template>
             <ControlTemplate>
                 <ItemsPresenter />

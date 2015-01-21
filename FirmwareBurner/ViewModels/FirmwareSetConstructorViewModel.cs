@@ -12,13 +12,13 @@ namespace FirmwareBurner.ViewModels
         public FirmwareSetConstructorViewModel(ICollection<FirmwareSetComponentViewModel> Components)
         {
             var rule = new HaveFirmwareValidationRule();
-            this.Components = Components.Select(c => new ValidateableViewModelShell<FirmwareSetComponentViewModel>(c, rule)).ToList();
+            this.Components = Components.Select(c => new ValidateableFirmwareSetComponentViewModel(c, rule)).ToList();
 
             foreach (FirmwareSetComponentViewModel component in Components)
                 component.SetChanged += ComponentOnSetChanged;
         }
 
-        public ICollection<ValidateableViewModelShell<FirmwareSetComponentViewModel>> Components { get; private set; }
+        public List<ValidateableFirmwareSetComponentViewModel> Components { get; private set; }
 
         public event EventHandler SomethingChanged;
 

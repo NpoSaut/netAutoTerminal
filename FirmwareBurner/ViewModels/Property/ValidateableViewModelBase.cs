@@ -50,9 +50,9 @@ namespace FirmwareBurner.ViewModels.Property
         }
     }
 
-    public class ValidateableViewModelShell<TValue> : ValidateableViewModelBase<TValue> where TValue : INotifyPropertyChanged
+    public class ValidateableNotifyViewModel<TValue> : ValidateableViewModelBase<TValue> where TValue : INotifyPropertyChanged
     {
-        public ValidateableViewModelShell(TValue Value, params IValidationRule<TValue>[] ValidationRules) : base(ValidationRules)
+        public ValidateableNotifyViewModel(TValue Value, params IValidationRule<TValue>[] ValidationRules) : base(ValidationRules)
         {
             this.Value = Value;
             Value.PropertyChanged += ValueOnPropertyChanged;
@@ -66,5 +66,25 @@ namespace FirmwareBurner.ViewModels.Property
         }
 
         private void ValueOnPropertyChanged(object Sender, PropertyChangedEventArgs ChangedEventArgs) { OnValidateableValueChanged(); }
+    }
+
+    public class ValidateableFirmwareSetComponentViewModel : ValidateableViewModelBase<FirmwareSetComponentViewModel>
+    {
+        public ValidateableFirmwareSetComponentViewModel(FirmwareSetComponentViewModel Value,
+                                                         params IValidationRule<FirmwareSetComponentViewModel>[] ValidationRules)
+            : base(ValidationRules)
+        {
+            this.Value = Value;
+            Value.SetChanged += ValueOnSetChanged;
+        }
+
+        public FirmwareSetComponentViewModel Value { get; private set; }
+
+        protected override FirmwareSetComponentViewModel ValidateableValue
+        {
+            get { return Value; }
+        }
+
+        private void ValueOnSetChanged(object Sender, EventArgs Args) { OnValidateableValueChanged(); }
     }
 }
