@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using FirmwareBurner.Validation.Rules;
 using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.Property;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -8,12 +11,14 @@ namespace FirmwareBurner.ViewModels
     {
         public FirmwareSetConstructorViewModel(ICollection<FirmwareSetComponentViewModel> Components)
         {
-            this.Components = Components;
+            var rule = new HaveFirmwareValidationRule();
+            this.Components = Components.Select(c => new ValidateableViewModelShell<FirmwareSetComponentViewModel>(c, rule)).ToList();
+
             foreach (FirmwareSetComponentViewModel component in Components)
                 component.SetChanged += ComponentOnSetChanged;
         }
 
-        public ICollection<FirmwareSetComponentViewModel> Components { get; private set; }
+        public ICollection<ValidateableViewModelShell<FirmwareSetComponentViewModel>> Components { get; private set; }
 
         public event EventHandler SomethingChanged;
 

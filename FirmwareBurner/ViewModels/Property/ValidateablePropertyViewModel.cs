@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FirmwareBurner.Validation;
-using FirmwareBurner.ViewModels.Bases;
+﻿using FirmwareBurner.Validation;
 
 namespace FirmwareBurner.ViewModels.Property
 {
-    public class ValidateablePropertyViewModel<TValue> : ViewModelBase
+    public class ValidateablePropertyViewModel<TValue> : ValidateableViewModelBase<TValue>
     {
-        private readonly IList<IValidationRule<TValue>> _validationRules;
-        private bool _initialized;
         private TValue _value;
 
-        public ValidateablePropertyViewModel(params IValidationRule<TValue>[] ValidationRules)
-        {
-            _initialized = false;
-            _validationRules = ValidationRules;
-        }
+        public ValidateablePropertyViewModel(params IValidationRule<TValue>[] ValidationRules) : base(ValidationRules) { }
 
         public ValidateablePropertyViewModel(TValue Value, params IValidationRule<TValue>[] ValidationRules) : this(ValidationRules) { this.Value = Value; }
 
@@ -26,29 +16,14 @@ namespace FirmwareBurner.ViewModels.Property
             set
             {
                 _value = value;
-                _initialized = true;
-                RaisePropertyChanged(string.Empty);
+                RaisePropertyChanged(() => Value);
+                OnValidateableValueChanged();
             }
         }
 
-        public bool IsInitialized
+        protected override TValue ValidateableValue
         {
-            get { return _initialized; }
-        }
-
-        public bool IsValid
-        {
-            get { return IsInitialized && !ValidationErrors.Any(); }
-        }
-
-        public virtual IEnumerable<string> ValidationErrors
-        {
-            get { return _validationRules.SelectMany(rule => rule.GetValidationErrors(Value)); }
-        }
-
-        public string ValidationErrorsText
-        {
-            get { return string.Join(Environment.NewLine, ValidationErrors); }
+            get { return Value; }
         }
     }
 }

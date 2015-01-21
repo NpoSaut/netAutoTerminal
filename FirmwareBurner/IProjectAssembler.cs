@@ -26,8 +26,9 @@ namespace FirmwareBurner
             return _firmwareProjectFactory.GetProject(_projectViewModel.CellKindId, _projectViewModel.CellModificationId, ChannelNumber,
                                                       _projectViewModel.BlockDetails.SerialNumber.Value,
                                                       _projectViewModel.BlockDetails.AssemblyDate.Value,
-                                                      _projectViewModel.FirmwareSetConstructor.Components.Select(
-                                                          c => Tuple.Create(c.ModuleIndex, c.FirmwareSelector.SelectedPackage)).ToList());
+                                                      _projectViewModel.FirmwareSetConstructor.Components
+                                                                       .Select(c => c.Value)
+                                                                       .Select(c => Tuple.Create(c.ModuleIndex, c.FirmwareSelector.SelectedPackage)).ToList());
         }
     }
 }

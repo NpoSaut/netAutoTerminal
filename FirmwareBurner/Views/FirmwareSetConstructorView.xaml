@@ -9,6 +9,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SharedResources.xaml"/>
                 <ResourceDictionary Source="FirmwareSelectors/FirmwareSelectorsDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -16,10 +17,12 @@
 
     <ListBox ItemsSource="{Binding Components}" SelectedIndex="0">
         <ListBox.ItemTemplate>
-            <DataTemplate DataType="viewModels:FirmwareSetComponentViewModel">
-                <HeaderedContentControl Header="{Binding ModuleName}">
-                    <ContentPresenter x:Name="ContentPresenter" Content="{Binding FirmwareSelector}" />
-                </HeaderedContentControl>
+            <DataTemplate>
+                <ContentControl Style="{StaticResource ValidateableControlStyle}">
+                    <HeaderedContentControl Header="{Binding Value.ModuleName}">
+                        <ContentPresenter x:Name="ContentPresenter" Content="{Binding Value.FirmwareSelector}" />
+                    </HeaderedContentControl>
+                </ContentControl>
                 <DataTemplate.Triggers>
                     <DataTrigger
                         Binding="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}"
