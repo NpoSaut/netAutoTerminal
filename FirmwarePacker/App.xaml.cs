@@ -5,6 +5,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Threading;
 using Microsoft.Practices.Unity;
 using FirmwarePacker.Dialogs;
 using FirmwarePacker.Models;
@@ -22,12 +23,21 @@ namespace FirmwarePacker
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Current.DispatcherUnhandledException += CurrentOnDispatcherUnhandledException;
             base.OnStartup(e);
 
             if (e.Args.Length > 0) ArgsDirectory = e.Args[0];
 
             MainWindow mainWindow = ServiceLocator.Container.Resolve<FirmwarePacker.MainWindow>();
             mainWindow.Show();
+        }
+
+        private void CurrentOnDispatcherUnhandledException(object Sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            if (MessageBox.Show(
+                String.Format("Непредвиденная ошибка при работе приложения:\n{0}\nСкопировать сведения об ошибке в буфер обмена?", e.Exception),
+                "Ошибка в приложении", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                Clipboard.SetText(e.Exception.ToString());
         }
     }
 

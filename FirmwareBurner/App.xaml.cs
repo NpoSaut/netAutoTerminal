@@ -1,4 +1,6 @@
-﻿using System.Windows;
+using System;
+using System.Windows;
+using System.Windows.Threading;
 
 namespace FirmwareBurner
 {
@@ -9,6 +11,7 @@ namespace FirmwareBurner
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            Current.DispatcherUnhandledException += CurrentOnDispatcherUnhandledException;
             base.OnStartup(e);
             _bootstrapper = new BurnerBootstrapper();
             _bootstrapper.Run();
@@ -18,6 +21,14 @@ namespace FirmwareBurner
         {
             base.OnExit(e);
             _bootstrapper.Dispose();
+        }
+
+        private void CurrentOnDispatcherUnhandledException(object Sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            if (MessageBox.Show(
+                String.Format("Непредвиденная ошибка при работе приложения:\n{0}\nСкопировать сведения об ошибке в буфер обмена?", e.Exception),
+                "Ошибка в приложении", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
+                Clipboard.SetText(e.Exception.ToString());
         }
     }
 }
