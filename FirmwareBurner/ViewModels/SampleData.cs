@@ -1,5 +1,7 @@
-﻿using FirmwareBurner.ViewModels.FirmwareSources;
+﻿using System;
+using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwareBurner.ViewModels.Targeting;
+using FirmwarePacking;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -9,8 +11,20 @@ namespace FirmwareBurner.ViewModels
         private static readonly CompositeFirmwareSelectorViewModel _firmwareSelector =
             new CompositeFirmwareSelectorViewModel(new[]
                                                    {
-                                                       new ManualFirmwareSelectorViewModel("Вручную"),
-                                                       new ManualFirmwareSelectorViewModel("Вручную")
+                                                       new FakeFirmwareSelectorViewModel("Вручную",
+                                                                                         new PackageInformation
+                                                                                         {
+                                                                                             FirmwareVersion = new Version(1, 3),
+                                                                                             FirmwareVersionLabel = "",
+                                                                                             ReleaseDate = DateTime.Now
+                                                                                         }),
+                                                       new FakeFirmwareSelectorViewModel("Из папки",
+                                                                                         new PackageInformation
+                                                                                         {
+                                                                                             FirmwareVersion = new Version(2, 6),
+                                                                                             FirmwareVersionLabel = "BPL",
+                                                                                             ReleaseDate = DateTime.Now
+                                                                                         })
                                                    });
 
         private static readonly FirmwareSetConstructorViewModel _firmwareSetConstructor =
@@ -21,7 +35,7 @@ namespace FirmwareBurner.ViewModels
                                                 });
 
         private static readonly ProjectViewModel _project =
-            new ProjectViewModel(30, 1, new BlockDetailsViewModel() { SerialNumber = 10007 }, _firmwareSetConstructor);
+            new ProjectViewModel(30, 1, new BlockDetailsViewModel { SerialNumber = 10007 }, _firmwareSetConstructor);
 
         public static CompositeFirmwareSelectorViewModel FirmwareSelector
         {
@@ -37,5 +51,20 @@ namespace FirmwareBurner.ViewModels
         {
             get { return _project; }
         }
+
+        #region Fake Classes
+
+        private class FakeFirmwareSelectorViewModel : FirmwareSelectorViewModel
+        {
+            private readonly PackageInformation _packageInformation;
+            public FakeFirmwareSelectorViewModel(string Name, PackageInformation PackageInformation) : base(Name) { _packageInformation = PackageInformation; }
+
+            public override FirmwarePackage SelectedPackage
+            {
+                get { return new FirmwarePackage { Information = _packageInformation }; }
+            }
+        }
+
+        #endregion
     }
 }

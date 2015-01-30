@@ -130,10 +130,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DialogShell.xaml.cs">
+      <DependentUpon>DialogShell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="ImageScroller.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="TriggerActions\ShowDialogTriggerAction.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="Validation\IProjectValidationRule.cs" />
     <Compile Include="Validation\IProjectValidator.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
+    <Compile Include="ViewModels\RequestDialogInteractionContext.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
@@ -179,6 +184,10 @@
     <Compile Include="Views\ProjectManagerView.xaml.cs">
       <DependentUpon>ProjectManagerView.xaml</DependentUpon>
     </Compile>
+    <Page Include="DialogShell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styler.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -365,6 +374,7 @@
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>REM rd $(TargetDir)SingleExe /S /Q

@@ -1,0 +1,13 @@
+﻿<Window x:Class="FirmwareBurner.DialogShell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DialogShell" SizeToContent="WidthAndHeight">
+    <Window.Resources>
+        <ResourceDictionary x:Name="ResourceDictionary">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <ContentPresenter Content="{Binding}" />
+</Window>
