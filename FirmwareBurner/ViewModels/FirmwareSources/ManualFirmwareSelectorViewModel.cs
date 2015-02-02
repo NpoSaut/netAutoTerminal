@@ -13,7 +13,6 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         public ManualFirmwareSelectorViewModel(string Name) : base(Name)
         {
             OpenPackageCommand = new DelegateCommand(OpenPackage);
-            FirmwarePath = "Выбрать файл";
         }
 
         public string FirmwarePath

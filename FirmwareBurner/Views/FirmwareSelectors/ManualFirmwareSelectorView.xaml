@@ -16,7 +16,7 @@
     <StackPanel>
         <TextBlock>
             <Hyperlink Command="{Binding OpenPackageCommand}">
-                <Run Text="{Binding FirmwarePath, Mode=OneWay}" />
+                <Run Text="{Binding FirmwarePath, Mode=OneWay, TargetNullValue='Выбрать файл'}" />
             </Hyperlink>
         </TextBlock>
         <ContentPresenter Content="{Binding SelectedVersion}" />
