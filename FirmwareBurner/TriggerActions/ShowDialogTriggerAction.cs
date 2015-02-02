@@ -5,7 +5,7 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwareBurner.TriggerActions
 {
-    public class ShowDialogTriggerAction : TriggerAction<FrameworkElement>
+    public class ShowDialogTriggerAction : TriggerAction<DependencyObject>
     {
         public ResourceDictionary DialogMergedResources { get; set; }
 
@@ -19,9 +19,16 @@ namespace FirmwareBurner.TriggerActions
             var e = (InteractionRequestedEventArgs)parameter;
             var context = (RequestDialogInteractionContext)e.Context;
 
-            var dlg = new DialogShell { DataContext = context.ViewModel };
+            var dlg = new DialogShell
+                      {
+                          DataContext = context.ViewModel,
+                          Title = context.Title,
+                          Owner = Window.GetWindow(AssociatedObject)
+                      };
+
             if (DialogMergedResources != null)
                 dlg.ResourceDictionary.MergedDictionaries.Add(DialogMergedResources);
+
             dlg.ShowDialog();
         }
     }

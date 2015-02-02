@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="100" d:DesignWidth="250"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSelector}">
-    <TabControl ItemsSource="{Binding Children}" SelectedItem="{Binding SelectedSelector}">
+    <TabControl ItemsSource="{Binding Children}" SelectedItem="{Binding SelectedSelector}" Padding="4">
         <TabControl.ItemTemplate>
             <DataTemplate>
                 <TextBlock Text="{Binding Name}" />

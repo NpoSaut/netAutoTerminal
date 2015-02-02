@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
-    <DockPanel>
+    <DockPanel Margin="2">
         <StackPanel DockPanel.Dock="Bottom">
             <StackPanel.Resources>
                 <Style TargetType="{x:Type Button}">

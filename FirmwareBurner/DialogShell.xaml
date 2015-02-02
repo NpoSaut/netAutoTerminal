@@ -1,7 +1,9 @@
 ﻿<Window x:Class="FirmwareBurner.DialogShell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="DialogShell" SizeToContent="WidthAndHeight">
+        Title="DialogShell" SizeToContent="WidthAndHeight"
+        SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display"
+        Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
     <Window.Resources>
         <ResourceDictionary x:Name="ResourceDictionary">
             <ResourceDictionary.MergedDictionaries>
