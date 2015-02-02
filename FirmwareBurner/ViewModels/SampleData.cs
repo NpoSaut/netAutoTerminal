@@ -1,4 +1,5 @@
 ﻿using System;
+using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwareBurner.ViewModels.Targeting;
 using FirmwarePacking;
@@ -37,6 +38,9 @@ namespace FirmwareBurner.ViewModels
         private static readonly ProjectViewModel _project =
             new ProjectViewModel(30, 1, new BlockDetailsViewModel { SerialNumber = 10007 }, _firmwareSetConstructor);
 
+        private static readonly FirmwareSelectorDialogViewModel _firmwareSelectorDialog =
+            new FirmwareSelectorDialogViewModel(_firmwareSelector);
+
         public static CompositeFirmwareSelectorViewModel FirmwareSelector
         {
             get { return _firmwareSelector; }
@@ -50,6 +54,11 @@ namespace FirmwareBurner.ViewModels
         public static ProjectViewModel Project
         {
             get { return _project; }
+        }
+
+        public static FirmwareSelectorDialogViewModel FirmwareSelectorDialog
+        {
+            get { return _firmwareSelectorDialog; }
         }
 
         #region Fake Classes

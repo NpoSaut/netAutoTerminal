@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -26,7 +27,11 @@ namespace FirmwareBurner.ViewModels
         public ICommand SelectFirmwareCommand { get; private set; }
         public FirmwareSelectorViewModel FirmwareSelector { get; private set; }
         public InteractionRequest<RequestDialogInteractionContext> FirmwareSelectionRequest { get; private set; }
-        private void RequestFirmwareSelection() { FirmwareSelectionRequest.Raise(new RequestDialogInteractionContext(FirmwareSelector)); }
+
+        private void RequestFirmwareSelection()
+        {
+            FirmwareSelectionRequest.Raise(new RequestDialogInteractionContext(new FirmwareSelectorDialogViewModel(FirmwareSelector)));
+        }
 
         public event EventHandler SetChanged;
 

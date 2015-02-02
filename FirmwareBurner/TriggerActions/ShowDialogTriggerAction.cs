@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Interactivity;
 using FirmwareBurner.ViewModels;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -8,7 +7,7 @@ namespace FirmwareBurner.TriggerActions
 {
     public class ShowDialogTriggerAction : TriggerAction<FrameworkElement>
     {
-        public Uri ResourceDictionary { get; set; }
+        public ResourceDictionary DialogMergedResources { get; set; }
 
         /// <summary>Invokes the action.</summary>
         /// <param name="parameter">
@@ -21,8 +20,8 @@ namespace FirmwareBurner.TriggerActions
             var context = (RequestDialogInteractionContext)e.Context;
 
             var dlg = new DialogShell { DataContext = context.ViewModel };
-            if (ResourceDictionary != null)
-                dlg.ResourceDictionary.MergedDictionaries.Add(new ResourceDictionary { Source = ResourceDictionary });
+            if (DialogMergedResources != null)
+                dlg.ResourceDictionary.MergedDictionaries.Add(DialogMergedResources);
             dlg.ShowDialog();
         }
     }

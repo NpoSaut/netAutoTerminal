@@ -6,6 +6,8 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
+             xmlns:dialogs="clr-namespace:FirmwareBurner.ViewModels.Dialogs"
+             xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
              mc:Ignorable="d" d:DesignWidth="300"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}">
     <UserControl.Resources>
@@ -56,8 +58,15 @@
                         </TextBlock>
                         <i:Interaction.Triggers>
                             <i:EventTrigger SourceObject="{Binding FirmwareSelectionRequest}" EventName="Raised">
-                                <triggerActions:ShowDialogTriggerAction
-                                    ResourceDictionary="../Views/FirmwareSelectors/FirmwareSelectorsDataTemplates.xaml" />
+                                <triggerActions:ShowDialogTriggerAction>
+                                    <triggerActions:ShowDialogTriggerAction.DialogMergedResources>
+                                        <ResourceDictionary>
+                                            <DataTemplate DataType="{x:Type dialogs:FirmwareSelectorDialogViewModel}">
+                                                <firmwareSelectors:FirmwareSelectorDialogView />
+                                            </DataTemplate>
+                                        </ResourceDictionary>
+                                    </triggerActions:ShowDialogTriggerAction.DialogMergedResources>
+                                </triggerActions:ShowDialogTriggerAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Grid></Border>

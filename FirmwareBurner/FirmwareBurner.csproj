@@ -148,6 +148,7 @@
     <Compile Include="Validation\ValidationModule.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\FirmwareSelectorDialogViewModel.cs" />
     <Compile Include="ViewModels\FileRequestServiceViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
@@ -163,6 +164,9 @@
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
     <Compile Include="ViewModels\RequestDialogInteractionContext.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
+    <Compile Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml.cs">
+      <DependentUpon>FirmwareSelectorDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
@@ -227,6 +231,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectView.xaml">
       <SubType>Designer</SubType>
