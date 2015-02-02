@@ -3,46 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
-             xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="100" d:DesignWidth="250"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSelector}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ListBox Grid.Column="0"
-                 ItemsSource="{Binding Children}"
-                 SelectedItem="{Binding SelectedSelector}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Text="{Binding Name}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="{x:Type ListBoxItem}">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <RadioButton Content="{TemplateBinding Content}"
-                                             ContentTemplate="{TemplateBinding ContentTemplate}"
-                                             IsChecked="{TemplateBinding Selector.IsSelected}" />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.Template>
-                <ControlTemplate>
-                    <ItemsPresenter />
-                </ControlTemplate>
-            </ListBox.Template>
-        </ListBox>
-        <Border Grid.Column="1" Padding="5">
-            <ContentPresenter Content="{Binding SelectedSelector}" />
-        </Border>
-    </Grid>
+    <TabControl ItemsSource="{Binding Children}" SelectedItem="{Binding SelectedSelector}">
+        <TabControl.ItemTemplate>
+            <DataTemplate>
+                <TextBlock Text="{Binding Name}" />
+            </DataTemplate>
+        </TabControl.ItemTemplate>
+    </TabControl>
 </UserControl>
