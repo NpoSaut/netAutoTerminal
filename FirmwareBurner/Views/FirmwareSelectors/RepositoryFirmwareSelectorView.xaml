@@ -4,15 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="200" d:DesignWidth="300"
              d:DataContext="{x:Static viewModels:SampleData.RepositoryFirmwareSelector}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-        <ListView ItemsSource="{Binding Packages}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ContentPresenter Grid.Row="0" Grid.Column="0" Margin="2" VerticalAlignment="Center"
+                          Content="{Binding SelectedVersion, TargetNullValue='Версия не выбрана'}" />
+        <Button Grid.Row="0" Grid.Column="1" Content="Загрузить" Command="{Binding GetPackageCommand}" />
+        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="2"
+                  ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedElement}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Версия" DisplayMemberBinding="{Binding Path=Information.FirmwareVersion}" />
-                    <GridViewColumn Header="Метка" DisplayMemberBinding="{Binding Path=Information.FirmwareVersionLabel}" />
+                    <GridViewColumn Header="Метка"
+                                    DisplayMemberBinding="{Binding Path=Information.FirmwareVersionLabel}" />
                     <GridViewColumn Header="Дата релиза" DisplayMemberBinding="{Binding Path=Information.ReleaseDate}" />
                 </GridView>
             </ListView.View>

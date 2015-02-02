@@ -128,7 +128,7 @@ namespace FirmwareBurner.ViewModels
                 public FirmwareComponent GetComponent(ComponentTarget Target) { throw new NotImplementedException(); }
             }
         }
-
+        
         #endregion
     }
 }
