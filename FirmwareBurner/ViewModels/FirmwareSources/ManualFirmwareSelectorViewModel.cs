@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using FirmwarePacking;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Win32;
@@ -10,7 +11,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         private string _firmwarePath;
         private FirmwarePackage _selectedPackage;
 
-        public ManualFirmwareSelectorViewModel(string Name) : base(Name)
+        public ManualFirmwareSelectorViewModel(string Name, ICollection<ComponentTarget> RequiredTargets) : base(Name)
         {
             OpenPackageCommand = new DelegateCommand(OpenPackage);
         }

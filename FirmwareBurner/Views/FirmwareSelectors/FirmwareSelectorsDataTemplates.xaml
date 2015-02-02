@@ -7,6 +7,10 @@
         <firmwareSelectors:ManualFirmwareSelectorView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type firmwareSources:RepositoryFirmwareSelectorViewModel}">
+        <firmwareSelectors:RepositoryFirmwareSelectorView />
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type firmwareSources:CompositeFirmwareSelectorViewModel}">
         <firmwareSelectors:CompositeFirmwareSelectorView />
     </DataTemplate>

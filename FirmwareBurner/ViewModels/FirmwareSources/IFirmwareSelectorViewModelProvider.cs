@@ -2,18 +2,6 @@
 {
     public interface IFirmwareSelectorViewModelProvider
     {
-        FirmwareSelectorViewModel GetViewModel(int CellKindId, int ModificationId);
-    }
-
-    public class CompositeFirmwareSelectorViewModelProvider : IFirmwareSelectorViewModelProvider
-    {
-        public FirmwareSelectorViewModel GetViewModel(int CellKindId, int ModificationId)
-        {
-            return new CompositeFirmwareSelectorViewModel(
-                new FirmwareSelectorViewModel[]
-                {
-                    new ManualFirmwareSelectorViewModel("Из файла")
-                });
-        }
+        FirmwareSelectorViewModel GetViewModel(int CellKindId, int ModificationId, int ModuleId, int ChannelsCount);
     }
 }

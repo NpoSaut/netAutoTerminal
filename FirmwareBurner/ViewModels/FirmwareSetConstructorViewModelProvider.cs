@@ -25,7 +25,8 @@ namespace FirmwareBurner.ViewModels
                     block.Modules.Select(module =>
                                          new FirmwareSetComponentViewModel(module.Id,
                                                                            module.Name,
-                                                                           _firmwareSelectorViewModelProvider.GetViewModel(CellKindId, CellModificationId)))
+                                                                           _firmwareSelectorViewModelProvider.GetViewModel(CellKindId, CellModificationId,
+                                                                                                                           module.Id, block.ChannelsCount)))
                          .ToList());
         }
     }

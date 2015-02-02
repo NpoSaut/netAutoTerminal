@@ -154,6 +154,7 @@
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
@@ -166,6 +167,9 @@
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml.cs">
       <DependentUpon>FirmwareSelectorDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirmwareSelectors\RepositoryFirmwareSelectorView.xaml.cs">
+      <DependentUpon>RepositoryFirmwareSelectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
@@ -236,6 +240,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\FirmwareSelectors\RepositoryFirmwareSelectorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -275,7 +283,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSelectorViewModel.cs" />
-    <Compile Include="ViewModels\FirmwareSources\RepoFirmwareSelector.cs" />
+    <Compile Include="ViewModels\FirmwareSources\RepositoryFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\Tools\ICellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\IndexCellsCatalogProvider.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
