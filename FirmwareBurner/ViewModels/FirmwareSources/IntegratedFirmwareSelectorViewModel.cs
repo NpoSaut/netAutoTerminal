@@ -26,13 +26,41 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 
     public class FirmwarePackageViewModel : ViewModelBase
     {
-        public FirmwarePackageViewModel(FirmwareVersionViewModel Version, bool LocallyAvailable)
+        public FirmwarePackageViewModel(FirmwareVersionViewModel Version, FirmwarePackageAvailabilityViewModel Availability)
         {
-            this.LocallyAvailable = LocallyAvailable;
+            this.Availability = Availability;
             this.Version = Version;
         }
 
-        public bool LocallyAvailable { get; private set; }
+        public FirmwarePackageAvailabilityViewModel Availability { get; private set; }
         public FirmwareVersionViewModel Version { get; private set; }
+    }
+
+    public class FirmwarePackageAvailabilityViewModel : ViewModelBase
+    {
+        public FirmwarePackageAvailabilityViewModel(bool IsAvailable)
+        {
+            this.IsAvailable = IsAvailable;
+            IsDownloading = false;
+            DownloadingProgress = 0;
+        }
+
+        public FirmwarePackageAvailabilityViewModel(bool IsAvailable, bool IsDownloading, double DownloadingProgress)
+        {
+            this.IsAvailable = IsAvailable;
+            this.IsDownloading = IsDownloading;
+            this.DownloadingProgress = DownloadingProgress;
+        }
+
+        public bool IsAvailable { get; private set; }
+        public bool IsDownloading { get; private set; }
+        public double DownloadingProgress { get; private set; }
+    }
+
+    public class FirmwarePackageReadinessViewModelFactory
+    {
+        public FirmwarePackageAvailabilityViewModel GetAvailableViewModel() { return new FirmwarePackageAvailabilityViewModel(true); }
+        public FirmwarePackageAvailabilityViewModel GetUnavailableViewModel() { return new FirmwarePackageAvailabilityViewModel(false); }
+        public FirmwarePackageAvailabilityViewModel GetProgressViewModel(double Progress) { return new FirmwarePackageAvailabilityViewModel(false, true, Progress); }
     }
 }

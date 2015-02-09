@@ -11,7 +11,7 @@
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type firmwareSources:FirmwarePackageViewModel}">
-            <Border Name="ItemRoot" Background="LightGreen" BorderBrush="Gray" BorderThickness="2" Margin="2" CornerRadius="2">
+            <Border Name="ItemRoot" Background="LightGreen">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -21,9 +21,12 @@
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
+                    <ProgressBar Name="DownloadProgressBar" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                 Grid.ColumnSpan="2" Opacity="0"
+                                 Value="{Binding Path=Availability.DownloadingProgress}" Maximum="1" />
                     <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#30ffffff">
                         <TextBlock VerticalAlignment="Center"
-                               HorizontalAlignment="Center" Text="{Binding Version}" FontWeight="DemiBold" />
+                                   HorizontalAlignment="Center" Text="{Binding Version}" FontWeight="DemiBold" />
                     </Border>
                     <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Text="Стабильная" Opacity="0.6"
                                FontSize="10" Margin="2" />
@@ -34,12 +37,12 @@
                 </Grid>
             </Border>
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding LocallyAvailable}" Value="False">
-                    <!--<Setter TargetName="ItemRoot" Property="Background" Value="LightGray" />-->
+                <DataTrigger Binding="{Binding Path=Availability.IsAvailable}" Value="False">
                     <Setter TargetName="ItemRoot" Property="Opacity" Value="0.3" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=ListBoxItem}, Path=IsSelected}" Value="True">
-                    <Setter TargetName="ItemRoot" Property="BorderBrush" Value="Brown" />
+                <DataTrigger Binding="{Binding Path=Availability.IsDownloading}" Value="True">
+                    <Setter TargetName="ItemRoot" Property="Opacity" Value="1" />
+                    <Setter TargetName="DownloadProgressBar" Property="Opacity" Value="1" />
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -52,7 +55,18 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <ContentPresenter Content="{TemplateBinding Content}" />
+                                <Border Name="ItemRoot" BorderBrush="Gray" BorderThickness="1"
+                                        Margin="2" CornerRadius="0">
+                                    <ContentPresenter Content="{TemplateBinding Content}" />
+                                    <Border.Effect>
+                                        <DropShadowEffect ShadowDepth="1" Opacity="0.2" BlurRadius="2" />
+                                    </Border.Effect>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="ItemRoot" Property="BorderBrush" Value="Blue" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
