@@ -157,6 +157,7 @@
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
+    <Compile Include="ViewModels\FirmwareSources\IntegratedFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
@@ -167,6 +168,9 @@
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml.cs">
       <DependentUpon>FirmwareSelectorDialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirmwareSelectors\IntegratedFirmwareSelectorView.xaml.cs">
+      <DependentUpon>IntegratedFirmwareSelectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FirmwareSelectors\RepositoryFirmwareSelectorView.xaml.cs">
       <DependentUpon>RepositoryFirmwareSelectorView.xaml</DependentUpon>
@@ -237,6 +241,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirmwareSelectors\IntegratedFirmwareSelectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

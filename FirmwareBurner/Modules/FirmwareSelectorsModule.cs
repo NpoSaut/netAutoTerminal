@@ -11,7 +11,7 @@ namespace FirmwareBurner.Modules
 
         public void Initialize()
         {
-            _container.RegisterType<IFirmwareSelectorViewModelProvider, CompositeFirmwareSelectorViewModelProvider>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IFirmwareSelectorViewModelProvider, IntegratedFirmwareSelectorViewModelProvider>(new ContainerControlledLifetimeManager());
         }
     }
 }

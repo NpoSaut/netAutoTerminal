@@ -12,7 +12,7 @@ namespace FirmwareBurner.ViewModels
     /// <summary>ViewModel-и для отображения в Design Time</summary>
     public static class SampleData
     {
-        private static readonly CompositeFirmwareSelectorViewModel _firmwareSelector =
+        private static readonly CompositeFirmwareSelectorViewModel _compositeFirmwareSelector =
             new CompositeFirmwareSelectorViewModel(new[]
                                                    {
                                                        new FakeFirmwareSelectorViewModel("Вручную",
@@ -31,27 +31,37 @@ namespace FirmwareBurner.ViewModels
                                                                                          })
                                                    });
 
+        private static readonly IntegratedFirmwareSelectorViewModel _integratedFirmwareSelector =
+            new IntegratedFirmwareSelectorViewModel(
+                Enumerable.Range(0, 6)
+                          .Reverse()
+                          .Select(i => new FirmwarePackageViewModel(new FirmwareVersionViewModel(String.Format("{0}.{1}", 1, i),
+                                                                                                 "LDP",
+                                                                                                 DateTime.Today.AddHours(12).AddMonths(-i)),
+                                                                    i % 2 == 0))
+                          .ToList());
+
         private static readonly FirmwareSetConstructorViewModel _firmwareSetConstructor =
             new FirmwareSetConstructorViewModel(new[]
                                                 {
-                                                    new FirmwareSetComponentViewModel(1, "Модуль 1", _firmwareSelector),
-                                                    new FirmwareSetComponentViewModel(1, "Модуль 2", _firmwareSelector)
+                                                    new FirmwareSetComponentViewModel(1, "Модуль 1", _compositeFirmwareSelector),
+                                                    new FirmwareSetComponentViewModel(1, "Модуль 2", _compositeFirmwareSelector)
                                                 });
 
         private static readonly ProjectViewModel _project =
             new ProjectViewModel(30, 1, new BlockDetailsViewModel { SerialNumber = 10007 }, _firmwareSetConstructor);
 
         private static readonly FirmwareSelectorDialogViewModel _firmwareSelectorDialog =
-            new FirmwareSelectorDialogViewModel(_firmwareSelector);
+            new FirmwareSelectorDialogViewModel(_compositeFirmwareSelector);
 
         private static readonly IRepository _fakeRepository = new FakeRepository();
 
         private static readonly RepositoryFirmwareSelectorViewModel _repositoryFirmwareSelector =
             new RepositoryFirmwareSelectorViewModel("Из репозитория", _fakeRepository, new ComponentTarget[0]);
 
-        public static CompositeFirmwareSelectorViewModel FirmwareSelector
+        public static CompositeFirmwareSelectorViewModel CompositeFirmwareSelector
         {
-            get { return _firmwareSelector; }
+            get { return _compositeFirmwareSelector; }
         }
 
         public static FirmwareSetConstructorViewModel FirmwareSetConstructor
@@ -72,6 +82,11 @@ namespace FirmwareBurner.ViewModels
         public static RepositoryFirmwareSelectorViewModel RepositoryFirmwareSelector
         {
             get { return _repositoryFirmwareSelector; }
+        }
+
+        public static IntegratedFirmwareSelectorViewModel IntegratedFirmwareSelector
+        {
+            get { return _integratedFirmwareSelector; }
         }
 
         #region Fake Classes
@@ -128,7 +143,7 @@ namespace FirmwareBurner.ViewModels
                 public FirmwareComponent GetComponent(ComponentTarget Target) { throw new NotImplementedException(); }
             }
         }
-        
+
         #endregion
     }
 }

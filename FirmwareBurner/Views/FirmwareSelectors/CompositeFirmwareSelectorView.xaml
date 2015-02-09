@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="100" d:DesignWidth="250"
-             d:DataContext="{x:Static viewModels:SampleData.FirmwareSelector}">
+             d:DataContext="{x:Static viewModels:SampleData.CompositeFirmwareSelector}">
     <TabControl ItemsSource="{Binding Children}" SelectedItem="{Binding SelectedSelector}" Padding="4">
         <TabControl.ItemTemplate>
             <DataTemplate>

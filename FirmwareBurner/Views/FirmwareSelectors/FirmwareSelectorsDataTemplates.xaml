@@ -15,4 +15,8 @@
         <firmwareSelectors:CompositeFirmwareSelectorView />
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type firmwareSources:IntegratedFirmwareSelectorViewModel}">
+        <firmwareSelectors:IntegratedFirmwareSelectorView />
+    </DataTemplate>
+
 </ResourceDictionary>
