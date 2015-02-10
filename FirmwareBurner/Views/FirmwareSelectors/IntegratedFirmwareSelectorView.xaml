@@ -26,8 +26,9 @@
                     </Grid.Resources>
                     <firmwareBurner:CircleProgress Name="DownloadProgressBar" Visibility="Collapsed"
                                                    Background="{StaticResource AccentBrush}"
-                                                   Value="{Binding Path=Availability.DownloadingProgress}" Maximum="1"
-                                                   IsIndeterminate="True" />
+                                                   InnerRadiusPortion="0.85"
+                                                   Value="{Binding Path=Availability.DownloadingProgress, Mode=OneWay}"
+                                                   Maximum="1" />
                     <Ellipse Name="VersionEllipse" Stroke="{StaticResource AccentBrush}" StrokeThickness="1.1" />
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock x:Name="VersionTextBlock" Text="{Binding Version.Version, Mode=OneWay}"
@@ -36,19 +37,25 @@
                                    FontSize="10" />
                     </StackPanel>
                 </Grid>
-                <StackPanel VerticalAlignment="Center" Margin="4,2">
-                    <TextBlock Text="Актуальная" Margin="2" Foreground="{StaticResource AccentBrush}" />
-                    <TextBlock Margin="2" Opacity="0.6">
+                <StackPanel VerticalAlignment="Center" Margin="6, 4">
+                    <TextBlock Text="Актуальная" Foreground="{StaticResource AccentBrush}" />
+                    <TextBlock Opacity="0.6">
                         <Run Text="Дата выпуска:" />
                         <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
                     </TextBlock>
                 </StackPanel>
             </DockPanel>
             <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Version.HaveLabel}" Value="True">
+                    <Setter TargetName="VersionLabelTextBlock" Property="Visibility" Value="Collapsed" />
+                    <Setter TargetName="VersionLabelTextBlock" Property="FontSize" Value="14" />
+                </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Availability.IsAvailable}" Value="False">
-                    <Setter TargetName="VersionEllipse" Property="StrokeDashArray" Value="3 3" />
+                    <Setter TargetName="VersionEllipse" Property="StrokeThickness" Value="1" />
+                    <Setter TargetName="VersionEllipse" Property="StrokeDashArray" Value="4 5" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Availability.IsDownloading}" Value="True">
+                    <Setter TargetName="VersionEllipse" Property="StrokeThickness" Value="0" />
                     <Setter TargetName="DownloadProgressBar" Property="Visibility" Value="Visible" />
                 </DataTrigger>
                 <DataTrigger
@@ -69,7 +76,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Name="ItemRoot" Margin="2" BorderThickness="3,0,0,0" Background="Transparent">
+                                <Border Name="ItemRoot" BorderThickness="1" Background="Transparent" Padding="3">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
                                 </Border>
                                 <ControlTemplate.Triggers>

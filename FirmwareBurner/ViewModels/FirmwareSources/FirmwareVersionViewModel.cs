@@ -17,6 +17,11 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         public String Label { get; private set; }
         public DateTime ReleaseDate { get; private set; }
 
+        public Boolean HaveLabel
+        {
+            get { return string.IsNullOrWhiteSpace(Label); }
+        }
+
         public override string ToString() { return string.Join(" ", new[] { Version, Label }.Where(i => i != null)); }
     }
 }
