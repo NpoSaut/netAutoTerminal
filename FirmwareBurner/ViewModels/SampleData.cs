@@ -41,7 +41,7 @@ namespace FirmwareBurner.ViewModels
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.32", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(true)),
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.30", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true)),
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.29", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true)),
-                });
+                }, null);
 
         private static readonly FirmwareSetConstructorViewModel _firmwareSetConstructor =
             new FirmwareSetConstructorViewModel(new[]

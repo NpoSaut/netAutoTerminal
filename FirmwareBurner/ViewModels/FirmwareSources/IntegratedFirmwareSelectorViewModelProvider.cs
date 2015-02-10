@@ -4,15 +4,18 @@ using System.Linq;
 using FirmwareBurner.Annotations;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     [UsedImplicitly]
     public class IntegratedFirmwareSelectorViewModelProvider : IFirmwareSelectorViewModelProvider
     {
+        private IDispatcherFacade _dispatcher;
         private readonly Lazy<DirectoryRepository> _userDirectoryRepository;
-        public IntegratedFirmwareSelectorViewModelProvider()
+        public IntegratedFirmwareSelectorViewModelProvider(IDispatcherFacade Dispatcher)
         {
+            _dispatcher = Dispatcher;
             _userDirectoryRepository = _userDirectoryRepository = new Lazy<DirectoryRepository>(GetUserRepository); ;
         }
 
@@ -22,7 +25,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                                                               .Select(channel => new ComponentTarget(CellKindId, ModificationId, channel, ModuleId))
                                                               .ToList();
 
-            return new IntegratedFirmwareSelectorViewModel(_userDirectoryRepository.Value, requiredTargets);
+            return new IntegratedFirmwareSelectorViewModel(new BackgroundRepositoryLoader(_userDirectoryRepository.Value, requiredTargets), _dispatcher);
         }
 
         private DirectoryRepository GetUserRepository() { return new DirectoryRepository(DirectoryRepository.UserRepositoryDirectory); }

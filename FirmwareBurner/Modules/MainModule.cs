@@ -8,6 +8,7 @@ using FirmwareBurner.ViewModels.Tools;
 using FirmwareBurner.Views;
 using FirmwarePacking.Repositories;
 using FirmwarePacking.SystemsIndexes;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
@@ -42,6 +43,7 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IProjectValidatorViewModelProvider, ProjectValidatorViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFileSelectorService, FileRequestServiceViewModel>(new ContainerControlledLifetimeManager())
+                .RegisterType<IDispatcherFacade, DefaultDispatcher>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
                 .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())

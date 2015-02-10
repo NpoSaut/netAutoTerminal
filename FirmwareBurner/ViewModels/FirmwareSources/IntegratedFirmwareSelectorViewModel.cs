@@ -1,35 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
+using System.Windows.Threading;
 using FirmwareBurner.Annotations;
-using FirmwareBurner.ViewModels.Bases;
 using FirmwarePacking;
-using FirmwarePacking.Repositories;
+using Microsoft.Practices.Prism;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     public class IntegratedFirmwareSelectorViewModel : FirmwareSelectorViewModel
     {
-        private ObservableCollection<FirmwarePackageViewModel> _packages;
+        private readonly IRepositoryLoader _loader;
+        private IDispatcherFacade _dispatcher;
+        private readonly ObservableCollection<FirmwarePackageViewModel> _packages;
 
-        public IntegratedFirmwareSelectorViewModel([NotNull] IList<FirmwarePackageViewModel> Packages) : base("Интегрированный")
+        public IntegratedFirmwareSelectorViewModel([NotNull] IList<FirmwarePackageViewModel> Packages, IDispatcherFacade Dispatcher) : base("Интегрированный")
         {
+            _dispatcher = Dispatcher;
             _packages = new ObservableCollection<FirmwarePackageViewModel>(Packages);
             this.Packages = new ReadOnlyObservableCollection<FirmwarePackageViewModel>(_packages);
         }
 
-        public IntegratedFirmwareSelectorViewModel(IRepository Repository, ICollection<ComponentTarget> RequiredTargets) : base("Интегрированный")
+        public IntegratedFirmwareSelectorViewModel(IRepositoryLoader Loader, IDispatcherFacade Dispatcher) : base("Интегрированный")
         {
-            IEnumerable<FirmwarePackageViewModel> packages = Repository.GetPackagesForTargets(RequiredTargets)
-                                                                       .Select(
-                                                                           p =>
-                                                                           new FirmwarePackageViewModel(
-                                                                               new FirmwareVersionViewModel(p.Information.FirmwareVersion.ToString(2),
-                                                                                                            p.Information.FirmwareVersionLabel,
-                                                                                                            p.Information.ReleaseDate),
-                                                                               new FirmwarePackageAvailabilityViewModel(true)));
-            _packages = new ObservableCollection<FirmwarePackageViewModel>(packages);
+            _loader = Loader;
+            _dispatcher = Dispatcher;
+            _packages = new ObservableCollection<FirmwarePackageViewModel>();
             Packages = new ReadOnlyObservableCollection<FirmwarePackageViewModel>(_packages);
+
+            _loader.ElementsLoaded += LoaderOnElementsLoaded;
+            var cts = new CancellationTokenSource();
+            _loader.StartLoading(cts.Token);
         }
 
         public ReadOnlyObservableCollection<FirmwarePackageViewModel> Packages { get; private set; }
@@ -38,49 +42,19 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         {
             get { return null; }
         }
-    }
 
-    public class FirmwarePackageViewModel : ViewModelBase
-    {
-        public FirmwarePackageViewModel(FirmwareVersionViewModel Version, FirmwarePackageAvailabilityViewModel Availability)
+        private void LoaderOnElementsLoaded(object Sender, RepositoryElementsLoadedEventArgs e)
         {
-            this.Availability = Availability;
-            this.Version = Version;
+            ICollection<FirmwarePackageViewModel> viewModels = e.Elements.Select(p =>
+                                                                                 new FirmwarePackageViewModel(
+                                                                                     new FirmwareVersionViewModel(p.Information.FirmwareVersion.ToString(2),
+                                                                                                                  p.Information.FirmwareVersionLabel,
+                                                                                                                  p.Information.ReleaseDate),
+                                                                                     new FirmwarePackageAvailabilityViewModel(true)))
+                                                                .ToList();
+            _dispatcher.BeginInvoke((Action<ICollection<FirmwarePackageViewModel>>)UpdateElements, viewModels);
         }
 
-        public FirmwarePackageAvailabilityViewModel Availability { get; private set; }
-        public FirmwareVersionViewModel Version { get; private set; }
-    }
-
-    public class FirmwarePackageAvailabilityViewModel : ViewModelBase
-    {
-        public FirmwarePackageAvailabilityViewModel(bool IsAvailable)
-        {
-            this.IsAvailable = IsAvailable;
-            IsDownloading = false;
-            DownloadingProgress = 0;
-        }
-
-        public FirmwarePackageAvailabilityViewModel(bool IsAvailable, bool IsDownloading, double DownloadingProgress)
-        {
-            this.IsAvailable = IsAvailable;
-            this.IsDownloading = IsDownloading;
-            this.DownloadingProgress = DownloadingProgress;
-        }
-
-        public bool IsAvailable { get; private set; }
-        public bool IsDownloading { get; private set; }
-        public double DownloadingProgress { get; private set; }
-    }
-
-    public class FirmwarePackageReadinessViewModelFactory
-    {
-        public FirmwarePackageAvailabilityViewModel GetAvailableViewModel() { return new FirmwarePackageAvailabilityViewModel(true); }
-        public FirmwarePackageAvailabilityViewModel GetUnavailableViewModel() { return new FirmwarePackageAvailabilityViewModel(false); }
-
-        public FirmwarePackageAvailabilityViewModel GetProgressViewModel(double Progress)
-        {
-            return new FirmwarePackageAvailabilityViewModel(false, true, Progress);
-        }
+        private void UpdateElements(ICollection<FirmwarePackageViewModel> ViewModels) { _packages.AddRange(ViewModels); }
     }
 }
