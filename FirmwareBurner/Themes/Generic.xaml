@@ -16,4 +16,42 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="{x:Type local:CircleProgress}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:CircleProgress}">
+                    <ControlTemplate.Resources>
+                        <PowerEase x:Key="PowerEase" />
+                    </ControlTemplate.Resources>
+                    <local:CircleSegment Name="Circle"
+                                         Background="{TemplateBinding Background}"
+                                         InnerRadiusPortion="0"
+                                         SegmentPortion="{TemplateBinding ProgressPortion}" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsIndeterminate" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="Circle">
+                                        <DoubleAnimation Storyboard.TargetProperty="InnerRadiusPortion" To="0.6" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.5" />
+                                        <DoubleAnimation Storyboard.TargetProperty="SegmentPortion" To="0.3" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.7" />
+                                        <DoubleAnimation Storyboard.TargetProperty="StartPortion" From="0" To="1" Duration="0:0:2" RepeatBehavior="Forever" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard TargetName="Circle">
+                                        <DoubleAnimation Storyboard.TargetProperty="InnerRadiusPortion" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.5" />
+                                        <DoubleAnimation Storyboard.TargetProperty="SegmentPortion" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.7" />
+                                        <DoubleAnimation Storyboard.TargetProperty="StartPortion" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.7" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>
