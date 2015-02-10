@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+             xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{x:Static viewModels:SampleData.IntegratedFirmwareSelector}">
@@ -15,9 +16,6 @@
                 <Brush x:Key="AccentBrush">#297529</Brush>
             </DataTemplate.Resources>
             <DockPanel Name="ItemRoot">
-                <ProgressBar Name="DownloadProgressBar" Opacity="0"
-                             Value="{Binding Path=Availability.DownloadingProgress, Mode=OneWay}" Maximum="1"
-                             Visibility="Collapsed" />
                 <Grid DockPanel.Dock="Left" Width="45" Height="45">
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
@@ -26,6 +24,10 @@
                             <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
                         </Style>
                     </Grid.Resources>
+                    <firmwareBurner:CircleProgress Name="DownloadProgressBar" Visibility="Collapsed"
+                                                   Background="{StaticResource AccentBrush}"
+                                                   Value="{Binding Path=Availability.DownloadingProgress}" Maximum="1"
+                                                   IsIndeterminate="True" />
                     <Ellipse Name="VersionEllipse" Stroke="{StaticResource AccentBrush}" StrokeThickness="1.1" />
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock x:Name="VersionTextBlock" Text="{Binding Version.Version, Mode=OneWay}"
@@ -47,8 +49,7 @@
                     <Setter TargetName="VersionEllipse" Property="StrokeDashArray" Value="3 3" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Availability.IsDownloading}" Value="True">
-                    <Setter TargetName="ItemRoot" Property="Opacity" Value="1" />
-                    <Setter TargetName="DownloadProgressBar" Property="Opacity" Value="1" />
+                    <Setter TargetName="DownloadProgressBar" Property="Visibility" Value="Visible" />
                 </DataTrigger>
                 <DataTrigger
                     Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"

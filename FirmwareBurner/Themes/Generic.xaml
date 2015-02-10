@@ -33,7 +33,7 @@
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard TargetName="Circle">
-                                        <DoubleAnimation Storyboard.TargetProperty="InnerRadiusPortion" To="0.6" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.5" />
+                                        <DoubleAnimation Storyboard.TargetProperty="InnerRadiusPortion" To="0.7" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.5" />
                                         <DoubleAnimation Storyboard.TargetProperty="SegmentPortion" To="0.3" EasingFunction="{StaticResource PowerEase}" Duration="0:0:0.7" />
                                         <DoubleAnimation Storyboard.TargetProperty="StartPortion" From="0" To="1" Duration="0:0:2" RepeatBehavior="Forever" />
                                     </Storyboard>
