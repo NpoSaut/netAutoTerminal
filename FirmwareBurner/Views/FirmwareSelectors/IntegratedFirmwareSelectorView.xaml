@@ -23,16 +23,16 @@
                     </Grid.RowDefinitions>
                     <ProgressBar Name="DownloadProgressBar" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
                                  Grid.ColumnSpan="2" Opacity="0"
-                                 Value="{Binding Path=Availability.DownloadingProgress}" Maximum="1" />
+                                 Value="{Binding Path=Availability.DownloadingProgress, Mode=OneWay}" Maximum="1" />
                     <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#30ffffff">
                         <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Center" Text="{Binding Version}" FontWeight="DemiBold" />
+                                   HorizontalAlignment="Center" Text="{Binding Version, Mode=OneWay}" FontWeight="DemiBold" />
                     </Border>
                     <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Text="Стабильная" Opacity="0.6"
                                FontSize="10" Margin="2" />
                     <TextBlock Grid.Row="1" Grid.Column="1" Margin="4">
                         <Run Text="Дата выпуска" />
-                        <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy'}" />
+                        <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
                     </TextBlock>
                 </Grid>
             </Border>
@@ -63,6 +63,9 @@
                                     </Border.Effect>
                                 </Border>
                                 <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="ItemRoot" Property="BorderBrush" Value="DodgerBlue" />
+                                    </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter TargetName="ItemRoot" Property="BorderBrush" Value="Blue" />
                                     </Trigger>
