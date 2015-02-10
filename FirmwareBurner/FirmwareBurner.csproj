@@ -158,6 +158,7 @@
     <Compile Include="ViewModels\FirmwareSources\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\IntegratedFirmwareSelectorViewModel.cs" />
+    <Compile Include="ViewModels\FirmwareSources\IntegratedFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />

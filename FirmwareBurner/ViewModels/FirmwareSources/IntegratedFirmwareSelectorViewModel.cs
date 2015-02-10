@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using FirmwareBurner.Annotations;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwarePacking;
+using FirmwarePacking.Repositories;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
@@ -14,6 +16,20 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         {
             _packages = new ObservableCollection<FirmwarePackageViewModel>(Packages);
             this.Packages = new ReadOnlyObservableCollection<FirmwarePackageViewModel>(_packages);
+        }
+
+        public IntegratedFirmwareSelectorViewModel(IRepository Repository, ICollection<ComponentTarget> RequiredTargets) : base("Интегрированный")
+        {
+            IEnumerable<FirmwarePackageViewModel> packages = Repository.GetPackagesForTargets(RequiredTargets)
+                                                                       .Select(
+                                                                           p =>
+                                                                           new FirmwarePackageViewModel(
+                                                                               new FirmwareVersionViewModel(p.Information.FirmwareVersion.ToString(2),
+                                                                                                            p.Information.FirmwareVersionLabel,
+                                                                                                            p.Information.ReleaseDate),
+                                                                               new FirmwarePackageAvailabilityViewModel(true)));
+            _packages = new ObservableCollection<FirmwarePackageViewModel>(packages);
+            Packages = new ReadOnlyObservableCollection<FirmwarePackageViewModel>(_packages);
         }
 
         public ReadOnlyObservableCollection<FirmwarePackageViewModel> Packages { get; private set; }
@@ -61,6 +77,10 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
     {
         public FirmwarePackageAvailabilityViewModel GetAvailableViewModel() { return new FirmwarePackageAvailabilityViewModel(true); }
         public FirmwarePackageAvailabilityViewModel GetUnavailableViewModel() { return new FirmwarePackageAvailabilityViewModel(false); }
-        public FirmwarePackageAvailabilityViewModel GetProgressViewModel(double Progress) { return new FirmwarePackageAvailabilityViewModel(false, true, Progress); }
+
+        public FirmwarePackageAvailabilityViewModel GetProgressViewModel(double Progress)
+        {
+            return new FirmwarePackageAvailabilityViewModel(false, true, Progress);
+        }
     }
 }
