@@ -11,38 +11,51 @@
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type firmwareSources:FirmwarePackageViewModel}">
-            <Border Name="ItemRoot" Background="LightGreen">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="3*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <ProgressBar Name="DownloadProgressBar" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
-                                 Grid.ColumnSpan="2" Opacity="0"
-                                 Value="{Binding Path=Availability.DownloadingProgress, Mode=OneWay}" Maximum="1" />
-                    <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Background="#30ffffff">
-                        <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Center" Text="{Binding Version, Mode=OneWay}" FontWeight="DemiBold" />
-                    </Border>
-                    <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Text="Стабильная" Opacity="0.6"
-                               FontSize="10" Margin="2" />
-                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="4">
-                        <Run Text="Дата выпуска" />
+            <DataTemplate.Resources>
+                <Brush x:Key="AccentBrush">#297529</Brush>
+            </DataTemplate.Resources>
+            <DockPanel Name="ItemRoot">
+                <ProgressBar Name="DownloadProgressBar" Opacity="0"
+                             Value="{Binding Path=Availability.DownloadingProgress, Mode=OneWay}" Maximum="1"
+                             Visibility="Collapsed" />
+                <Grid DockPanel.Dock="Left" Width="45" Height="45">
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontWeight" Value="DemiBold" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+                        </Style>
+                    </Grid.Resources>
+                    <Ellipse Name="VersionEllipse" Stroke="{StaticResource AccentBrush}" StrokeThickness="1.1" />
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock x:Name="VersionTextBlock" Text="{Binding Version.Version, Mode=OneWay}"
+                                   FontSize="13" />
+                        <TextBlock x:Name="VersionLabelTextBlock" Text="{Binding Version.Label, Mode=OneWay}"
+                                   FontSize="10" />
+                    </StackPanel>
+                </Grid>
+                <StackPanel VerticalAlignment="Center" Margin="4,2">
+                    <TextBlock Text="Актуальная" Margin="2" Foreground="{StaticResource AccentBrush}" />
+                    <TextBlock Margin="2" Opacity="0.6">
+                        <Run Text="Дата выпуска:" />
                         <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
                     </TextBlock>
-                </Grid>
-            </Border>
+                </StackPanel>
+            </DockPanel>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=Availability.IsAvailable}" Value="False">
-                    <Setter TargetName="ItemRoot" Property="Opacity" Value="0.3" />
+                    <Setter TargetName="VersionEllipse" Property="StrokeDashArray" Value="3 3" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Availability.IsDownloading}" Value="True">
                     <Setter TargetName="ItemRoot" Property="Opacity" Value="1" />
                     <Setter TargetName="DownloadProgressBar" Property="Opacity" Value="1" />
+                </DataTrigger>
+                <DataTrigger
+                    Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+                    Value="True">
+                    <Setter TargetName="VersionEllipse" Property="Fill" Value="{StaticResource AccentBrush}" />
+                    <Setter TargetName="VersionTextBlock" Property="Foreground" Value="White" />
+                    <Setter TargetName="VersionLabelTextBlock" Property="Foreground" Value="White" />
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
@@ -55,20 +68,14 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Name="ItemRoot" BorderBrush="Gray" BorderThickness="1"
-                                        Margin="2" CornerRadius="0">
+                                <Border Name="ItemRoot" Margin="2" BorderThickness="3,0,0,0" Background="Transparent">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
-                                    <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="1" Opacity="0.2" BlurRadius="2" />
-                                    </Border.Effect>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter TargetName="ItemRoot" Property="BorderBrush" Value="DodgerBlue" />
                                     </Trigger>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="ItemRoot" Property="BorderBrush" Value="Blue" />
-                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True" />
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
