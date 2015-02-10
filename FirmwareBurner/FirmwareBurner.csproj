@@ -133,11 +133,13 @@
     <Compile Include="DialogShell.xaml.cs">
       <DependentUpon>DialogShell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CircleProgress.cs" />
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="ImageScroller.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="TriggerActions\ShowDialogTriggerAction.cs" />
+    <Compile Include="CircleSegment.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="Validation\IProjectValidationRule.cs" />
     <Compile Include="Validation\IProjectValidator.cs" />
