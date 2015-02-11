@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="CircleProgress.cs" />
     <Compile Include="Events\TargetSelectedEvent.cs" />
+    <Compile Include="Fakes\FakeRepository.cs" />
     <Compile Include="ImageScroller.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />

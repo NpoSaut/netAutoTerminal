@@ -31,10 +31,10 @@ namespace FirmwareBurner.Modules
                 .RegisterType<ICellsCatalogProvider, IndexCellsCatalogProvider>(new ContainerControlledLifetimeManager())
 
                 // Конфигурируем репозитории
-                .RegisterType<Repository, DirectoryRepository>("User Repository", new ContainerControlledLifetimeManager(),
-                                                               new InjectionConstructor(DirectoryRepository.UserRepositoryDirectory))
-                .RegisterType<Repository, DirectoryRepository>("Local Repository", new ContainerControlledLifetimeManager(),
-                                                               new InjectionConstructor(DirectoryRepository.ApplicationRepositoryDirectory))
+                //.RegisterType<Repository, DirectoryRepository>("User Repository", new ContainerControlledLifetimeManager(),
+                //                                               new InjectionConstructor(DirectoryRepository.UserRepositoryDirectory))
+                //.RegisterType<Repository, DirectoryRepository>("Local Repository", new ContainerControlledLifetimeManager(),
+                //                                               new InjectionConstructor(DirectoryRepository.ApplicationRepositoryDirectory))
                 
                 // Конфигурируем модели представления
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())

@@ -42,7 +42,6 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         {
             var enumerator = (IEnumerator<IRepositoryElement>)Parameter;
             OnElementsLoaded(new RepositoryElementsLoadedEventArgs(new[] { enumerator.Current }));
-            Thread.Sleep(4000);
             BeginLoadNext(_cancellationToken, enumerator);
         }
 
