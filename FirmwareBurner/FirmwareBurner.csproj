@@ -167,6 +167,11 @@
     <Compile Include="ViewModels\FirmwareSources\IntegratedFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IntegratedFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\IRepositoryLoader.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\DispatcherRepositoryLoadControllerBase.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\ILoadControllerFactory.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\IRepositoryLoadController.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\LocalRepositoryLoadController.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\RemoteRepositoryLoadController.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />

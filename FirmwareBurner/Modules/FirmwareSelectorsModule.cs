@@ -1,4 +1,5 @@
 ﻿using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwareBurner.ViewModels.FirmwareSources.LoadControllers;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
@@ -11,7 +12,9 @@ namespace FirmwareBurner.Modules
 
         public void Initialize()
         {
-            _container.RegisterType<IFirmwareSelectorViewModelProvider, IntegratedFirmwareSelectorViewModelProvider>(new ContainerControlledLifetimeManager());
+            _container.RegisterType<IFirmwareSelectorViewModelProvider, IntegratedFirmwareSelectorViewModelProvider>(new ContainerControlledLifetimeManager())
+                      .RegisterType<IFirmwarePackageViewModelKeyFormatter, FirmwarePackageViewModelKeyFormatter>(new ContainerControlledLifetimeManager())
+                      .RegisterType<ILoadControllerFactory, LoadControllerFactory>(new ContainerControlledLifetimeManager());
         }
     }
 }

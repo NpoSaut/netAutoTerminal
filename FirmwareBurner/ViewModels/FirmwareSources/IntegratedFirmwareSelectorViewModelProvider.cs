@@ -1,22 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Annotations;
 using FirmwareBurner.Fakes;
+using FirmwareBurner.ViewModels.FirmwareSources.LoadControllers;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
-using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     [UsedImplicitly]
     public class IntegratedFirmwareSelectorViewModelProvider : IFirmwareSelectorViewModelProvider
     {
-        private IDispatcherFacade _dispatcher;
+        private readonly ILoadControllerFactory _loadControllerFactory;
         //private readonly Lazy<DirectoryRepository> _userDirectoryRepository;
-        public IntegratedFirmwareSelectorViewModelProvider(IDispatcherFacade Dispatcher)
+        public IntegratedFirmwareSelectorViewModelProvider(ILoadControllerFactory LoadControllerFactory)
         {
-            _dispatcher = Dispatcher;
+            _loadControllerFactory = LoadControllerFactory;
             //_userDirectoryRepository = _userDirectoryRepository = new Lazy<DirectoryRepository>(GetUserRepository); ;
         }
 
@@ -27,7 +26,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                                                               .ToList();
 
             return new IntegratedFirmwareSelectorViewModel(
-                new []
+                new[]
                 {
                     new BackgroundRepositoryLoader(new FakeRepository(0, 6, 500, false), requiredTargets)
                 },
@@ -35,7 +34,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                 {
                     new BackgroundRepositoryLoader(new FakeRepository(2, 8, 2000, true), requiredTargets)
                 },
-                _dispatcher);
+                _loadControllerFactory);
         }
 
         private DirectoryRepository GetUserRepository() { return new DirectoryRepository(DirectoryRepository.UserRepositoryDirectory); }
