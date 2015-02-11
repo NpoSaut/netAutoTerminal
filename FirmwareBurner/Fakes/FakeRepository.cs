@@ -9,8 +9,18 @@ namespace FirmwareBurner.Fakes
 {
     public class FakeRepository : IRepository
     {
+        private int _startVersionIndex;
+        private int _endVersionIndex;
         private readonly int _loadingDelayMs;
-        public FakeRepository(int LoadingDelayMs = 0) { _loadingDelayMs = LoadingDelayMs; }
+        private readonly bool _setReleaseStatus;
+
+        public FakeRepository(int StartVersionIndex, int EndVersionIndex, int LoadingDelayMs = 0, bool SetReleaseStatus = false)
+        {
+            _loadingDelayMs = LoadingDelayMs;
+            _setReleaseStatus = SetReleaseStatus;
+            _startVersionIndex = StartVersionIndex;
+            _endVersionIndex = EndVersionIndex;
+        }
 
         /// <summary>Список всех пакетов в репозитории</summary>
         public IEnumerable<IRepositoryElement> Packages
@@ -24,7 +34,7 @@ namespace FirmwareBurner.Fakes
 
         private IEnumerable<IRepositoryElement> GetPackages(ICollection<ComponentTarget> Targets)
         {
-            for (int i = 0; i < 8; i++)
+            for (int i = _startVersionIndex; i < _endVersionIndex; i++)
             {
                 foreach (string label in new[] { "P", "DZR" })
                 {
@@ -37,7 +47,9 @@ namespace FirmwareBurner.Fakes
                             ReleaseDate = DateTime.Now.AddMonths(-1).AddDays(i),
                         },
                         Targets.ToList(),
-                        ReleaseStatus.Unknown);
+                        _setReleaseStatus
+                            ? (i == 5 ? ReleaseStatus.Stable : ReleaseStatus.Archive)
+                            : ReleaseStatus.Unknown);
                 }
             }
         }

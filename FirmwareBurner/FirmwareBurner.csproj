@@ -160,7 +160,7 @@
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageAvailabilityViewModel.cs" />
-    <Compile Include="ViewModels\FirmwareSources\FirmwarePackageReadinessViewModelFactory.cs" />
+    <Compile Include="ViewModels\FirmwareSources\FirmwarePackageAvailabilityViewModelFactory.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\IFirmwareSelectorViewModelProvider.cs" />

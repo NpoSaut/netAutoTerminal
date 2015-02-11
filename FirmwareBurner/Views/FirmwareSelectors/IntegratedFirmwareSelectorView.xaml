@@ -38,7 +38,7 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel VerticalAlignment="Center" Margin="6, 4">
-                    <TextBlock Text="Актуальная" Foreground="{StaticResource AccentBrush}" />
+                    <TextBlock Text="{Binding Status, Mode=OneWay}" Foreground="{StaticResource AccentBrush}" />
                     <TextBlock Opacity="0.6">
                         <Run Text="Дата выпуска:" />
                         <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />

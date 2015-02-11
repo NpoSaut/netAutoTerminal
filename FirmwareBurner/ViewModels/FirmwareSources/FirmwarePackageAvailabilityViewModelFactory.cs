@@ -1,6 +1,6 @@
 ﻿namespace FirmwareBurner.ViewModels.FirmwareSources
 {
-    public class FirmwarePackageReadinessViewModelFactory
+    public class FirmwarePackageAvailabilityViewModelFactory
     {
         public FirmwarePackageAvailabilityViewModel GetAvailableViewModel() { return new FirmwarePackageAvailabilityViewModel(true); }
         public FirmwarePackageAvailabilityViewModel GetUnavailableViewModel() { return new FirmwarePackageAvailabilityViewModel(false); }

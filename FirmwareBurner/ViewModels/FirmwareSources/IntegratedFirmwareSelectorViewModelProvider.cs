@@ -26,7 +26,16 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                                                               .Select(channel => new ComponentTarget(CellKindId, ModificationId, channel, ModuleId))
                                                               .ToList();
 
-            return new IntegratedFirmwareSelectorViewModel(new BackgroundRepositoryLoader(new FakeRepository(2000), requiredTargets), _dispatcher);
+            return new IntegratedFirmwareSelectorViewModel(
+                new []
+                {
+                    new BackgroundRepositoryLoader(new FakeRepository(0, 6, 500, false), requiredTargets)
+                },
+                new[]
+                {
+                    new BackgroundRepositoryLoader(new FakeRepository(2, 8, 2000, true), requiredTargets)
+                },
+                _dispatcher);
         }
 
         private DirectoryRepository GetUserRepository() { return new DirectoryRepository(DirectoryRepository.UserRepositoryDirectory); }
