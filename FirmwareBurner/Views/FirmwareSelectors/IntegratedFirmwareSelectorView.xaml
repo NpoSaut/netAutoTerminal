@@ -78,12 +78,37 @@
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Border Name="ItemRoot" BorderThickness="1" Background="Transparent" Padding="3">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
+                                    <Border.LayoutTransform>
+                                        <ScaleTransform />
+                                    </Border.LayoutTransform>
+                                    <Border.RenderTransform>
+                                        <TranslateTransform />
+                                    </Border.RenderTransform>
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter TargetName="ItemRoot" Property="BorderBrush" Value="DodgerBlue" />
                                     </Trigger>
-                                    <Trigger Property="IsSelected" Value="True" />
+                                    <EventTrigger RoutedEvent="Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard TargetName="ItemRoot">
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0"
+                                                                 Duration="0:0:0" />
+                                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY"
+                                                                 From="0" Duration="0:0:0.2"
+                                                                 EasingFunction="{StaticResource PowerEaseOut}" />
+                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"
+                                                                 BeginTime="0:0:0.2" Duration="0:0:0.2"
+                                                                 EasingFunction="{StaticResource PowerEaseOut}" />
+                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X"
+                                                                 From="50" BeginTime="0:0:0.2" Duration="0:0:0.4">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <BackEase Amplitude="0.4" />
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </Setter.Value>
