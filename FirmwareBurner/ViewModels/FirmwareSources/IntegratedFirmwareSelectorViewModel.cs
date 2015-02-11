@@ -125,7 +125,11 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 
         private void UpdateRemoteExistingViewModel(FirmwarePackageViewModel ExistingViewModel, IRepositoryElement Element)
         {
+            // Удаление/добавление нужно для того, чтобы элемент
+            // занял нужное место в сортировке
+            //_packages.Remove(ExistingViewModel);
             ExistingViewModel.Status = Element.Status;
+            //_packages.Add(ExistingViewModel);
         }
 
         #endregion

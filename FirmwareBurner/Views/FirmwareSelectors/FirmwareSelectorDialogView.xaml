@@ -6,7 +6,7 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              mc:Ignorable="d"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSelectorDialog}"
-             MinWidth="400" MinHeight="250">
+             d:DesignWidth="276" d:DesignHeight="222">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

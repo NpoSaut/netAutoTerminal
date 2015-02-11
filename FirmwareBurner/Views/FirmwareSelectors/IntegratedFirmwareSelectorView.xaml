@@ -6,6 +6,7 @@
              xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300"
              d:DataContext="{x:Static viewModels:SampleData.IntegratedFirmwareSelector}">
@@ -67,10 +68,17 @@
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
+
+        <CollectionViewSource x:Key="Packages" Source="{Binding Packages}">
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="Version.ReleaseDate" Direction="Descending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
     </UserControl.Resources>
 
     <Grid>
-        <ListBox Margin="2" ItemsSource="{Binding Packages}" SelectedIndex="1">
+        <ListBox Margin="2" ItemsSource="{Binding Source={StaticResource Packages}}" SelectedIndex="1">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
