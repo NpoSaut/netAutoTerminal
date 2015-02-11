@@ -33,14 +33,15 @@ namespace FirmwareBurner.ViewModels
 
         private static readonly IntegratedFirmwareSelectorViewModel _integratedFirmwareSelector =
             new IntegratedFirmwareSelectorViewModel(
-                new []
+                new[]
                 {
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.36", "ABC", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false)),
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.36", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false)),
-                    new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.32", "ABC", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false, true, 0.37)),
+                    new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.32", "ABC", DateTime.Today),
+                                                 new FirmwarePackageAvailabilityViewModel(false, true, 0.37)),
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.32", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(true)),
                     new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.30", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true)),
-                    new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.29", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true)),
+                    new FirmwarePackageViewModel(new FirmwareVersionViewModel("1.29", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true))
                 }, null);
 
         private static readonly FirmwareSetConstructorViewModel _firmwareSetConstructor =
@@ -125,11 +126,15 @@ namespace FirmwareBurner.ViewModels
 
             private class FakeRepositoryElement : IRepositoryElement
             {
-                public FakeRepositoryElement(PackageInformation Information)
+                public FakeRepositoryElement(PackageInformation Information, ReleaseStatus Status = ReleaseStatus.Unknown)
                 {
+                    this.Status = Status;
                     this.Information = Information;
                     Targets = new[] { new ComponentTarget(1, 1, 1, 1) };
                 }
+
+                /// <summary>Статус релиза пакета</summary>
+                public ReleaseStatus Status { get; private set; }
 
                 /// <summary>Информация о пакете</summary>
                 public PackageInformation Information { get; private set; }
@@ -138,11 +143,17 @@ namespace FirmwareBurner.ViewModels
                 public ICollection<ComponentTarget> Targets { get; private set; }
 
                 /// <summary>Загружает всё тело пакета</summary>
-                public FirmwarePackage GetPackage() { throw new NotImplementedException(); }
+                public FirmwarePackage GetPackage()
+                {
+                    throw new NotImplementedException();
+                }
 
                 /// <summary>Загружает необходимый компонент из тела пакета</summary>
                 /// <param name="Target">Цель, компонент для которой требуется</param>
-                public FirmwareComponent GetComponent(ComponentTarget Target) { throw new NotImplementedException(); }
+                public FirmwareComponent GetComponent(ComponentTarget Target)
+                {
+                    throw new NotImplementedException();
+                }
             }
         }
 

@@ -34,9 +34,10 @@ namespace FirmwareBurner.Fakes
                         {
                             FirmwareVersion = new Version(1, i),
                             FirmwareVersionLabel = label,
-                            ReleaseDate = DateTime.Now.AddMonths(-1).AddDays(i)
+                            ReleaseDate = DateTime.Now.AddMonths(-1).AddDays(i),
                         },
-                        Targets.ToList());
+                        Targets.ToList(),
+                        ReleaseStatus.Unknown);
                 }
             }
         }
@@ -44,11 +45,15 @@ namespace FirmwareBurner.Fakes
         private class FakeRepositoryElement : IRepositoryElement
         {
             /// <summary>Инициализирует новый экземпляр класса <see cref="T:System.Object" />.</summary>
-            public FakeRepositoryElement(PackageInformation Information, ICollection<ComponentTarget> Targets)
+            public FakeRepositoryElement(PackageInformation Information, ICollection<ComponentTarget> Targets, ReleaseStatus Status)
             {
+                this.Status = Status;
                 this.Information = Information;
                 this.Targets = Targets;
             }
+
+            /// <summary>Статус релиза пакета</summary>
+            public ReleaseStatus Status { get; private set; }
 
             /// <summary>Информация о пакете</summary>
             public PackageInformation Information { get; private set; }
