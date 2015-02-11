@@ -15,6 +15,10 @@
         <DataTemplate DataType="{x:Type firmwareSources:FirmwarePackageViewModel}">
             <DataTemplate.Resources>
                 <Brush x:Key="AccentBrush">#297529</Brush>
+                <Brush x:Key="ActualVersionBrush">#297529</Brush>
+                <Brush x:Key="TestVersionBrush">#754529</Brush>
+                <Brush x:Key="ArchiveVersionBrush">#294675</Brush>
+                <Brush x:Key="UnknownVersionBrush">#585858</Brush>
             </DataTemplate.Resources>
             <DockPanel Name="ItemRoot">
                 <Grid DockPanel.Dock="Left" Width="45" Height="45">
@@ -22,15 +26,15 @@
                         <Style TargetType="TextBlock">
                             <Setter Property="FontWeight" Value="DemiBold" />
                             <Setter Property="TextAlignment" Value="Center" />
-                            <Setter Property="Foreground" Value="{StaticResource AccentBrush}" />
+                            <Setter Property="Foreground" Value="{Binding ElementName=VersionEllipse, Path=Stroke}" />
                         </Style>
                     </Grid.Resources>
                     <firmwareBurner:CircleProgress Name="DownloadProgressBar" Visibility="Collapsed"
-                                                   Background="{StaticResource AccentBrush}"
+                                                   Background="{Binding ElementName=VersionEllipse, Path=Stroke}"
                                                    InnerRadiusPortion="0.85"
                                                    Value="{Binding Path=Availability.DownloadingProgress, Mode=OneWay}"
                                                    Maximum="1" />
-                    <Ellipse Name="VersionEllipse" Stroke="{StaticResource AccentBrush}" StrokeThickness="1.1" />
+                    <Ellipse Name="VersionEllipse" Stroke="{StaticResource UnknownVersionBrush}" StrokeThickness="1.1" />
                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                         <TextBlock x:Name="VersionTextBlock" Text="{Binding Version.Version, Mode=OneWay}"
                                    FontSize="13" />
@@ -39,7 +43,8 @@
                     </StackPanel>
                 </Grid>
                 <StackPanel VerticalAlignment="Center" Margin="6, 4">
-                    <TextBlock Text="{Binding Status, Mode=OneWay}" Foreground="{StaticResource AccentBrush}" />
+                    <TextBlock Name="VersionStatusLabel" Text="{Binding Status, Mode=OneWay}"
+                               Foreground="{Binding ElementName=VersionEllipse, Path=Stroke}" />
                     <TextBlock Opacity="0.6">
                         <Run Text="Дата выпуска:" />
                         <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
@@ -47,6 +52,17 @@
                 </StackPanel>
             </DockPanel>
             <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Status}" Value="Actual">
+                    <Setter TargetName="VersionEllipse" Property="Stroke" Value="{StaticResource ActualVersionBrush}" />
+                    <Setter TargetName="VersionEllipse" Property="StrokeThickness" Value="1.5" />
+                    <Setter TargetName="VersionStatusLabel" Property="FontWeight" Value="SemiBold" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Archive">
+                    <Setter TargetName="VersionEllipse" Property="Stroke" Value="{StaticResource ArchiveVersionBrush}" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Status}" Value="Test">
+                    <Setter TargetName="VersionEllipse" Property="Stroke" Value="{StaticResource TestVersionBrush}" />
+                </DataTrigger>
                 <DataTrigger Binding="{Binding Version.HaveLabel}" Value="True">
                     <Setter TargetName="VersionLabelTextBlock" Property="Visibility" Value="Collapsed" />
                     <Setter TargetName="VersionLabelTextBlock" Property="FontSize" Value="14" />
@@ -62,7 +78,8 @@
                 <DataTrigger
                     Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
                     Value="True">
-                    <Setter TargetName="VersionEllipse" Property="Fill" Value="{StaticResource AccentBrush}" />
+                    <Setter TargetName="VersionEllipse" Property="Fill"
+                            Value="{Binding ElementName=VersionEllipse, Path=Stroke}" />
                     <Setter TargetName="VersionTextBlock" Property="Foreground" Value="White" />
                     <Setter TargetName="VersionLabelTextBlock" Property="Foreground" Value="White" />
                 </DataTrigger>

@@ -35,13 +35,13 @@ namespace FirmwareBurner.ViewModels
             new IntegratedFirmwareSelectorViewModel(
                 new[]
                 {
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "ABC", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Stable),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Stable),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "ABC", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Actual),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Actual),
                     new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.32", "ABC", DateTime.Today),
-                                                 new FirmwarePackageAvailabilityViewModel(false, true, 0.37), ReleaseStatus.Stable),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.32", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Stable),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.30", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Stable),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.29", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Stable)
+                                                 new FirmwarePackageAvailabilityViewModel(false, true, 0.37), ReleaseStatus.Actual),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.32", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.30", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.29", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual)
                 }, null);
 
         private static readonly FirmwareSetConstructorViewModel _firmwareSetConstructor =

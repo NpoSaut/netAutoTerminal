@@ -48,7 +48,7 @@ namespace FirmwareBurner.Fakes
                         },
                         Targets.ToList(),
                         _setReleaseStatus
-                            ? (i == 5 ? ReleaseStatus.Stable : ReleaseStatus.Archive)
+                            ? (i == 5 ? ReleaseStatus.Actual : ReleaseStatus.Archive)
                             : ReleaseStatus.Unknown);
                 }
             }
