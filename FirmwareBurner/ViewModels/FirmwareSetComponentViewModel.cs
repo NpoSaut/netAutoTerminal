@@ -3,6 +3,7 @@ using System.Windows.Input;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwarePacking;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
@@ -16,7 +17,7 @@ namespace FirmwareBurner.ViewModels
             this.ModuleName = ModuleName;
             this.ModuleIndex = ModuleIndex;
 
-            FirmwareSelectionRequest = new InteractionRequest<RequestDialogInteractionContext>();
+            FirmwareSelectionRequest = new InteractionRequest<RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>>();
             SelectFirmwareCommand = new DelegateCommand(RequestFirmwareSelection);
 
             FirmwareSelector.SelectedPackageChanged += FirmwareSelectorOnSelectedPackageChanged;
@@ -26,14 +27,21 @@ namespace FirmwareBurner.ViewModels
         public String ModuleName { get; private set; }
         public ICommand SelectFirmwareCommand { get; private set; }
         public FirmwareSelectorViewModel FirmwareSelector { get; private set; }
-        public InteractionRequest<RequestDialogInteractionContext> FirmwareSelectionRequest { get; private set; }
+        public InteractionRequest<RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>> FirmwareSelectionRequest { get; private set; }
+        public FirmwarePackage SelectedFirmware { get; private set; }
 
         private void RequestFirmwareSelection()
         {
-            FirmwareSelectionRequest.Raise(new RequestDialogInteractionContext(new FirmwareSelectorDialogViewModel(FirmwareSelector))
+            FirmwareSelectionRequest.Raise(new RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>(new FirmwareSelectorDialogViewModel(FirmwareSelector))
                                            {
                                                Title = "Выбор прошивки"
-                                           });
+                                           },
+                                           FirmwareSelectedCallback);
+        }
+
+        private void FirmwareSelectedCallback(RequestDialogInteractionContext<FirmwareSelectorDialogViewModel> Context)
+        {
+            SelectedFirmware = Context.ViewModel.SelectedPackage;
         }
 
         public event EventHandler SetChanged;

@@ -1,17 +1,22 @@
-﻿using FirmwareBurner.ViewModels.Bases;
+﻿using FirmwareBurner.Annotations;
+using FirmwareBurner.ViewModels.Bases;
+using FirmwarePacking;
 using FirmwarePacking.Repositories;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
     public class FirmwarePackageViewModel : ViewModelBase
     {
+        private readonly IFirmwarePackageProvider _packageProvider;
         private FirmwarePackageAvailabilityViewModel _availability;
         private ReleaseStatus _status;
 
-        public FirmwarePackageViewModel(string Key, FirmwareVersionViewModel Version, FirmwarePackageAvailabilityViewModel Availability, ReleaseStatus Status)
+        public FirmwarePackageViewModel(string Key, FirmwareVersionViewModel Version, FirmwarePackageAvailabilityViewModel Availability, ReleaseStatus Status,
+                                        [NotNull] IFirmwarePackageProvider PackageProvider)
         {
             this.Key = Key;
             this.Status = Status;
+            _packageProvider = PackageProvider;
             this.Availability = Availability;
             this.Version = Version;
         }
@@ -41,5 +46,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                 RaisePropertyChanged(() => Status);
             }
         }
+
+        public FirmwarePackage GetPackageBody() { return _packageProvider.GetPackage(); }
     }
 }

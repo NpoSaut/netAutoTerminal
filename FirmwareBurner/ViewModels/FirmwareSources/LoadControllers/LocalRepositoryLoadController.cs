@@ -7,19 +7,22 @@ namespace FirmwareBurner.ViewModels.FirmwareSources.LoadControllers
 {
     internal class LocalRepositoryLoadController : DispatcherRepositoryLoadControllerBase
     {
+        private readonly IFirmwarePackageViewModelFactory _packageViewModelFactory;
+
         public LocalRepositoryLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection, IDispatcherFacade Dispatcher,
-                                             IFirmwarePackageViewModelKeyFormatter KeyFormatter, CancellationTokenSource CancellationTokenSource)
-            : base(Loader, PackagesCollection, Dispatcher, KeyFormatter, CancellationTokenSource) { }
+                                             IFirmwarePackageViewModelKeyFormatter KeyFormatter, CancellationTokenSource CancellationTokenSource,
+                                             IFirmwarePackageViewModelFactory PackageViewModelFactory)
+            : base(Loader, PackagesCollection, Dispatcher, KeyFormatter, CancellationTokenSource)
+        {
+            _packageViewModelFactory = PackageViewModelFactory;
+        }
 
         protected override void AddNewViewModel(string ElementKey, IRepositoryElement Element)
         {
-            var viewModel =
-                new FirmwarePackageViewModel(ElementKey,
-                                             new FirmwareVersionViewModel(Element.Information.FirmwareVersion.ToString(2),
-                                                                          Element.Information.FirmwareVersionLabel,
-                                                                          Element.Information.ReleaseDate),
-                                             new FirmwarePackageAvailabilityViewModel(true),
-                                             ReleaseStatus.Unknown);
+            FirmwarePackageViewModel viewModel =
+                _packageViewModelFactory.GetViewModel(ElementKey, Element,
+                                                      new FirmwarePackageAvailabilityViewModel(true),
+                                                      ReleaseStatus.Unknown);
             AddModel(viewModel);
         }
 

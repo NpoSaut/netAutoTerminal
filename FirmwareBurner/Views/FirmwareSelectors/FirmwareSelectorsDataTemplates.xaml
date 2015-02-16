@@ -3,18 +3,6 @@
                     xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
                     xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors">
 
-    <DataTemplate DataType="{x:Type firmwareSources:ManualFirmwareSelectorViewModel}">
-        <firmwareSelectors:ManualFirmwareSelectorView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type firmwareSources:RepositoryFirmwareSelectorViewModel}">
-        <firmwareSelectors:RepositoryFirmwareSelectorView />
-    </DataTemplate>
-
-    <DataTemplate DataType="{x:Type firmwareSources:CompositeFirmwareSelectorViewModel}">
-        <firmwareSelectors:CompositeFirmwareSelectorView />
-    </DataTemplate>
-
     <DataTemplate DataType="{x:Type firmwareSources:IntegratedFirmwareSelectorViewModel}">
         <firmwareSelectors:IntegratedFirmwareSelectorView />
     </DataTemplate>

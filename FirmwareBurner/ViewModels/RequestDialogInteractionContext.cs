@@ -3,9 +3,13 @@ using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwareBurner.ViewModels
 {
-    public class RequestDialogInteractionContext : Notification
+    public class RequestDialogInteractionContext<TViewModel> : Notification where TViewModel : ViewModelBase
     {
-        public RequestDialogInteractionContext(ViewModelBase ViewModel) { this.ViewModel = ViewModel; }
-        public ViewModelBase ViewModel { get; private set; }
+        public RequestDialogInteractionContext(TViewModel ViewModel)
+        {
+            this.ViewModel = ViewModel;
+            Content = ViewModel;
+        }
+        public TViewModel ViewModel { get; private set; }
     }
 }

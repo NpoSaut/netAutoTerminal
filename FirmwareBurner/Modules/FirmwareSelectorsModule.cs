@@ -14,6 +14,7 @@ namespace FirmwareBurner.Modules
         {
             _container.RegisterType<IFirmwareSelectorViewModelProvider, IntegratedFirmwareSelectorViewModelProvider>(new ContainerControlledLifetimeManager())
                       .RegisterType<IFirmwarePackageViewModelKeyFormatter, FirmwarePackageViewModelKeyFormatter>(new ContainerControlledLifetimeManager())
+                      .RegisterType<IFirmwarePackageViewModelFactory, FirmwarePackageViewModelFactory>(new ContainerControlledLifetimeManager())
                       .RegisterType<ILoadControllerFactory, LoadControllerFactory>(new ContainerControlledLifetimeManager());
         }
     }

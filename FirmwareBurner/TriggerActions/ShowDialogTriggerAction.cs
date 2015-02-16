@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Interactivity;
-using FirmwareBurner.ViewModels;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwareBurner.TriggerActions
@@ -17,12 +16,11 @@ namespace FirmwareBurner.TriggerActions
         protected override void Invoke(object parameter)
         {
             var e = (InteractionRequestedEventArgs)parameter;
-            var context = (RequestDialogInteractionContext)e.Context;
 
             var dlg = new DialogShell
                       {
-                          DataContext = context.ViewModel,
-                          Title = context.Title,
+                          DataContext = e.Context.Content,
+                          Title = e.Context.Title,
                           Owner = Window.GetWindow(AssociatedObject)
                       };
 
@@ -30,6 +28,8 @@ namespace FirmwareBurner.TriggerActions
                 dlg.ResourceDictionary.MergedDictionaries.Add(DialogMergedResources);
 
             dlg.ShowDialog();
+
+            e.Callback();
         }
     }
 }

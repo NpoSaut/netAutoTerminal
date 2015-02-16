@@ -53,7 +53,7 @@
                         <TextBlock Grid.Column="1">
                             <Hyperlink Command="{Binding SelectFirmwareCommand}">
                                 <Run x:Name="VersionPresenter"
-                                     Text="{Binding FirmwareSelector.SelectedVersion, Mode=OneWay}" />
+                                     Text="{Binding FirmwareSelector.SelectedVersion, Mode=OneWay, StringFormat='Версия {0}', TargetNullValue='Не выбрана'}" />
                             </Hyperlink>
                         </TextBlock>
                         <i:Interaction.Triggers>
@@ -69,7 +69,8 @@
                                 </triggerActions:ShowDialogTriggerAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                    </Grid></Border>
+                    </Grid>
+                </Border>
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding Path=FirmwareSelector.IsPackageSelected}" Value="False">
                         <Setter TargetName="VersionPresenter" Property="Text" Value="Не выбрана" />

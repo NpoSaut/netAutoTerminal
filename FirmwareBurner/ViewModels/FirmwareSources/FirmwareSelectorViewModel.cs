@@ -1,6 +1,5 @@
 ﻿using System;
 using FirmwareBurner.ViewModels.Bases;
-using FirmwarePacking;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
 {
@@ -16,15 +15,10 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 
         public FirmwareVersionViewModel SelectedVersion
         {
-            get
-            {
-                if (!IsPackageSelected) return null;
-                return new FirmwareVersionViewModel(SelectedPackage.Information.FirmwareVersion.ToString(2), SelectedPackage.Information.FirmwareVersionLabel,
-                                                    SelectedPackage.Information.ReleaseDate);
-            }
+            get { return IsPackageSelected ? SelectedPackage.Version : null; }
         }
 
-        public abstract FirmwarePackage SelectedPackage { get; }
+        public abstract FirmwarePackageViewModel SelectedPackage { get; set; }
         public event EventHandler SelectedPackageChanged;
 
         protected virtual void OnSelectedPackageChanged()

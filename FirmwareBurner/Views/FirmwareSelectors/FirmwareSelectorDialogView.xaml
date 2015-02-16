@@ -4,6 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
+             xmlns:dialogs="clr-namespace:FirmwareBurner.ViewModels.Dialogs"
+             xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
              mc:Ignorable="d"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSelectorDialog}"
              d:DesignWidth="276" d:DesignHeight="222">
@@ -21,8 +25,13 @@
                     <Setter Property="Margin" Value="2" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="OK" />
+            <Button Content="OK" Margin="2" Padding="16,4" Command="{Binding SubmitCommand}" />
         </StackPanel>
         <ContentPresenter Margin="2" Content="{Binding Selector}" />
     </DockPanel>
+    <i:Interaction.Triggers>
+        <i:EventTrigger SourceObject="{Binding CloseDialogRequest}" EventName="Raised">
+            <triggerActions:CloseWindowTriggerAction />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 </UserControl>

@@ -139,6 +139,7 @@
     <Compile Include="ImageScroller.cs" />
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="TriggerActions\CloseWindowTriggerAction.cs" />
     <Compile Include="TriggerActions\ShowDialogTriggerAction.cs" />
     <Compile Include="CircleSegment.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
@@ -157,8 +158,6 @@
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\BackgroundRepositoryLoader.cs" />
-    <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModel.cs" />
-    <Compile Include="ViewModels\FirmwareSources\CompositeFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageAvailabilityViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageAvailabilityViewModelFactory.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageViewModel.cs" />
@@ -168,6 +167,8 @@
     <Compile Include="ViewModels\FirmwareSources\IntegratedFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\IRepositoryLoader.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\DispatcherRepositoryLoadControllerBase.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\FirmwarePackageViewModelFactory.cs" />
+    <Compile Include="ViewModels\FirmwareSources\LoadControllers\IFirmwarePackageViewModelFactory.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\ILoadControllerFactory.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\IRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\LocalRepositoryLoadController.cs" />
@@ -186,20 +187,11 @@
     <Compile Include="Views\FirmwareSelectors\IntegratedFirmwareSelectorView.xaml.cs">
       <DependentUpon>IntegratedFirmwareSelectorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FirmwareSelectors\RepositoryFirmwareSelectorView.xaml.cs">
-      <DependentUpon>RepositoryFirmwareSelectorView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TargetSelectorView.xaml.cs">
       <DependentUpon>TargetSelectorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FirmwareSelectors\CompositeFirmwareSelectorView.xaml.cs">
-      <DependentUpon>CompositeFirmwareSelectorView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\FirmwareSelectors\ManualFirmwareSelectorView.xaml.cs">
-      <DependentUpon>ManualFirmwareSelectorView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FirmwareSetConstructorView.xaml.cs">
       <DependentUpon>FirmwareSetConstructorView.xaml</DependentUpon>
@@ -262,10 +254,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FirmwareSelectors\RepositoryFirmwareSelectorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\ProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -274,15 +262,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FirmwareSelectors\CompositeFirmwareSelectorView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\FirmwareSelectors\FirmwareSelectorsDataTemplates.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\FirmwareSelectors\ManualFirmwareSelectorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,8 +284,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\FirmwareSources\ManualFirmwareSelectorViewModel.cs" />
-    <Compile Include="ViewModels\FirmwareSources\RepositoryFirmwareSelectorViewModel.cs" />
     <Compile Include="ViewModels\Tools\ICellsCatalogProvider.cs" />
     <Compile Include="ViewModels\Tools\IndexCellsCatalogProvider.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />

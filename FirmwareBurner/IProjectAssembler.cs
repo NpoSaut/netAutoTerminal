@@ -27,7 +27,7 @@ namespace FirmwareBurner
                                                       _projectViewModel.BlockDetails.SerialNumber,
                                                       _projectViewModel.BlockDetails.AssemblyDate,
                                                       _projectViewModel.FirmwareSetConstructor.Components.Select(
-                                                          c => Tuple.Create(c.ModuleIndex, c.FirmwareSelector.SelectedPackage)).ToList());
+                                                          c => Tuple.Create(c.ModuleIndex, c.SelectedFirmware)).ToList());
         }
     }
 }

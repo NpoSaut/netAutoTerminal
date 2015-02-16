@@ -12,60 +12,38 @@ namespace FirmwareBurner.ViewModels
     /// <summary>ViewModel-и для отображения в Design Time</summary>
     public static class SampleData
     {
-        private static readonly CompositeFirmwareSelectorViewModel _compositeFirmwareSelector =
-            new CompositeFirmwareSelectorViewModel(new[]
-                                                   {
-                                                       new FakeFirmwareSelectorViewModel("Вручную",
-                                                                                         new PackageInformation
-                                                                                         {
-                                                                                             FirmwareVersion = new Version(1, 3),
-                                                                                             FirmwareVersionLabel = "",
-                                                                                             ReleaseDate = DateTime.Now
-                                                                                         }),
-                                                       new FakeFirmwareSelectorViewModel("Из папки",
-                                                                                         new PackageInformation
-                                                                                         {
-                                                                                             FirmwareVersion = new Version(2, 6),
-                                                                                             FirmwareVersionLabel = "BPL",
-                                                                                             ReleaseDate = DateTime.Now
-                                                                                         })
-                                                   });
-
         private static readonly IntegratedFirmwareSelectorViewModel _integratedFirmwareSelector =
             new IntegratedFirmwareSelectorViewModel(
                 new[]
                 {
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "ABC", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Actual),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Actual),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "ABC", DateTime.Today),
+                                                 new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Actual, null),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.36", "XYZ", DateTime.Today),
+                                                 new FirmwarePackageAvailabilityViewModel(false), ReleaseStatus.Actual, null),
                     new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.32", "ABC", DateTime.Today),
-                                                 new FirmwarePackageAvailabilityViewModel(false, true, 0.37), ReleaseStatus.Actual),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.32", "XYZ", DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.30", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual),
-                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.29", null, DateTime.Today), new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual)
+                                                 new FirmwarePackageAvailabilityViewModel(false, true, 0.37), ReleaseStatus.Actual, null),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.32", "XYZ", DateTime.Today),
+                                                 new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual, null),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.30", null, DateTime.Today),
+                                                 new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual, null),
+                    new FirmwarePackageViewModel("asdasd", new FirmwareVersionViewModel("1.29", null, DateTime.Today),
+                                                 new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Actual, null)
                 });
 
         private static readonly FirmwareSetConstructorViewModel _firmwareSetConstructor =
             new FirmwareSetConstructorViewModel(new[]
                                                 {
-                                                    new FirmwareSetComponentViewModel(1, "Модуль 1", _compositeFirmwareSelector),
-                                                    new FirmwareSetComponentViewModel(1, "Модуль 2", _compositeFirmwareSelector)
+                                                    new FirmwareSetComponentViewModel(1, "Модуль 1", _integratedFirmwareSelector),
+                                                    new FirmwareSetComponentViewModel(1, "Модуль 2", _integratedFirmwareSelector)
                                                 });
 
         private static readonly ProjectViewModel _project =
             new ProjectViewModel(30, 1, new BlockDetailsViewModel { SerialNumber = 10007 }, _firmwareSetConstructor);
 
         private static readonly FirmwareSelectorDialogViewModel _firmwareSelectorDialog =
-            new FirmwareSelectorDialogViewModel(_compositeFirmwareSelector);
+            new FirmwareSelectorDialogViewModel(_integratedFirmwareSelector);
 
         private static readonly IRepository _fakeRepository = new FakeRepository();
-
-        private static readonly RepositoryFirmwareSelectorViewModel _repositoryFirmwareSelector =
-            new RepositoryFirmwareSelectorViewModel("Из репозитория", _fakeRepository, new ComponentTarget[0]);
-
-        public static CompositeFirmwareSelectorViewModel CompositeFirmwareSelector
-        {
-            get { return _compositeFirmwareSelector; }
-        }
 
         public static FirmwareSetConstructorViewModel FirmwareSetConstructor
         {
@@ -82,11 +60,6 @@ namespace FirmwareBurner.ViewModels
             get { return _firmwareSelectorDialog; }
         }
 
-        public static RepositoryFirmwareSelectorViewModel RepositoryFirmwareSelector
-        {
-            get { return _repositoryFirmwareSelector; }
-        }
-
         public static IntegratedFirmwareSelectorViewModel IntegratedFirmwareSelector
         {
             get { return _integratedFirmwareSelector; }
@@ -97,12 +70,15 @@ namespace FirmwareBurner.ViewModels
         private class FakeFirmwareSelectorViewModel : FirmwareSelectorViewModel
         {
             private readonly PackageInformation _packageInformation;
-            public FakeFirmwareSelectorViewModel(string Name, PackageInformation PackageInformation) : base(Name) { _packageInformation = PackageInformation; }
 
-            public override FirmwarePackage SelectedPackage
+            public FakeFirmwareSelectorViewModel(string Name, PackageInformation PackageInformation) : base(Name)
             {
-                get { return new FirmwarePackage { Information = _packageInformation }; }
+                _packageInformation = PackageInformation;
+                SelectedPackage = new FirmwarePackageViewModel("sdfsdf", new FirmwareVersionViewModel("3.2", "LDS", DateTime.Now),
+                                                               new FirmwarePackageAvailabilityViewModel(true), ReleaseStatus.Unknown, null);
             }
+
+            public override FirmwarePackageViewModel SelectedPackage { get; set; }
         }
 
         private class FakeRepository : Repository
@@ -143,17 +119,11 @@ namespace FirmwareBurner.ViewModels
                 public ICollection<ComponentTarget> Targets { get; private set; }
 
                 /// <summary>Загружает всё тело пакета</summary>
-                public FirmwarePackage GetPackage()
-                {
-                    throw new NotImplementedException();
-                }
+                public FirmwarePackage GetPackage() { throw new NotImplementedException(); }
 
                 /// <summary>Загружает необходимый компонент из тела пакета</summary>
                 /// <param name="Target">Цель, компонент для которой требуется</param>
-                public FirmwareComponent GetComponent(ComponentTarget Target)
-                {
-                    throw new NotImplementedException();
-                }
+                public FirmwareComponent GetComponent(ComponentTarget Target) { throw new NotImplementedException(); }
             }
         }
 

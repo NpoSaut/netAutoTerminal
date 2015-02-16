@@ -7,18 +7,22 @@ namespace FirmwareBurner.ViewModels.FirmwareSources.LoadControllers
 {
     internal class RemoteRepositoryLoadController : DispatcherRepositoryLoadControllerBase
     {
-        public RemoteRepositoryLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection, IDispatcherFacade Dispatcher, IFirmwarePackageViewModelKeyFormatter KeyFormatter, CancellationTokenSource CancellationTokenSource)
-            : base(Loader, PackagesCollection, Dispatcher, KeyFormatter, CancellationTokenSource) { }
+        private readonly IFirmwarePackageViewModelFactory _packageViewModelFactory;
+
+        public RemoteRepositoryLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection, IDispatcherFacade Dispatcher,
+                                              IFirmwarePackageViewModelKeyFormatter KeyFormatter, CancellationTokenSource CancellationTokenSource,
+                                              IFirmwarePackageViewModelFactory PackageViewModelFactory)
+            : base(Loader, PackagesCollection, Dispatcher, KeyFormatter, CancellationTokenSource)
+        {
+            _packageViewModelFactory = PackageViewModelFactory;
+        }
 
         protected override void AddNewViewModel(string ElementKey, IRepositoryElement Element)
         {
-            var viewModel =
-                new FirmwarePackageViewModel(ElementKey,
-                                             new FirmwareVersionViewModel(Element.Information.FirmwareVersion.ToString(2),
-                                                                          Element.Information.FirmwareVersionLabel,
-                                                                          Element.Information.ReleaseDate),
-                                             new FirmwarePackageAvailabilityViewModel(false),
-                                             Element.Status);
+            FirmwarePackageViewModel viewModel =
+                _packageViewModelFactory.GetViewModel(ElementKey, Element,
+                                                      new FirmwarePackageAvailabilityViewModel(false),
+                                                      Element.Status);
             AddModel(viewModel);
         }
 
