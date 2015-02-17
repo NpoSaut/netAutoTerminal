@@ -2,6 +2,7 @@
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
+using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
@@ -10,11 +11,17 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
     public class AvrOverStk500BurningToolFacadeFactory : IBurningToolFacadeFactory<AvrImage>
     {
         private readonly Stk500BurningToolFactory _burningToolFactory;
-        public AvrOverStk500BurningToolFacadeFactory(Stk500BurningToolFactory BurningToolFactory) { _burningToolFactory = BurningToolFactory; }
+        private readonly IProgressControllerFactory _progressControllerFactory;
+
+        public AvrOverStk500BurningToolFacadeFactory(Stk500BurningToolFactory BurningToolFactory, IProgressControllerFactory ProgressControllerFactory)
+        {
+            _burningToolFactory = BurningToolFactory;
+            _progressControllerFactory = ProgressControllerFactory;
+        }
 
         public IBurningToolFacade<AvrImage> GetBurningToolFacade(string DeviceName)
         {
-            return new AvrOverStk500BurningToolFacade(_burningToolFactory, DeviceName);
+            return new AvrOverStk500BurningToolFacade(_burningToolFactory, DeviceName, _progressControllerFactory);
         }
     }
 }

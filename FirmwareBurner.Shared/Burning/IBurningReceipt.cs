@@ -1,4 +1,5 @@
 ﻿using System;
+using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Burning
@@ -12,6 +13,7 @@ namespace FirmwareBurner.Burning
 
         /// <summary>Прошивает указанный проект</summary>
         /// <param name="Project">Проект для прожигания</param>
-        void Burn(FirmwareProject Project);
+        /// <param name="Progress">Токен для отчёта о процессе прошивки</param>
+        void Burn(FirmwareProject Project, IProgressToken Progress);
     }
 }

@@ -4,6 +4,7 @@ using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
 using FirmwareBurner.Interaction;
+using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
@@ -16,7 +17,8 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
-        public void Burn(AvrImage Image)
+        /// <param name="ProgressToken"></param>
+        public void Burn(AvrImage Image, IProgressToken ProgressToken)
         {
             SaveBuffer(Image.FlashBuffer, "flash", "Куда сохранить файл с Flash?");
             SaveBuffer(Image.EepromBuffer, "eeprom", "Куда сохранить файл с EEPROM?");

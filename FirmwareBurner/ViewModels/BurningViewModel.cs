@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using FirmwareBurner.Burning;
+using System.Threading.Tasks;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
-using FirmwarePacking.SystemsIndexes;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -32,45 +30,15 @@ namespace FirmwareBurner.ViewModels
             get { return BurningVariants.FirstOrDefault(v => v.IsDefault); }
         }
 
+        public ProgressViewModel BurningProgress { get; private set; }
+
         private void BurningVariantOnActivated(object Sender, BurningVariantActivatedEventArgs e)
         {
+            BurningProgress = new ProgressViewModel();
             FirmwareProject project = _projectAssembler.GetProject(ChannelSelector.SelectedChannel.Number);
-            e.BurningReceipt.Burn(project);
-        }
-    }
-
-    public interface IBurningViewModelProvider
-    {
-        BurningViewModel GetViewModel(int CellKindId, int ModificationId, IProjectAssembler projectAssembler);
-    }
-
-    public class BurningViewModelProvider : IBurningViewModelProvider
-    {
-        private readonly IBurningReceiptsCatalog _burningReceiptsCatalog;
-        private readonly IIndex _index;
-
-        public BurningViewModelProvider(IBurningReceiptsCatalog BurningReceiptsCatalog, IIndex Index)
-        {
-            _burningReceiptsCatalog = BurningReceiptsCatalog;
-            _index = Index;
-        }
-
-        public BurningViewModel GetViewModel(int CellKindId, int ModificationId, IProjectAssembler projectAssembler)
-        {
-            BlockKind cellKind = _index.Blocks.SingleOrDefault(c => c.Id == CellKindId);
-            if (cellKind == null) throw new ArgumentException("Ячейка с таким идентификатором отсутствует в каталоге", "CellKindId");
-
-            ModificationKind modification = cellKind.Modifications.SingleOrDefault(m => m.Id == ModificationId);
-            if (modification == null) throw new ArgumentException("Модификация с таким идентификатором отсутствует в каталоге", "ModificationId");
-
-            var channelSelector = new ChannelSelectorViewModel(cellKind.ChannelsCount);
-
-            return new BurningViewModel(projectAssembler, channelSelector,
-                                        _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
-                                                               .Select(
-                                                                   receiptFactory =>
-                                                                   new BurningVariantViewModel(receiptFactory.GetReceipt(modification.DeviceName), true))
-                                                               .ToList());
+            RaisePropertyChanged(() => BurningProgress);
+            Task.Factory.StartNew(() =>
+                                  e.BurningReceipt.Burn(project, BurningProgress));
         }
     }
 }

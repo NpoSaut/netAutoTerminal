@@ -151,6 +151,7 @@
     <Compile Include="Validation\Rules\SerialNumberValidationRule.cs" />
     <Compile Include="Validation\ValidationModule.cs" />
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
+    <Compile Include="ViewModels\BurningViewModelFactory.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\FirmwareSelectorDialogViewModel.cs" />
     <Compile Include="ViewModels\FileRequestServiceViewModel.cs" />
@@ -173,9 +174,11 @@
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\IRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\LocalRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\RemoteRepositoryLoadController.cs" />
+    <Compile Include="ViewModels\IBurningViewModelFactory.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
+    <Compile Include="ViewModels\ProgressViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />

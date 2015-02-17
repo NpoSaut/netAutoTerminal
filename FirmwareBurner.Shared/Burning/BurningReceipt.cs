@@ -1,4 +1,5 @@
 ﻿using FirmwareBurner.Imaging;
+using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Burning
@@ -22,10 +23,17 @@ namespace FirmwareBurner.Burning
 
         /// <summary>Прошивает указанный проект</summary>
         /// <param name="Project">Проект для прожигания</param>
-        public void Burn(FirmwareProject Project)
+        /// <param name="Progress">Токен для отчёта о процессе прошивки</param>
+        public void Burn(FirmwareProject Project, IProgressToken Progress)
         {
-            TImage image = _formatter.GetImage(Project);
-            _burningToolFacade.Burn(image);
+            var imageProgress = new SubprocessProgressToken(0.1);
+            var burnProgress = new SubprocessProgressToken();
+
+            using (new CompositeProgressManager(Progress, imageProgress, burnProgress))
+            {
+                TImage image = _formatter.GetImage(Project, imageProgress);
+                _burningToolFacade.Burn(image, burnProgress);
+            }
         }
     }
 }

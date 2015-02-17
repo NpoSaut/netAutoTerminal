@@ -2,6 +2,7 @@
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.IntelHex;
+using FirmwareBurner.Progress;
 using FirmwareBurner.Receipts.Avr.Utilities;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
@@ -12,32 +13,38 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
     {
         private readonly Stk500BurningToolFactory _burningToolFactory;
         private readonly string _chipName;
+        private readonly IProgressControllerFactory _progressControllerFactory;
 
-        public AvrOverStk500BurningToolFacade(Stk500BurningToolFactory BurningToolFactory, string ChipName)
+        public AvrOverStk500BurningToolFacade(Stk500BurningToolFactory BurningToolFactory, string ChipName, IProgressControllerFactory ProgressControllerFactory)
         {
             _burningToolFactory = BurningToolFactory;
             _chipName = ChipName;
+            _progressControllerFactory = ProgressControllerFactory;
         }
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
-        public void Burn(AvrImage Image)
+        /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
+        public void Burn(AvrImage Image, IProgressToken ProgressToken)
         {
-            Stk500BurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
-            var fuses = new Fuses { FuseH = Image.Fuses.FuseH, FuseL = Image.Fuses.FuseL, FuseE = Image.Fuses.FuseX };
-            burner.WriteFuse(fuses);
-
-            IntelHexStream flashHexStream = new IntelHexStream(),
-                           eepromHexStream = new IntelHexStream();
-
-            Image.FlashBuffer.CopyTo(flashHexStream);
-            Image.EepromBuffer.CopyTo(eepromHexStream);
-
-            using (TemporaryFile flashFile = new TemporaryFile(flashHexStream),
-                                 eepromFile = new TemporaryFile(eepromHexStream))
+            using (IProgressController progress = _progressControllerFactory.CreateController(ProgressToken))
             {
-                burner.WriteFlash(flashFile.FileInfo);
-                burner.WriteFlash(eepromFile.FileInfo);
+                Stk500BurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
+                var fuses = new Fuses { FuseH = Image.Fuses.FuseH, FuseL = Image.Fuses.FuseL, FuseE = Image.Fuses.FuseX };
+                burner.WriteFuse(fuses);
+
+                IntelHexStream flashHexStream = new IntelHexStream(),
+                               eepromHexStream = new IntelHexStream();
+
+                Image.FlashBuffer.CopyTo(flashHexStream);
+                Image.EepromBuffer.CopyTo(eepromHexStream);
+
+                using (TemporaryFile flashFile = new TemporaryFile(flashHexStream),
+                                     eepromFile = new TemporaryFile(eepromHexStream))
+                {
+                    burner.WriteFlash(flashFile.FileInfo);
+                    burner.WriteFlash(eepromFile.FileInfo);
+                }
             }
         }
     }

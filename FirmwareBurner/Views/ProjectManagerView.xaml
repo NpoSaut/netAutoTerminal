@@ -1,13 +1,32 @@
 ﻿<UserControl x:Class="FirmwareBurner.Views.ProjectManagerView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:FirmwareBurner.Views"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}">
 
+    <UserControl.Resources>
+        <Storyboard x:Key="BurnStartedStoryboard">
+            <ThicknessAnimation Storyboard.TargetName="BurnButton"
+                                Storyboard.TargetProperty="Margin" To="2" Duration="0:0:0.2"
+                                EasingFunction="{StaticResource PowerEaseOut}" />
+            <ThicknessAnimation Storyboard.TargetName="BurningProgress"
+                                Storyboard.TargetProperty="Margin" To="-2" Duration="0:0:0.2"
+                                EasingFunction="{StaticResource PowerEaseOut}" />
+        </Storyboard>
+        <Storyboard x:Key="BurnCompleatedStoryboard">
+            <ThicknessAnimation Storyboard.TargetName="BurnButton"
+                                Storyboard.TargetProperty="Margin" Duration="0:0:0.2"
+                                EasingFunction="{StaticResource PowerEaseOut}" />
+            <ThicknessAnimation Storyboard.TargetName="BurningProgress"
+                                Storyboard.TargetProperty="Margin" Duration="0:0:0.2" />
+        </Storyboard>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,7 +40,7 @@
 
         <Rectangle Grid.Column="0" Name="BurningDataShadow" Fill="#3547A0E8" />
         <Polygon Grid.Column="1" Points="2,4 0,0 0,8" Stretch="Fill"
-                     Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
+                 Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
             <Polygon.Fill>
                 <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
                     <GradientStop Color="#3547A0E8" Offset="0" />
@@ -31,17 +50,23 @@
         </Polygon>
 
         <views:ProjectView Grid.Row="0" Grid.Column="0" DataContext="{Binding Project}"
-                           d:DataContext="{x:Static viewModels:SampleData.Project}"/>
-        
-        <ListBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     ItemsSource="{Binding Burning.ChannelSelector.Channels}"
-                     SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
-                     Style="{StaticResource ChannelSelectorStyle}" />
+                           d:DataContext="{x:Static viewModels:SampleData.Project}" />
 
-        <Grid Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=Validator.IsValid}">
-            <Button Width="60" Height="60" Style="{StaticResource CircleButton}"
-                        Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
-                        Content="Начать">
+        <ListBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                 ItemsSource="{Binding Burning.ChannelSelector.Channels}"
+                 SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
+                 Style="{StaticResource ChannelSelectorStyle}" />
+
+        <Grid Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"
+              Width="60" Height="60" Margin="3">
+            <firmwareBurner:CircleProgress Background="#00E73B" x:Name="BurningProgress" Margin="8"
+                                           DataContext="{Binding Burning.BurningProgress}"
+                                           Value="{Binding Complete, Mode=OneWay}" Maximum="1"
+                                           IsIndeterminate="{Binding IsIntermediate}"
+                                           InnerRadiusPortion="0" />
+            <Button Style="{StaticResource CircleButton}" Name="BurnButton"
+                    Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
+                    Content="Начать">
                 <Button.ContextMenu>
                     <ContextMenu Placement="Right" ItemsSource="{Binding Burning.BurningVariants}">
                         <ContextMenu.ItemContainerStyle>
@@ -54,12 +79,19 @@
                 </Button.ContextMenu>
             </Button>
             <i:Interaction.Triggers>
-                <i:EventTrigger SourceObject="{Binding Burning}" EventName="" />
+                <ei:DataTrigger Binding="{Binding Burning.BurningProgress.IsActive}" Value="True">
+                    <ei:ChangePropertyAction TargetName="BurningGroup" PropertyName="IsEnabled" Value="False" />
+                    <ei:ControlStoryboardAction Storyboard="{StaticResource BurnStartedStoryboard}" />
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding Burning.BurningProgress.IsActive}" Value="False">
+                    <ei:ChangePropertyAction TargetName="BurningGroup" PropertyName="IsEnabled" Value="True" />
+                    <ei:ControlStoryboardAction Storyboard="{StaticResource BurnCompleatedStoryboard}" />
+                </ei:DataTrigger>
             </i:Interaction.Triggers>
         </Grid>
 
         <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Visibility="Collapsed"
-                          ItemsSource="{Binding Path=Validator.ValidationErrors}" />
+                      ItemsSource="{Binding Path=Validator.ValidationErrors}" />
 
     </Grid>
 </UserControl>

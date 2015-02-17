@@ -2,11 +2,11 @@
 using ExternalTools.Interfaces;
 using FirmwareBurner.Burning;
 using FirmwareBurner.Interaction;
+using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
 using FirmwareBurner.Views;
-using FirmwarePacking.Repositories;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Modularity;
@@ -30,20 +30,17 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IIndexHelper, IndexHelper>()
                 .RegisterType<ICellsCatalogProvider, IndexCellsCatalogProvider>(new ContainerControlledLifetimeManager())
 
-                // Конфигурируем репозитории
-                //.RegisterType<Repository, DirectoryRepository>("User Repository", new ContainerControlledLifetimeManager(),
-                //                                               new InjectionConstructor(DirectoryRepository.UserRepositoryDirectory))
-                //.RegisterType<Repository, DirectoryRepository>("Local Repository", new ContainerControlledLifetimeManager(),
-                //                                               new InjectionConstructor(DirectoryRepository.ApplicationRepositoryDirectory))
-                
                 // Конфигурируем модели представления
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>()
-                .RegisterType<IBurningViewModelProvider, BurningViewModelProvider>(new ContainerControlledLifetimeManager())
+                .RegisterType<IBurningViewModelFactory, BurningViewModelFactory>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectValidatorViewModelProvider, ProjectValidatorViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFileSelectorService, FileRequestServiceViewModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDispatcherFacade, DefaultDispatcher>(new ContainerControlledLifetimeManager())
+
+                // Различные утилиты
+                .RegisterType<IProgressControllerFactory, ProgressControllerFactory>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
                 .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())

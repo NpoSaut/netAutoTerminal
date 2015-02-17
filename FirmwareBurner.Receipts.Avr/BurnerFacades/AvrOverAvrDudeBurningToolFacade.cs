@@ -2,6 +2,7 @@
 using FirmwareBurner.BurningTools.AvrDude;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.IntelHex;
+using FirmwareBurner.Progress;
 using FirmwareBurner.Receipts.Avr.Utilities;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
@@ -19,7 +20,8 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
-        public void Burn(AvrImage Image)
+        /// <param name="ProgressToken"></param>
+        public void Burn(AvrImage Image, IProgressToken ProgressToken)
         {
             AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
             var fuses = new Fuses(Image.Fuses.FuseH, Image.Fuses.FuseL, Image.Fuses.FuseX);
