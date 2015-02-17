@@ -30,7 +30,7 @@ namespace FirmwareBurner.ViewModels
         private void RequestFirmwareSelection()
         {
             FirmwareSelectionRequest.Raise(
-                new RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>(new FirmwareSelectorDialogViewModel(FirmwareSelector))
+                new RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>(new FirmwareSelectorDialogViewModel(FirmwareSelector, SelectedFirmware))
                 {
                     Title = "Выбор прошивки"
                 },

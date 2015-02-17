@@ -10,7 +10,8 @@
              xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
              mc:Ignorable="d"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSelectorDialog}"
-             d:DesignWidth="276" d:DesignHeight="222">
+             d:DesignWidth="276" d:DesignHeight="222"
+             FocusManager.FocusedElement="{Binding ElementName=SelectorPresenter}">
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -18,6 +19,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.InputBindings>
+        <KeyBinding Key="Escape" Command="{Binding CancelCommand}" />
+    </UserControl.InputBindings>
     <DockPanel Margin="2">
         <StackPanel DockPanel.Dock="Bottom">
             <StackPanel.Resources>
@@ -25,9 +29,9 @@
                     <Setter Property="Margin" Value="2" />
                 </Style>
             </StackPanel.Resources>
-            <Button Content="OK" Margin="2" Padding="16,4" Command="{Binding SubmitCommand}" />
+            <Button Content="OK" Margin="2" Padding="16,4" Command="{Binding SubmitCommand}" IsDefault="True" />
         </StackPanel>
-        <ContentPresenter Margin="2" Content="{Binding Selector}" />
+        <ContentPresenter Name="SelectorPresenter" Margin="2" Content="{Binding Selector}" />
     </DockPanel>
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding CloseDialogRequest}" EventName="Raised">
