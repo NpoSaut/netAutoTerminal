@@ -10,14 +10,14 @@ namespace FirmwareBurner.ViewModels
         {
             this.Components = Components;
             foreach (FirmwareSetComponentViewModel component in Components)
-                component.SetChanged += ComponentOnSetChanged;
+                component.SelectedFirmwareChanged += ComponentOnSelectedFirmwareChanged;
         }
 
         public ICollection<FirmwareSetComponentViewModel> Components { get; private set; }
 
         public event EventHandler SomethingChanged;
 
-        private void ComponentOnSetChanged(object Sender, EventArgs Args) { OnSomethingChanged(); }
+        private void ComponentOnSelectedFirmwareChanged(object Sender, EventArgs Args) { OnSomethingChanged(); }
 
         private void OnSomethingChanged()
         {

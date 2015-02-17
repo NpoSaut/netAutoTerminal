@@ -1,7 +1,6 @@
 ﻿using System;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.FirmwareSources;
-using FirmwarePacking;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
@@ -24,7 +23,7 @@ namespace FirmwareBurner.ViewModels.Dialogs
         public FirmwareSelectorViewModel Selector { get; private set; }
 
         public DelegateCommand SubmitCommand { get; private set; }
-        public FirmwarePackage SelectedPackage { get; private set; }
+        public FirmwarePackageViewModel SelectedPackage { get; private set; }
 
         private void SelectorOnSelectedPackageChanged(object Sender, EventArgs EventArgs) { SubmitCommand.RaiseCanExecuteChanged(); }
 
@@ -32,7 +31,7 @@ namespace FirmwareBurner.ViewModels.Dialogs
 
         private void Submit()
         {
-            SelectedPackage = Selector.SelectedPackage.GetPackageBody();
+            SelectedPackage = Selector.SelectedPackage;
             CloseDialogRequest.Raise(new Notification());
         }
     }

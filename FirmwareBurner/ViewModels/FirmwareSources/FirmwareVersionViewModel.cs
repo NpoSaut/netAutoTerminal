@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using FirmwareBurner.ViewModels.Bases;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources
@@ -17,11 +16,16 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         public String Label { get; private set; }
         public DateTime ReleaseDate { get; private set; }
 
+        public string FullVersion
+        {
+            get { return HaveLabel ? String.Format("{0} {1}", Version, Label) : Version; }
+        }
+
         public Boolean HaveLabel
         {
             get { return string.IsNullOrWhiteSpace(Label); }
         }
 
-        public override string ToString() { return string.Join(" ", new[] { Version, Label }.Where(i => i != null)); }
+        public override string ToString() { return String.Format("Версия {0} от {1:d}", FullVersion, ReleaseDate); }
     }
 }

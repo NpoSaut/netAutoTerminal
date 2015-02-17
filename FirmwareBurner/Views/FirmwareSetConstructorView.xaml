@@ -46,14 +46,15 @@
                 <Border Name="ItemRoot" Padding="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" Text="{Binding ModuleName, Mode=OneWay}" />
                         <TextBlock Grid.Column="1">
                             <Hyperlink Command="{Binding SelectFirmwareCommand}">
+                                <Run Text="Версия" />
                                 <Run x:Name="VersionPresenter"
-                                     Text="{Binding FirmwareSelector.SelectedVersion, Mode=OneWay, StringFormat='Версия {0}', TargetNullValue='Не выбрана'}" />
+                                     Text="{Binding Path=SelectedFirmware.Version.FullVersion, Mode=OneWay}" />
                             </Hyperlink>
                         </TextBlock>
                         <i:Interaction.Triggers>
@@ -72,8 +73,8 @@
                     </Grid>
                 </Border>
                 <DataTemplate.Triggers>
-                    <DataTrigger Binding="{Binding Path=FirmwareSelector.IsPackageSelected}" Value="False">
-                        <Setter TargetName="VersionPresenter" Property="Text" Value="Не выбрана" />
+                    <DataTrigger Binding="{Binding SelectedFirmware}" Value="{x:Null}">
+                        <Setter TargetName="VersionPresenter" Property="Text" Value="не выбрана" />
                     </DataTrigger>
                     <DataTrigger
                         Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}"

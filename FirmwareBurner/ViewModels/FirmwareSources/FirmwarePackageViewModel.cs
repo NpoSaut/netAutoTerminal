@@ -1,4 +1,5 @@
-﻿using FirmwareBurner.Annotations;
+﻿using System;
+using FirmwareBurner.Annotations;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
@@ -48,5 +49,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
         }
 
         public FirmwarePackage GetPackageBody() { return _packageProvider.GetPackage(); }
+
+        public override string ToString() { return String.Format("{{{0}}}", Version); }
     }
 }
