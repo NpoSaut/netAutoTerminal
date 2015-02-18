@@ -63,7 +63,7 @@
                 <DataTrigger Binding="{Binding Status}" Value="Test">
                     <Setter TargetName="VersionEllipse" Property="Stroke" Value="{StaticResource TestVersionBrush}" />
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Version.HaveLabel}" Value="True">
+                <DataTrigger Binding="{Binding Version.HaveLabel}" Value="False">
                     <Setter TargetName="VersionLabelTextBlock" Property="Visibility" Value="Collapsed" />
                     <Setter TargetName="VersionLabelTextBlock" Property="FontSize" Value="14" />
                 </DataTrigger>

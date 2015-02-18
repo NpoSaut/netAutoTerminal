@@ -23,7 +23,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
 
         public Boolean HaveLabel
         {
-            get { return string.IsNullOrWhiteSpace(Label); }
+            get { return !string.IsNullOrWhiteSpace(Label); }
         }
 
         public override string ToString() { return String.Format("Версия {0} от {1:d}", FullVersion, ReleaseDate); }
