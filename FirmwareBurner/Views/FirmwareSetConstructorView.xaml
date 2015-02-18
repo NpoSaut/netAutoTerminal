@@ -60,13 +60,11 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger SourceObject="{Binding FirmwareSelectionRequest}" EventName="Raised">
                                 <triggerActions:ShowDialogTriggerAction>
-                                    <triggerActions:ShowDialogTriggerAction.DialogMergedResources>
-                                        <ResourceDictionary>
-                                            <DataTemplate DataType="{x:Type dialogs:FirmwareSelectorDialogViewModel}">
-                                                <firmwareSelectors:FirmwareSelectorDialogView />
-                                            </DataTemplate>
-                                        </ResourceDictionary>
-                                    </triggerActions:ShowDialogTriggerAction.DialogMergedResources>
+                                    <ResourceDictionary>
+                                        <DataTemplate DataType="{x:Type dialogs:FirmwareSelectorDialogViewModel}">
+                                            <firmwareSelectors:FirmwareSelectorDialogView />
+                                        </DataTemplate>
+                                    </ResourceDictionary>
                                 </triggerActions:ShowDialogTriggerAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>

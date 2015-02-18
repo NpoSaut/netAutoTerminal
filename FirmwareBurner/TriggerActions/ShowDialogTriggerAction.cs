@@ -1,9 +1,11 @@
 ﻿using System.Windows;
 using System.Windows.Interactivity;
+using System.Windows.Markup;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwareBurner.TriggerActions
 {
+    [ContentProperty("DialogMergedResources")]
     public class ShowDialogTriggerAction : TriggerAction<DependencyObject>
     {
         public ResourceDictionary DialogMergedResources { get; set; }
