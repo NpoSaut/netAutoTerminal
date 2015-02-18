@@ -18,67 +18,48 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <!--<ListBox ItemsSource="{Binding Components}" SelectedIndex="0" Visibility="Collapsed">
-        <ListBox.ItemTemplate>
-            <DataTemplate DataType="viewModels:FirmwareSetComponentViewModel">
-                <HeaderedContentControl Header="{Binding ModuleName}">
-                    <ContentPresenter x:Name="ContentPresenter" Content="{Binding FirmwareSelector}" />
-                </HeaderedContentControl>
-                <DataTemplate.Triggers>
-                    <DataTrigger
-                        Binding="{Binding Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}"
-                        Value="False">
-                        <Setter TargetName="ContentPresenter" Property="Visibility" Value="Collapsed" />
-                    </DataTrigger>
-                </DataTemplate.Triggers>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-        <ListBox.Template>
-            <ControlTemplate>
-                <ItemsPresenter />
-            </ControlTemplate>
-        </ListBox.Template>
-    </ListBox>-->
-
     <ItemsControl ItemsSource="{Binding Components}" AlternationCount="2">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel Orientation="Vertical" MaxHeight="100" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="viewModels:FirmwareSetComponentViewModel">
-                <Border Name="ItemRoot" Padding="1">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="2*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding ModuleName, Mode=OneWay}" />
-                        <TextBlock Grid.Column="1">
-                            <Hyperlink Command="{Binding SelectFirmwareCommand}">
-                                <Run Text="Версия" />
-                                <Run x:Name="VersionPresenter"
-                                     Text="{Binding Path=SelectedFirmware.Version.FullVersion, Mode=OneWay}" />
-                            </Hyperlink>
-                        </TextBlock>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger SourceObject="{Binding FirmwareSelectionRequest}" EventName="Raised">
-                                <triggerActions:ShowDialogTriggerAction>
-                                    <ResourceDictionary>
-                                        <DataTemplate DataType="{x:Type dialogs:FirmwareSelectorDialogViewModel}">
-                                            <firmwareSelectors:FirmwareSelectorDialogView />
-                                        </DataTemplate>
-                                    </ResourceDictionary>
-                                </triggerActions:ShowDialogTriggerAction>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Grid>
-                </Border>
+                <DockPanel Name="ItemRoot" Margin="1,1,6,1">
+                    <Border CornerRadius="10"
+                            BorderBrush="{StaticResource ProjectArrowBrush}" BorderThickness="1"
+                            DockPanel.Dock="Left" Padding="8,2" Margin="0,0,4,0">
+                        <TextBlock Name="VersionTextBlock" HorizontalAlignment="Center"
+                                   Text="{Binding Path=SelectedFirmware.Version.FullVersion, Mode=OneWay}"
+                                   Foreground="{StaticResource ProjectArrowBrush}" />
+                    </Border>
+                    <TextBlock VerticalAlignment="Center">
+                        <Hyperlink Command="{Binding SelectFirmwareCommand}">
+                            <Run Text="{Binding ModuleName, Mode=OneWay}" />
+                        </Hyperlink>
+                    </TextBlock>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger SourceObject="{Binding FirmwareSelectionRequest}" EventName="Raised">
+                            <triggerActions:ShowDialogTriggerAction>
+                                <ResourceDictionary>
+                                    <DataTemplate DataType="{x:Type dialogs:FirmwareSelectorDialogViewModel}">
+                                        <firmwareSelectors:FirmwareSelectorDialogView />
+                                    </DataTemplate>
+                                </ResourceDictionary>
+                            </triggerActions:ShowDialogTriggerAction>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DockPanel>
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding SelectedFirmware}" Value="{x:Null}">
-                        <Setter TargetName="VersionPresenter" Property="Text" Value="не выбрана" />
+                        <Setter TargetName="VersionTextBlock" Property="Text" Value="N/A" />
                     </DataTrigger>
-                    <DataTrigger
+                    <!--<DataTrigger
                         Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}"
                         Value="1">
                         <Setter TargetName="ItemRoot" Property="Background" Value="#0A002795" />
-                    </DataTrigger>
+                    </DataTrigger>-->
                 </DataTemplate.Triggers>
             </DataTemplate>
         </ItemsControl.ItemTemplate>
