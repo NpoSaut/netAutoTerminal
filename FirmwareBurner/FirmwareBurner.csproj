@@ -130,6 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ArrowHead.cs" />
     <Compile Include="DialogShell.xaml.cs">
       <DependentUpon>DialogShell.xaml</DependentUpon>
     </Compile>

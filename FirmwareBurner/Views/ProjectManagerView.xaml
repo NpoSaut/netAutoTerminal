@@ -27,39 +27,47 @@
                                 Storyboard.TargetProperty="Margin" Duration="0:0:0.2" />
         </Storyboard>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <Rectangle Grid.Column="0" Name="BurningDataShadow" Fill="#3547A0E8" />
-        <Polygon Grid.Column="1" Points="2,4 0,0 0,8" Stretch="Fill"
-                 Height="{Binding ElementName=BurningDataShadow, Path=ActualHeight}">
-            <Polygon.Fill>
-                <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
-                    <GradientStop Color="#3547A0E8" Offset="0" />
-                    <GradientStop Color="#A247A0E8" Offset="1" />
-                </LinearGradientBrush>
-            </Polygon.Fill>
-        </Polygon>
+            <Border BorderThickness="0,1" BorderBrush="{StaticResource ProjectArrowBrush}"
+                    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
+                    Padding="8">
+                <views:ProjectView DataContext="{Binding Project}"
+                                   d:DataContext="{x:Static viewModels:SampleData.Project}" />
+            </Border>
 
-        <views:ProjectView Grid.Row="0" Grid.Column="0" DataContext="{Binding Project}"
-                           d:DataContext="{x:Static viewModels:SampleData.Project}" />
+            <firmwareBurner:ArrowHead Grid.Column="1" HorizontalAlignment="Left" Width="30"
+                                      Stroke="{StaticResource ProjectArrowBrush}" StrokeThickness="1"
+                                      Fill="{StaticResource {x:Static SystemColors.ControlBrushKey}}" />
 
-        <ListBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                 ItemsSource="{Binding Burning.ChannelSelector.Channels}"
-                 SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
-                 Style="{StaticResource ChannelSelectorStyle}" />
 
-        <Grid Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"
-              Width="60" Height="60" Margin="3">
-            <firmwareBurner:CircleProgress Background="#00E73B" x:Name="BurningProgress" Margin="8"
+            <ListBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                     ItemsSource="{Binding Burning.ChannelSelector.Channels}"
+                     SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
+                     Style="{StaticResource ChannelSelectorStyle}" />
+
+            <ItemsControl Grid.Column="0" Visibility="Collapsed"
+                          ItemsSource="{Binding Path=Validator.ValidationErrors}" />
+
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="2" Opacity="0.1" />
+            </Grid.Effect>
+
+        </Grid>
+
+        <Grid Grid.Column="1" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"
+              Width="60" Height="60" Margin="8">
+            <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrush}" x:Name="BurningProgress"
+                                           Margin="8"
                                            DataContext="{Binding Burning.BurningProgress}"
                                            Value="{Binding Complete, Mode=OneWay}" Maximum="1"
                                            IsIndeterminate="{Binding IsIntermediate}"
@@ -89,9 +97,5 @@
                 </ei:DataTrigger>
             </i:Interaction.Triggers>
         </Grid>
-
-        <ItemsControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Visibility="Collapsed"
-                      ItemsSource="{Binding Path=Validator.ValidationErrors}" />
-
     </Grid>
 </UserControl>

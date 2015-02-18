@@ -2,11 +2,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
                     xmlns:targeting="clr-namespace:FirmwareBurner.ViewModels.Targeting">
+
+
+    <Brush x:Key="ProjectArrowBrush">#00A815</Brush>
+
+
     <Style TargetType="ListBox" x:Key="ChannelSelectorStyle">
         <Style.Resources>
             <DataTemplate DataType="{x:Type targeting:ChannelViewModel}">
                 <TextBlock>
-                    <Run Text="Канал"/>
+                    <Run Text="Канал" />
                     <Run FontWeight="Bold" Text="{Binding Number, Mode=OneTime}" />
                 </TextBlock>
             </DataTemplate>
@@ -18,12 +23,18 @@
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Margin" Value="1" />
+                    <Setter Property="BorderBrush" Value="{StaticResource ProjectArrowBrush}" />
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="Padding" Value="5,2" />
+                    <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}" />
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
                                 <Border Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="1" CornerRadius="1" Padding="2">
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        Padding="{TemplateBinding Padding}"
+                                        CornerRadius="1">
                                     <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
                                                       ContentTemplate="{TemplateBinding ContentControl.ContentTemplate}"
                                                       ContentStringFormat="{TemplateBinding ContentControl.ContentStringFormat}"
@@ -35,8 +46,7 @@
                     </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="Gray" />
-                            <Setter Property="BorderBrush" Value="DimGray" />
+                            <Setter Property="Background" Value="{StaticResource ProjectArrowBrush}" />
                             <Setter Property="Foreground" Value="White" />
                         </Trigger>
                     </Style.Triggers>
