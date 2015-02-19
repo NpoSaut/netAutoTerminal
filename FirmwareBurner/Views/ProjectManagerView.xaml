@@ -27,11 +27,12 @@
                                 Storyboard.TargetProperty="Margin" Duration="0:0:0.2" />
         </Storyboard>
     </UserControl.Resources>
-    <Grid VerticalAlignment="Center">
+    <Grid Margin="10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -39,8 +40,7 @@
             </Grid.ColumnDefinitions>
 
             <Border BorderThickness="0,1" BorderBrush="{StaticResource ProjectArrowBrush}"
-                    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}"
-                    Padding="8">
+                    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
                 <views:ProjectView DataContext="{Binding Project}"
                                    d:DataContext="{x:Static viewModels:SampleData.Project}" />
             </Border>
@@ -55,13 +55,12 @@
                      SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
                      Style="{StaticResource ChannelSelectorStyle}" />
 
-            <ItemsControl Grid.Column="0" Visibility="Collapsed"
-                          ItemsSource="{Binding Path=Validator.ValidationErrors}" />
+            <!--<ItemsControl Grid.Column="0" Visibility="Collapsed"
+                          ItemsSource="{Binding Path=Validator.ValidationErrors}" />-->
 
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="0" ShadowDepth="2" Opacity="0.1" />
             </Grid.Effect>
-
         </Grid>
 
         <Grid Grid.Column="1" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"

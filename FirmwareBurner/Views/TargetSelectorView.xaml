@@ -51,7 +51,7 @@
 
         <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector" IsEditable="False"
                   DisplayMemberPath="Name" ItemsSource="{Binding CellKinds}"
-                  SelectedItem="{Binding SelectedCellKind}" />
+                  SelectedItem="{Binding SelectedCellKind}" Background="Transparent" />
         <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector" IsEditable="False" Width="130"
                   LayoutTransform="{StaticResource ModificationTransform}"
                   DisplayMemberPath="Name"

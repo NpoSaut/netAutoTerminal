@@ -13,6 +13,25 @@
              FocusManager.FocusedElement="{Binding ElementName=PackagesList}">
 
     <UserControl.Resources>
+
+        <Storyboard x:Key="ItemLoadedStoryboard" TargetName="ItemRoot">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0"
+                             Duration="0:0:0" />
+            <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0"
+                             Duration="0:0:0.2"
+                             EasingFunction="{StaticResource PowerEaseOut}" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"
+                             BeginTime="0:0:0.2" Duration="0:0:0.2"
+                             EasingFunction="{StaticResource PowerEaseOut}" />
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="50"
+                             BeginTime="0:0:0.2" Duration="0:0:0.4">
+                <DoubleAnimation.EasingFunction>
+                    <BackEase Amplitude="0.4" />
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+
+
         <DataTemplate DataType="{x:Type firmwareSources:FirmwarePackageViewModel}">
             <DataTemplate.Resources>
                 <Brush x:Key="ActualVersionBrush">#297529</Brush>
@@ -45,10 +64,8 @@
                 <StackPanel VerticalAlignment="Center" Margin="6, 4">
                     <TextBlock Name="VersionStatusLabel" Text="{Binding Status, Mode=OneWay}"
                                Foreground="{Binding ElementName=VersionEllipse, Path=Stroke}" />
-                    <TextBlock Opacity="0.6">
-                        <Run Text="Дата выпуска:" />
-                        <Run Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
-                    </TextBlock>
+                    <TextBlock Opacity="0.6" Text="Дата выпуска" />
+                    <TextBlock Opacity="0.6" Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
                 </StackPanel>
             </DockPanel>
             <DataTemplate.Triggers>
@@ -97,7 +114,9 @@
     <Grid>
         <ListBox Margin="2" Name="PackagesList"
                  ItemsSource="{Binding Source={StaticResource Packages}}"
-                 SelectedItem="{Binding SelectedPackage}">
+                 SelectedItem="{Binding SelectedPackage}"
+                 BorderBrush="Transparent"
+                 Background="Transparent">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
@@ -117,24 +136,7 @@
                                         <Setter TargetName="ItemRoot" Property="BorderBrush" Value="DodgerBlue" />
                                     </Trigger>
                                     <EventTrigger RoutedEvent="Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard TargetName="ItemRoot">
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0"
-                                                                 Duration="0:0:0" />
-                                                <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY"
-                                                                 From="0" Duration="0:0:0.2"
-                                                                 EasingFunction="{StaticResource PowerEaseOut}" />
-                                                <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"
-                                                                 BeginTime="0:0:0.2" Duration="0:0:0.2"
-                                                                 EasingFunction="{StaticResource PowerEaseOut}" />
-                                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X"
-                                                                 From="50" BeginTime="0:0:0.2" Duration="0:0:0.4">
-                                                    <DoubleAnimation.EasingFunction>
-                                                        <BackEase Amplitude="0.4" />
-                                                    </DoubleAnimation.EasingFunction>
-                                                </DoubleAnimation>
-                                            </Storyboard>
-                                        </BeginStoryboard>
+                                        <BeginStoryboard Storyboard="{StaticResource ItemLoadedStoryboard}" />
                                     </EventTrigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>

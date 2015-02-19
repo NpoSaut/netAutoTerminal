@@ -20,7 +20,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
                Content="Серийный номер блока" />
@@ -32,7 +32,10 @@
         <TextBox Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
                  Text="{Binding Path=BlockDetails.AssemblyDate, StringFormat=MM.yyy}" />
 
-        <views:FirmwareSetConstructorView Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
-                                          DataContext="{Binding Path=FirmwareSetConstructor}" />
+        <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,8,0,0">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <views:FirmwareSetConstructorView DataContext="{Binding Path=FirmwareSetConstructor}" />
+            </ScrollViewer>
+        </Border>
     </Grid>
 </UserControl>
