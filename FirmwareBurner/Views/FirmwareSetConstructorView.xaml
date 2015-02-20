@@ -19,13 +19,12 @@
     <ItemsControl ItemsSource="{Binding Components}" AlternationCount="2">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel Orientation="Horizontal" />
+                <UniformGrid Columns="{Binding Components.Count}" />
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate DataType="viewModels:FirmwareSetComponentViewModel">
-                <Border Name="ItemRoot" Margin="1,0,6,0" MinWidth="180"
-                        BorderBrush="DarkGray" BorderThickness="1,0,0,0">
+                <Border Name="ItemRoot" MinWidth="180">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Top"
                                    Foreground="{StaticResource ProjectArrowBrush}"
