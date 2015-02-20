@@ -160,6 +160,7 @@
     <Compile Include="ViewModels\FirmwareSetConstructorViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\BackgroundRepositoryLoader.cs" />
+    <Compile Include="ViewModels\FirmwareSources\FakeIntegratedFirmwareSelectorViewModelProvider.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageAvailabilityViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageAvailabilityViewModelFactory.cs" />
     <Compile Include="ViewModels\FirmwareSources\FirmwarePackageViewModel.cs" />
