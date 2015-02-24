@@ -36,7 +36,7 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
                                                                                DefaultFileName = FileName,
                                                                                FileTypes = _fileTypeDescriptions,
                                                                            });
-            if (fileName != null)
+            if (!string.IsNullOrWhiteSpace(fileName))
             {
                 var hexStream = new IntelHexStream();
                 Buffer.CopyTo(hexStream);

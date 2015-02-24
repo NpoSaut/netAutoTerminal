@@ -2,13 +2,20 @@
 using System.Threading;
 using FirmwareBurner.Interaction;
 using FirmwareBurner.ViewModels.Bases;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwareBurner.ViewModels
 {
     public class FileRequestServiceViewModel : ViewModelBase, IFileSelectorService
     {
-        public FileRequestServiceViewModel() { SaveFileRequest = new InteractionRequest<SaveFileInteractionContext>(); }
+        private readonly IDispatcherFacade _dispatcher;
+
+        public FileRequestServiceViewModel(IDispatcherFacade Dispatcher)
+        {
+            _dispatcher = Dispatcher;
+            SaveFileRequest = new InteractionRequest<SaveFileInteractionContext>();
+        }
 
         public InteractionRequest<SaveFileInteractionContext> SaveFileRequest { get; private set; }
 
@@ -19,7 +26,7 @@ namespace FirmwareBurner.ViewModels
         {
             var resetEvent = new AutoResetEvent(false);
             var context = new SaveFileInteractionContext(Arguments, resetEvent);
-            SaveFileRequest.Raise(context, OnSaveInteractinCompleated);
+            _dispatcher.BeginInvoke((Action<Object>)(x => SaveFileRequest.Raise(context, OnSaveInteractinCompleated)), null);
             resetEvent.WaitOne();
             return context.FileName;
         }
