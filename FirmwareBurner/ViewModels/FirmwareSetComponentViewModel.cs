@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Windows.Input;
 using FirmwareBurner.ViewModels.Bases;
-using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -16,34 +12,20 @@ namespace FirmwareBurner.ViewModels
             this.ModuleName = ModuleName;
             this.ModuleIndex = ModuleIndex;
 
-            FirmwareSelectionRequest = new InteractionRequest<RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>>();
-            SelectFirmwareCommand = new DelegateCommand(RequestFirmwareSelection);
+            FirmwareSelector.SelectedPackageChanged += FirmwareSelectorOnSelectedPackageChanged;
         }
 
         public int ModuleIndex { get; private set; }
         public String ModuleName { get; private set; }
-        public ICommand SelectFirmwareCommand { get; private set; }
         public FirmwareSelectorViewModel FirmwareSelector { get; private set; }
-        public InteractionRequest<RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>> FirmwareSelectionRequest { get; private set; }
         public FirmwarePackageViewModel SelectedFirmware { get; private set; }
+        public event EventHandler SelectedFirmwareChanged;
 
-        private void RequestFirmwareSelection()
+        private void FirmwareSelectorOnSelectedPackageChanged(object Sender, EventArgs Args)
         {
-            FirmwareSelectionRequest.Raise(
-                new RequestDialogInteractionContext<FirmwareSelectorDialogViewModel>(new FirmwareSelectorDialogViewModel(FirmwareSelector, SelectedFirmware))
-                {
-                    Title = "Выбор прошивки"
-                },
-                FirmwareSelectedCallback);
-        }
-
-        private void FirmwareSelectedCallback(RequestDialogInteractionContext<FirmwareSelectorDialogViewModel> Context)
-        {
-            SelectedFirmware = Context.ViewModel.SelectedPackage;
+            SelectedFirmware = FirmwareSelector.SelectedPackage;
             OnSelectedFirmwareChanged();
         }
-
-        public event EventHandler SelectedFirmwareChanged;
 
         protected virtual void OnSelectedFirmwareChanged()
         {
