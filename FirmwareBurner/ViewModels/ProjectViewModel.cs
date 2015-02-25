@@ -17,7 +17,8 @@ namespace FirmwareBurner.ViewModels
             this.BlockDetails = BlockDetails;
 
             FirmwareSetConstructor.SomethingChanged += FirmwareSetConstructorOnSomethingChanged;
-            BlockDetails.PropertyChanged += BlockDetailsOnPropertyChanged;
+            BlockDetails.AssemblyDate.PropertyChanged += BlockDetailsOnPropertyChanged;
+            BlockDetails.SerialNumber.PropertyChanged += BlockDetailsOnPropertyChanged;
         }
 
         public int CellKindId { get; private set; }
