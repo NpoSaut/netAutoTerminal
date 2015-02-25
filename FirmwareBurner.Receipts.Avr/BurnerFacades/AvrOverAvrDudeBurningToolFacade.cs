@@ -33,11 +33,11 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             Image.FlashBuffer.CopyTo(flashHexStream);
             Image.EepromBuffer.CopyTo(eepromHexStream);
 
-            using (TemporaryFile flashFile = new TemporaryFile(flashHexStream),
-                                 eepromFile = new TemporaryFile(eepromHexStream))
+            using (TemporaryFile flashFile = new TemporaryFile(flashHexStream.GetHexFile().OpenIntelHexStream()),
+                                 eepromFile = new TemporaryFile(eepromHexStream.GetHexFile().OpenIntelHexStream()))
             {
                 burner.WriteFlash(flashFile.FileInfo);
-                burner.WriteFlash(eepromFile.FileInfo);
+                burner.WriteEeprom(eepromFile.FileInfo);
             }
         }
     }
