@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using FirmwareBurner.Project;
+﻿using System.Collections.Generic;
 using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation

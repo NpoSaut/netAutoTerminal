@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner.Validation
