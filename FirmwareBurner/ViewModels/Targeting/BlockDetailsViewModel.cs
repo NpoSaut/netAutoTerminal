@@ -1,39 +1,28 @@
 ﻿using System;
+using FirmwareBurner.Validation.Rules;
 using FirmwareBurner.ViewModels.Bases;
+using FirmwareBurner.ViewModels.Property;
 
 namespace FirmwareBurner.ViewModels.Targeting
 {
     public class BlockDetailsViewModel : ViewModelBase
     {
-        private DateTime _assemblyDate = DateTime.Now;
-        private int _serialNumber;
+        public BlockDetailsViewModel() : this(0, DateTime.Now) { }
+
+        public BlockDetailsViewModel(int SerialNumber, DateTime AssemblyDate)
+        {
+            this.SerialNumber = new ValidateableTextPropertyViewModel<int>(new IntTextValueConverter(),
+                                                                           new SerialNumberValidationRule());
+
+            this.AssemblyDate = new ValidateableTextPropertyViewModel<DateTime>(AssemblyDate,
+                                                                                new DateTimeTextValueConverter("M.yyyy"),
+                                                                                new AssemblyDateValidationRule());
+        }
 
         /// <summary>Серийный номер блока</summary>
-        public int SerialNumber
-        {
-            get { return _serialNumber; }
-            set
-            {
-                if (_serialNumber != value)
-                {
-                    _serialNumber = value;
-                    RaisePropertyChanged("SerialNumber");
-                }
-            }
-        }
+        public ValidateableTextPropertyViewModel<int> SerialNumber { get; private set; }
 
         /// <summary>Дата сборки модуля</summary>
-        public DateTime AssemblyDate
-        {
-            get { return _assemblyDate; }
-            set
-            {
-                if (_assemblyDate != value)
-                {
-                    _assemblyDate = value;
-                    RaisePropertyChanged("AssemblyDate");
-                }
-            }
-        }
+        public ValidateableTextPropertyViewModel<DateTime> AssemblyDate { get; private set; }
     }
 }

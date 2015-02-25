@@ -1,6 +1,26 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources">
+                    xmlns:firmwareSources="clr-namespace:FirmwareBurner.ViewModels.FirmwareSources"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
+                    xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+                    mc:Ignorable="d">
+
+
+    <Style TargetType="{x:Type Run}" x:Key="IconRunStyle">
+        <Setter Property="FontFamily" Value="/Fonts/#burner" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="TextIconStyle">
+        <Setter Property="FontFamily" Value="/Fonts/#burner" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource TextIconStyle}" x:Key="TextIconBoxStyle">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
     <DataTemplate DataType="{x:Type firmwareSources:FirmwareVersionViewModel}">
         <TextBlock>
             <Run Text="Версия" />
@@ -10,4 +30,86 @@
             <Run Text="{Binding ReleaseDate, Mode=OneWay}" />
         </TextBlock>
     </DataTemplate>
+
+    <Style TargetType="ContentControl" x:Key="ValidateableControlStyle">
+        <Style.Resources>
+            <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5" To="0"
+                                 Duration="0:0:0.7">
+                    <DoubleAnimation.EasingFunction>
+                        <ElasticEase />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Key="DisplayErrorIconStoryboard" TargetName="WarningIcon">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.7" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="10" Duration="0:0:0.3">
+                    <DoubleAnimation.EasingFunction>
+                        <PowerEase EasingMode="EaseOut" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+            <Storyboard x:Key="HideErrorIconStoryboard" TargetName="WarningIcon" FillBehavior="Stop">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.4" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.4"
+                                 To="20">
+                    <DoubleAnimation.EasingFunction>
+                        <BackEase EasingMode="EaseIn" Amplitude="0.4" />
+                    </DoubleAnimation.EasingFunction>
+                </DoubleAnimation>
+            </Storyboard>
+        </Style.Resources>
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Border Name="Holder" d:DataContext="{x:Static viewModels:SampleData.ValidateableTextProperty}"
+                            Margin="{TemplateBinding Margin}" Padding="1">
+                        <Grid Name="Presenter">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                            <TextBlock Name="WarningIcon" Text="!" FontSize="14"
+                                       Style="{StaticResource TextIconStyle}" TextOptions.TextFormattingMode="Ideal"
+                                       VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4"
+                                       Opacity="0" IsHitTestVisible="False">
+                                <TextBlock.RenderTransform>
+                                    <TranslateTransform />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Grid.RenderTransform>
+                                <TranslateTransform />
+                            </Grid.RenderTransform>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsInitialized}" Value="True"/>
+                                <Condition Binding="{Binding IsValid}" Value="False"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="ToolTip" Value="{Binding ValidationErrorsText}"/>
+                            <Setter TargetName="WarningIcon" Property="Foreground" Value="#FF3410" />
+                            <MultiDataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ShakeInputStoryboard}" />
+                                <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
+                            </MultiDataTrigger.EnterActions>
+                            <MultiDataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
+                            </MultiDataTrigger.ExitActions>
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding IsInitialized}" Value="False">
+                            <Setter TargetName="WarningIcon" Property="Foreground" Value="#0061C5" />
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

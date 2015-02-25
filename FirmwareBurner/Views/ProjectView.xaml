@@ -6,6 +6,15 @@
              xmlns:views="clr-namespace:FirmwareBurner.Views"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              mc:Ignorable="d" d:DataContext="{x:Static viewModels:SampleData.Project}">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.Resources>
             <Style x:Key="InputBoxStyle" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
@@ -27,10 +36,18 @@
         <Label Grid.Column="1" Grid.Row="0" Target="{Binding ElementName=AssemblyDateEdit}"
                Content="Дата изготовления" />
 
-        <TextBox Grid.Column="0" Grid.Row="1" Name="SerialNumberEdit" Style="{StaticResource InputBoxStyle}"
-                 Text="{Binding Path=BlockDetails.SerialNumber, UpdateSourceTrigger=PropertyChanged}" />
-        <TextBox Grid.Column="1" Grid.Row="1" Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
-                 Text="{Binding Path=BlockDetails.AssemblyDate, StringFormat=MM.yyy}" />
+        <ContentControl Grid.Column="0" Grid.Row="1"
+                        Style="{StaticResource ValidateableControlStyle}"
+                        DataContext="{Binding Path=BlockDetails.SerialNumber}">
+            <TextBox Name="SerialNumberEdit" Style="{StaticResource InputBoxStyle}"
+                     Text="{Binding Path=ValueText, UpdateSourceTrigger=PropertyChanged}" />
+        </ContentControl>
+        <ContentControl Grid.Column="1" Grid.Row="1"
+                        Style="{StaticResource ValidateableControlStyle}"
+                        DataContext="{Binding Path=BlockDetails.AssemblyDate}">
+            <TextBox Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
+                     Text="{Binding Path=ValueText, StringFormat=MM.yyy}" />
+        </ContentControl>
 
         <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,8,0,0">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">

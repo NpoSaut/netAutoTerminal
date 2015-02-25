@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
+using FirmwareBurner.ViewModels.Property;
 using FirmwareBurner.ViewModels.Targeting;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
@@ -38,7 +39,10 @@ namespace FirmwareBurner.ViewModels
                                                 });
 
         private static readonly ProjectViewModel _project =
-            new ProjectViewModel(30, 1, new BlockDetailsViewModel { SerialNumber = 10007 }, _firmwareSetConstructor);
+            new ProjectViewModel(30, 1, new BlockDetailsViewModel(10007, DateTime.Now), _firmwareSetConstructor);
+
+        private static readonly ValidateableTextPropertyViewModel<int> _validateableTextProperty =
+            new ValidateableTextPropertyViewModel<int>(new IntTextValueConverter());
 
         private static readonly FirmwareSelectorDialogViewModel _firmwareSelectorDialog =
             new FirmwareSelectorDialogViewModel(_integratedFirmwareSelector);
@@ -58,6 +62,11 @@ namespace FirmwareBurner.ViewModels
         public static FirmwareSelectorDialogViewModel FirmwareSelectorDialog
         {
             get { return _firmwareSelectorDialog; }
+        }
+        
+        public static ValidateableTextPropertyViewModel<int> ValidateableTextProperty
+        {
+            get { return _validateableTextProperty; }
         }
 
         public static IntegratedFirmwareSelectorViewModel IntegratedFirmwareSelector

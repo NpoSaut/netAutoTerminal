@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
+             xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
              mc:Ignorable="d"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}">
 
@@ -23,18 +24,18 @@
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="viewModels:FirmwareSetComponentViewModel">
+            <DataTemplate DataType="property:ValidateableFirmwareSetComponentViewModel">
                 <Border Name="ItemRoot" MinWidth="180">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Left" VerticalAlignment="Top"
                                    Foreground="{StaticResource ProjectArrowBrush}"
                                    FontSize="18" FontWeight="Light"
-                                   Text="{Binding ModuleName, Mode=OneWay}">
+                                   Text="{Binding Path=Value.ModuleName, Mode=OneWay}">
                             <TextBlock.LayoutTransform>
                                 <RotateTransform Angle="-90" />
                             </TextBlock.LayoutTransform>
                         </TextBlock>
-                        <firmwareSelectors:IntegratedFirmwareSelectorView DataContext="{Binding Path=FirmwareSelector}" />
+                        <firmwareSelectors:IntegratedFirmwareSelectorView DataContext="{Binding Path=Value.FirmwareSelector}" />
                     </DockPanel>
                 </Border>
                 <DataTemplate.Triggers>

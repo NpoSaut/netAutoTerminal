@@ -24,10 +24,11 @@ namespace FirmwareBurner
         public FirmwareProject GetProject(int ChannelNumber)
         {
             return _firmwareProjectFactory.GetProject(_projectViewModel.CellKindId, _projectViewModel.CellModificationId, ChannelNumber,
-                                                      _projectViewModel.BlockDetails.SerialNumber,
-                                                      _projectViewModel.BlockDetails.AssemblyDate,
-                                                      _projectViewModel.FirmwareSetConstructor.Components.Select(
-                                                          c => Tuple.Create(c.ModuleIndex, c.SelectedFirmware.GetPackageBody())).ToList());
+                                                      _projectViewModel.BlockDetails.SerialNumber.Value,
+                                                      _projectViewModel.BlockDetails.AssemblyDate.Value,
+                                                      _projectViewModel.FirmwareSetConstructor.Components
+                                                                       .Select(c => c.Value)
+                                                                       .Select(c => Tuple.Create(c.ModuleIndex, c.SelectedFirmware.GetPackageBody())).ToList());
         }
     }
 }

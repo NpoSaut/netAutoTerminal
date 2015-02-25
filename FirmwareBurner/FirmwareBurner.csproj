@@ -146,6 +146,7 @@
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="Validation\IProjectValidationRule.cs" />
     <Compile Include="Validation\IProjectValidator.cs" />
+    <Compile Include="Validation\IValidationRule.cs" />
     <Compile Include="Validation\RulesListProjectValidator.cs" />
     <Compile Include="Validation\Rules\AssemblyDateNumberValidationRule.cs" />
     <Compile Include="Validation\Rules\HaveFirmwareValidationRule.cs" />
@@ -185,6 +186,12 @@
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectValidatorViewModel.cs" />
     <Compile Include="ViewModels\RequestDialogInteractionContext.cs" />
+    <Compile Include="ViewModels\Property\IntTextValueConverter.cs" />
+    <Compile Include="ViewModels\Property\ITextValueConverter.cs" />
+    <Compile Include="ViewModels\Property\IValidateable.cs" />
+    <Compile Include="ViewModels\Property\ValidateablePropertyViewModel.cs" />
+    <Compile Include="ViewModels\Property\ValidateableTextPropertyViewModel.cs" />
+    <Compile Include="ViewModels\Property\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml.cs">
       <DependentUpon>FirmwareSelectorDialogView.xaml</DependentUpon>
@@ -315,6 +322,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\burner.ttf" />
+    <Resource Include="Fonts\saut-font.ttf" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
