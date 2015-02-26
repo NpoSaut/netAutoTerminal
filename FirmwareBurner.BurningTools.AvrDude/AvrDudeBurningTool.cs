@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using ExternalTools.Interfaces;
@@ -38,16 +37,17 @@ namespace FirmwareBurner.BurningTools.AvrDude
 
         public void WriteFuse(Fuses f, IProgressToken ProgressToken)
         {
-            var fuses = new Dictionary<AvrDudeMemoryType, byte>
+            var fuses = new[]
                         {
-                            { AvrDudeMemoryType.HFuse, f.FuseH },
-                            { AvrDudeMemoryType.LFuse, f.FuseL },
-                            { AvrDudeMemoryType.EFuse, f.FuseE }
+                            new { MemType = AvrDudeMemoryType.HFuse, Data = f.FuseH, ProgressToken = new SubprocessProgressToken() },
+                            new { MemType = AvrDudeMemoryType.LFuse, Data = f.FuseL, ProgressToken = new SubprocessProgressToken() },
+                            new { MemType = AvrDudeMemoryType.EFuse, Data = f.FuseE, ProgressToken = new SubprocessProgressToken() }
                         };
 
             foreach (var fuse in fuses)
             {
-                string res = LaunchAvrDude(fuse.Key, AvrDudeMemoryOperationType.Write, String.Format("0x{0:x2}", fuse.Value), AvrDudeInputFormat.Manual, null);
+                string res = LaunchAvrDude(fuse.MemType, AvrDudeMemoryOperationType.Write, String.Format("0x{0:x2}", fuse.Data), AvrDudeInputFormat.Manual,
+                                           ProgressToken);
             }
         }
 
@@ -70,14 +70,12 @@ namespace FirmwareBurner.BurningTools.AvrDude
                                 new SubprocessProgressToken(2.0)
                             };
 
-            using (var progressManager = new CompositeProgressManager(ProgressToken, subtokens))
+            using (new CompositeProgressManager(ProgressToken, subtokens))
             {
-                IEnumerator toktok = subtokens.GetEnumerator();
+                IEnumerator tokensEnumerator = subtokens.GetEnumerator();
                 IProgressController progressController = null;
                 bool calculatingProgress = false;
                 int counter = 0;
-                Debug.WriteLine("-------------------------------------------");
-                string bufferString = "";
                 while (true)
                 {
                     int x = p.StandardError.Read();
@@ -85,16 +83,15 @@ namespace FirmwareBurner.BurningTools.AvrDude
                     {
                         var c = (char)x;
                         Debug.Write(c);
-                        bufferString += c;
 
                         if (c == '|')
                         {
                             if (!calculatingProgress)
                             {
-                                toktok.MoveNext();
+                                tokensEnumerator.MoveNext();
                                 calculatingProgress = true;
                                 counter = 0;
-                                progressController = _progressControllerFactory.CreateController((IProgressToken)toktok.Current);
+                                progressController = _progressControllerFactory.CreateController((IProgressToken)tokensEnumerator.Current);
                             }
                             else
                             {
@@ -116,7 +113,5 @@ namespace FirmwareBurner.BurningTools.AvrDude
             p.WaitForExit();
             return string.Empty;
         }
-
-        private void POnErrorDataReceived(object Sender, DataReceivedEventArgs DataReceivedEventArgs) { Debug.Write("[{0}]", DataReceivedEventArgs.Data); }
     }
 }

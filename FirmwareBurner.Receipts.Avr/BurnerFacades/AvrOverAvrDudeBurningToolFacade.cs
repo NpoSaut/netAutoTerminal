@@ -29,11 +29,11 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
             var fuses = new Fuses(Image.Fuses.FuseH, Image.Fuses.FuseL, Image.Fuses.FuseX);
 
-            var fuseToken = new SubprocessProgressToken(6);
+            var fuseToken = new SubprocessProgressToken(50);
             var flashToken = new SubprocessProgressToken(Image.FlashBuffer.Size);
             var eepromToken = new SubprocessProgressToken(Image.EepromBuffer.Size);
 
-            using (var progressManager = new CompositeProgressManager(ProgressToken, fuseToken, flashToken, eepromToken))
+            using (new CompositeProgressManager(ProgressToken, fuseToken, flashToken, eepromToken))
             {
                 burner.WriteFuse(fuses, fuseToken);
                 WriteBuffer(Image.FlashBuffer, burner.WriteFlash, flashToken);
