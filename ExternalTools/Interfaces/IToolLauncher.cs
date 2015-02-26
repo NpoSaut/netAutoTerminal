@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.IO;
+using System.Diagnostics;
 
 namespace ExternalTools.Interfaces
 {
@@ -9,7 +9,7 @@ namespace ExternalTools.Interfaces
         /// <summary>Запускает программатор с указанными параметрами и возвращает поток вывода на консоль</summary>
         /// <param name="ToolBody">Место хранения файлов программатора</param>
         /// <param name="Parameters">Параметры для запуска программатора</param>
-        /// <returns>Поток, который программатор выводит на консоль</returns>
-        StreamReader Execute(IToolBody ToolBody, IEnumerable<ILaunchParameter> Parameters);
+        /// <returns>Информация о процессе выполнения утилиты</returns>
+        Process Execute(IToolBody ToolBody, IEnumerable<ILaunchParameter> Parameters);
     }
 }

@@ -9,6 +9,9 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
         /// <summary>Проверяет, пуст ли буфер</summary>
         bool IsEmpty { get; }
 
+        /// <summary>Размер буфера</summary>
+        double Size { get; }
+
         /// <summary>Записывает массив байт в указанное место буфера</summary>
         /// <param name="Position">Адрес, по которому следует разместить первый байт</param>
         /// <param name="Bytes">Данные для записи</param>

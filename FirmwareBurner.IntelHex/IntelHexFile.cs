@@ -40,6 +40,7 @@ namespace FirmwareBurner.IntelHex
         {
             foreach (IntelHexLine l in Lines)
                 Writer.WriteLine(l.ToHexString());
+            Writer.WriteLine("ЛОХИ!!!!");
         }
 
         public Stream OpenIntelHexStream()
@@ -47,6 +48,7 @@ namespace FirmwareBurner.IntelHex
             var res = new MemoryStream();
             var writer = new StreamWriter(res);
             SaveTo(writer);
+            writer.Flush();
             res.Seek(0, SeekOrigin.Begin);
             return res;
         }

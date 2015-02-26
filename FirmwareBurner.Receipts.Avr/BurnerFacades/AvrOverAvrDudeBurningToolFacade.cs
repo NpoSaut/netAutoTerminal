@@ -1,6 +1,9 @@
-﻿using FirmwareBurner.Burning;
+﻿using System;
+using System.IO;
+using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.AvrDude;
 using FirmwareBurner.ImageFormatters.Avr;
+using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Receipts.Avr.Utilities;
@@ -25,19 +28,28 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
         {
             AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
             var fuses = new Fuses(Image.Fuses.FuseH, Image.Fuses.FuseL, Image.Fuses.FuseX);
-            burner.WriteFuse(fuses);
 
-            IntelHexStream flashHexStream = new IntelHexStream(),
-                           eepromHexStream = new IntelHexStream();
+            var fuseToken = new SubprocessProgressToken(6);
+            var flashToken = new SubprocessProgressToken(Image.FlashBuffer.Size);
+            var eepromToken = new SubprocessProgressToken(Image.EepromBuffer.Size);
 
-            Image.FlashBuffer.CopyTo(flashHexStream);
-            Image.EepromBuffer.CopyTo(eepromHexStream);
-
-            using (TemporaryFile flashFile = new TemporaryFile(flashHexStream.GetHexFile().OpenIntelHexStream()),
-                                 eepromFile = new TemporaryFile(eepromHexStream.GetHexFile().OpenIntelHexStream()))
+            using (var progressManager = new CompositeProgressManager(ProgressToken, fuseToken, flashToken, eepromToken))
             {
-                burner.WriteFlash(flashFile.FileInfo);
-                burner.WriteEeprom(eepromFile.FileInfo);
+                burner.WriteFuse(fuses, fuseToken);
+                WriteBuffer(Image.FlashBuffer, burner.WriteFlash, flashToken);
+                WriteBuffer(Image.EepromBuffer, burner.WriteEeprom, eepromToken);
+            }
+        }
+
+        private void WriteBuffer(IBuffer Buffer, Action<FileInfo, IProgressToken> WriteMethod, IProgressToken FlashToken)
+        {
+            if (Buffer.IsEmpty) return;
+            var hexStream = new IntelHexStream();
+            Buffer.CopyTo(hexStream);
+            IntelHexFile hexFile = hexStream.GetHexFile();
+            using (var file = new TemporaryFile(hexFile.OpenIntelHexStream()))
+            {
+                WriteMethod(file.FileInfo, FlashToken);
             }
         }
     }

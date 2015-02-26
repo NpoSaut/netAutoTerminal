@@ -13,12 +13,12 @@ namespace FirmwareBurner.Modules
         public void Initialize()
         {
             _container.RegisterType<ILoadControllerFactory, LoadControllerFactory>(new ContainerControlledLifetimeManager())
-#if DEBUG
-                      .RegisterType<IFirmwareSelectorViewModelProvider, FakeIntegratedFirmwareSelectorViewModelProvider>(
-                          new ContainerControlledLifetimeManager())
-#else
+//#if DEBUG
+//                      .RegisterType<IFirmwareSelectorViewModelProvider, FakeIntegratedFirmwareSelectorViewModelProvider>(
+//                          new ContainerControlledLifetimeManager())
+//#else
                       .RegisterType<IFirmwareSelectorViewModelProvider, IntegratedFirmwareSelectorViewModelProvider>(new ContainerControlledLifetimeManager())
-#endif
+//#endif
                       .RegisterType<IFirmwarePackageViewModelKeyFormatter, FirmwarePackageViewModelKeyFormatter>(new ContainerControlledLifetimeManager())
                       .RegisterType<IFirmwarePackageViewModelFactory, FirmwarePackageViewModelFactory>(new ContainerControlledLifetimeManager());
         }

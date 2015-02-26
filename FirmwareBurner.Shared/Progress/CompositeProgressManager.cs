@@ -17,6 +17,8 @@ namespace FirmwareBurner.Progress
 
         public CompositeProgressManager(IProgressToken RootProgress, ICollection<SubprocessProgressToken> Subprocesses)
         {
+            if (RootProgress == null) return;
+
             _rootProgress = RootProgress;
             _subprocesses = Subprocesses;
 
@@ -32,7 +34,7 @@ namespace FirmwareBurner.Progress
 
         public void Dispose()
         {
-            if (!_compleated)
+            if (!_compleated && _rootProgress != null)
                 _rootProgress.OnCompleated();
         }
 

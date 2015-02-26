@@ -12,10 +12,10 @@ namespace FirmwareBurner.Receipts.Avr.Utilities
     {
         public TemporaryFile(Stream ContentStream)
         {
-            var fi = new FileInfo(Path.GetTempFileName());
+            FileInfo = new FileInfo(Path.GetTempFileName());
             if (ContentStream != null)
             {
-                using (FileStream fs = fi.OpenWrite())
+                using (FileStream fs = FileInfo.OpenWrite())
                 {
                     ContentStream.CopyTo(fs);
                 }
