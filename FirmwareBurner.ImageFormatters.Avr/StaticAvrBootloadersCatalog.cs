@@ -10,12 +10,12 @@ namespace FirmwareBurner.ImageFormatters.Avr
 
         public StaticAvrBootloadersCatalog()
         {
-            var assembly = Assembly.GetAssembly(typeof (StaticAvrBootloadersCatalog));
+            Assembly assembly = Assembly.GetAssembly(typeof (StaticAvrBootloadersCatalog));
             _catalog =
                 new Dictionary<string, AvrBootloaderInformation>
                 {
-                    { "at90can128", GetDimaAvrBootloaderInformation(0x1e000, assembly.GetName().Name + ".Bootloaders.bootloader") },
-                    { "at90can64", GetDimaAvrBootloaderInformation(0x0e000, assembly.GetName().Name + ".Bootloaders.bootloader") }
+                    { "at90can128", GetDimaAvrBootloaderInformation(0x1e000, assembly.GetName().Name + ".Bootloaders.Bootloader_128k") },
+                    { "at90can64", GetDimaAvrBootloaderInformation(0x0e000, assembly.GetName().Name + ".Bootloaders.Bootloader_64k") }
                 };
         }
 

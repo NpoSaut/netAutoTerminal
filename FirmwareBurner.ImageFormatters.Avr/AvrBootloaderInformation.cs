@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Reflection;
 using FirmwareBurner.Annotations;
@@ -27,6 +28,8 @@ namespace FirmwareBurner.ImageFormatters.Avr
         public byte[] GetBootloaderBody()
         {
             Stream bodyResourceStream = Assembly.GetAssembly(typeof (StaticAvrBootloadersCatalog)).GetManifestResourceStream(_bootloaderBodyResourceName);
+            if (bodyResourceStream == null)
+                throw new ApplicationException("Не удалось найти ресурс с телом загрузчика");
             using (var body = new MemoryStream())
             {
                 bodyResourceStream.CopyTo(body);

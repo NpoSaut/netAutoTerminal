@@ -74,9 +74,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Bootloaders\bootloader">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Bootloaders\Bootloader_128k" />
+    <EmbeddedResource Include="Bootloaders\Bootloader_64k" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
