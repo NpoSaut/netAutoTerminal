@@ -31,7 +31,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 new DeviceNameParameter(_chipName),
                 new ProgramParameter(ProgramParameter.ProgramTarget.flash),
                 new InputFileParameter(FlashFile, InputFileParameter.FilePlacement.flash),
-                Erase ? new EraseParameter() : null).ReadToEnd();
+                Erase ? new EraseParameter() : null).StandardOutput.ReadToEnd();
             CheckOutputForErrors(output, "FLASH programmed");
         }
 
@@ -43,7 +43,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 _toolBody,
                 new ConnectionParameter(),
                 new DeviceNameParameter(_chipName),
-                new ReadFuseParameter()).ReadToEnd();
+                new ReadFuseParameter()).StandardOutput.ReadToEnd();
             CheckOutputForErrors(output, "Fuse byte 0 read");
 
             var r = new Regex(@"Fuse byte (?<key>[012]) read \(0x(?<byte>[0-9a-fA-F]{2})\)");
@@ -77,7 +77,7 @@ namespace FirmwareBurner.BurningTools.Stk500
                 new ConnectionParameter(),
                 new DeviceNameParameter(_chipName),
                 new WriteFuseParameter(f.FuseH, f.FuseL),
-                new WriteExtendedFuseParameter(f.FuseE)).ReadToEnd();
+                new WriteExtendedFuseParameter(f.FuseE)).StandardOutput.ReadToEnd();
             CheckOutputForErrors(output, "Fuse bits programmed");
         }
 

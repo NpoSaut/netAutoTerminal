@@ -32,9 +32,25 @@ namespace FirmwareBurner.IntelHex
         {
             using (StreamWriter writer = File.CreateText())
             {
-                foreach (IntelHexLine l in Lines)
-                    writer.WriteLine(l.ToHexString());
+                SaveTo(writer);
             }
+        }
+
+        public void SaveTo(StreamWriter Writer)
+        {
+            foreach (IntelHexLine l in Lines)
+                Writer.WriteLine(l.ToHexString());
+            Writer.WriteLine("ЛОХИ!!!!");
+        }
+
+        public Stream OpenIntelHexStream()
+        {
+            var res = new MemoryStream();
+            var writer = new StreamWriter(res);
+            SaveTo(writer);
+            writer.Flush();
+            res.Seek(0, SeekOrigin.Begin);
+            return res;
         }
     }
 }

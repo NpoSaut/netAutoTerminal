@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\ToolWorkResult.cs" />
     <Compile Include="Implementations\EmbeddedToolBody.cs" />
     <Compile Include="Implementations\SingletonEmbeddedToolBodyFactoryBase.cs" />
     <Compile Include="Implementations\ToolLauncher.cs" />

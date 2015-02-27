@@ -1,4 +1,4 @@
-using System.IO;
+using System.Diagnostics;
 
 namespace ExternalTools.Interfaces
 {
@@ -8,8 +8,8 @@ namespace ExternalTools.Interfaces
         /// <param name="Launcher">Лаунчер</param>
         /// <param name="ToolBody">Место хранения файлов программатора</param>
         /// <param name="Parameters">Параметры для запуска программатора</param>
-        /// <returns>Поток, который программатор выводит на консоль</returns>
-        public static StreamReader Execute(this IToolLauncher Launcher, IToolBody ToolBody, params ILaunchParameter[] Parameters)
+        /// <returns>Информация о процессе выполнения утилиты</returns>
+        public static Process Execute(this IToolLauncher Launcher, IToolBody ToolBody, params ILaunchParameter[] Parameters)
         {
             return Launcher.Execute(ToolBody, Parameters);
         }

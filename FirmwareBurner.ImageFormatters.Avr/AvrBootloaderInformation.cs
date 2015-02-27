@@ -1,12 +1,18 @@
+using System;
+using System.IO;
+using System.Reflection;
 using FirmwareBurner.Annotations;
 
 namespace FirmwareBurner.ImageFormatters.Avr
 {
     public class AvrBootloaderInformation
     {
+        private readonly string _bootloaderBodyResourceName;
+
         /// <summary>Инициализирует новый экземпляр класса <see cref="T:System.Object" />.</summary>
-        public AvrBootloaderInformation(AvrFuses RequiredFuses, PlacementsInformation Placements)
+        public AvrBootloaderInformation(AvrFuses RequiredFuses, PlacementsInformation Placements, string BootloaderBodyResourceName)
         {
+            _bootloaderBodyResourceName = BootloaderBodyResourceName;
             this.Placements = Placements;
             this.RequiredFuses = RequiredFuses;
         }
@@ -21,8 +27,14 @@ namespace FirmwareBurner.ImageFormatters.Avr
         [NotNull]
         public byte[] GetBootloaderBody()
         {
-            // TODO: Return bootloader body!!!
-            return new byte[10];
+            Stream bodyResourceStream = Assembly.GetAssembly(typeof (StaticAvrBootloadersCatalog)).GetManifestResourceStream(_bootloaderBodyResourceName);
+            if (bodyResourceStream == null)
+                throw new ApplicationException("Не удалось найти ресурс с телом загрузчика");
+            using (var body = new MemoryStream())
+            {
+                bodyResourceStream.CopyTo(body);
+                return body.ToArray();
+            }
         }
     }
 }
