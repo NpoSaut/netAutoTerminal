@@ -42,6 +42,9 @@
     <Compile Include="AvrDudeBody\AvrDudeBodyMarker.cs" />
     <Compile Include="AvrDudeBurningTool.cs" />
     <Compile Include="AvrDudeBurningToolFactory.cs" />
+    <Compile Include="Exceptions\AvrDudeException.cs" />
+    <Compile Include="Exceptions\DeviceNotConnectedAvrDudeException.cs" />
+    <Compile Include="Exceptions\ProgrammerNotConnectedAvrDudeException.cs" />
     <Compile Include="Fuses.cs" />
     <Compile Include="IChipPseudonameProvider.cs" />
     <Compile Include="Parameters\AvrDudeParameter.cs" />
@@ -81,6 +84,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

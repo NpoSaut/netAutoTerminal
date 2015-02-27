@@ -3,6 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using ExternalTools.Interfaces;
+using FirmwareBurner.BurningTools.AvrDude.Exceptions;
 using FirmwareBurner.BurningTools.AvrDude.Parameters;
 using FirmwareBurner.Progress;
 
@@ -70,18 +71,21 @@ namespace FirmwareBurner.BurningTools.AvrDude
                                 new SubprocessProgressToken(2.0)
                             };
 
+            string output = string.Empty;
             using (new CompositeProgressManager(ProgressToken, subtokens))
             {
                 IEnumerator tokensEnumerator = subtokens.GetEnumerator();
                 IProgressController progressController = null;
                 bool calculatingProgress = false;
                 int counter = 0;
+
                 while (true)
                 {
                     int x = p.StandardError.Read();
                     if (x != -1)
                     {
                         var c = (char)x;
+                        output += c;
                         Debug.Write(c);
 
                         if (c == '|')
@@ -109,8 +113,17 @@ namespace FirmwareBurner.BurningTools.AvrDude
                         break;
                 }
             }
-
             p.WaitForExit();
+
+            if (output.Contains("did not find any USB device \"usb\""))
+                throw new ProgrammerNotConnectedAvrDudeException(output);
+
+            if (output.Contains("initialization failed"))
+                throw new DeviceNotConnectedAvrDudeException(output);
+
+            if (!output.Contains("OK"))
+                throw new AvrDudeException { Output = output };
+
             return string.Empty;
         }
     }
