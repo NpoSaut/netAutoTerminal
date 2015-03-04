@@ -50,9 +50,7 @@
         </ContentControl>
 
         <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,8,0,0">
-            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
-                <views:FirmwareSetConstructorView DataContext="{Binding Path=FirmwareSetConstructor}" />
-            </ScrollViewer>
+            <views:FirmwareSetConstructorView DataContext="{Binding Path=FirmwareSetConstructor}" />
         </Border>
     </Grid>
 </UserControl>

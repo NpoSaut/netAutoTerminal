@@ -8,7 +8,7 @@
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="500"
+             d:DesignWidth="500"
              d:DataContext="{x:Static viewModels:SampleData.IntegratedFirmwareSelector}"
              FocusManager.FocusedElement="{Binding ElementName=PackagesList}">
 
@@ -17,14 +17,17 @@
         <Storyboard x:Key="ItemLoadedStoryboard" TargetName="ItemRoot">
             <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0"
                              Duration="0:0:0" />
+            <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleX" From="0"
+                             Duration="0:0:0.2"
+                             EasingFunction="{StaticResource PowerEaseOut}" />
             <DoubleAnimation Storyboard.TargetProperty="LayoutTransform.ScaleY" From="0"
                              Duration="0:0:0.2"
                              EasingFunction="{StaticResource PowerEaseOut}" />
             <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0"
                              BeginTime="0:0:0.2" Duration="0:0:0.2"
                              EasingFunction="{StaticResource PowerEaseOut}" />
-            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="50"
-                             BeginTime="0:0:0.2" Duration="0:0:0.4">
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="50"
+                             BeginTime="0:0:0.1" Duration="0:0:0.4">
                 <DoubleAnimation.EasingFunction>
                     <BackEase Amplitude="0.4" />
                 </DoubleAnimation.EasingFunction>
@@ -39,8 +42,16 @@
                 <Brush x:Key="ArchiveVersionBrush">#294675</Brush>
                 <Brush x:Key="UnknownVersionBrush">#585858</Brush>
             </DataTemplate.Resources>
-            <DockPanel Name="ItemRoot">
-                <Grid DockPanel.Dock="Left" Width="45" Height="45">
+            <DockPanel Name="ItemRoot" Margin="5">
+                <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Margin="6, 4"
+                               Visibility="Collapsed">
+                    <TextBlock Name="VersionStatusLabel" Text="{Binding Status, Mode=OneWay}" TextAlignment="Center"
+                               Foreground="{Binding ElementName=VersionEllipse, Path=Stroke}"
+                               Visibility="Collapsed" />
+                    <TextBlock Opacity="0.4" TextAlignment="Center"
+                               Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
+                </StackPanel>
+                <Grid Width="45" Height="45">
                     <Grid.Resources>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontWeight" Value="DemiBold" />
@@ -60,14 +71,9 @@
                         <TextBlock x:Name="VersionLabelTextBlock" Text="{Binding Version.Label, Mode=OneWay}"
                                    FontSize="10" />
                     </StackPanel>
+                    <Button x:Name="DownloadButton" Content="Загрузить" HorizontalAlignment="Center"
+                            VerticalAlignment="Center" Visibility="Collapsed" />
                 </Grid>
-                <StackPanel VerticalAlignment="Center" Margin="6, 4">
-                    <TextBlock Name="VersionStatusLabel" Text="{Binding Status, Mode=OneWay}"
-                               Foreground="{Binding ElementName=VersionEllipse, Path=Stroke}" />
-                    <TextBlock Opacity="0.6" Text="Дата выпуска" />
-                    <TextBlock Opacity="0.6"
-                               Text="{Binding Version.ReleaseDate, StringFormat='dd.MM.yyy', Mode=OneWay}" />
-                </StackPanel>
             </DockPanel>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Status}" Value="Actual">
@@ -101,6 +107,15 @@
                     <Setter TargetName="VersionTextBlock" Property="Foreground" Value="White" />
                     <Setter TargetName="VersionLabelTextBlock" Property="Foreground" Value="White" />
                 </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding Availability.IsAvailable}" Value="False" />
+                        <Condition
+                            Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
+                            Value="True" />
+                    </MultiDataTrigger.Conditions>
+                    <Setter TargetName="DownloadButton" Property="Visibility" Value="Visible" />
+                </MultiDataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
 
@@ -119,6 +134,11 @@
                  VirtualizingStackPanel.IsVirtualizing="False"
                  BorderBrush="Transparent"
                  Background="Transparent">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="Template">
@@ -135,7 +155,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="ItemRoot" Property="BorderBrush" Value="DodgerBlue" />
+                                        <Setter TargetName="ItemRoot" Property="Background" Value="LightGray" />
                                     </Trigger>
                                     <EventTrigger RoutedEvent="Loaded">
                                         <BeginStoryboard Storyboard="{StaticResource ItemLoadedStoryboard}" />

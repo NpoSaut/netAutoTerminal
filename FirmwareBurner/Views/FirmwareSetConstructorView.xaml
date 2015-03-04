@@ -7,7 +7,7 @@
              xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
              xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
              mc:Ignorable="d"
-             d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}">
+             d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}" d:DesignWidth="469">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -17,40 +17,39 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <ItemsControl ItemsSource="{Binding Components}" AlternationCount="2">
-        <ItemsControl.ItemsPanel>
-            <ItemsPanelTemplate>
-                <UniformGrid Columns="{Binding Components.Count}" />
-            </ItemsPanelTemplate>
-        </ItemsControl.ItemsPanel>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate DataType="property:ValidateableFirmwareSetComponentViewModel">
-                <Border Name="ItemRoot" MinWidth="180">
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" VerticalAlignment="Top"
-                                   Foreground="{StaticResource ProjectArrowBrush}"
-                                   FontSize="18" FontWeight="Light"
-                                   Text="{Binding Path=Value.ModuleName, Mode=OneWay}">
-                            <TextBlock.LayoutTransform>
-                                <RotateTransform Angle="-90" />
-                            </TextBlock.LayoutTransform>
-                        </TextBlock>
-                        <firmwareSelectors:IntegratedFirmwareSelectorView DataContext="{Binding Path=Value.FirmwareSelector}" />
-                    </DockPanel>
-                </Border>
-                <DataTemplate.Triggers>
-                    <!--<DataTrigger Binding="{Binding SelectedFirmware}" Value="{x:Null}">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Components}" AlternationCount="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="property:ValidateableFirmwareSetComponentViewModel">
+                    <Border Name="ItemRoot" MinWidth="180">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" VerticalAlignment="Top"
+                                       Foreground="DarkGreen"
+                                       Text="{Binding Path=Value.ModuleName, Mode=OneWay}" />
+                            <firmwareSelectors:IntegratedFirmwareSelectorView
+                                DataContext="{Binding Path=Value.FirmwareSelector}" />
+                        </DockPanel>
+                    </Border>
+                    <DataTemplate.Triggers>
+                        <!--<DataTrigger Binding="{Binding SelectedFirmware}" Value="{x:Null}">
                         <Setter TargetName="VersionTextBlock" Property="Text" Value="N/A" />
                     </DataTrigger>-->
-                    <!--<DataTrigger
+                        <!--<DataTrigger
                         Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}"
                         Value="1">
                         <Setter TargetName="ItemRoot" Property="Background" Value="#0A002795" />
                     </DataTrigger>-->
-                </DataTemplate.Triggers>
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
-    </ItemsControl>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
 
 
 </UserControl>
