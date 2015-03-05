@@ -22,34 +22,41 @@
                 <Setter Property="Padding" Value="3" />
             </Style>
         </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
-               Content="Серийный номер блока" />
-        <Label Grid.Column="1" Grid.Row="0" Target="{Binding ElementName=AssemblyDateEdit}"
-               Content="Дата изготовления" />
+        <Border Grid.Row="0" Background="{StaticResource ProjectArrowBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
+                       Content="Серийный номер блока" />
+                <Label Grid.Column="1" Grid.Row="0" Target="{Binding ElementName=AssemblyDateEdit}"
+                       Content="Дата изготовления" />
 
-        <ContentControl Grid.Column="0" Grid.Row="1"
-                        Style="{StaticResource ValidateableControlStyle}"
-                        DataContext="{Binding Path=BlockDetails.SerialNumber}">
-            <TextBox Name="SerialNumberEdit" Style="{StaticResource InputBoxStyle}"
-                     Text="{Binding Path=ValueText, UpdateSourceTrigger=PropertyChanged}" />
-        </ContentControl>
-        <ContentControl Grid.Column="1" Grid.Row="1"
-                        Style="{StaticResource ValidateableControlStyle}"
-                        DataContext="{Binding Path=BlockDetails.AssemblyDate}">
-            <TextBox Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
-                     Text="{Binding Path=ValueText, StringFormat=MM.yyy}" />
-        </ContentControl>
+                <ContentControl Grid.Column="0" Grid.Row="1"
+                                Style="{StaticResource ValidateableControlStyle}"
+                                DataContext="{Binding Path=BlockDetails.SerialNumber}">
+                    <TextBox Name="SerialNumberEdit" Style="{StaticResource InputBoxStyle}"
+                             Text="{Binding Path=ValueText, UpdateSourceTrigger=PropertyChanged}" />
+                </ContentControl>
+                <ContentControl Grid.Column="1" Grid.Row="1"
+                                Style="{StaticResource ValidateableControlStyle}"
+                                DataContext="{Binding Path=BlockDetails.AssemblyDate}">
+                    <TextBox Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
+                             Text="{Binding Path=ValueText, StringFormat=MM.yyy}" />
+                </ContentControl>
+            </Grid>
+        </Border>
 
-        <Border Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,8,0,0">
+        <Border Grid.Row="1">
             <views:FirmwareSetConstructorView DataContext="{Binding Path=FirmwareSetConstructor}" />
         </Border>
     </Grid>

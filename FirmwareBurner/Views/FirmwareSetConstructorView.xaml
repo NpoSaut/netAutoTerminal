@@ -27,11 +27,13 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="property:ValidateableFirmwareSetComponentViewModel">
-                    <Border Name="ItemRoot" MinWidth="180">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Top" VerticalAlignment="Top"
-                                       Foreground="DarkGreen"
-                                       Text="{Binding Path=Value.ModuleName, Mode=OneWay}" />
+                    <Border Name="ItemRoot">
+                        <DockPanel Margin="0,0,0,8">
+                            <Border BorderBrush="{StaticResource ProjectArrowBrushLight}" BorderThickness="0,1,0,0"
+                                    DockPanel.Dock="Top" Padding="8,2">
+                                <TextBlock VerticalAlignment="Top"
+                                           Text="{Binding Path=Value.ModuleName, Mode=OneWay}" />
+                            </Border>
                             <firmwareSelectors:IntegratedFirmwareSelectorView
                                 DataContext="{Binding Path=Value.FirmwareSelector}" />
                         </DockPanel>

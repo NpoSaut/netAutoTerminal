@@ -28,29 +28,30 @@
         </Storyboard>
     </UserControl.Resources>
     <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <Border BorderThickness="0,1" BorderBrush="{StaticResource ProjectArrowBrush}"
+            <Border BorderThickness="1,1,1,0" BorderBrush="{StaticResource ProjectArrowBrush}"
                     Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
                 <views:ProjectView DataContext="{Binding Project}"
                                    d:DataContext="{x:Static viewModels:SampleData.Project}" />
             </Border>
 
-            <firmwareBurner:ArrowHead Grid.Column="1" HorizontalAlignment="Left" Width="30"
+            <firmwareBurner:ArrowHead Grid.Row="1" Height="35"
+                                      VerticalAlignment="Top"
                                       Stroke="{StaticResource ProjectArrowBrush}" StrokeThickness="1"
                                       Fill="{StaticResource {x:Static SystemColors.ControlBrushKey}}" />
 
 
-            <ListBox Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <ListBox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                      ItemsSource="{Binding Burning.ChannelSelector.Channels}"
                      SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
                      Style="{StaticResource ChannelSelectorStyle}" />
@@ -63,7 +64,7 @@
             </Grid.Effect>
         </Grid>
 
-        <Grid Grid.Column="1" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"
+        <Grid Grid.Row="1" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"
               Width="60" Height="60" Margin="8">
             <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrush}" x:Name="BurningProgress"
                                            Margin="8"

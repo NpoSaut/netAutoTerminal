@@ -42,7 +42,7 @@
                 <Brush x:Key="ArchiveVersionBrush">#294675</Brush>
                 <Brush x:Key="UnknownVersionBrush">#585858</Brush>
             </DataTemplate.Resources>
-            <DockPanel Name="ItemRoot" Margin="5">
+            <DockPanel Name="ItemRoot">
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Margin="6, 4"
                                Visibility="Collapsed">
                     <TextBlock Name="VersionStatusLabel" Text="{Binding Status, Mode=OneWay}" TextAlignment="Center"
@@ -144,7 +144,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ListBoxItem">
-                                <Border Name="ItemRoot" BorderThickness="1" Background="Transparent" Padding="3">
+                                <Border Name="ItemRoot" BorderThickness="1" Background="Transparent" Padding="5,3">
                                     <ContentPresenter Content="{TemplateBinding Content}" />
                                     <Border.LayoutTransform>
                                         <ScaleTransform />

@@ -5,6 +5,7 @@
 
 
     <Brush x:Key="ProjectArrowBrush">#00A815</Brush>
+    <Brush x:Key="ProjectArrowBrushLight">#73D27F</Brush>
 
 
     <Style TargetType="ListBox" x:Key="ChannelSelectorStyle">
@@ -16,13 +17,20 @@
                 </TextBlock>
             </DataTemplate>
         </Style.Resources>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="BorderBrush" Value="{x:Null}" />
         <Setter Property="Background" Value="{x:Null}" />
         <Setter Property="SelectionMode" Value="Single" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="Margin" Value="1" />
+                    <Setter Property="Margin" Value="20,1" />
                     <Setter Property="BorderBrush" Value="{StaticResource ProjectArrowBrush}" />
                     <Setter Property="BorderThickness" Value="1" />
                     <Setter Property="Padding" Value="5,2" />
