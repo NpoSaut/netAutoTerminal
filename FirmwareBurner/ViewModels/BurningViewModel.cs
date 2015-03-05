@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
 
@@ -38,7 +40,16 @@ namespace FirmwareBurner.ViewModels
             FirmwareProject project = _projectAssembler.GetProject(ChannelSelector.SelectedChannel.Number);
             RaisePropertyChanged(() => BurningProgress);
             Task.Factory.StartNew(() =>
-                                  e.BurningReceipt.Burn(project, BurningProgress));
+                                  {
+                                      try
+                                      {
+                                          e.BurningReceipt.Burn(project, BurningProgress);
+                                      }
+                                      catch (BurningException exception)
+                                      {
+                                          MessageBox.Show(exception.InnerException.Message);
+                                      }
+                                  });
         }
     }
 }
