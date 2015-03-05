@@ -1,4 +1,5 @@
 ﻿using System;
+using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 
@@ -14,6 +15,10 @@ namespace FirmwareBurner.Burning
         /// <summary>Прошивает указанный проект</summary>
         /// <param name="Project">Проект для прожигания</param>
         /// <param name="Progress">Токен для отчёта о процессе прошивки</param>
+        /// <exception cref="BurningException">
+        ///     В это исключение будет обёрнуто любое исключение, возникшее в процессе прожигания
+        ///     проекта
+        /// </exception>
         void Burn(FirmwareProject Project, IProgressToken Progress);
     }
 }

@@ -85,16 +85,16 @@ namespace FirmwareBurner.BurningTools.Stk500
         {
             CheckOutputForErrors(Output);
             if (!Output.Contains(SuccessString))
-                throw new BurningException(Output);
+                throw new Stk500Exception(Output);
         }
 
         private void CheckOutputForErrors(string Output)
         {
             if (Output.Contains("Could not connect to AVRISP mkII"))
-                throw new ProgrammerIsNotConnectedException();
+                throw new ProgrammerIsNotConnectedException { Output = Output };
 
             if (Output.Contains("Could not enter programming mode"))
-                throw new DeviceIsNotConnectedException();
+                throw new DeviceIsNotConnectedException { Output = Output };
         }
     }
 }

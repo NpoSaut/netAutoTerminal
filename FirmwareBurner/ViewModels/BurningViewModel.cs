@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
 
@@ -8,12 +9,15 @@ namespace FirmwareBurner.ViewModels
 {
     public class BurningViewModel : ViewModelBase
     {
+        private readonly IExceptionService _exceptionService;
         private readonly IProjectAssembler _projectAssembler;
 
-        public BurningViewModel(IProjectAssembler ProjectAssembler, ChannelSelectorViewModel ChannelSelector, IList<BurningVariantViewModel> BurningVariants)
+        public BurningViewModel(IExceptionService ExceptionService, IProjectAssembler ProjectAssembler,
+                                ChannelSelectorViewModel ChannelSelector, IList<BurningVariantViewModel> BurningVariants)
         {
             this.ChannelSelector = ChannelSelector;
             this.BurningVariants = BurningVariants;
+            _exceptionService = ExceptionService;
             _projectAssembler = ProjectAssembler;
             foreach (BurningVariantViewModel burningVariant in BurningVariants)
                 burningVariant.Activated += BurningVariantOnActivated;
@@ -38,7 +42,20 @@ namespace FirmwareBurner.ViewModels
             FirmwareProject project = _projectAssembler.GetProject(ChannelSelector.SelectedChannel.Number);
             RaisePropertyChanged(() => BurningProgress);
             Task.Factory.StartNew(() =>
-                                  e.BurningReceipt.Burn(project, BurningProgress));
+                                  {
+                                      try
+                                      {
+                                          e.BurningReceipt.Burn(project, BurningProgress);
+                                      }
+                                      catch (CreateImageException exception)
+                                      {
+                                          _exceptionService.PublishException("Не удалось составить образ для прошивки", exception.InnerException);
+                                      }
+                                      catch (BurningException exception)
+                                      {
+                                          _exceptionService.PublishException("Не удалось прошить устройство", exception.InnerException);
+                                      }
+                                  });
         }
     }
 }

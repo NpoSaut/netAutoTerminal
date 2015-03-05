@@ -6,7 +6,7 @@
     x:Class="FirmwareBurner.DialogShell"
     Title="DialogShell"
     SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display"
-    WindowStartupLocation="CenterOwner" Width="300" Height="400"
+    WindowStartupLocation="CenterOwner" SizeToContent="WidthAndHeight"
     FocusManager.FocusedElement="{Binding ElementName=ContentPresenter}">
     <Window.Resources>
         <ResourceDictionary x:Name="ResourceDictionary">

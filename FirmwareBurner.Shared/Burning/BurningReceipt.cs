@@ -1,4 +1,6 @@
-﻿using FirmwareBurner.Imaging;
+﻿using System;
+using FirmwareBurner.Burning.Exceptions;
+using FirmwareBurner.Imaging;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 
@@ -31,8 +33,23 @@ namespace FirmwareBurner.Burning
 
             using (new CompositeProgressManager(Progress, imageProgress, burnProgress))
             {
-                TImage image = _formatter.GetImage(Project, imageProgress);
-                _burningToolFacade.Burn(image, burnProgress);
+                TImage image;
+                try
+                {
+                    image = _formatter.GetImage(Project, imageProgress);
+                }
+                catch (Exception e)
+                {
+                    throw new CreateImageException(e);
+                }
+                try
+                {
+                    _burningToolFacade.Burn(image, burnProgress);
+                }
+                catch (Exception e)
+                {
+                    throw new BurningException(e);
+                }
             }
         }
     }

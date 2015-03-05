@@ -10,6 +10,7 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
+             xmlns:dialogs="clr-namespace:FirmwareBurner.ViewModels.Dialogs"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
              d:DesignWidth="400" d:DesignHeight="250">
@@ -17,7 +18,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="SharedResources.xaml"/>
+                <ResourceDictionary Source="SharedResources.xaml" />
                 <ResourceDictionary Source="FirmwareSelectors/FirmwareSelectorsDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <firmwareBurner:ImageScrollerUniter x:Key="BackgroundScrollerUniter" />
@@ -30,7 +31,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        
+
         <Rectangle Name="TopperStub" Height="50" />
 
         <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="3" Source="../Background.JPG"
@@ -42,8 +43,8 @@
         <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.5">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="Black" Offset="0"/>
-                    <GradientStop Color="#00000000" Offset="1"/>
+                    <GradientStop Color="Black" Offset="0" />
+                    <GradientStop Color="#00000000" Offset="1" />
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
@@ -57,8 +58,9 @@
             <views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
         </Border>
 
-        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}"  Margin="4">
+        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0"
+                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}" Margin="4">
                 <views:ProjectManagerView.RenderTransform>
                     <TranslateTransform Y="50" />
                 </views:ProjectManagerView.RenderTransform>
@@ -70,6 +72,15 @@
         <i:EventTrigger SourceObject="{Binding Path=FileRequestServiceViewModel.SaveFileRequest}" EventName="Raised">
             <triggerActions:ShowSaveFileDialog />
         </i:EventTrigger>
+        <i:EventTrigger SourceObject="{Binding Path=ExceptionDialogSource.DialogInteractionRequest}" EventName="Raised">
+            <triggerActions:ShowDialogTriggerAction>
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type dialogs:ExceptionDialogViewModel}">
+                        <views:ExceptionDialogView />
+                    </DataTemplate>
+                </ResourceDictionary>
+            </triggerActions:ShowDialogTriggerAction>
+        </i:EventTrigger>
         <ei:DataTrigger Binding="{Binding ProjectManager}" Value="{x:Null}" Comparison="NotEqual">
             <ei:ControlStoryboardAction>
                 <ei:ControlStoryboardAction.Storyboard>
@@ -77,11 +88,14 @@
                         <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
                                          To="0" Duration="0:0:0.7" EasingFunction="{StaticResource PowerEaseOut}" />
                         <ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
-                                         To="2" Duration="0:0:0.4" />
-                        <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel" Storyboard.TargetProperty="Opacity"
+                                            To="2" Duration="0:0:0.4" />
+                        <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel"
+                                         Storyboard.TargetProperty="Opacity"
                                          To="1" BeginTime="0:0:0.2" Duration="0:0:0.5" />
-                        <DoubleAnimation Storyboard.TargetName="ProjectManager" Storyboard.TargetProperty="RenderTransform.Y"
-                                         To="0" BeginTime="0:0:0.2" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                        <DoubleAnimation Storyboard.TargetName="ProjectManager"
+                                         Storyboard.TargetProperty="RenderTransform.Y"
+                                         To="0" BeginTime="0:0:0.2" Duration="0:0:0.5"
+                                         EasingFunction="{StaticResource PowerEaseOut}" />
                     </Storyboard>
                 </ei:ControlStoryboardAction.Storyboard>
             </ei:ControlStoryboardAction>
@@ -93,8 +107,7 @@
                 <Storyboard>
                     <DoubleAnimation Storyboard.Target="{StaticResource BackgroundScrollerUniter}"
                                      Storyboard.TargetProperty="VerticalOffset" From="0" To="1"
-                                     Duration="0:1:45" EasingFunction="{StaticResource PowerEaseOut}">
-                    </DoubleAnimation>
+                                     Duration="0:1:45" EasingFunction="{StaticResource PowerEaseOut}" />
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>

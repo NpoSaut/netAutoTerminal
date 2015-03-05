@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\BurnerNotFoundException.cs" />
+    <Compile Include="Exceptions\DeviceIsNotConnectedException.cs" />
     <Compile Include="Exceptions\ProgrammerIsNotConnectedException.cs" />
     <Compile Include="IAvrIspCommandShell.cs" />
     <Compile Include="Parameters\ConnectionParameter.cs" />

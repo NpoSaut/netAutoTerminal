@@ -65,7 +65,7 @@
     <Compile Include="Burning\BurningReceiptFactoryHelper.cs" />
     <Compile Include="Burning\BurningReceiptsCatalog.cs" />
     <Compile Include="Burning\Exceptions\BurningException.cs" />
-    <Compile Include="Burning\Exceptions\DeviceIsNotConnectedException.cs" />
+    <Compile Include="Burning\Exceptions\CreateImageException.cs" />
     <Compile Include="Burning\IBurningToolFacadeFactory.cs" />
     <Compile Include="Burning\IBurningReceiptsCatalog.cs" />
     <Compile Include="Burning\IBurningToolFacade.cs" />
