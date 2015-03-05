@@ -8,7 +8,8 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}"
+             Background="#E1F4CB">
 
     <UserControl.Resources>
         <Storyboard x:Key="BurnStartedStoryboard">
@@ -40,7 +41,7 @@
             </Grid.RowDefinitions>
 
             <Border BorderThickness="1,1,1,0" BorderBrush="{StaticResource ProjectArrowBrush}"
-                    Background="White">
+                    Background="{StaticResource ProjectArrowFillBrush}">
                 <views:ProjectView DataContext="{Binding Project}"
                                    d:DataContext="{x:Static viewModels:SampleData.Project}" />
             </Border>
@@ -48,7 +49,7 @@
             <firmwareBurner:ArrowHead Grid.Row="1" Height="35"
                                       VerticalAlignment="Top"
                                       Stroke="{StaticResource ProjectArrowBrush}" StrokeThickness="1"
-                                      Fill="White" />
+                                      Fill="{StaticResource ProjectArrowFillBrush}" />
 
 
             <ListBox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"

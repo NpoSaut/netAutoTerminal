@@ -58,9 +58,8 @@
             <views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
         </Border>
 
-        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0"
-                Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}" Margin="4">
+        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0">
+            <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}">
                 <views:ProjectManagerView.RenderTransform>
                     <TranslateTransform Y="50" />
                 </views:ProjectManagerView.RenderTransform>

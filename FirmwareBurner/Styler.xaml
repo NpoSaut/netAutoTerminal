@@ -4,9 +4,10 @@
                     xmlns:targeting="clr-namespace:FirmwareBurner.ViewModels.Targeting">
 
 
-    <Brush x:Key="ProjectArrowBrush">#F46036</Brush>
+    <Brush x:Key="ProjectArrowBrush">#97AA83</Brush>
     <Brush x:Key="ProjectArrowBrushLight">#F27935</Brush>
-    <Brush x:Key="ProjectArrowBrushDark">#B44525</Brush>
+    <Brush x:Key="ProjectArrowBrushDark">#788768</Brush>
+    <Brush x:Key="ProjectArrowFillBrush">#FFFCF9</Brush>
 
 
     <Style TargetType="ListBox" x:Key="ChannelSelectorStyle">

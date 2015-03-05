@@ -9,7 +9,8 @@
              mc:Ignorable="d"
              MaxWidth="400" d:DataContext="{x:Static viewModels:SampleData.ExceptionDialog}">
     <UserControl.Resources>
-        <SolidColorBrush x:Key="BadBrush" Color="#F46036" />
+        <SolidColorBrush x:Key="BadBrush" Color="#F1BF98" />
+        <SolidColorBrush x:Key="TitleBrush" Color="White" />
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -19,11 +20,14 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" Background="{StaticResource BadBrush}">
             <DockPanel Margin="4">
-                <TextBlock Style="{StaticResource TextIconBoxStyle}" Text="!" Foreground="White" Margin="8"
+                <TextBlock Style="{StaticResource TextIconBoxStyle}" Text="!" Foreground="{StaticResource TitleBrush}" Margin="8"
                            TextOptions.TextFormattingMode="Ideal"
                            FontSize="30" />
-                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextWrapping="Wrap" Foreground="White"
+                <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextWrapping="Wrap" Foreground="{StaticResource TitleBrush}"
                            VerticalAlignment="Bottom" Margin="8" FontSize="18" />
+                <DockPanel.Effect>
+                    <DropShadowEffect Color="Black" ShadowDepth="2" BlurRadius="0" Opacity="0.2" />
+                </DockPanel.Effect>
             </DockPanel>
         </Border>
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="16,8,8,8">
