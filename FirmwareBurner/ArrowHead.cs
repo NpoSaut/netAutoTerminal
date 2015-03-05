@@ -14,7 +14,7 @@ namespace FirmwareBurner
             "Stroke", typeof (Brush), typeof (ArrowHead), new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender));
 
         public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
-            "Fill", typeof (Brush), typeof (ArrowHead), new PropertyMetadata(default(Brush)));
+            "Fill", typeof (Brush), typeof (ArrowHead), new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender));
 
         static ArrowHead() { DefaultStyleKeyProperty.OverrideMetadata(typeof (ArrowHead), new FrameworkPropertyMetadata(typeof (ArrowHead))); }
 

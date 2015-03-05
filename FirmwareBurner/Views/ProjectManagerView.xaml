@@ -40,7 +40,7 @@
             </Grid.RowDefinitions>
 
             <Border BorderThickness="1,1,1,0" BorderBrush="{StaticResource ProjectArrowBrush}"
-                    Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+                    Background="White">
                 <views:ProjectView DataContext="{Binding Project}"
                                    d:DataContext="{x:Static viewModels:SampleData.Project}" />
             </Border>
@@ -48,7 +48,7 @@
             <firmwareBurner:ArrowHead Grid.Row="1" Height="35"
                                       VerticalAlignment="Top"
                                       Stroke="{StaticResource ProjectArrowBrush}" StrokeThickness="1"
-                                      Fill="{StaticResource {x:Static SystemColors.ControlBrushKey}}" />
+                                      Fill="White" />
 
 
             <ListBox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
