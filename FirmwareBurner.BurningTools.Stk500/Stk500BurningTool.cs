@@ -85,7 +85,7 @@ namespace FirmwareBurner.BurningTools.Stk500
         {
             CheckOutputForErrors(Output);
             if (!Output.Contains(SuccessString))
-                throw new BurningException(Output);
+                throw new Stk500Exception(Output);
         }
 
         private void CheckOutputForErrors(string Output)

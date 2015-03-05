@@ -135,6 +135,7 @@
       <DependentUpon>DialogShell.xaml</DependentUpon>
     </Compile>
     <Compile Include="CircleProgress.cs" />
+    <Compile Include="Events\HandledExceptionEvent.cs" />
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="Fakes\FakeRepository.cs" />
     <Compile Include="ImageScroller.cs" />
@@ -156,6 +157,8 @@
     <Compile Include="ViewModels\BurningVariantViewModel.cs" />
     <Compile Include="ViewModels\BurningViewModelFactory.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
+    <Compile Include="ViewModels\Dialogs\DialogViewModelBase.cs" />
+    <Compile Include="ViewModels\Dialogs\ExceptionDialogViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\FirmwareSelectorDialogViewModel.cs" />
     <Compile Include="ViewModels\FileRequestServiceViewModel.cs" />
     <Compile Include="ViewModels\FirmwareSetComponentViewModel.cs" />
@@ -180,6 +183,7 @@
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\RemoteRepositoryLoadController.cs" />
     <Compile Include="ViewModels\IBurningViewModelFactory.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
+    <Compile Include="ViewModels\IExceptionService.cs" />
     <Compile Include="ViewModels\IFirmwareSetConstructorViewModelProvider.cs" />
     <Compile Include="ViewModels\IProjectViewModelProvider.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
@@ -194,6 +198,9 @@
     <Compile Include="ViewModels\Property\ValidateableTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\Property\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
+    <Compile Include="Views\ExceptionDialogView.xaml.cs">
+      <DependentUpon>ExceptionDialogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml.cs">
       <DependentUpon>FirmwareSelectorDialogView.xaml</DependentUpon>
     </Compile>
@@ -258,6 +265,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ExceptionDialogView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FirmwareSelectors\FirmwareSelectorDialogView.xaml">
       <SubType>Designer</SubType>

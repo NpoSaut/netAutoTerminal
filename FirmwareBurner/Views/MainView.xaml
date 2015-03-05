@@ -10,6 +10,7 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
+             xmlns:dialogs="clr-namespace:FirmwareBurner.ViewModels.Dialogs"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
              d:DesignWidth="400" d:DesignHeight="250">
@@ -69,6 +70,15 @@
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=FileRequestServiceViewModel.SaveFileRequest}" EventName="Raised">
             <triggerActions:ShowSaveFileDialog />
+        </i:EventTrigger>
+        <i:EventTrigger SourceObject="{Binding Path=ExceptionService.DialogInteractionRequest}" EventName="Raised">
+            <triggerActions:ShowDialogTriggerAction>
+                <ResourceDictionary>
+                    <DataTemplate DataType="{x:Type dialogs:ExceptionDialogViewModel}">
+                        <views:ExceptionDialogView />
+                    </DataTemplate>
+                </ResourceDictionary>
+            </triggerActions:ShowDialogTriggerAction>
         </i:EventTrigger>
         <ei:DataTrigger Binding="{Binding ProjectManager}" Value="{x:Null}" Comparison="NotEqual">
             <ei:ControlStoryboardAction>

@@ -49,6 +49,11 @@ namespace FirmwareBurner.ViewModels
 
         private static readonly IRepository _fakeRepository = new FakeRepository();
 
+        private static readonly ExceptionDialogViewModel _exceptionDialog =
+            new ExceptionDialogViewModel("Не удалось отобразить страницу",
+                                         "Не удаётся установить соединение с сервером. Возможно, сервер недоступен или требуется проверка настроек сетевого подключения",
+                                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
+
         public static FirmwareSetConstructorViewModel FirmwareSetConstructor
         {
             get { return _firmwareSetConstructor; }
@@ -63,7 +68,7 @@ namespace FirmwareBurner.ViewModels
         {
             get { return _firmwareSelectorDialog; }
         }
-        
+
         public static ValidateableTextPropertyViewModel<int> ValidateableTextProperty
         {
             get { return _validateableTextProperty; }
@@ -72,6 +77,11 @@ namespace FirmwareBurner.ViewModels
         public static IntegratedFirmwareSelectorViewModel IntegratedFirmwareSelector
         {
             get { return _integratedFirmwareSelector; }
+        }
+
+        public static ExceptionDialogViewModel ExceptionDialog
+        {
+            get { return _exceptionDialog; }
         }
 
         #region Fake Classes

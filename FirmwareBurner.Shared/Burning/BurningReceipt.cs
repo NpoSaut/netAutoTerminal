@@ -33,14 +33,22 @@ namespace FirmwareBurner.Burning
 
             using (new CompositeProgressManager(Progress, imageProgress, burnProgress))
             {
+                TImage image;
                 try
                 {
-                    TImage image = _formatter.GetImage(Project, imageProgress);
+                    image = _formatter.GetImage(Project, imageProgress);
+                }
+                catch (Exception e)
+                {
+                    throw new CreateImageException(e);
+                }
+                try
+                {
                     _burningToolFacade.Burn(image, burnProgress);
                 }
                 catch (Exception e)
                 {
-                    throw new BurningException("Во время прошивки возникло исключение", e);
+                    throw new BurningException(e);
                 }
             }
         }

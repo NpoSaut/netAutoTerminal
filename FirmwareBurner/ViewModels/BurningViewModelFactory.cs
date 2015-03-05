@@ -10,12 +10,14 @@ namespace FirmwareBurner.ViewModels
     public class BurningViewModelFactory : IBurningViewModelFactory
     {
         private readonly IBurningReceiptsCatalog _burningReceiptsCatalog;
+        private readonly IExceptionService _exceptionService;
         private readonly IIndex _index;
 
-        public BurningViewModelFactory(IBurningReceiptsCatalog BurningReceiptsCatalog, IIndex Index)
+        public BurningViewModelFactory(IBurningReceiptsCatalog BurningReceiptsCatalog, IIndex Index, IExceptionService ExceptionService)
         {
             _burningReceiptsCatalog = BurningReceiptsCatalog;
             _index = Index;
+            _exceptionService = ExceptionService;
         }
 
         public BurningViewModel GetViewModel(int CellKindId, int ModificationId, IProjectAssembler projectAssembler)
@@ -28,7 +30,7 @@ namespace FirmwareBurner.ViewModels
 
             var channelSelector = new ChannelSelectorViewModel(cellKind.ChannelsCount);
 
-            return new BurningViewModel(projectAssembler, channelSelector,
+            return new BurningViewModel(_exceptionService, projectAssembler, channelSelector,
                                         _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
                                                                .Select(
                                                                    receiptFactory =>
