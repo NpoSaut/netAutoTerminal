@@ -38,7 +38,10 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFileSelectorService, FileRequestServiceViewModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDispatcherFacade, DefaultDispatcher>(new ContainerControlledLifetimeManager())
-                .RegisterType<IExceptionService, DispatchedExceptionService>(new ContainerControlledLifetimeManager())
+
+                // Обработка исключений
+                .RegisterType<IExceptionService, EventAggregatorExceptionService>(new ContainerControlledLifetimeManager())
+                .RegisterType<IExceptionDialogSource, EventAggregatorExceptionDialogSource>(new ContainerControlledLifetimeManager())
 
                 // Различные утилиты
                 .RegisterType<IProgressControllerFactory, ProgressControllerFactory>(new ContainerControlledLifetimeManager())

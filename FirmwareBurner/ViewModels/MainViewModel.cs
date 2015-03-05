@@ -10,19 +10,19 @@ namespace FirmwareBurner.ViewModels
         private readonly ProjectManagerViewModelFactory _projectManagerViewModelFactory;
 
         public MainViewModel(TargetSelectorViewModel TargetSelector, IEventAggregator EventAggregator, FileRequestServiceViewModel FileRequestServiceViewModel,
-                             ProjectManagerViewModelFactory ProjectManagerViewModelFactory, IExceptionService ExceptionService)
+                             ProjectManagerViewModelFactory ProjectManagerViewModelFactory, IExceptionDialogSource ExceptionDialogSource)
         {
             this.TargetSelector = TargetSelector;
             this.FileRequestServiceViewModel = FileRequestServiceViewModel;
             _projectManagerViewModelFactory = ProjectManagerViewModelFactory;
-            this.ExceptionService = ExceptionService;
+            this.ExceptionDialogSource = ExceptionDialogSource;
 
             EventAggregator.GetEvent<TargetSelectedEvent>().Subscribe(OnTargetSelected);
         }
 
         public FileRequestServiceViewModel FileRequestServiceViewModel { get; private set; }
 
-        public IExceptionService ExceptionService { get; private set; }
+        public IExceptionDialogSource ExceptionDialogSource { get; private set; }
         public TargetSelectorViewModel TargetSelector { get; private set; }
         public ProjectManagerViewModel ProjectManager { get; private set; }
 
