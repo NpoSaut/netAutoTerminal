@@ -1,9 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
 namespace FirmwareBurner
 {
+    public enum ArrowHeadDirection
+    {
+        Down,
+        Right
+    }
+
     public class ArrowHead : FrameworkElement
     {
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
@@ -16,7 +24,16 @@ namespace FirmwareBurner
         public static readonly DependencyProperty FillProperty = DependencyProperty.Register(
             "Fill", typeof (Brush), typeof (ArrowHead), new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsRender));
 
+        public static readonly DependencyProperty DirectionProperty = DependencyProperty.Register(
+            "Direction", typeof(ArrowHeadDirection), typeof(ArrowHead), new FrameworkPropertyMetadata(ArrowHeadDirection.Right, FrameworkPropertyMetadataOptions.AffectsRender));
+
         static ArrowHead() { DefaultStyleKeyProperty.OverrideMetadata(typeof (ArrowHead), new FrameworkPropertyMetadata(typeof (ArrowHead))); }
+
+        public ArrowHeadDirection Direction
+        {
+            get { return (ArrowHeadDirection)GetValue(DirectionProperty); }
+            set { SetValue(DirectionProperty, value); }
+        }
 
         public Double StrokeThickness
         {
@@ -45,19 +62,36 @@ namespace FirmwareBurner
 
         private StreamGeometry GetGeometry()
         {
-            var point1 = new Point(0, 0);
-            var point2 = new Point(ActualWidth / 2, ActualHeight);
-            var point3 = new Point(ActualWidth, 0);
-            var streamGeometry = new StreamGeometry();
-            using (StreamGeometryContext geometryContext = streamGeometry.Open())
+            ICollection<Point> points = null;
+
+            switch (Direction)
             {
-                geometryContext.BeginFigure(point1, true, false);
-                var points = new PointCollection
+                case ArrowHeadDirection.Right:
+                    points = new[]
                              {
-                                 point2,
-                                 point3
+                                 new Point(0, 0.5 * StrokeThickness),
+                                 new Point(ActualWidth, ActualHeight / 2),
+                                 new Point(0, ActualHeight - 0.5 * StrokeThickness),
                              };
-                geometryContext.PolyLineTo(points, true, true);
+                    break;
+                case ArrowHeadDirection.Down:
+                    points = new[]
+                             {
+                                 new Point(0, 0),
+                                 new Point(ActualWidth / 2, ActualHeight),
+                                 new Point(ActualWidth, 0),
+                             };
+                    break;
+            }
+
+            var streamGeometry = new StreamGeometry();
+            if (points != null)
+            {
+                using (StreamGeometryContext geometryContext = streamGeometry.Open())
+                {
+                    geometryContext.BeginFigure(points.First(), true, false);
+                    geometryContext.PolyLineTo(points.Skip(1).ToList(), true, true);
+                }
             }
             return streamGeometry;
         }

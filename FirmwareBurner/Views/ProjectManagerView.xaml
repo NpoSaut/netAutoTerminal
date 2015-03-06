@@ -44,8 +44,8 @@
                                    d:DataContext="{x:Static viewModels:SampleData.Project}" />
             </Border>
 
-            <firmwareBurner:ArrowHead Grid.Row="1" Height="35"
-                                      VerticalAlignment="Top"
+            <firmwareBurner:ArrowHead Grid.Row="1" Height="35" VerticalAlignment="Top"
+                                      Direction="Down"
                                       Stroke="{StaticResource ProjectArrowBrush}" StrokeThickness="1"
                                       Fill="{StaticResource ProjectArrowFillBrush}" />
 

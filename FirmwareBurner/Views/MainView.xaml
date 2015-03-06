@@ -11,6 +11,7 @@
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              xmlns:dialogs="clr-namespace:FirmwareBurner.ViewModels.Dialogs"
+             xmlns:targeting="clr-namespace:FirmwareBurner.ViewModels.Targeting"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
              d:DesignWidth="400" d:DesignHeight="250">
@@ -40,11 +41,32 @@
         <Grid Name="BackShaderPanel" Grid.Row="2" Opacity="0">
             <firmwareBurner:ImageScroller Source="../Background-blur.JPG"
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
-            <Rectangle Opacity="0.8" Fill="{StaticResource ProjectBackgroundBrush}">
-            </Rectangle>
+            <Rectangle Opacity="0.8" Fill="{StaticResource ProjectBackgroundBrush}" />
         </Grid>
 
-        <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.3">
+        <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.3" />
+
+        <Rectangle Grid.Row="0" Grid.RowSpan="3" Fill="#50000000" />
+
+        <firmwareBurner:ImageScroller Grid.Row="1" Source="../Background-blur.JPG"
+                                      Uniter="{StaticResource BackgroundScrollerUniter}" />
+
+        <Border Grid.Row="1" Background="#6689FF89">
+            <views:TargetPresenterView DataContext="{Binding TargetSelector}" />
+        </Border>
+
+        <Grid Grid.Row="2" VerticalAlignment="Top" Margin="50,0,0,0" Name="TargetSelector">
+            <firmwareBurner:ImageScroller Source="../Background-blur.JPG"
+                                          Uniter="{StaticResource BackgroundScrollerUniter}" />
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <views:TargetSelecterView DataContext="{Binding TargetSelector}" />
+            </ScrollViewer>
+            <Grid.RenderTransform>
+                <TranslateTransform />
+            </Grid.RenderTransform>
+        </Grid>
+
+        <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.5">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0" />
@@ -69,10 +91,6 @@
         <firmwareBurner:ImageScroller Grid.Row="1" Source="../Background-blur-accent.jpg"
                                       Uniter="{StaticResource BackgroundScrollerUniter}" />
 
-        <Border Grid.Row="1">
-            <views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
-        </Border>
-
     </Grid>
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=FileRequestServiceViewModel.SaveFileRequest}" EventName="Raised">
@@ -94,8 +112,6 @@
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
                                          To="0" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
-                        <!--<ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
-                                            To="2" Duration="0:0:0.2" />-->
                         <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel"
                                          Storyboard.TargetProperty="Opacity"
                                          To="1" BeginTime="0:0:0.3" Duration="0:0:0.4" />
@@ -105,6 +121,14 @@
                         <DoubleAnimation Storyboard.TargetName="ProjectManager"
                                          Storyboard.TargetProperty="RenderTransform.Y"
                                          To="0" BeginTime="0:0:0.1" Duration="0:0:0.7"
+                                         EasingFunction="{StaticResource PowerEaseOut}" />
+                        <DoubleAnimation Storyboard.TargetName="TargetSelector"
+                                         Storyboard.TargetProperty="Opacity"
+                                         To="0" Duration="0:0:0.2"
+                                         EasingFunction="{StaticResource PowerEaseOut}" />
+                        <DoubleAnimation Storyboard.TargetName="TargetSelector"
+                                         Storyboard.TargetProperty="RenderTransform.Y"
+                                         To="-150" Duration="0:0:0.2"
                                          EasingFunction="{StaticResource PowerEaseOut}" />
                     </Storyboard>
                 </ei:ControlStoryboardAction.Storyboard>
