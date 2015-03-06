@@ -43,8 +43,8 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=BlockKindSelector}">Блок</Label>
-        <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=ModificationKindSelector}"
+        <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=BlockKindSelector}" HorizontalContentAlignment="Center">Блок</Label>
+        <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=ModificationKindSelector}"  HorizontalContentAlignment="Center"
                Name="ModificationLabel" LayoutTransform="{StaticResource ModificationTransform}">
             Модификация
         </Label>

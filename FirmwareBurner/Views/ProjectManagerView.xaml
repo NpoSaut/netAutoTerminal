@@ -8,8 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}"
-             Background="#E1F4CB">
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}">
 
     <UserControl.Resources>
         <Storyboard x:Key="BurnStartedStoryboard">
@@ -28,7 +27,7 @@
                                 Storyboard.TargetProperty="Margin" Duration="0:0:0.2" />
         </Storyboard>
     </UserControl.Resources>
-    <Grid Margin="10">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -40,8 +39,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <Border BorderThickness="1,1,1,0" BorderBrush="{StaticResource ProjectArrowBrush}"
-                    Background="{StaticResource ProjectArrowFillBrush}">
+            <Border Background="{StaticResource ProjectArrowFillBrush}">
                 <views:ProjectView DataContext="{Binding Project}"
                                    d:DataContext="{x:Static viewModels:SampleData.Project}" />
             </Border>

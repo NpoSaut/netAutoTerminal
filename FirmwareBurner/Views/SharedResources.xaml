@@ -5,8 +5,8 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
                     xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
+                    xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
                     mc:Ignorable="d">
-
 
     <Style TargetType="{x:Type Run}" x:Key="IconRunStyle">
         <Setter Property="FontFamily" Value="/Fonts/#burner" />

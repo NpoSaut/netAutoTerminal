@@ -34,13 +34,17 @@
 
         <Rectangle Name="TopperStub" Height="50" />
 
-        <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="3" Source="../Background.JPG"
+        <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="3" Source="../Background.jpg"
                                       Uniter="{StaticResource BackgroundScrollerUniter}" />
 
-        <firmwareBurner:ImageScroller Grid.Row="1" Source="../Background-blur.JPG"
-                                      Uniter="{StaticResource BackgroundScrollerUniter}" />
+        <Grid Name="BackShaderPanel" Grid.Row="2" Opacity="0">
+            <firmwareBurner:ImageScroller Source="../Background-blur.JPG"
+                                          Uniter="{StaticResource BackgroundScrollerUniter}" />
+            <Rectangle Opacity="0.8" Fill="{StaticResource ProjectBackgroundBrush}">
+            </Rectangle>
+        </Grid>
 
-        <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.5">
+        <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.3">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0" />
@@ -54,16 +58,19 @@
                    Text="a" FontSize="50" Foreground="White" Opacity="0.3" Margin="8,-14"
                    TextOptions.TextFormattingMode="Ideal" TextOptions.TextHintingMode="Animated" />
 
-        <Border Grid.Row="1" Background="#6689FF89">
-            <views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
-        </Border>
-
-        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0">
+        <Grid x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" IsHitTestVisible="False">
             <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}">
                 <views:ProjectManagerView.RenderTransform>
-                    <TranslateTransform Y="50" />
+                    <TranslateTransform Y="-50" />
                 </views:ProjectManagerView.RenderTransform>
             </views:ProjectManagerView>
+        </Grid>
+
+        <firmwareBurner:ImageScroller Grid.Row="1" Source="../Background-blur-accent.jpg"
+                                      Uniter="{StaticResource BackgroundScrollerUniter}" />
+
+        <Border Grid.Row="1">
+            <views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />
         </Border>
 
     </Grid>
@@ -81,19 +88,23 @@
             </triggerActions:ShowDialogTriggerAction>
         </i:EventTrigger>
         <ei:DataTrigger Binding="{Binding ProjectManager}" Value="{x:Null}" Comparison="NotEqual">
+            <ei:ChangePropertyAction TargetName="ProjectManagerPanel" PropertyName="IsHitTestVisible" Value="True" />
             <ei:ControlStoryboardAction>
                 <ei:ControlStoryboardAction.Storyboard>
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
-                                         To="0" Duration="0:0:0.7" EasingFunction="{StaticResource PowerEaseOut}" />
-                        <ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
-                                            To="2" Duration="0:0:0.4" />
+                                         To="0" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                        <!--<ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
+                                            To="2" Duration="0:0:0.2" />-->
                         <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel"
                                          Storyboard.TargetProperty="Opacity"
-                                         To="1" BeginTime="0:0:0.2" Duration="0:0:0.5" />
+                                         To="1" BeginTime="0:0:0.3" Duration="0:0:0.4" />
+                        <DoubleAnimation Storyboard.TargetName="BackShaderPanel"
+                                         Storyboard.TargetProperty="Opacity"
+                                         To="1" BeginTime="0:0:0.1" Duration="0:0:0.5" />
                         <DoubleAnimation Storyboard.TargetName="ProjectManager"
                                          Storyboard.TargetProperty="RenderTransform.Y"
-                                         To="0" BeginTime="0:0:0.2" Duration="0:0:0.5"
+                                         To="0" BeginTime="0:0:0.1" Duration="0:0:0.7"
                                          EasingFunction="{StaticResource PowerEaseOut}" />
                     </Storyboard>
                 </ei:ControlStoryboardAction.Storyboard>

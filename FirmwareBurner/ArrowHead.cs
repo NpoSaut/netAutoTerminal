@@ -45,9 +45,9 @@ namespace FirmwareBurner
 
         private StreamGeometry GetGeometry()
         {
-            var point1 = new Point(0.5 * StrokeThickness, 0);
+            var point1 = new Point(0, 0);
             var point2 = new Point(ActualWidth / 2, ActualHeight);
-            var point3 = new Point(ActualWidth - 0.5 * StrokeThickness, 0);
+            var point3 = new Point(ActualWidth, 0);
             var streamGeometry = new StreamGeometry();
             using (StreamGeometryContext geometryContext = streamGeometry.Open())
             {

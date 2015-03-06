@@ -4,11 +4,16 @@
                     xmlns:targeting="clr-namespace:FirmwareBurner.ViewModels.Targeting">
 
 
-    <Brush x:Key="ProjectArrowBrush">#97AA83</Brush>
-    <Brush x:Key="ProjectArrowBrushLight">#F27935</Brush>
-    <Brush x:Key="ProjectArrowBrushDark">#788768</Brush>
+    <Brush x:Key="ProjectArrowBrush">#DE9E36</Brush>
+    <Brush x:Key="ProjectArrowBrushDark">#A17327</Brush>
     <Brush x:Key="ProjectArrowFillBrush">#FFFCF9</Brush>
 
+    <RadialGradientBrush x:Key="ProjectBackgroundBrush"
+                         GradientOrigin="0.5,0.2" Center="0.5,0.2"
+                         RadiusY="1" RadiusX="1">
+        <GradientStop Color="#FFE0F5FF" Offset="0.404" />
+        <GradientStop Color="#FFBCD2DC" Offset="0.844" />
+    </RadialGradientBrush>
 
     <Style TargetType="ListBox" x:Key="ChannelSelectorStyle">
         <Style.Resources>
