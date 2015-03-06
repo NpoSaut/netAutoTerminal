@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace FirmwareBurner.Views
 {
     /// <summary>
-    /// Логика взаимодействия для TargetSelectorView.xaml
+    /// Логика взаимодействия для TargetSelecterView.xaml
     /// </summary>
-    public partial class TargetSelectorView : UserControl
+    public partial class TargetSelecterView : UserControl
     {
-        public TargetSelectorView()
+        public TargetSelecterView()
         {
             InitializeComponent();
         }

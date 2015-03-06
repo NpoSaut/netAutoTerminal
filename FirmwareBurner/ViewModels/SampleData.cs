@@ -4,8 +4,10 @@ using System.Linq;
 using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwareBurner.ViewModels.Targeting;
+using FirmwareBurner.ViewModels.Tools;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -64,6 +66,14 @@ namespace FirmwareBurner.ViewModels
         {
             get { return _integratedFirmwareSelector; }
         }
+
+        public static TargetSelectorViewModel TargetSelector
+        {
+            get { return _targetSelector; }
+            set { _targetSelector = value; }
+        }
+
+        private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), null);
 
         #region Fake Classes
 
@@ -124,6 +134,25 @@ namespace FirmwareBurner.ViewModels
                 /// <summary>Загружает необходимый компонент из тела пакета</summary>
                 /// <param name="Target">Цель, компонент для которой требуется</param>
                 public FirmwareComponent GetComponent(ComponentTarget Target) { throw new NotImplementedException(); }
+            }
+        }
+
+        class FakeCellsCatalogProvider : ICellsCatalogProvider
+        {
+            public IList<CellKindViewModel> GetCatalog()
+            {
+                return new[]
+                       {
+                           new CellKindViewModel(1, "БС-ДПС", new []
+                                                              {
+                                                                  new ModificationKindViewModel(1, "128Кб", string.Empty), 
+                                                                  new ModificationKindViewModel(1, "64Кб", string.Empty), 
+                                                              }, new ChannelViewModel[0]), 
+                           new CellKindViewModel(1, "Монитор-КХ", new []
+                                                              {
+                                                                  new ModificationKindViewModel(1, "Базовая", string.Empty),
+                                                              }, new ChannelViewModel[0]), 
+                       };
             }
         }
 

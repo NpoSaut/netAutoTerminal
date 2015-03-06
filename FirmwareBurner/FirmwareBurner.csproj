@@ -192,11 +192,12 @@
     <Compile Include="Views\FirmwareSelectors\IntegratedFirmwareSelectorView.xaml.cs">
       <DependentUpon>IntegratedFirmwareSelectorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModulesListItemTemplateSelector.cs" />
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TargetSelectorView.xaml.cs">
-      <DependentUpon>TargetSelectorView.xaml</DependentUpon>
+    <Compile Include="Views\TargetPresenterView.xaml.cs">
+      <DependentUpon>TargetPresenterView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FirmwareSetConstructorView.xaml.cs">
       <DependentUpon>FirmwareSetConstructorView.xaml</DependentUpon>
@@ -206,6 +207,9 @@
     </Compile>
     <Compile Include="Views\ProjectManagerView.xaml.cs">
       <DependentUpon>ProjectManagerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TargetSelecterView.xaml.cs">
+      <DependentUpon>TargetSelecterView.xaml</DependentUpon>
     </Compile>
     <Page Include="DialogShell.xaml">
       <SubType>Designer</SubType>
@@ -263,7 +267,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\TargetSelectorView.xaml">
+    <Page Include="Views\TargetPresenterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,6 +288,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SharedResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TargetSelecterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
