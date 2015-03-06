@@ -14,6 +14,7 @@
     <UserControl.Resources>
         <Brush x:Key="CellKindBarBackgroundBrush">#30ffffff</Brush>
         <Brush x:Key="CellKindBarBackgroundHoverBrush">#60ffffff</Brush>
+        <Brush x:Key="CellKindBarBackgroundPressedBrush">#20000000</Brush>
         <!--<Brush x:Key="CellKindBarBackgroundHoverBrush">Tomato</Brush>-->
 
         <ControlTemplate x:Key="CellKindBarButtonTemplate" TargetType="{x:Type Button}">
@@ -25,11 +26,30 @@
                     <Setter TargetName="ItemRoot" Property="Background"
                             Value="{StaticResource CellKindBarBackgroundHoverBrush}" />
                 </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="ItemRoot" Property="Background"
+                            Value="{StaticResource CellKindBarBackgroundPressedBrush}" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="ModificationKindBarButtonTemplate" TargetType="{x:Type Button}">
+            <Border Name="ItemRoot" Padding="{TemplateBinding Padding}" CornerRadius="12">
+                <ContentPresenter Content="{TemplateBinding Content}" />
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="ItemRoot" Property="Background" Value="#60000000" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter TargetName="ItemRoot" Property="Background" Value="#f0000000" />
+                </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
 
         <DataTemplate x:Key="SingleModuleItemTemplate" DataType="{x:Type targeting:CellKindViewModel}">
-            <Button Margin="0,1,0,0" Template="{StaticResource CellKindBarButtonTemplate}">
+            <Button Margin="0,1,0,0" Template="{StaticResource CellKindBarButtonTemplate}"
+                    Command="{Binding SelectCommand}">
                 <TextBlock Text="{Binding Name}" Margin="15, 3" FontWeight="Light" FontSize="20" />
             </Button>
         </DataTemplate>
@@ -72,9 +92,11 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Margin="6,0" FontWeight="Light" FontSize="14">
-                                    <Run Text="{Binding Name, Mode=OneWay}" />
-                                </TextBlock>
+                                <Button Template="{StaticResource ModificationKindBarButtonTemplate}"
+                                        Command="{Binding SelectCommand}" Padding="8,2">
+                                    <TextBlock FontWeight="Light" FontSize="14"
+                                               Text="{Binding Name, Mode=OneWay}" />
+                                </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

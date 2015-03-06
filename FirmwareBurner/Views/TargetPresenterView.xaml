@@ -10,63 +10,30 @@
              mc:Ignorable="d" d:DesignWidth="300"
              d:DataContext="{d:DesignInstance targeting:TargetSelectorViewModel}">
 
-    <UserControl.Resources>
-        <ScaleTransform x:Key="ModificationTransform" x:Shared="True" ScaleX="0" />
-
-        <Storyboard x:Key="ExpandModificationStoryboard">
-            <DoubleAnimation Storyboard.TargetName="ModificationKindSelector"
-                             Storyboard.TargetProperty="LayoutTransform.ScaleX"
-                             To="1" Duration="0:0:0.35" EasingFunction="{StaticResource PowerEaseOut}" />
-            <DoubleAnimation Storyboard.TargetName="ModificationKindSelector" Storyboard.TargetProperty="Opacity"
-                             To="1" BeginTime="0:0:0.10" Duration="0:0:0.15" />
-            <DoubleAnimation Storyboard.TargetName="ModificationLabel" Storyboard.TargetProperty="Opacity"
-                             To="1" BeginTime="0:0:0.10" Duration="0:0:0.15" />
-        </Storyboard>
-        <Storyboard x:Key="CollapseModificationStoryboard">
-            <DoubleAnimation Storyboard.TargetName="ModificationKindSelector"
-                             Storyboard.TargetProperty="LayoutTransform.ScaleX"
-                             To="0" Duration="0:0:0.35" EasingFunction="{StaticResource PowerEaseOut}" />
-            <DoubleAnimation Storyboard.TargetName="ModificationKindSelector" Storyboard.TargetProperty="Opacity"
-                             To="0" Duration="0:0:0.15" />
-            <DoubleAnimation Storyboard.TargetName="ModificationLabel" Storyboard.TargetProperty="Opacity"
-                             To="0" Duration="0:0:0.15" />
-        </Storyboard>
-    </UserControl.Resources>
-
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Target="{Binding ElementName=BlockKindSelector}">Блок</Label>
-        <Label Grid.Row="0" Grid.Column="1" Target="{Binding ElementName=ModificationKindSelector}"
-               Name="ModificationLabel" LayoutTransform="{StaticResource ModificationTransform}">
-            Модификация
-        </Label>
-
-        <ComboBox Grid.Row="1" Grid.Column="0" Name="BlockKindSelector" IsEditable="False"
-                  DisplayMemberPath="Name" ItemsSource="{Binding CellKinds}"
-                  SelectedItem="{Binding SelectedCellKind}" Background="Transparent" />
-        <ComboBox Grid.Row="1" Grid.Column="1" Name="ModificationKindSelector" IsEditable="False" Width="130"
-                  LayoutTransform="{StaticResource ModificationTransform}"
-                  DisplayMemberPath="Name"
-                  ItemsSource="{Binding Path=SelectedCellKind.Modifications}"
-                  SelectedItem="{Binding Path=SelectedModificationKind}" />
+        <TextBlock Grid.Column="0" Text="{Binding SelectedCellKind.Name}" Margin="15,15,15,10" FontSize="26"
+                   FontWeight="UltraLight"
+                   TextOptions.TextFormattingMode="Ideal" />
+        <Border Grid.Column="1" Name="ModificationPresenter" Background="#20ffffff">
+            <TextBlock Text="{Binding SelectedModificationKind.Name}" Margin="15,15,15,10" FontSize="26"
+                       FontWeight="UltraLight"
+                       TextOptions.TextFormattingMode="Ideal" />
+        </Border>
     </Grid>
 
     <i:Interaction.Triggers>
         <ei:DataTrigger Binding="{Binding Path=SelectedCellKind.Modifications.Count}"
                         Comparison="GreaterThan" Value="1">
-            <ei:ControlStoryboardAction Storyboard="{StaticResource ExpandModificationStoryboard}" />
+            <ei:ChangePropertyAction TargetName="ModificationPresenter" PropertyName="Visibility" Value="Visible" />
         </ei:DataTrigger>
         <ei:DataTrigger Binding="{Binding Path=SelectedCellKind.Modifications.Count}"
                         Comparison="LessThanOrEqual" Value="1">
-            <ei:ControlStoryboardAction Storyboard="{StaticResource CollapseModificationStoryboard}" />
+            <ei:ChangePropertyAction TargetName="ModificationPresenter" PropertyName="Visibility" Value="Collapsed" />
         </ei:DataTrigger>
     </i:Interaction.Triggers>
 

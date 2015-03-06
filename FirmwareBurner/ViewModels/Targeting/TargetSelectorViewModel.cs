@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Events;
 using FirmwareBurner.ViewModels.Bases;
@@ -18,6 +19,16 @@ namespace FirmwareBurner.ViewModels.Targeting
         {
             _eventAggregator = EventAggregator;
             CellKinds = CellsCatalogProvider.GetCatalog();
+            foreach (var cellKind in CellKinds)
+            {
+                cellKind.TargetSelected += CellKindOnTargetSelected;
+            }
+        }
+
+        private void CellKindOnTargetSelected(object Sender, TargetSelectedEventArgs e)
+        {
+            SelectedCellKind = e.Cell;
+            SelectedModificationKind = e.Modification;
         }
 
         /// <summary>Известные типы ячеек</summary>

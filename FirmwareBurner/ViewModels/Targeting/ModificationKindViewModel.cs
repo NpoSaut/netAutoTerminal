@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Input;
+using Microsoft.Practices.Prism.Commands;
 
 namespace FirmwareBurner.ViewModels.Targeting
 {
@@ -10,6 +12,8 @@ namespace FirmwareBurner.ViewModels.Targeting
             this.DeviceName = DeviceName;
             this.Id = Id;
             this.Name = Name;
+
+            SelectCommand = new DelegateCommand(SelectMe);
         }
 
         /// <summary>Номер модификации ячейки</summary>
@@ -20,5 +24,16 @@ namespace FirmwareBurner.ViewModels.Targeting
 
         /// <summary>Название устройства, на котором основана ячейка</summary>
         public String DeviceName { get; private set; }
+
+        public ICommand SelectCommand { get; private set; }
+        private void SelectMe() { OnTargetSelected(); }
+
+        public event EventHandler TargetSelected;
+
+        protected virtual void OnTargetSelected()
+        {
+            EventHandler handler = TargetSelected;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
     }
 }

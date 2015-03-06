@@ -42,9 +42,7 @@
                                       Uniter="{StaticResource BackgroundScrollerUniter}" />
 
         <Border Grid.Row="1" Background="#6689FF89">
-            <!--<views:TargetSelectorView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" Margin="4,8" />-->
-            <TextBlock Text="БС-ДПС" Margin="15,15,15,10" FontSize="26" FontWeight="UltraLight"
-                       TextOptions.TextFormattingMode="Ideal" />
+            <views:TargetPresenterView x:Name="TargetSelector" DataContext="{Binding TargetSelector}" />
         </Border>
 
         <Grid Grid.Row="2" VerticalAlignment="Top" Margin="50,0,0,0">
@@ -64,7 +62,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" Visibility="Collapsed"
+        <Border x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" IsHitTestVisible="False"
                 Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}" Margin="4">
                 <views:ProjectManagerView.RenderTransform>
@@ -84,8 +82,6 @@
                     <Storyboard>
                         <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
                                          To="0" Duration="0:0:0.7" EasingFunction="{StaticResource PowerEaseOut}" />
-                        <ThicknessAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Margin"
-                                            To="2" Duration="0:0:0.4" />
                         <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel"
                                          Storyboard.TargetProperty="Opacity"
                                          To="1" BeginTime="0:0:0.2" Duration="0:0:0.5" />
