@@ -31,7 +31,7 @@
         </TextBlock>
     </DataTemplate>
 
-    <Style TargetType="ContentControl" x:Key="ValidateableControlStyle">
+    <Style x:Key="ValidateableControlStyle" TargetType="ContentControl">
         <Style.Resources>
             <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5" To="0"
@@ -84,10 +84,10 @@
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsInitialized}" Value="True"/>
-                                <Condition Binding="{Binding IsValid}" Value="False"/>
+                                <Condition Binding="{Binding IsInitialized}" Value="True" />
+                                <Condition Binding="{Binding IsValid}" Value="False" />
                             </MultiDataTrigger.Conditions>
-                            <Setter Property="ToolTip" Value="{Binding ValidationErrorsText}"/>
+                            <Setter Property="ToolTip" Value="{Binding ValidationErrorsText}" />
                             <Setter TargetName="WarningIcon" Property="Foreground" Value="#FF3410" />
                             <MultiDataTrigger.EnterActions>
                                 <BeginStoryboard Storyboard="{StaticResource ShakeInputStoryboard}" />
@@ -110,6 +110,31 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="TextIconButton" TargetType="Button">
+        <Setter Property="FontFamily" Value="/Fonts/#burner" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="White" />
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Foreground" Value="Gray" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="SquareTextIconButton" BasedOn="{StaticResource TextIconButton}" TargetType="Button">
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
     </Style>
 
 </ResourceDictionary>

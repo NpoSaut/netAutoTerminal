@@ -14,5 +14,15 @@ namespace FirmwareBurner.Events
 
         public int CellKindId { get; private set; }
         public int ModificationId { get; private set; }
+
+        public bool IsUnselected
+        {
+            get { return CellKindId == -1 || ModificationId == -1; }
+        }
+
+        public static TargetSelectedArgs Unselected
+        {
+            get { return new TargetSelectedArgs(-1, -1); }
+        }
     }
 }

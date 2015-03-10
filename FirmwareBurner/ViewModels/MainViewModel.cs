@@ -9,12 +9,14 @@ namespace FirmwareBurner.ViewModels
     {
         private readonly ProjectManagerViewModelFactory _projectManagerViewModelFactory;
 
-        public MainViewModel(TargetSelectorViewModel TargetSelector, IEventAggregator EventAggregator, FileRequestServiceViewModel FileRequestServiceViewModel,
-                             ProjectManagerViewModelFactory ProjectManagerViewModelFactory, IExceptionDialogSource ExceptionDialogSource)
+        public MainViewModel(TargetSelectorViewModel TargetSelector, TargetPresenterViewModel TargetPresenter, IEventAggregator EventAggregator,
+                             FileRequestServiceViewModel FileRequestServiceViewModel, ProjectManagerViewModelFactory ProjectManagerViewModelFactory,
+                             IExceptionDialogSource ExceptionDialogSource)
         {
             this.TargetSelector = TargetSelector;
             this.FileRequestServiceViewModel = FileRequestServiceViewModel;
             _projectManagerViewModelFactory = ProjectManagerViewModelFactory;
+            this.TargetPresenter = TargetPresenter;
             this.ExceptionDialogSource = ExceptionDialogSource;
 
             EventAggregator.GetEvent<TargetSelectedEvent>().Subscribe(OnTargetSelected);
@@ -24,11 +26,14 @@ namespace FirmwareBurner.ViewModels
 
         public IExceptionDialogSource ExceptionDialogSource { get; private set; }
         public TargetSelectorViewModel TargetSelector { get; private set; }
+        public TargetPresenterViewModel TargetPresenter { get; private set; }
         public ProjectManagerViewModel ProjectManager { get; private set; }
 
         private void OnTargetSelected(TargetSelectedArgs SelectedArgs)
         {
-            ProjectManager = _projectManagerViewModelFactory.GetViewModel(SelectedArgs.CellKindId, SelectedArgs.ModificationId);
+            ProjectManager = SelectedArgs.IsUnselected
+                                 ? null
+                                 : _projectManagerViewModelFactory.GetViewModel(SelectedArgs.CellKindId, SelectedArgs.ModificationId);
             RaisePropertyChanged("ProjectManager");
         }
     }

@@ -22,6 +22,40 @@
                 <ResourceDictionary Source="FirmwareSelectors/FirmwareSelectorsDataTemplates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <firmwareBurner:ImageScrollerUniter x:Key="BackgroundScrollerUniter" />
+
+            <Storyboard x:Key="ShowProjectStoryboard">
+                <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
+                                 To="0" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel" Storyboard.TargetProperty="Opacity"
+                                 To="1" BeginTime="0:0:0.3" Duration="0:0:0.4" />
+                <DoubleAnimation Storyboard.TargetName="ProjectManager" Storyboard.TargetProperty="RenderTransform.Y"
+                                 To="0" BeginTime="0:0:0.1" Duration="0:0:0.5"
+                                 EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="BackShaderPanel" Storyboard.TargetProperty="Opacity"
+                                 To="1" BeginTime="0:0:0.1" Duration="0:0:0.5" />
+                <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Opacity"
+                                 To="0" Duration="0:0:0.2" EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="RenderTransform.Y"
+                                 To="-150" Duration="0:0:0.2" EasingFunction="{StaticResource PowerEaseOut}" />
+            </Storyboard>
+
+            <Storyboard x:Key="HideProjectStoryboard">
+                <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
+                                 BeginTime="0:0:0.1" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel" Storyboard.TargetProperty="Opacity"
+                                 Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetName="ProjectManager" Storyboard.TargetProperty="RenderTransform.Y"
+                                 BeginTime="0:0:0.3"  Duration="0:0:0.0" EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="BackShaderPanel" Storyboard.TargetProperty="Opacity"
+                                 Duration="0:0:0.7" />
+                <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="RenderTransform.Y"
+                                 Duration="0:0:0.35" EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Opacity"
+                                 BeginTime="0:0:0.35" Duration="0:0:0.4" EasingFunction="{StaticResource PowerEaseOut}" />
+                <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="RenderTransform.X"
+                                 From="150" BeginTime="0:0:0.35" Duration="0:0:0.4" EasingFunction="{StaticResource PowerEaseOut}" />
+            </Storyboard>
+
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -87,14 +121,17 @@
         <Grid Grid.Row="1">
             <firmwareBurner:ImageScroller Source="../Background-blur-accent.jpg"
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
-            <views:TargetPresenterView DataContext="{Binding TargetSelector}" />
+            <views:TargetPresenterView DataContext="{Binding TargetPresenter}" />
         </Grid>
 
     </Grid>
+
     <i:Interaction.Triggers>
+
         <i:EventTrigger SourceObject="{Binding Path=FileRequestServiceViewModel.SaveFileRequest}" EventName="Raised">
             <triggerActions:ShowSaveFileDialog />
         </i:EventTrigger>
+
         <i:EventTrigger SourceObject="{Binding Path=ExceptionDialogSource.DialogInteractionRequest}" EventName="Raised">
             <triggerActions:ShowDialogTriggerAction>
                 <ResourceDictionary>
@@ -104,36 +141,18 @@
                 </ResourceDictionary>
             </triggerActions:ShowDialogTriggerAction>
         </i:EventTrigger>
+
         <ei:DataTrigger Binding="{Binding ProjectManager}" Value="{x:Null}" Comparison="NotEqual">
             <ei:ChangePropertyAction TargetName="ProjectManagerPanel" PropertyName="IsHitTestVisible" Value="True" />
-            <ei:ControlStoryboardAction>
-                <ei:ControlStoryboardAction.Storyboard>
-                    <Storyboard>
-                        <DoubleAnimation Storyboard.TargetName="TopperStub" Storyboard.TargetProperty="Height"
-                                         To="0" Duration="0:0:0.5" EasingFunction="{StaticResource PowerEaseOut}" />
-                        <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel"
-                                         Storyboard.TargetProperty="Opacity"
-                                         To="1" BeginTime="0:0:0.3" Duration="0:0:0.4" />
-                        <DoubleAnimation Storyboard.TargetName="BackShaderPanel"
-                                         Storyboard.TargetProperty="Opacity"
-                                         To="1" BeginTime="0:0:0.1" Duration="0:0:0.5" />
-                        <DoubleAnimation Storyboard.TargetName="ProjectManager"
-                                         Storyboard.TargetProperty="RenderTransform.Y"
-                                         To="0" BeginTime="0:0:0.1" Duration="0:0:0.7"
-                                         EasingFunction="{StaticResource PowerEaseOut}" />
-                        <DoubleAnimation Storyboard.TargetName="TargetSelector"
-                                         Storyboard.TargetProperty="Opacity"
-                                         To="0" Duration="0:0:0.2"
-                                         EasingFunction="{StaticResource PowerEaseOut}" />
-                        <DoubleAnimation Storyboard.TargetName="TargetSelector"
-                                         Storyboard.TargetProperty="RenderTransform.Y"
-                                         To="-150" Duration="0:0:0.2"
-                                         EasingFunction="{StaticResource PowerEaseOut}" />
-                    </Storyboard>
-                </ei:ControlStoryboardAction.Storyboard>
-            </ei:ControlStoryboardAction>
+            <ei:ControlStoryboardAction Storyboard="{StaticResource ShowProjectStoryboard}" />
         </ei:DataTrigger>
+        <ei:DataTrigger Binding="{Binding ProjectManager}" Value="{x:Null}" Comparison="Equal">
+            <ei:ChangePropertyAction TargetName="ProjectManagerPanel" PropertyName="IsHitTestVisible" Value="False" />
+            <ei:ControlStoryboardAction Storyboard="{StaticResource HideProjectStoryboard}" />
+        </ei:DataTrigger>
+
     </i:Interaction.Triggers>
+
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
@@ -145,4 +164,5 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
+
 </UserControl>

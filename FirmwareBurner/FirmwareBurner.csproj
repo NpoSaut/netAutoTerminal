@@ -201,6 +201,7 @@
     <Compile Include="ViewModels\Property\ValidateableTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\Property\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
+    <Compile Include="ViewModels\TargetPresenterViewModel.cs" />
     <Compile Include="Views\ExceptionDialogView.xaml.cs">
       <DependentUpon>ExceptionDialogView.xaml</DependentUpon>
     </Compile>
