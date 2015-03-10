@@ -11,7 +11,6 @@
              xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              xmlns:dialogs="clr-namespace:FirmwareBurner.ViewModels.Dialogs"
-             xmlns:targeting="clr-namespace:FirmwareBurner.ViewModels.Targeting"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
              d:DesignWidth="400" d:DesignHeight="250">
@@ -30,31 +29,30 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="2*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
+        <!--Верхняя заглушка-->
         <Rectangle Name="TopperStub" Height="50" />
 
+        <!--Основной задний фон-->
         <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="3" Source="../Background.jpg"
                                       Uniter="{StaticResource BackgroundScrollerUniter}" />
 
+        <!--Логотип САУТ-->
+        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                   Style="{StaticResource TextIconStyle}" FontFamily="/Fonts/#saut-font"
+                   Text="a" FontSize="50" Foreground="White" Opacity="0.3" Margin="8,-14"
+                   TextOptions.TextFormattingMode="Ideal" TextOptions.TextHintingMode="Animated" />
+
+        <!--Фон для панели проекта-->
         <Grid Name="BackShaderPanel" Grid.Row="2" Opacity="0">
             <firmwareBurner:ImageScroller Source="../Background-blur.JPG"
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
             <Rectangle Opacity="0.8" Fill="{StaticResource ProjectBackgroundBrush}" />
         </Grid>
 
-        <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.3" />
-
-        <Rectangle Grid.Row="0" Grid.RowSpan="3" Fill="#50000000" />
-
-        <firmwareBurner:ImageScroller Grid.Row="1" Source="../Background-blur.JPG"
-                                      Uniter="{StaticResource BackgroundScrollerUniter}" />
-
-        <Border Grid.Row="1" Background="#6689FF89">
-            <views:TargetPresenterView DataContext="{Binding TargetSelector}" />
-        </Border>
-
+        <!--Выбор цели-->
         <Grid Grid.Row="2" VerticalAlignment="Top" Margin="50,0,0,0" Name="TargetSelector">
             <firmwareBurner:ImageScroller Source="../Background-blur.JPG"
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
@@ -66,6 +64,7 @@
             </Grid.RenderTransform>
         </Grid>
 
+        <!--Тень-->
         <Rectangle Grid.Row="2" VerticalAlignment="Top" Height="15" Opacity="0.5">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -75,11 +74,7 @@
             </Rectangle.Fill>
         </Rectangle>
 
-        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                   Style="{StaticResource TextIconStyle}" FontFamily="/Fonts/#saut-font"
-                   Text="a" FontSize="50" Foreground="White" Opacity="0.3" Margin="8,-14"
-                   TextOptions.TextFormattingMode="Ideal" TextOptions.TextHintingMode="Animated" />
-
+        <!--Панель проекта-->
         <Grid x:Name="ProjectManagerPanel" Grid.Row="2" Opacity="0" IsHitTestVisible="False">
             <views:ProjectManagerView x:Name="ProjectManager" DataContext="{Binding ProjectManager}">
                 <views:ProjectManagerView.RenderTransform>
@@ -88,8 +83,12 @@
             </views:ProjectManagerView>
         </Grid>
 
-        <firmwareBurner:ImageScroller Grid.Row="1" Source="../Background-blur-accent.jpg"
-                                      Uniter="{StaticResource BackgroundScrollerUniter}" />
+        <!--Панель выбранного модуля-->
+        <Grid Grid.Row="1">
+            <firmwareBurner:ImageScroller Source="../Background-blur-accent.jpg"
+                                          Uniter="{StaticResource BackgroundScrollerUniter}" />
+            <views:TargetPresenterView DataContext="{Binding TargetSelector}" />
+        </Grid>
 
     </Grid>
     <i:Interaction.Triggers>
