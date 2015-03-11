@@ -10,23 +10,6 @@
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}">
 
-    <UserControl.Resources>
-        <Storyboard x:Key="BurnStartedStoryboard">
-            <ThicknessAnimation Storyboard.TargetName="BurnButton"
-                                Storyboard.TargetProperty="Margin" To="2" Duration="0:0:0.2"
-                                EasingFunction="{StaticResource PowerEaseOut}" />
-            <ThicknessAnimation Storyboard.TargetName="BurningProgress"
-                                Storyboard.TargetProperty="Margin" To="-2" Duration="0:0:0.2"
-                                EasingFunction="{StaticResource PowerEaseOut}" />
-        </Storyboard>
-        <Storyboard x:Key="BurnCompleatedStoryboard">
-            <ThicknessAnimation Storyboard.TargetName="BurnButton"
-                                Storyboard.TargetProperty="Margin" Duration="0:0:0.2"
-                                EasingFunction="{StaticResource PowerEaseOut}" />
-            <ThicknessAnimation Storyboard.TargetName="BurningProgress"
-                                Storyboard.TargetProperty="Margin" Duration="0:0:0.2" />
-        </Storyboard>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -63,38 +46,10 @@
             </Grid.Effect>
         </Grid>
 
-        <Grid Grid.Row="1" IsEnabled="{Binding Path=Validator.IsValid}" Name="BurningGroup"
-              Width="60" Height="60" Margin="8">
-            <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrush}" x:Name="BurningProgress"
-                                           Margin="8"
-                                           DataContext="{Binding Burning.BurningProgress}"
-                                           Value="{Binding Complete, Mode=OneWay}" Maximum="1"
-                                           IsIndeterminate="{Binding IsIntermediate}"
-                                           InnerRadiusPortion="0" />
-            <Button Style="{StaticResource CircleButton}" Name="BurnButton"
-                    Command="{Binding Path=Burning.DefaultVariant.BurnCommand}"
-                    Content="Начать">
-                <Button.ContextMenu>
-                    <ContextMenu Placement="Right" ItemsSource="{Binding Burning.BurningVariants}">
-                        <ContextMenu.ItemContainerStyle>
-                            <Style TargetType="MenuItem">
-                                <Setter Property="Header" Value="{Binding Name}" />
-                                <Setter Property="Command" Value="{Binding BurnCommand}" />
-                            </Style>
-                        </ContextMenu.ItemContainerStyle>
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
-            <i:Interaction.Triggers>
-                <ei:DataTrigger Binding="{Binding Burning.BurningProgress.IsActive}" Value="True">
-                    <ei:ChangePropertyAction TargetName="BurningGroup" PropertyName="IsEnabled" Value="False" />
-                    <ei:ControlStoryboardAction Storyboard="{StaticResource BurnStartedStoryboard}" />
-                </ei:DataTrigger>
-                <ei:DataTrigger Binding="{Binding Burning.BurningProgress.IsActive}" Value="False">
-                    <ei:ChangePropertyAction TargetName="BurningGroup" PropertyName="IsEnabled" Value="True" />
-                    <ei:ControlStoryboardAction Storyboard="{StaticResource BurnCompleatedStoryboard}" />
-                </ei:DataTrigger>
-            </i:Interaction.Triggers>
+        <Grid Grid.Row="1" IsEnabled="{Binding Path=Validator.IsValid}">
+            <views:BurningView DataContext="{Binding Path=Burning}"
+                               d:DataContext="{x:Static viewModels:SampleData.Burning}" />
         </Grid>
+
     </Grid>
 </UserControl>

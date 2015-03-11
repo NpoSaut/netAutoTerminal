@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Modules;
 using FirmwareBurner.Receipts.Avr;
@@ -25,6 +26,7 @@ namespace FirmwareBurner
 
             // Общие модули
             mc.AddModule(typeof (CommonsModule));
+            mc.AddModule(typeof (BurningModule));
 
             // Модули сборщиков образов
             mc.AddModule(typeof (AvrImagesModule));

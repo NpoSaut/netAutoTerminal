@@ -9,33 +9,29 @@ namespace FirmwareBurner.ViewModels
     [UsedImplicitly]
     public class BurningViewModelFactory : IBurningViewModelFactory
     {
-        private readonly IBurningReceiptsCatalog _burningReceiptsCatalog;
-        private readonly IExceptionService _exceptionService;
-        private readonly IIndex _index;
+        private readonly IBurningService _burningService;
 
-        public BurningViewModelFactory(IBurningReceiptsCatalog BurningReceiptsCatalog, IIndex Index, IExceptionService ExceptionService)
+        private readonly IIndexHelper _indexHelper;
+
+        public BurningViewModelFactory(IBurningReceiptsCatalog BurningReceiptsCatalog, IIndexHelper IndexHelper, IExceptionService ExceptionService,
+                                       IBurningService BurningService)
         {
-            _burningReceiptsCatalog = BurningReceiptsCatalog;
-            _index = Index;
-            _exceptionService = ExceptionService;
+            _indexHelper = IndexHelper;
+            _burningService = BurningService;
         }
 
         public BurningViewModel GetViewModel(int CellKindId, int ModificationId, IProjectAssembler projectAssembler)
         {
-            BlockKind cellKind = _index.Blocks.SingleOrDefault(c => c.Id == CellKindId);
-            if (cellKind == null) throw new ArgumentException("Ячейка с таким идентификатором отсутствует в каталоге", "CellKindId");
+            BlockKind cellKind = _indexHelper.GetCell(CellKindId);
+            ModificationKind modification = _indexHelper.GetModification(cellKind, ModificationId);
 
-            ModificationKind modification = cellKind.Modifications.SingleOrDefault(m => m.Id == ModificationId);
-            if (modification == null) throw new ArgumentException("Модификация с таким идентификатором отсутствует в каталоге", "ModificationId");
-
-            var channelSelector = new ChannelSelectorViewModel(cellKind.ChannelsCount);
-
-            return new BurningViewModel(_exceptionService, projectAssembler, channelSelector,
-                                        _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName)
-                                                               .Select(
-                                                                   receiptFactory =>
-                                                                   new BurningVariantViewModel(receiptFactory.GetReceipt(modification.DeviceName), true))
-                                                               .ToList());
+            return new BurningViewModel(projectAssembler, _burningService,
+                                        Enumerable.Range(1, cellKind.ChannelsCount)
+                                                  .Select(i => new BurningOptionViewModel(String.Format("Канал {0}", i), i))
+                                                  .ToList(),
+                                        _burningService.GetBurningMethods(modification.DeviceName)
+                                                       .Select(burningMethod => new BurningMethodViewModel(burningMethod.Name, burningMethod.Receipt))
+                                                       .ToList());
         }
     }
 }

@@ -47,8 +47,7 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IProgressControllerFactory, ProgressControllerFactory>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
-                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IBurningReceiptsCatalog, BurningReceiptsCatalog>();
+                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager());
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("Root", typeof (MainView));

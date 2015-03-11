@@ -131,6 +131,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ArrowHead.cs" />
+    <Compile Include="Burning\BurningMethod.cs" />
+    <Compile Include="Burning\BurningModule.cs" />
+    <Compile Include="Burning\BurningService.cs" />
+    <Compile Include="Burning\IBurningMethod.cs" />
+    <Compile Include="Burning\IBurningService.cs" />
     <Compile Include="DialogShell.xaml.cs">
       <DependentUpon>DialogShell.xaml</DependentUpon>
     </Compile>
@@ -154,7 +159,8 @@
     <Compile Include="Validation\Rules\SerialNumberValidationRule.cs" />
     <Compile Include="Validation\ValidationModule.cs" />
     <Compile Include="Validation\ValidationPropertyCheckProjectValidator.cs" />
-    <Compile Include="ViewModels\BurningVariantViewModel.cs" />
+    <Compile Include="ViewModels\BurningMethodViewModel.cs" />
+    <Compile Include="ViewModels\BurningOptionViewModel.cs" />
     <Compile Include="ViewModels\BurningViewModelFactory.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModelBase.cs" />
@@ -202,6 +208,9 @@
     <Compile Include="ViewModels\Property\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
     <Compile Include="ViewModels\TargetPresenterViewModel.cs" />
+    <Compile Include="Views\BurningView.xaml.cs">
+      <DependentUpon>BurningView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ExceptionDialogView.xaml.cs">
       <DependentUpon>ExceptionDialogView.xaml</DependentUpon>
     </Compile>
@@ -247,9 +256,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BurnerBootstrapper.cs" />
-    <Compile Include="Burning\BurningOperationStatus.cs" />
-    <Compile Include="Burning\IBurningOperationStatus.cs" />
-    <Compile Include="Burning\Pie.cs" />
     <Compile Include="FirmwareProviders\IFirmwaresSet.cs" />
     <Compile Include="FirmwareProviders\PackageFirmwaresSet.cs" />
     <Compile Include="Formating\IFirmwareFormatter.cs" />
@@ -258,7 +264,6 @@
     <Compile Include="Formating\PropertyFormat.cs" />
     <Compile Include="Formating\ElementFormat.cs" />
     <Compile Include="Formating\TableFormat.cs" />
-    <Compile Include="Burning\IFirmwareBurner.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="ViewModels\Bases\ActionCommand.cs" />
     <Compile Include="ViewModels\Targeting\BlockDetailsViewModel.cs" />
@@ -273,6 +278,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BurningView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ExceptionDialogView.xaml">
       <SubType>Designer</SubType>

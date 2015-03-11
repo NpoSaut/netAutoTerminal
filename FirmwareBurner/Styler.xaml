@@ -91,6 +91,7 @@
     <Style TargetType="RadioButton" BasedOn="{StaticResource BasicControlStyle}" />
 
     <Style TargetType="Button" x:Key="CircleButton">
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

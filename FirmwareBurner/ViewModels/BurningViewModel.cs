@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using FirmwareBurner.Burning.Exceptions;
+using FirmwareBurner.Burning;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
 
@@ -9,53 +9,32 @@ namespace FirmwareBurner.ViewModels
 {
     public class BurningViewModel : ViewModelBase
     {
-        private readonly IExceptionService _exceptionService;
+        private readonly IBurningService _burningService;
         private readonly IProjectAssembler _projectAssembler;
 
-        public BurningViewModel(IExceptionService ExceptionService, IProjectAssembler ProjectAssembler,
-                                ChannelSelectorViewModel ChannelSelector, IList<BurningVariantViewModel> BurningVariants)
+        public BurningViewModel(IProjectAssembler ProjectAssembler, IBurningService BurningService,
+                                ICollection<BurningOptionViewModel> BurningOptions, ICollection<BurningMethodViewModel> BurningMethods)
         {
-            this.ChannelSelector = ChannelSelector;
-            this.BurningVariants = BurningVariants;
-            _exceptionService = ExceptionService;
+            this.BurningOptions = BurningOptions;
+            this.BurningMethods = BurningMethods;
+            _burningService = BurningService;
             _projectAssembler = ProjectAssembler;
-            foreach (BurningVariantViewModel burningVariant in BurningVariants)
-                burningVariant.Activated += BurningVariantOnActivated;
+
+            foreach (BurningOptionViewModel burningOption in BurningOptions)
+                burningOption.Activated += BurningOptionOnActivated;
+
+            SelectedBurningMethod = BurningMethods.FirstOrDefault();
         }
 
-        public ChannelSelectorViewModel ChannelSelector { get; private set; }
+        public BurningMethodViewModel SelectedBurningMethod { get; set; }
+        public ICollection<BurningOptionViewModel> BurningOptions { get; private set; }
+        public ICollection<BurningMethodViewModel> BurningMethods { get; private set; }
 
-        /// <summary>Способ прошивки по-умолчанию</summary>
-        public IList<BurningVariantViewModel> BurningVariants { get; private set; }
-
-        /// <summary>Варианты способов прошивки</summary>
-        public BurningVariantViewModel DefaultVariant
+        private void BurningOptionOnActivated(object Sender, EventArgs EventArgs)
         {
-            get { return BurningVariants.FirstOrDefault(v => v.IsDefault); }
-        }
-
-        public ProgressViewModel BurningProgress { get; private set; }
-
-        private void BurningVariantOnActivated(object Sender, BurningVariantActivatedEventArgs e)
-        {
-            BurningProgress = new ProgressViewModel();
-            FirmwareProject project = _projectAssembler.GetProject(ChannelSelector.SelectedChannel.Number);
-            RaisePropertyChanged(() => BurningProgress);
-            Task.Factory.StartNew(() =>
-                                  {
-                                      try
-                                      {
-                                          e.BurningReceipt.Burn(project, BurningProgress);
-                                      }
-                                      catch (CreateImageException exception)
-                                      {
-                                          _exceptionService.PublishException("Не удалось составить образ для прошивки", exception.InnerException);
-                                      }
-                                      catch (BurningException exception)
-                                      {
-                                          _exceptionService.PublishException("Не удалось прошить устройство", exception.InnerException);
-                                      }
-                                  });
+            var activatedOption = (BurningOptionViewModel)Sender;
+            FirmwareProject project = _projectAssembler.GetProject(activatedOption.ChannelNumber);
+            _burningService.BeginBurn(SelectedBurningMethod.Receipt, project, activatedOption.Progress);
         }
     }
 }

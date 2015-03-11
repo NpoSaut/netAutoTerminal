@@ -56,6 +56,19 @@ namespace FirmwareBurner.ViewModels
                                          "Не удаётся установить соединение с сервером. Возможно, сервер недоступен или требуется проверка настроек сетевого подключения",
                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
 
+        private static readonly BurningViewModel _burning =
+            new BurningViewModel(null, null,
+                                 new[]
+                                 {
+                                     new BurningOptionViewModel("Канал 1", 1),
+                                     new BurningOptionViewModel("Канал 2", 2)
+                                 },
+                                 new[]
+                                 {
+                                     new BurningMethodViewModel("AvrDude", null),
+                                     new BurningMethodViewModel("Сохранить в .hex", null)
+                                 });
+
         public static FirmwareSetConstructorViewModel FirmwareSetConstructor
         {
             get { return _firmwareSetConstructor; }
@@ -90,6 +103,11 @@ namespace FirmwareBurner.ViewModels
         {
             get { return _targetSelector; }
             set { _targetSelector = value; }
+        }
+
+        public static BurningViewModel Burning
+        {
+            get { return _burning; }
         }
 
         private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), null);
