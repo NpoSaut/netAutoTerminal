@@ -13,35 +13,48 @@
              designUtils:DesignTime.Background="#BDD6E1">
     <UserControl.Resources>
 
+        <BackEase x:Key="BackEaseOut" />
+
         <Storyboard x:Key="BurnStartedStoryboard">
-            <ThicknessAnimation Storyboard.TargetName="BurnButton"
-                                Storyboard.TargetProperty="Margin" To="2" Duration="0:0:0.2"
-                                EasingFunction="{StaticResource PowerEaseOut}" />
-            <ThicknessAnimation Storyboard.TargetName="BurningProgress"
-                                Storyboard.TargetProperty="Margin" To="-2" Duration="0:0:0.2"
-                                EasingFunction="{StaticResource PowerEaseOut}" />
+            <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleX"
+                             To="1.15" EasingFunction="{StaticResource BackEaseOut}" Duration="0:0:0.12" />
+            <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleY"
+                             To="1.15" EasingFunction="{StaticResource BackEaseOut}" Duration="0:0:0.12" />
         </Storyboard>
 
         <Storyboard x:Key="BurnCompleatedStoryboard">
-            <ThicknessAnimation Storyboard.TargetName="BurnButton"
-                                Storyboard.TargetProperty="Margin" Duration="0:0:0.2"
-                                EasingFunction="{StaticResource PowerEaseOut}" />
-            <ThicknessAnimation Storyboard.TargetName="BurningProgress"
-                                Storyboard.TargetProperty="Margin" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleX"
+                             EasingFunction="{StaticResource PowerEaseOut}" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleY"
+                             EasingFunction="{StaticResource PowerEaseOut}" Duration="0:0:0.2" />
         </Storyboard>
 
         <DataTemplate DataType="{x:Type viewModels:BurningOptionViewModel}">
             <Grid Width="60" Height="60" Margin="8">
                 <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrush}" x:Name="BurningProgress"
-                                               Margin="-4"
                                                DataContext="{Binding Path=Progress}"
                                                Value="{Binding Complete, Mode=OneWay}" Maximum="1"
-                                               IsIndeterminate="{Binding IsIntermediate}"
-                                               InnerRadiusPortion="0" />
+                                               IsIndeterminate="{Binding IsIntermediate}" UseLayoutRounding="False"
+                                               SnapsToDevicePixels="False"
+                                               InnerRadiusPortion="0" RenderTransformOrigin="0.5,0.5">
+                    <firmwareBurner:CircleProgress.RenderTransform>
+                        <ScaleTransform />
+                    </firmwareBurner:CircleProgress.RenderTransform>
+                </firmwareBurner:CircleProgress>
                 <Button Style="{StaticResource CircleButton}" Name="BurnButton"
                         Command="{Binding BurnCommand}"
                         Content="{Binding Name}" />
             </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Progress.IsActive}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource BurnStartedStoryboard}" />
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard Storyboard="{StaticResource BurnCompleatedStoryboard}" />
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </DataTemplate.Triggers>
         </DataTemplate>
 
         <ContextMenu x:Key="MethodsContextMenu" Placement="Bottom" ItemsSource="{Binding BurningMethods}"
