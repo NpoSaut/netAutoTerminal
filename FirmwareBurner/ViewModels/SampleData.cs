@@ -8,7 +8,6 @@ using FirmwareBurner.ViewModels.Targeting;
 using FirmwareBurner.ViewModels.Tools;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
-using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -65,54 +64,32 @@ namespace FirmwareBurner.ViewModels
                                  },
                                  new[]
                                  {
-                                     new BurningMethodViewModel("AvrDude", null),
+                                     new BurningMethodViewModel("Прошить через AVRDude", null),
                                      new BurningMethodViewModel("Сохранить в .hex", null)
                                  });
-
-        public static FirmwareSetConstructorViewModel FirmwareSetConstructor
-        {
-            get { return _firmwareSetConstructor; }
-        }
-
-        public static ProjectViewModel Project
-        {
-            get { return _project; }
-        }
-
-        public static FirmwareSelectorDialogViewModel FirmwareSelectorDialog
-        {
-            get { return _firmwareSelectorDialog; }
-        }
-
-        public static ValidateableTextPropertyViewModel<int> ValidateableTextProperty
-        {
-            get { return _validateableTextProperty; }
-        }
-
-        public static IntegratedFirmwareSelectorViewModel IntegratedFirmwareSelector
-        {
-            get { return _integratedFirmwareSelector; }
-        }
-
-        public static ExceptionDialogViewModel ExceptionDialog
-        {
-            get { return _exceptionDialog; }
-        }
-
-        public static TargetSelectorViewModel TargetSelector
-        {
-            get { return _targetSelector; }
-            set { _targetSelector = value; }
-        }
-
-        public static BurningViewModel Burning
-        {
-            get { return _burning; }
-        }
 
         private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), null);
 
         #region Fake Classes
+
+        private class FakeCellsCatalogProvider : ICellsCatalogProvider
+        {
+            public IList<CellKindViewModel> GetCatalog()
+            {
+                return new[]
+                       {
+                           new CellKindViewModel(1, "БС-ДПС", new[]
+                                                              {
+                                                                  new ModificationKindViewModel(1, "128Кб", string.Empty),
+                                                                  new ModificationKindViewModel(1, "64Кб", string.Empty)
+                                                              }, new ChannelViewModel[0]),
+                           new CellKindViewModel(1, "Монитор-КХ", new[]
+                                                                  {
+                                                                      new ModificationKindViewModel(1, "Базовая", string.Empty)
+                                                                  }, new ChannelViewModel[0])
+                       };
+            }
+        }
 
         private class FakeFirmwareSelectorViewModel : FirmwareSelectorViewModel
         {
@@ -174,25 +151,47 @@ namespace FirmwareBurner.ViewModels
             }
         }
 
-        class FakeCellsCatalogProvider : ICellsCatalogProvider
+        #endregion
+
+        public static FirmwareSetConstructorViewModel FirmwareSetConstructor
         {
-            public IList<CellKindViewModel> GetCatalog()
-            {
-                return new[]
-                       {
-                           new CellKindViewModel(1, "БС-ДПС", new []
-                                                              {
-                                                                  new ModificationKindViewModel(1, "128Кб", string.Empty), 
-                                                                  new ModificationKindViewModel(1, "64Кб", string.Empty), 
-                                                              }, new ChannelViewModel[0]), 
-                           new CellKindViewModel(1, "Монитор-КХ", new []
-                                                              {
-                                                                  new ModificationKindViewModel(1, "Базовая", string.Empty),
-                                                              }, new ChannelViewModel[0]), 
-                       };
-            }
+            get { return _firmwareSetConstructor; }
         }
 
-        #endregion
+        public static ProjectViewModel Project
+        {
+            get { return _project; }
+        }
+
+        public static FirmwareSelectorDialogViewModel FirmwareSelectorDialog
+        {
+            get { return _firmwareSelectorDialog; }
+        }
+
+        public static ValidateableTextPropertyViewModel<int> ValidateableTextProperty
+        {
+            get { return _validateableTextProperty; }
+        }
+
+        public static IntegratedFirmwareSelectorViewModel IntegratedFirmwareSelector
+        {
+            get { return _integratedFirmwareSelector; }
+        }
+
+        public static ExceptionDialogViewModel ExceptionDialog
+        {
+            get { return _exceptionDialog; }
+        }
+
+        public static TargetSelectorViewModel TargetSelector
+        {
+            get { return _targetSelector; }
+            set { _targetSelector = value; }
+        }
+
+        public static BurningViewModel Burning
+        {
+            get { return _burning; }
+        }
     }
 }

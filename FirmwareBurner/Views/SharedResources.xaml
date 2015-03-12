@@ -112,9 +112,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="TextIconButton" TargetType="Button">
-        <Setter Property="FontFamily" Value="/Fonts/#burner" />
-        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+    <Style x:Key="TextButtonStyle" TargetType="Button">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -131,6 +129,11 @@
                 <Setter Property="Foreground" Value="Gray" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+    
+    <Style x:Key="TextIconButton" TargetType="Button" BasedOn="{StaticResource TextButtonStyle}">
+        <Setter Property="FontFamily" Value="/Fonts/#burner" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
     </Style>
 
     <Style x:Key="SquareTextIconButton" BasedOn="{StaticResource TextIconButton}" TargetType="Button">

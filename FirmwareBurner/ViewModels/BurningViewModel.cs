@@ -11,6 +11,7 @@ namespace FirmwareBurner.ViewModels
     {
         private readonly IBurningService _burningService;
         private readonly IProjectAssembler _projectAssembler;
+        private BurningMethodViewModel _selectedBurningMethod;
 
         public BurningViewModel(IProjectAssembler ProjectAssembler, IBurningService BurningService,
                                 ICollection<BurningOptionViewModel> BurningOptions, ICollection<BurningMethodViewModel> BurningMethods)
@@ -26,7 +27,17 @@ namespace FirmwareBurner.ViewModels
             SelectedBurningMethod = BurningMethods.FirstOrDefault();
         }
 
-        public BurningMethodViewModel SelectedBurningMethod { get; set; }
+        public BurningMethodViewModel SelectedBurningMethod
+        {
+            get { return _selectedBurningMethod; }
+            set
+            {
+                if (Equals(value, _selectedBurningMethod)) return;
+                _selectedBurningMethod = value;
+                RaisePropertyChanged(() => SelectedBurningMethod);
+            }
+        }
+
         public ICollection<BurningOptionViewModel> BurningOptions { get; private set; }
         public ICollection<BurningMethodViewModel> BurningMethods { get; private set; }
 

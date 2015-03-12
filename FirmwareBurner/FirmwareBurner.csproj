@@ -147,6 +147,7 @@
     <Compile Include="IProjectAssembler.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
     <Compile Include="TriggerActions\CloseWindowTriggerAction.cs" />
+    <Compile Include="TriggerActions\ShowContextMenuAction.cs" />
     <Compile Include="TriggerActions\ShowDialogTriggerAction.cs" />
     <Compile Include="CircleSegment.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />

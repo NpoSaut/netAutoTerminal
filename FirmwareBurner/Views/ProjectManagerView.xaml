@@ -8,7 +8,9 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
-             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}">
+             xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectManagerViewModel}"
+             designUtils:DesignTime.Background="#BDD6E1">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +18,12 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Grid.Row="1" IsEnabled="{Binding Path=Validator.IsValid}" Margin="6">
+            <views:BurningView DataContext="{Binding Path=Burning}"
+                               d:DataContext="{x:Static viewModels:SampleData.Burning}" />
+        </Grid>
+
+        <Grid Grid.Row="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -32,23 +39,12 @@
                                       Stroke="{StaticResource ProjectArrowBrush}" StrokeThickness="1"
                                       Fill="{StaticResource ProjectArrowFillBrush}" />
 
-
-            <ListBox Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                     ItemsSource="{Binding Burning.ChannelSelector.Channels}"
-                     SelectedItem="{Binding Burning.ChannelSelector.SelectedChannel}"
-                     Style="{StaticResource ChannelSelectorStyle}" />
-
             <!--<ItemsControl Grid.Column="0" Visibility="Collapsed"
                           ItemsSource="{Binding Path=Validator.ValidationErrors}" />-->
 
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="0" ShadowDepth="2" Opacity="0.1" />
             </Grid.Effect>
-        </Grid>
-
-        <Grid Grid.Row="1" IsEnabled="{Binding Path=Validator.IsValid}">
-            <views:BurningView DataContext="{Binding Path=Burning}"
-                               d:DataContext="{x:Static viewModels:SampleData.Burning}" />
         </Grid>
 
     </Grid>

@@ -7,7 +7,10 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
-             mc:Ignorable="d" d:DataContext="{x:Static viewModels:SampleData.Burning}">
+             xmlns:triggerActions="clr-namespace:FirmwareBurner.TriggerActions"
+             xmlns:designUtils="clr-namespace:DesignUtils;assembly=DesignUtils"
+             mc:Ignorable="d" d:DataContext="{x:Static viewModels:SampleData.Burning}"
+             designUtils:DesignTime.Background="#BDD6E1">
     <UserControl.Resources>
 
         <Storyboard x:Key="BurnStartedStoryboard">
@@ -38,35 +41,68 @@
                 <Button Style="{StaticResource CircleButton}" Name="BurnButton"
                         Command="{Binding BurnCommand}"
                         Content="{Binding Name}" />
-                <!--<i:Interaction.Triggers>
-                    <ei:DataTrigger Binding="{Binding Path=Progress.IsActive}" Value="True">
-                        --><!--<ei:ChangePropertyAction TargetName="BurningGroup" PropertyName="IsEnabled" Value="False" />--><!--
-                        <ei:ControlStoryboardAction Storyboard="{StaticResource BurnStartedStoryboard}" />
-                    </ei:DataTrigger>
-                    <ei:DataTrigger Binding="{Binding Path=Progress.IsActive}" Value="False">
-                        --><!--<ei:ChangePropertyAction TargetName="BurningGroup" PropertyName="IsEnabled" Value="True" />--><!--
-                        <ei:ControlStoryboardAction Storyboard="{StaticResource BurnCompleatedStoryboard}" />
-                    </ei:DataTrigger>
-                </i:Interaction.Triggers>-->
             </Grid>
         </DataTemplate>
 
+        <ContextMenu x:Key="MethodsContextMenu" Placement="Bottom" ItemsSource="{Binding BurningMethods}"
+                     DisplayMemberPath="Name">
+            <ContextMenu.ItemContainerStyle>
+                <Style TargetType="MenuItem">
+                    <EventSetter Event="Click" Handler="BurningMethodMenuItem_OnClick" />
+                </Style>
+            </ContextMenu.ItemContainerStyle>
+        </ContextMenu>
+
+        <ControlTemplate x:Key="SelectMethodButtonControlTemplate" TargetType="{x:Type Button}">
+            <Border Background="Transparent">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter Grid.Column="1" Margin="1,0" VerticalAlignment="Center" />
+                    <TextBlock Grid.Column="2" Margin="1,0" Name="DropdownIcon"
+                               Text="v" Style="{StaticResource TextIconStyle}"
+                               VerticalAlignment="Center" />
+                </Grid>
+            </Border>
+        </ControlTemplate>
+
+        <Style x:Key="SelectMethodButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="#FF1E5183" />
+            <Setter Property="Template" Value="{StaticResource SelectMethodButtonControlTemplate}" />
+            <Setter Property="Padding" Value="3,0" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#21384E" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
-    <Grid Name="BurningGroup">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <ItemsControl Grid.Column="1" ItemsSource="{Binding BurningOptions}">
+
+    <StackPanel>
+
+        <Button FontSize="18" Style="{StaticResource SelectMethodButtonStyle}"
+                HorizontalAlignment="Center" Cursor="Hand"
+                ContextMenu="{StaticResource MethodsContextMenu}">
+            <TextBlock Text="{Binding Path=SelectedBurningMethod.Name}" VerticalAlignment="Center" />
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="Click">
+                    <triggerActions:ShowContextMenuAction />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Button>
+
+        <ItemsControl ItemsSource="{Binding BurningOptions}" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <ComboBox Grid.Column="2" IsEditable="False" MinWidth="100" VerticalAlignment="Center"
-                  HorizontalAlignment="Right" Margin="8"
-                  ItemsSource="{Binding BurningMethods}" SelectedItem="{Binding SelectedBurningMethod}" DisplayMemberPath="Name" />
-    </Grid>
+
+    </StackPanel>
+
 </UserControl>
