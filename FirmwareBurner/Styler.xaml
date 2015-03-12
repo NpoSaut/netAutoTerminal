@@ -6,6 +6,7 @@
 
     <Brush x:Key="ProjectArrowBrush">#DE9E36</Brush>
     <Brush x:Key="ProjectArrowBrushDark">#A17327</Brush>
+    <Brush x:Key="ProjectArrowBrushLight">#E9B934</Brush>
     <Brush x:Key="ProjectArrowFillBrush">#FFFCF9</Brush>
 
     <RadialGradientBrush x:Key="ProjectBackgroundBrush"
@@ -108,9 +109,6 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="White" />
                         </Trigger>
-                        <!--<Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Background" Value="Gray" />
-                        </Trigger>-->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="cnt" Property="Opacity" Value="0.7" />
                             <Setter Property="Background" Value="WhiteSmoke" />
