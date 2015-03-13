@@ -141,6 +141,7 @@
     </Compile>
     <Compile Include="CircleProgress.cs" />
     <Compile Include="Events\HandledExceptionEvent.cs" />
+    <Compile Include="Events\ProjectChangedEvent.cs" />
     <Compile Include="Events\TargetSelectedEvent.cs" />
     <Compile Include="Fakes\FakeRepository.cs" />
     <Compile Include="ImageScroller.cs" />

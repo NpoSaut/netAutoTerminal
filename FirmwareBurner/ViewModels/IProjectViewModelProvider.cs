@@ -1,5 +1,6 @@
 ﻿using FirmwareBurner.Annotations;
 using FirmwareBurner.ViewModels.Targeting;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -11,11 +12,13 @@ namespace FirmwareBurner.ViewModels
     [UsedImplicitly]
     public class ProjectViewModelProvider : IProjectViewModelProvider
     {
+        private readonly IEventAggregator _eventAggregator;
         private readonly IFirmwareSetConstructorViewModelProvider _firmwareSetConstructorViewModelProvider;
 
-        public ProjectViewModelProvider(IFirmwareSetConstructorViewModelProvider FirmwareSetConstructorViewModelProvider)
+        public ProjectViewModelProvider(IFirmwareSetConstructorViewModelProvider FirmwareSetConstructorViewModelProvider, IEventAggregator EventAggregator)
         {
             _firmwareSetConstructorViewModelProvider = FirmwareSetConstructorViewModelProvider;
+            _eventAggregator = EventAggregator;
         }
 
         public ProjectViewModel GetViewModel(int CellKindId, int CellModificationId)
@@ -23,7 +26,8 @@ namespace FirmwareBurner.ViewModels
             return new ProjectViewModel(
                 CellKindId, CellModificationId,
                 new BlockDetailsViewModel(),
-                _firmwareSetConstructorViewModelProvider.GetViewModel(CellKindId, CellModificationId));
+                _firmwareSetConstructorViewModelProvider.GetViewModel(CellKindId, CellModificationId),
+                _eventAggregator);
         }
     }
 }

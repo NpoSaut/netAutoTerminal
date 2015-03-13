@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Burning;
+using FirmwareBurner.Events;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels.Bases;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -13,7 +15,7 @@ namespace FirmwareBurner.ViewModels
         private readonly IProjectAssembler _projectAssembler;
         private BurningMethodViewModel _selectedBurningMethod;
 
-        public BurningViewModel(IProjectAssembler ProjectAssembler, IBurningService BurningService,
+        public BurningViewModel(IProjectAssembler ProjectAssembler, IBurningService BurningService, IEventAggregator EventAggregator,
                                 ICollection<BurningOptionViewModel> BurningOptions, ICollection<BurningMethodViewModel> BurningMethods)
         {
             this.BurningOptions = BurningOptions;
@@ -25,6 +27,7 @@ namespace FirmwareBurner.ViewModels
                 burningOption.Activated += BurningOptionOnActivated;
 
             SelectedBurningMethod = BurningMethods.FirstOrDefault();
+            EventAggregator.GetEvent<ProjectChangedEvent>().Subscribe(OnProjectChanged);
         }
 
         public BurningMethodViewModel SelectedBurningMethod
@@ -40,6 +43,12 @@ namespace FirmwareBurner.ViewModels
 
         public ICollection<BurningOptionViewModel> BurningOptions { get; private set; }
         public ICollection<BurningMethodViewModel> BurningMethods { get; private set; }
+
+        private void OnProjectChanged(ProjectChangedArgs e)
+        {
+            foreach (BurningOptionViewModel burningOption in BurningOptions)
+                burningOption.Progress.Reset();
+        }
 
         private void BurningOptionOnActivated(object Sender, EventArgs EventArgs)
         {

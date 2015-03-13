@@ -51,6 +51,13 @@ namespace FirmwareBurner.ViewModels
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
+        public void Reset()
+        {
+            IsIntermediate = false;
+            Complete = 0;
+            IsActive = false;
+        }
+
         #region Реализация IProgressToken
 
         void IProgressToken.Start()

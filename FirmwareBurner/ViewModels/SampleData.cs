@@ -8,6 +8,7 @@ using FirmwareBurner.ViewModels.Targeting;
 using FirmwareBurner.ViewModels.Tools;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
 {
@@ -40,7 +41,7 @@ namespace FirmwareBurner.ViewModels
                                                 });
 
         private static readonly ProjectViewModel _project =
-            new ProjectViewModel(30, 1, new BlockDetailsViewModel(10007, DateTime.Now), _firmwareSetConstructor);
+            new ProjectViewModel(30, 1, new BlockDetailsViewModel(10007, DateTime.Now), _firmwareSetConstructor, new EventAggregator());
 
         private static readonly ValidateableTextPropertyViewModel<int> _validateableTextProperty =
             new ValidateableTextPropertyViewModel<int>(new IntTextValueConverter());
@@ -56,7 +57,7 @@ namespace FirmwareBurner.ViewModels
                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
 
         private static readonly BurningViewModel _burning =
-            new BurningViewModel(null, null,
+            new BurningViewModel(null, null, new EventAggregator(),
                                  new[]
                                  {
                                      new BurningOptionViewModel("Канал 1", 1),

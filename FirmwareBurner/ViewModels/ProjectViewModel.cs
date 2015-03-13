@@ -1,15 +1,19 @@
 ﻿using System;
 using System.ComponentModel;
+using FirmwareBurner.Events;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwareBurner.ViewModels.Targeting;
+using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
 {
     public class ProjectViewModel : ViewModelBase
     {
+        private readonly ProjectChangedEvent _projectChangedEvent;
+
         public ProjectViewModel(int CellKindId, int CellModificationId,
                                 BlockDetailsViewModel BlockDetails,
-                                FirmwareSetConstructorViewModel FirmwareSetConstructor)
+                                FirmwareSetConstructorViewModel FirmwareSetConstructor, IEventAggregator EventAggregator)
         {
             this.CellKindId = CellKindId;
             this.CellModificationId = CellModificationId;
@@ -19,6 +23,8 @@ namespace FirmwareBurner.ViewModels
             FirmwareSetConstructor.SomethingChanged += FirmwareSetConstructorOnSomethingChanged;
             BlockDetails.AssemblyDate.PropertyChanged += BlockDetailsOnPropertyChanged;
             BlockDetails.SerialNumber.PropertyChanged += BlockDetailsOnPropertyChanged;
+
+            _projectChangedEvent = EventAggregator.GetEvent<ProjectChangedEvent>();
         }
 
         public int CellKindId { get; private set; }
@@ -34,6 +40,7 @@ namespace FirmwareBurner.ViewModels
 
         protected virtual void OnProjectChanged()
         {
+            _projectChangedEvent.Publish(new ProjectChangedArgs());
             EventHandler handler = ProjectChanged;
             if (handler != null) handler(this, EventArgs.Empty);
         }
