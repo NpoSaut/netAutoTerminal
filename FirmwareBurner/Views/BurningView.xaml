@@ -42,7 +42,8 @@
 
         <DataTemplate DataType="{x:Type viewModels:BurningOptionViewModel}">
             <Grid Width="60" Height="60" Margin="8">
-                <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrushLight}" x:Name="BurningProgress"
+                <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrushLight}"
+                                               x:Name="BurningProgress"
                                                DataContext="{Binding Path=Progress}"
                                                Value="{Binding Complete, Mode=OneWay}" Maximum="1"
                                                IsIndeterminate="{Binding IsIntermediate}" UseLayoutRounding="False"
@@ -52,9 +53,13 @@
                         <ScaleTransform />
                     </firmwareBurner:CircleProgress.RenderTransform>
                 </firmwareBurner:CircleProgress>
+                <TextBlock Text="o" Style="{StaticResource TextIconBoxStyle}" Foreground="White" FontSize="40" />
                 <Button Style="{StaticResource ChannelPushButtonStyle}" Name="BurnButton"
                         Command="{Binding BurnCommand}"
                         Content="{Binding Name}" />
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="2" Opacity="0.1" />
+                </Grid.Effect>
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=Progress.IsActive}" Value="True">
@@ -64,6 +69,9 @@
                     <DataTrigger.ExitActions>
                         <BeginStoryboard Storyboard="{StaticResource BurnCompleatedStoryboard}" />
                     </DataTrigger.ExitActions>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Path=Progress.Complete}" Value="1.0">
+                    <Setter TargetName="BurnButton" Property="Visibility" Value="Hidden" />
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
