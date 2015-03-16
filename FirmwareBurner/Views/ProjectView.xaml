@@ -30,7 +30,7 @@
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="Opacity" Value="0.5" />
                 <Setter Property="Margin" Value="0,-2,0,0" />
-                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontSize" Value="11" />
                 <Setter Property="Padding" Value="0" />
             </Style>
         </Grid.Resources>
@@ -63,7 +63,7 @@
                                 Style="{StaticResource ValidateableControlStyle}"
                                 DataContext="{Binding Path=BlockDetails.AssemblyDate}">
                     <TextBox Name="AssemblyDateEdit" Style="{StaticResource InputBoxStyle}"
-                             Text="{Binding Path=ValueText, StringFormat=MM.yyy}" />
+                             Text="{Binding Path=ValueText, StringFormat=MM.yyy, UpdateSourceTrigger=PropertyChanged}" />
                 </ContentControl>
             </Grid>
         </Border>

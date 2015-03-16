@@ -10,7 +10,7 @@ namespace FirmwareBurner.Validation.Rules
         /// <returns>Тексты ошибок валидации</returns>
         public IEnumerable<string> GetValidationErrors(int PropertyValue)
         {
-            if (PropertyValue <= 0)
+            if (PropertyValue <= 10000)
                 yield return "Введён не верный серийный номер ячейки";
             if (PropertyValue > 99999)
                 yield return "Введён слишком большой серийный номер ячейки";

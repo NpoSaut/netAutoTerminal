@@ -35,28 +35,36 @@
 
     <Style x:Key="ValidateableControlStyle" TargetType="ContentControl">
         <Style.Resources>
-            <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
-                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5" To="0"
-                                 Duration="0:0:0.7">
+
+            <Style x:Key="HintIconStyle" TargetType="TextBlock" BasedOn="{StaticResource TextIconStyle}">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Margin" Value="8" />
+                <Setter Property="Opacity" Value="0" />
+                <Setter Property="IsHitTestVisible" Value="False" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <TranslateTransform />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Storyboard x:Key="DisplaySuccessIconStoryboard" TargetName="SuccessIcon">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="10" Duration="0:0:0.25">
                     <DoubleAnimation.EasingFunction>
-                        <ElasticEase />
+                        <BackEase EasingMode="EaseOut" Amplitude="0.4" />
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
-            <Storyboard x:Key="DisplayErrorIconStoryboard" TargetName="WarningIcon">
-                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.7" />
-                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="10" Duration="0:0:0.3">
-                    <DoubleAnimation.EasingFunction>
-                        <PowerEase EasingMode="EaseOut" />
-                    </DoubleAnimation.EasingFunction>
-                </DoubleAnimation>
-            </Storyboard>
-            <Storyboard x:Key="HideErrorIconStoryboard" TargetName="WarningIcon" FillBehavior="Stop">
-                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.4" />
-                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.4"
+            <Storyboard x:Key="HideSuccessIconStoryboard" TargetName="SuccessIcon" FillBehavior="Stop">
+                <DoubleAnimation Storyboard.TargetProperty="Opacity" To="0" Duration="0:0:0.2" />
+                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="0:0:0.3"
                                  To="20">
                     <DoubleAnimation.EasingFunction>
-                        <BackEase EasingMode="EaseIn" Amplitude="0.4" />
+                        <PowerEase EasingMode="EaseIn" />
                     </DoubleAnimation.EasingFunction>
                 </DoubleAnimation>
             </Storyboard>
@@ -69,7 +77,7 @@
                     <Border Name="Holder" d:DataContext="{x:Static viewModels:SampleData.ValidateableTextProperty}"
                             Margin="{TemplateBinding Margin}">
                         <Border.Resources>
-                            <Storyboard x:Key="StoryboardXxx" TargetName="Presenter" FillBehavior="Stop">
+                            <Storyboard x:Key="SakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
                                 <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5"
                                                  To="0" Duration="0:0:0.7">
                                     <DoubleAnimation.EasingFunction>
@@ -79,48 +87,35 @@
                             </Storyboard>
                         </Border.Resources>
                         <Grid Name="Presenter">
-                            <ContentPresenter Content="{TemplateBinding Content}" />
-                            <TextBlock Name="WarningIcon" Text="!" FontSize="14"
-                                       Style="{StaticResource TextIconStyle}" TextOptions.TextFormattingMode="Ideal"
-                                       VerticalAlignment="Top" HorizontalAlignment="Right" Margin="4"
-                                       Opacity="0" IsHitTestVisible="False">
-                                <TextBlock.RenderTransform>
-                                    <TranslateTransform />
-                                </TextBlock.RenderTransform>
-                            </TextBlock>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ContentPresenter Grid.Row="0" Content="{TemplateBinding Content}" />
+                            <TextBlock Grid.Row="0" Name="SuccessIcon" Style="{StaticResource HintIconStyle}" Foreground="{StaticResource ProjectOkayBrush}" Text="o" />
+                            <TextBlock Grid.Row="1" Name="ErrorTextLabel"  FontSize="11" Foreground="{StaticResource ProjectErrorBrush}"
+                                       Text="{Binding ValidationErrorsText}" TextAlignment="Center" Opacity="0" />
                             <Grid.RenderTransform>
                                 <TranslateTransform />
                             </Grid.RenderTransform>
                         </Grid>
                         <i:Interaction.Triggers>
                             <i:EventTrigger SourceObject="{Binding}" EventName="Signal">
-                                <ei:ControlStoryboardAction Storyboard="{StaticResource StoryboardXxx}" />
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource SakeInputStoryboard}" />
+                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="1" Duration="0:0:0.5" />
                             </i:EventTrigger>
+                            <ei:DataTrigger Binding="{Binding IsValid}" Value="True">
+                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="0" Duration="0:0:0.5" />
+                            </ei:DataTrigger>
                         </i:Interaction.Triggers>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsInitialized}" Value="True" />
-                                <Condition Binding="{Binding IsValid}" Value="False" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="ToolTip" Value="{Binding ValidationErrorsText}" />
-                            <Setter TargetName="WarningIcon" Property="Foreground" Value="#FF3410" />
-                            <MultiDataTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ShakeInputStoryboard}" />
-                                <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
-                            </MultiDataTrigger.EnterActions>
-                            <MultiDataTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
-                            </MultiDataTrigger.ExitActions>
-                        </MultiDataTrigger>
-                        <DataTrigger Binding="{Binding IsInitialized}" Value="False">
-                            <Setter TargetName="WarningIcon" Property="Foreground" Value="#0061C5" />
+                        <DataTrigger Binding="{Binding IsValid}" Value="True">
                             <DataTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource DisplayErrorIconStoryboard}" />
+                                <BeginStoryboard Storyboard="{StaticResource DisplaySuccessIconStoryboard}" />
                             </DataTrigger.EnterActions>
                             <DataTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource HideErrorIconStoryboard}" />
+                                <BeginStoryboard Storyboard="{StaticResource HideSuccessIconStoryboard}" />
                             </DataTrigger.ExitActions>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
