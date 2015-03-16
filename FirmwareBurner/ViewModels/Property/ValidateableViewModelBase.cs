@@ -42,6 +42,13 @@ namespace FirmwareBurner.ViewModels.Property
 
         public event EventHandler Signal;
 
+        public bool Check()
+        {
+            bool res = IsValid;
+            if (!res) OnSignal();
+            return res;
+        }
+
         protected void OnSignal()
         {
             EventHandler handler = Signal;

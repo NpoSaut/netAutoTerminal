@@ -15,6 +15,10 @@ namespace FirmwareBurner.Validation
 
         /// <summary>Проверяет все зарегистрированные валидаторы</summary>
         /// <returns>True, если контекст не содержит ошибок</returns>
-        public bool Check() { return _validateableElements.All(i => i.IsValid); }
+        public bool Check()
+        {
+            List<bool> validationResults = _validateableElements.Select(i => i.Check()).ToList();
+            return validationResults.All(r => r);
+        }
     }
 }

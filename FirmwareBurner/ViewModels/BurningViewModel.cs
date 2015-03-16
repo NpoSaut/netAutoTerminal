@@ -56,7 +56,8 @@ namespace FirmwareBurner.ViewModels
 
         private void BurningOptionOnActivated(object Sender, EventArgs EventArgs)
         {
-            if (!_validationContext.Check()) return;
+            var checkResult = !_validationContext.Check();
+            if (checkResult) return;
             var activatedOption = (BurningOptionViewModel)Sender;
             FirmwareProject project = _projectAssembler.GetProject(activatedOption.ChannelNumber);
             _burningService.BeginBurn(SelectedBurningMethod.Receipt, project, activatedOption.Progress);

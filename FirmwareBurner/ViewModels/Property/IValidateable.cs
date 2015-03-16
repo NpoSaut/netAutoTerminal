@@ -11,5 +11,6 @@ namespace FirmwareBurner.ViewModels.Property
         IEnumerable<string> ValidationErrors { get; }
         string ValidationErrorsText { get; }
         event EventHandler Signal;
+        bool Check();
     }
 }

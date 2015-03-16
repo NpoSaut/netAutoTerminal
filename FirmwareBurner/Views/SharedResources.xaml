@@ -6,6 +6,8 @@
                     xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
                     xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
                     xmlns:firmwareBurner="clr-namespace:FirmwareBurner"
+                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
                     mc:Ignorable="d">
 
     <Style TargetType="{x:Type Run}" x:Key="IconRunStyle">
@@ -65,7 +67,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="ContentControl">
                     <Border Name="Holder" d:DataContext="{x:Static viewModels:SampleData.ValidateableTextProperty}"
-                            Margin="{TemplateBinding Margin}" Padding="1">
+                            Margin="{TemplateBinding Margin}">
+                        <Border.Resources>
+                            <Storyboard x:Key="StoryboardXxx" TargetName="Presenter" FillBehavior="Stop">
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5"
+                                                 To="0" Duration="0:0:0.7">
+                                    <DoubleAnimation.EasingFunction>
+                                        <ElasticEase />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </Border.Resources>
                         <Grid Name="Presenter">
                             <ContentPresenter Content="{TemplateBinding Content}" />
                             <TextBlock Name="WarningIcon" Text="!" FontSize="14"
@@ -80,6 +92,11 @@
                                 <TranslateTransform />
                             </Grid.RenderTransform>
                         </Grid>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger SourceObject="{Binding}" EventName="Signal">
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource StoryboardXxx}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </Border>
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
@@ -130,7 +147,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
-    
+
     <Style x:Key="TextIconButton" TargetType="Button" BasedOn="{StaticResource TextButtonStyle}">
         <Setter Property="FontFamily" Value="/Fonts/#burner" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
