@@ -1,6 +1,5 @@
 ﻿using ExternalTools.Implementations;
 using ExternalTools.Interfaces;
-using FirmwareBurner.Burning;
 using FirmwareBurner.Interaction;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
@@ -34,7 +33,6 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IProjectViewModelProvider, ProjectViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFirmwareSetConstructorViewModelProvider, FirmwareSetConstructorViewModelProvider>()
                 .RegisterType<IBurningViewModelFactory, BurningViewModelFactory>(new ContainerControlledLifetimeManager())
-                .RegisterType<IProjectValidatorViewModelProvider, ProjectValidatorViewModelProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectAssembler, ViewModelProjectAssembler>(new ContainerControlledLifetimeManager())
                 .RegisterType<IFileSelectorService, FileRequestServiceViewModel>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDispatcherFacade, DefaultDispatcher>(new ContainerControlledLifetimeManager())

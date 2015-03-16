@@ -35,7 +35,7 @@ namespace FirmwareBurner
             mc.AddModule(typeof (AvrReceiptsModule));
 
             // Модули интерфейса
-            mc.AddModule(typeof (ValidationModule));
+            mc.AddModule(typeof (ValidationsModule));
             mc.AddModule(typeof (FirmwareSelectorsModule));
             mc.AddModule(typeof (MainModule));
 

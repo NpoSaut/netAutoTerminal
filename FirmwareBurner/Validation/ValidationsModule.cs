@@ -3,10 +3,10 @@ using Microsoft.Practices.Unity;
 
 namespace FirmwareBurner.Validation
 {
-    public class ValidationModule : IModule
+    public class ValidationsModule : IModule
     {
         private readonly IUnityContainer _container;
-        public ValidationModule(IUnityContainer Container) { _container = Container; }
+        public ValidationsModule(IUnityContainer Container) { _container = Container; }
 
         /// <summary>Notifies the module that it has be initialized.</summary>
         public void Initialize()
