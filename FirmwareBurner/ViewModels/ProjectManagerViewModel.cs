@@ -4,15 +4,13 @@ namespace FirmwareBurner.ViewModels
 {
     public class ProjectManagerViewModel : ViewModelBase
     {
-        public ProjectManagerViewModel(ProjectViewModel Project, BurningViewModel Burning, ProjectValidatorViewModel Validator)
+        public ProjectManagerViewModel(ProjectViewModel Project, BurningViewModel Burning)
         {
             this.Project = Project;
             this.Burning = Burning;
-            this.Validator = Validator;
         }
 
         public ProjectViewModel Project { get; private set; }
         public BurningViewModel Burning { get; private set; }
-        public ProjectValidatorViewModel Validator { get; private set; }
     }
 }

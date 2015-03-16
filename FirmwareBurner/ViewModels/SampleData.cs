@@ -67,7 +67,8 @@ namespace FirmwareBurner.ViewModels
                                  {
                                      new BurningMethodViewModel("Прошить через AVRDude", null),
                                      new BurningMethodViewModel("Сохранить в .hex", null)
-                                 });
+                                 },
+                                 null);
 
         private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), null);
 

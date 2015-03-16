@@ -40,6 +40,14 @@ namespace FirmwareBurner.ViewModels.Property
             get { return string.Join(Environment.NewLine, ValidationErrors); }
         }
 
+        public event EventHandler Signal;
+
+        protected void OnSignal()
+        {
+            EventHandler handler = Signal;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
+
         protected void OnValidateableValueChanged()
         {
             _initialized = true;

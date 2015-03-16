@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using Microsoft.Practices.Prism.Modularity;
+﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
 namespace FirmwareBurner.Validation
@@ -15,7 +12,7 @@ namespace FirmwareBurner.Validation
         public void Initialize()
         {
             _container
-                .RegisterType<IProjectValidator, ValidationPropertyCheckProjectValidator>(new ContainerControlledLifetimeManager());
+                .RegisterType<IValidationContextFactory, ValidationContextFactory>(new ContainerControlledLifetimeManager());
         }
     }
 }

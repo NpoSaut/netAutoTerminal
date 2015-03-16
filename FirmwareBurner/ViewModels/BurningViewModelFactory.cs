@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Annotations;
 using FirmwareBurner.Burning;
+using FirmwareBurner.Validation;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Prism.Events;
 
@@ -23,18 +25,23 @@ namespace FirmwareBurner.ViewModels
             _eventAggregator = EventAggregator;
         }
 
-        public BurningViewModel GetViewModel(int CellKindId, int ModificationId, IProjectAssembler projectAssembler)
+        public BurningViewModel GetViewModel(int CellKindId, int ModificationId, IValidationContext ValidationContext, IProjectAssembler projectAssembler)
         {
             BlockKind cellKind = _indexHelper.GetCell(CellKindId);
             ModificationKind modification = _indexHelper.GetModification(cellKind, ModificationId);
 
+            List<BurningOptionViewModel> burningOptions = Enumerable.Range(1, cellKind.ChannelsCount)
+                                                                    .Select(i => new BurningOptionViewModel(String.Format("Канал {0}", i), i))
+                                                                    .ToList();
+            List<BurningMethodViewModel> burningMethods = _burningService.GetBurningMethods(modification.DeviceName)
+                                                                         .Select(
+                                                                             burningMethod =>
+                                                                             new BurningMethodViewModel(burningMethod.Name, burningMethod.Receipt))
+                                                                         .ToList();
+
             return new BurningViewModel(projectAssembler, _burningService, _eventAggregator,
-                                        Enumerable.Range(1, cellKind.ChannelsCount)
-                                                  .Select(i => new BurningOptionViewModel(String.Format("Канал {0}", i), i))
-                                                  .ToList(),
-                                        _burningService.GetBurningMethods(modification.DeviceName)
-                                                       .Select(burningMethod => new BurningMethodViewModel(burningMethod.Name, burningMethod.Receipt))
-                                                       .ToList());
+                                        burningOptions, burningMethods,
+                                        ValidationContext);
         }
     }
 }

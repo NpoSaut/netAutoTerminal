@@ -154,11 +154,14 @@
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="Validation\IProjectValidationRule.cs" />
     <Compile Include="Validation\IProjectValidator.cs" />
+    <Compile Include="Validation\IValidationContextFactory.cs" />
     <Compile Include="Validation\IValidationRule.cs" />
+    <Compile Include="Validation\IValidationContext.cs" />
     <Compile Include="Validation\RulesListProjectValidator.cs" />
     <Compile Include="Validation\Rules\AssemblyDateNumberValidationRule.cs" />
     <Compile Include="Validation\Rules\HaveFirmwareValidationRule.cs" />
     <Compile Include="Validation\Rules\SerialNumberValidationRule.cs" />
+    <Compile Include="Validation\ValidationContext.cs" />
     <Compile Include="Validation\ValidationModule.cs" />
     <Compile Include="Validation\ValidationPropertyCheckProjectValidator.cs" />
     <Compile Include="ViewModels\BurningMethodViewModel.cs" />
