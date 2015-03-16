@@ -6,8 +6,11 @@
 
     <Brush x:Key="ProjectArrowBrush">#DE9E36</Brush>
     <Brush x:Key="ProjectArrowBrushDark">#A17327</Brush>
-    <Brush x:Key="ProjectArrowBrushLight">#E9B934</Brush>
+    <Brush x:Key="ProjectArrowBrushLight">#EEB22D</Brush>
     <Brush x:Key="ProjectArrowFillBrush">#FFFCF9</Brush>
+    <Brush x:Key="ProjectInputsBrush">#3A3A3A</Brush>
+    <Brush x:Key="ProjectOkayBrush">#0FA312</Brush>
+    <Brush x:Key="ProjectErrorBrush">#D32F2F</Brush>
 
     <RadialGradientBrush x:Key="ProjectBackgroundBrush"
                          GradientOrigin="0.5,0.2" Center="0.5,0.2"

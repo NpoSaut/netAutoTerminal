@@ -21,8 +21,8 @@
                 <Setter Property="TextAlignment" Value="Center" />
                 <Setter Property="Padding" Value="5" />
                 <Setter Property="Margin" Value="3,0" />
-                <Setter Property="BorderBrush" Value="{StaticResource ProjectArrowBrushDark}" />
-                <Setter Property="Foreground" Value="{StaticResource ProjectArrowBrushDark}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ProjectInputsBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource ProjectInputsBrush}" />
                 <Setter Property="Background" Value="{StaticResource ProjectArrowFillBrush}" />
                 <Setter Property="FontSize" Value="18" />
             </Style>
