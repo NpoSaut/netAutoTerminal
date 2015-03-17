@@ -66,9 +66,6 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--Верхняя заглушка-->
-        <Rectangle Name="TopperStub" Height="50" />
-
         <!--Основной задний фон-->
         <firmwareBurner:ImageScroller Grid.Row="0" Grid.RowSpan="3" Source="../Background.jpg"
                                       Uniter="{StaticResource BackgroundScrollerUniter}" />
@@ -85,6 +82,9 @@
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
             <Rectangle Opacity="0.8" Fill="{StaticResource ProjectBackgroundBrush}" />
         </Grid>
+
+        <!--Верхняя заглушка-->
+        <Rectangle Grid.Row="0" Name="TopperStub" Height="50" MouseDown="DragableElement_OnMouseDown" Fill="Transparent" />
 
         <!--Выбор цели-->
         <Grid Grid.Row="2" VerticalAlignment="Top" Margin="50,0,0,0" Name="TargetSelector">
@@ -118,7 +118,7 @@
         </Grid>
 
         <!--Панель выбранного модуля-->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" MouseDown="DragableElement_OnMouseDown">
             <firmwareBurner:ImageScroller Source="../Background-blur-accent.jpg"
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
             <views:TargetPresenterView DataContext="{Binding TargetPresenter}" />

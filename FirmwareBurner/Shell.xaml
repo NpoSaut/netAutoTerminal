@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="Первичное программирование ячейки" Width="600" Height="400"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
-        Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
-    <ContentControl regions:RegionManager.RegionName="Root" />
+        WindowStyle="None" Background="Transparent"
+        AllowsTransparency="True">
+    <Border BorderThickness="1" BorderBrush="Black" Margin="10,10,15,15"
+            Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
+        <ContentControl regions:RegionManager.RegionName="Root" ClipToBounds="True" />
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="13" ShadowDepth="2" Opacity="0.5" />
+        </Border.Effect>
+    </Border>
 </Window>
