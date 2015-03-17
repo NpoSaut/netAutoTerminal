@@ -64,10 +64,13 @@
             <DataTemplate.Resources>
                 <Storyboard x:Key="DisplayArrowStoryboard">
                     <DoubleAnimation Storyboard.TargetName="Arrow" Storyboard.TargetProperty="Opacity"
-                                     To="1" Duration="0:0:0.2" />
+                                     To="1" BeginTime="0:0:0.1" Duration="0:0:0.2" />
                     <ThicknessAnimation Storyboard.TargetName="Arrow" Storyboard.TargetProperty="Margin"
-                                        From="0,0,300,0" Duration="0:0:0.5"
-                                        EasingFunction="{StaticResource PowerEaseOut}" />
+                                        From="0,0,300,0" Duration="0:0:0.5">
+                        <ThicknessAnimation.EasingFunction>
+                            <PowerEase EasingMode="EaseInOut" />
+                        </ThicknessAnimation.EasingFunction>
+                    </ThicknessAnimation>
                 </Storyboard>
             </DataTemplate.Resources>
             <Button Name="ItemRoot" Margin="0,1,0,0" Template="{StaticResource CellKindBarButtonTemplate}">
