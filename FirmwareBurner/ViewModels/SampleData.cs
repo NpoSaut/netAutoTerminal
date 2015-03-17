@@ -82,12 +82,12 @@ namespace FirmwareBurner.ViewModels
                        {
                            new CellKindViewModel(1, "БС-ДПС", new[]
                                                               {
-                                                                  new ModificationKindViewModel(1, "128Кб", string.Empty),
-                                                                  new ModificationKindViewModel(1, "64Кб", string.Empty)
+                                                                  new ModificationKindViewModel(1, "128Кб", string.Empty, true),
+                                                                  new ModificationKindViewModel(1, "64Кб", string.Empty, false)
                                                               }, new ChannelViewModel[0]),
                            new CellKindViewModel(1, "Монитор-КХ", new[]
                                                                   {
-                                                                      new ModificationKindViewModel(1, "Базовая", string.Empty)
+                                                                      new ModificationKindViewModel(1, "Базовая", string.Empty, true)
                                                                   }, new ChannelViewModel[0])
                        };
             }

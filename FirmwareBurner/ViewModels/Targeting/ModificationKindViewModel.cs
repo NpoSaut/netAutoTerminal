@@ -7,13 +7,14 @@ namespace FirmwareBurner.ViewModels.Targeting
     /// <summary>Модель представления для модификации ячейки</summary>
     public class ModificationKindViewModel
     {
-        public ModificationKindViewModel(int Id, string Name, string DeviceName)
+        public ModificationKindViewModel(int Id, string Name, string DeviceName, bool CanBeBurned)
         {
+            this.CanBeBurned = CanBeBurned;
             this.DeviceName = DeviceName;
             this.Id = Id;
             this.Name = Name;
 
-            SelectCommand = new DelegateCommand(SelectMe);
+            SelectCommand = new DelegateCommand(SelectMe, CanSelectMe);
         }
 
         /// <summary>Номер модификации ячейки</summary>
@@ -25,7 +26,11 @@ namespace FirmwareBurner.ViewModels.Targeting
         /// <summary>Название устройства, на котором основана ячейка</summary>
         public String DeviceName { get; private set; }
 
+        /// <summary>Показывает, имеется ли в программе инструментарий, способный прошить данную модификацию</summary>
+        public Boolean CanBeBurned { get; private set; }
+
         public ICommand SelectCommand { get; private set; }
+        private bool CanSelectMe() { return CanBeBurned; }
         private void SelectMe() { OnTargetSelected(); }
 
         public event EventHandler TargetSelected;

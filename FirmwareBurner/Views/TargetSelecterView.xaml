@@ -32,12 +32,17 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        
+
         <ControlTemplate x:Key="ModificationKindBarButtonTemplate" TargetType="{x:Type Button}">
             <Border Name="ItemRoot" Padding="{TemplateBinding Padding}" CornerRadius="12">
                 <ContentPresenter Content="{TemplateBinding Content}" />
             </Border>
             <ControlTemplate.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter TargetName="ItemRoot" Property="Opacity" Value="0.5" />
+                    <Setter TargetName="ItemRoot" Property="ToolTip"
+                            Value="Нет инструментария для прошивки данной модификации" />
+                </Trigger>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter TargetName="ItemRoot" Property="Background" Value="#60000000" />
                 </Trigger>

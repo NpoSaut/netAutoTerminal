@@ -26,13 +26,14 @@ namespace FirmwareBurner.ViewModels.Tools
                                              cell.Id,
                                              cell.Name,
                                              cell.Modifications
-                                                 .Where(m => _burningReceiptsCatalog.GetBurningReceiptFactories(m.DeviceName).Any())
                                                  .Select(modification => new ModificationKindViewModel(
                                                                              modification.Id,
                                                                              modification.Name,
-                                                                             modification.DeviceName)).ToList(),
+                                                                             modification.DeviceName,
+                                                                             _burningReceiptsCatalog.GetBurningReceiptFactories(modification.DeviceName).Any()))
+                                                 .ToList(),
                                              Enumerable.Range(1, cell.ChannelsCount).Select(i => new ChannelViewModel(i)).ToList()))
-                         .Where(cm => cm.Modifications.Any())
+                         .Where(cm => cm.Modifications.Any(m => m.CanBeBurned))
                          .ToList();
         }
     }
