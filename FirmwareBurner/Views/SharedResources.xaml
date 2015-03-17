@@ -92,8 +92,10 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <ContentPresenter Grid.Row="0" Content="{TemplateBinding Content}" />
-                            <TextBlock Grid.Row="0" Name="SuccessIcon" Style="{StaticResource HintIconStyle}" Foreground="{StaticResource ProjectOkayBrush}" Text="o" />
-                            <TextBlock Grid.Row="1" Name="ErrorTextLabel"  FontSize="11" Foreground="{StaticResource ProjectErrorBrush}"
+                            <TextBlock Grid.Row="0" Name="SuccessIcon" Style="{StaticResource HintIconStyle}"
+                                       Foreground="{StaticResource ProjectOkayBrush}" Text="o" />
+                            <TextBlock Grid.Row="1" Name="ErrorTextLabel" FontSize="11"
+                                       Foreground="{StaticResource ProjectErrorBrush}"
                                        Text="{Binding ValidationErrorsText}" TextAlignment="Center" Opacity="0" />
                             <Grid.RenderTransform>
                                 <TranslateTransform />
@@ -102,10 +104,12 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger SourceObject="{Binding}" EventName="Signal">
                                 <ei:ControlStoryboardAction Storyboard="{StaticResource SakeInputStoryboard}" />
-                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="1" Duration="0:0:0.5" />
+                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="1"
+                                                         Duration="0:0:0.5" />
                             </i:EventTrigger>
                             <ei:DataTrigger Binding="{Binding IsValid}" Value="True">
-                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="0" Duration="0:0:0.5" />
+                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="0"
+                                                         Duration="0:0:0.5" />
                             </ei:DataTrigger>
                         </i:Interaction.Triggers>
                     </Border>
@@ -129,7 +133,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                      Margin="{TemplateBinding Padding}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

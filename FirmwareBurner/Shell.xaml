@@ -9,9 +9,22 @@
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display" UseLayoutRounding="True"
         WindowStyle="None" Background="Transparent"
         AllowsTransparency="True">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Views/SharedResources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Border BorderThickness="1" BorderBrush="Black" Margin="10,10,15,15"
             Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}">
-        <ContentControl regions:RegionManager.RegionName="Root" ClipToBounds="True" />
+        <Grid>
+            <ContentControl regions:RegionManager.RegionName="Root" ClipToBounds="True" />
+            <Button HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource SquareTextIconButton}"
+                    Content="x" FontSize="16" Click="CloseButton_Click" Padding="4" />
+        </Grid>
         <Border.Effect>
             <DropShadowEffect BlurRadius="13" ShadowDepth="2" Opacity="0.5" />
         </Border.Effect>

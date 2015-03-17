@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using System.Windows;
-using FirmwareBurner.ViewModels;
 
 namespace FirmwareBurner
 {
@@ -14,5 +13,7 @@ namespace FirmwareBurner
             Version version = Assembly.GetAssembly(typeof (App)).GetName().Version;
             Title += string.Format(" (ver. {0})", version);
         }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e) { Close(); }
     }
 }
