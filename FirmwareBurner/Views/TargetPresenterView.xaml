@@ -11,26 +11,18 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <!--Кнопка назад-->
-        <Button Content="&lt;" Name="ClearButton"
-                Style="{StaticResource SquareTextIconButton}" FontSize="22"
-                Command="{Binding ClearSelectionCommand}" />
-
         <!--Название блока-->
-        <TextBlock Grid.Column="1" Text="{Binding CellName}" Margin="15,15,15,10" FontSize="26"
-                   FontWeight="UltraLight"
-                   TextOptions.TextFormattingMode="Ideal" />
+        <TextBlock Grid.Column="0" Text="{Binding CellName}" Margin="15,15,15,10" FontSize="26"
+                   FontWeight="UltraLight" TextOptions.TextFormattingMode="Ideal" />
 
         <!--Название модификации-->
-        <Border Grid.Column="2" Name="ModificationPresenter" Background="#20ffffff" Visibility="Collapsed">
+        <Border Grid.Column="1" Name="ModificationPresenter" Background="#20ffffff" Visibility="Collapsed">
             <TextBlock Text="{Binding ModificationName}" Margin="15,15,15,10" FontSize="26"
-                       FontWeight="UltraLight"
-                       TextOptions.TextFormattingMode="Ideal" />
+                       FontWeight="UltraLight" TextOptions.TextFormattingMode="Ideal" />
         </Border>
     </Grid>
 
@@ -39,17 +31,11 @@
         <ei:DataTrigger Binding="{Binding Path=ModificationName}" Comparison="NotEqual" Value="">
             <ei:ChangePropertyAction TargetName="ModificationPresenter" PropertyName="Visibility" Value="Visible" />
         </ei:DataTrigger>
+        
         <ei:DataTrigger Binding="{Binding Path=ModificationName}" Comparison="Equal" Value="">
             <ei:ChangePropertyAction TargetName="ModificationPresenter" PropertyName="Visibility" Value="Collapsed" />
         </ei:DataTrigger>
-
-        <ei:DataTrigger Binding="{Binding Path=IsTargetSelected}" Value="False">
-            <ei:ChangePropertyAction TargetName="ClearButton" PropertyName="Visibility" Value="Collapsed" />
-        </ei:DataTrigger>
-        <ei:DataTrigger Binding="{Binding Path=IsTargetSelected}" Value="True">
-            <ei:ChangePropertyAction TargetName="ClearButton" PropertyName="Visibility" Value="Visible" />
-        </ei:DataTrigger>
-
+        
     </i:Interaction.Triggers>
 
 </UserControl>

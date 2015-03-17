@@ -45,7 +45,7 @@
                 <DoubleAnimation Storyboard.TargetName="ProjectManagerPanel" Storyboard.TargetProperty="Opacity"
                                  Duration="0:0:0.2" />
                 <DoubleAnimation Storyboard.TargetName="ProjectManager" Storyboard.TargetProperty="RenderTransform.Y"
-                                 BeginTime="0:0:0.3"  Duration="0:0:0.0" EasingFunction="{StaticResource PowerEaseOut}" />
+                                 BeginTime="0:0:0.3" Duration="0:0:0.0" EasingFunction="{StaticResource PowerEaseOut}" />
                 <DoubleAnimation Storyboard.TargetName="BackShaderPanel" Storyboard.TargetProperty="Opacity"
                                  Duration="0:0:0.7" />
                 <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="RenderTransform.Y"
@@ -53,7 +53,8 @@
                 <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="Opacity"
                                  BeginTime="0:0:0.35" Duration="0:0:0.4" EasingFunction="{StaticResource PowerEaseOut}" />
                 <DoubleAnimation Storyboard.TargetName="TargetSelector" Storyboard.TargetProperty="RenderTransform.X"
-                                 From="150" BeginTime="0:0:0.35" Duration="0:0:0.4" EasingFunction="{StaticResource PowerEaseOut}" />
+                                 From="150" BeginTime="0:0:0.35" Duration="0:0:0.4"
+                                 EasingFunction="{StaticResource PowerEaseOut}" />
             </Storyboard>
 
         </ResourceDictionary>
@@ -119,9 +120,40 @@
 
         <!--Панель выбранного модуля-->
         <Grid Grid.Row="1">
-            <firmwareBurner:ImageScroller Source="../Background-blur-accent.jpg"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <firmwareBurner:ImageScroller Grid.Column="0" Grid.ColumnSpan="2" Source="../Background-blur-accent.jpg"
                                           Uniter="{StaticResource BackgroundScrollerUniter}" />
-            <views:TargetPresenterView DataContext="{Binding TargetPresenter}" />
+
+            <!--Кнопка назад-->
+            <Button Grid.Column="0" Content="&lt;" Name="ClearButton" Style="{StaticResource SquareTextIconButton}"
+                    FontSize="22" Command="{Binding Path=TargetSelector.ClearSelectionCommand}" Visibility="Collapsed" />
+
+            <!--Презентер выделенной ячейки-->
+            <views:TargetPresenterView Grid.Column="1" DataContext="{Binding TargetPresenter}" />
+
+            <!--Подсказка-->
+            <TextBlock Name="SelectCellHintTextBlock" Grid.Column="1" Opacity="0.53"
+                       VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="15,10"
+                       FontSize="26" FontWeight="UltraLight" TextOptions.TextFormattingMode="Ideal"
+                       Text="Выберите ячейку для прошивки" />
+
+            <i:Interaction.Triggers>
+                <ei:DataTrigger Binding="{Binding Path=TargetPresenter.IsTargetSelected}" Value="False">
+                    <ei:ChangePropertyAction TargetName="ClearButton" PropertyName="Visibility" Value="Hidden" />
+                    <ei:ChangePropertyAction TargetName="SelectCellHintTextBlock" PropertyName="Visibility"
+                                             Value="Visible" />
+                </ei:DataTrigger>
+                <ei:DataTrigger Binding="{Binding Path=TargetPresenter.IsTargetSelected}" Value="True">
+                    <ei:ChangePropertyAction TargetName="ClearButton" PropertyName="Visibility" Value="Visible" />
+                    <ei:ChangePropertyAction TargetName="SelectCellHintTextBlock" PropertyName="Visibility"
+                                             Value="Collapsed" />
+                </ei:DataTrigger>
+            </i:Interaction.Triggers>
+
         </Grid>
 
     </Grid>

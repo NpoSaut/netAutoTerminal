@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Windows.Input;
 using FirmwareBurner.Events;
 using FirmwareBurner.ViewModels.Bases;
 using FirmwarePacking.SystemsIndexes;
-using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels
@@ -11,15 +9,11 @@ namespace FirmwareBurner.ViewModels
     public class TargetPresenterViewModel : ViewModelBase
     {
         private readonly IIndexHelper _indexHelper;
-        private readonly TargetSelectedEvent _targetSelectedEvent;
 
         public TargetPresenterViewModel(IEventAggregator EventAggregator, IIndexHelper IndexHelper)
         {
             _indexHelper = IndexHelper;
-            _targetSelectedEvent = EventAggregator.GetEvent<TargetSelectedEvent>();
-            _targetSelectedEvent.Subscribe(OnTargetSelected);
-
-            ClearSelectionCommand = new DelegateCommand(ClearSelection);
+            EventAggregator.GetEvent<TargetSelectedEvent>().Subscribe(OnTargetSelected);
         }
 
         public bool IsTargetSelected { get; private set; }
@@ -27,10 +21,6 @@ namespace FirmwareBurner.ViewModels
         public String CellName { get; private set; }
 
         public String ModificationName { get; private set; }
-
-        public ICommand ClearSelectionCommand { get; private set; }
-
-        private void ClearSelection() { _targetSelectedEvent.Publish(TargetSelectedArgs.Unselected); }
 
         private void OnTargetSelected(TargetSelectedArgs Target)
         {
