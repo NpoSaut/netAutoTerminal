@@ -156,7 +156,7 @@
     <UserControl.Triggers>
         <EventTrigger RoutedEvent="Loaded">
             <BeginStoryboard>
-                <Storyboard AutoReverse="True">
+                <Storyboard AutoReverse="True" RepeatBehavior="Forever">
                     <DoubleAnimation Storyboard.Target="{StaticResource BackgroundScrollerUniter}"
                                      Storyboard.TargetProperty="VerticalOffset" From="0" To="1"
                                      Duration="0:3:00" EasingFunction="{StaticResource PowerEaseOut}" />
