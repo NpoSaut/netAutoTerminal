@@ -21,6 +21,15 @@ namespace FirmwareBurner.ViewModels
         public int ChannelNumber { get; private set; }
 
         public event EventHandler Activated;
+        public event EventHandler ErrorPulse;
+
+        public void PulseError() { OnErrorPulse(); }
+
+        protected void OnErrorPulse()
+        {
+            EventHandler handler = ErrorPulse;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
 
         private void OnActivated()
         {
