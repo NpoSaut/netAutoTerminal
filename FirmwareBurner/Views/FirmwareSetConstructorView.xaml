@@ -6,6 +6,8 @@
              xmlns:viewModels="clr-namespace:FirmwareBurner.ViewModels"
              xmlns:firmwareSelectors="clr-namespace:FirmwareBurner.Views.FirmwareSelectors"
              xmlns:property="clr-namespace:FirmwareBurner.ViewModels.Property"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              mc:Ignorable="d"
              d:DataContext="{x:Static viewModels:SampleData.FirmwareSetConstructor}" d:DesignWidth="469">
 
@@ -27,32 +29,40 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="property:ValidateableFirmwareSetComponentViewModel">
-                    <Border Name="ItemRoot">
-                        <DockPanel Margin="0,4">
-                            <Grid DockPanel.Dock="Top">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Grid.Column="0" Height="1" Margin="7,0" Fill="LightGray" />
-                                <Rectangle Grid.Column="2" Height="1" Margin="7,0" Fill="LightGray" />
-                                <TextBlock Grid.Column="1" Text="{Binding Path=Value.ModuleName, Mode=OneWay}" />
-                            </Grid>
-                            <firmwareSelectors:IntegratedFirmwareSelectorView
-                                DataContext="{Binding Path=Value.FirmwareSelector}" />
-                        </DockPanel>
+                    <Border Name="ItemRoot" Margin="0,4">
+                        <ContentControl Style="{StaticResource ValidateableControlStyle}">
+                            <DockPanel Margin="0" Name="SelectorPanel">
+                                <Grid DockPanel.Dock="Top" Visibility="Collapsed">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Rectangle Grid.Column="0" Height="1" Margin="7,0" Fill="LightGray" />
+                                    <Rectangle Grid.Column="2" Height="1" Margin="7,0" Fill="LightGray" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Path=Value.ModuleName, Mode=OneWay}" />
+                                </Grid>
+                                <firmwareSelectors:IntegratedFirmwareSelectorView
+                                    DataContext="{Binding Path=Value.FirmwareSelector}" />
+                                <i:Interaction.Triggers>
+                                    <ei:DataTrigger Binding="{Binding IsValid}" Value="True">
+                                        <ei:ControlStoryboardAction>
+                                            <ei:ControlStoryboardAction.Storyboard>
+                                                <Storyboard TargetName="SelectorPanel">
+                                                    <ThicknessAnimation Storyboard.TargetProperty="Margin"
+                                                                        To="0,0,30,0" Duration="0:0:0.15">
+                                                        <ThicknessAnimation.EasingFunction>
+                                                            <PowerEase EasingMode="EaseInOut" />
+                                                        </ThicknessAnimation.EasingFunction>
+                                                    </ThicknessAnimation>
+                                                </Storyboard>
+                                            </ei:ControlStoryboardAction.Storyboard>
+                                        </ei:ControlStoryboardAction>
+                                    </ei:DataTrigger>
+                                </i:Interaction.Triggers>
+                            </DockPanel>
+                        </ContentControl>
                     </Border>
-                    <DataTemplate.Triggers>
-                        <!--<DataTrigger Binding="{Binding SelectedFirmware}" Value="{x:Null}">
-                        <Setter TargetName="VersionTextBlock" Property="Text" Value="N/A" />
-                    </DataTrigger>-->
-                        <!--<DataTrigger
-                        Binding="{Binding RelativeSource={RelativeSource Self}, Path=(ItemsControl.AlternationIndex)}"
-                        Value="1">
-                        <Setter TargetName="ItemRoot" Property="Background" Value="#0A002795" />
-                    </DataTrigger>-->
-                    </DataTemplate.Triggers>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

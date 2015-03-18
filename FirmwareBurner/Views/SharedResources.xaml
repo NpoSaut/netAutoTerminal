@@ -77,11 +77,17 @@
                     <Border Name="Holder" d:DataContext="{x:Static viewModels:SampleData.ValidateableTextProperty}"
                             Margin="{TemplateBinding Margin}">
                         <Border.Resources>
-                            <Storyboard x:Key="SakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
-                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-5"
+                            <Storyboard x:Key="ShakeInputStoryboard" TargetName="Presenter" FillBehavior="Stop">
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.X" From="-12.75"
                                                  To="0" Duration="0:0:0.7">
                                     <DoubleAnimation.EasingFunction>
                                         <ElasticEase />
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" From="-1"
+                                                 To="0" Duration="0:0:1">
+                                    <DoubleAnimation.EasingFunction>
+                                        <ElasticEase Oscillations="10" />
                                     </DoubleAnimation.EasingFunction>
                                 </DoubleAnimation>
                             </Storyboard>
@@ -103,9 +109,8 @@
                         </Grid>
                         <i:Interaction.Triggers>
                             <i:EventTrigger SourceObject="{Binding}" EventName="Signal">
-                                <ei:ControlStoryboardAction Storyboard="{StaticResource SakeInputStoryboard}" />
-                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="1"
-                                                         Duration="0:0:0.5" />
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource ShakeInputStoryboard}" />
+                                <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="1" Duration="0:0:0.5" />
                             </i:EventTrigger>
                             <ei:DataTrigger Binding="{Binding IsValid}" Value="True">
                                 <ei:ChangePropertyAction TargetName="ErrorTextLabel" PropertyName="Opacity" Value="0"

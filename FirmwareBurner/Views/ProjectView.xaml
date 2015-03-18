@@ -26,15 +26,15 @@
                 <Setter Property="Background" Value="{StaticResource ProjectArrowFillBrush}" />
                 <Setter Property="FontSize" Value="18" />
             </Style>
-            <Style x:Key="LabelStyle" TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+            <Style x:Key="LabelStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Setter Property="HorizontalAlignment" Value="Center" />
                 <Setter Property="Opacity" Value="0.5" />
                 <Setter Property="Margin" Value="0,-2,0,0" />
-                <Setter Property="FontSize" Value="11" />
                 <Setter Property="Padding" Value="0" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -48,10 +48,10 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Target="{Binding ElementName=SerialNumberEdit}"
-                       Content="Серийный номер" Style="{StaticResource LabelStyle}" />
-                <Label Grid.Column="1" Grid.Row="0" Target="{Binding ElementName=AssemblyDateEdit}"
-                       Content="Дата изготовления" Style="{StaticResource LabelStyle}" />
+                <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource LabelStyle}"
+                           Text="Серийный номер" />
+                <TextBlock Grid.Column="1" Grid.Row="0" Style="{StaticResource LabelStyle}"
+                           Text="Дата изготовления" />
 
                 <ContentControl Grid.Column="0" Grid.Row="1"
                                 Style="{StaticResource ValidateableControlStyle}"
@@ -68,7 +68,9 @@
             </Grid>
         </Border>
 
-        <Border Grid.Row="1">
+        <TextBlock Grid.Row="1" Text="Версия прошивки" Style="{StaticResource LabelStyle}" />
+        
+        <Border Grid.Row="2">
             <views:FirmwareSetConstructorView DataContext="{Binding Path=FirmwareSetConstructor}" />
         </Border>
     </Grid>
