@@ -27,9 +27,9 @@
 
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="property:ValidateableFirmwareSetComponentViewModel">
-                    <Border Name="ItemRoot">
-                        <DockPanel Margin="0,4">
-                            <Grid DockPanel.Dock="Top">
+                    <Border Name="ItemRoot" Margin="0,4">
+                        <DockPanel Margin="0">
+                            <Grid DockPanel.Dock="Top" Visibility="Collapsed">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
