@@ -70,7 +70,7 @@ namespace FirmwareBurner.ViewModels
                                  },
                                  null);
 
-        private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), null);
+        private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), new EventAggregator());
 
         #region Fake Classes
 
