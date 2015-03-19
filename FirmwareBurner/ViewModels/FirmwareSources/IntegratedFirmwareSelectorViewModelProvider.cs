@@ -15,12 +15,12 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
     public class IntegratedFirmwareSelectorViewModelProvider : IFirmwareSelectorViewModelProvider
     {
         private readonly ILoadControllerFactory _loadControllerFactory;
-        private readonly DirectoryRepository _userDirectoryRepository;
+        private readonly NotifyDirectoryRepository _userDirectoryRepository;
 
         public IntegratedFirmwareSelectorViewModelProvider(ILoadControllerFactory LoadControllerFactory)
         {
             _loadControllerFactory = LoadControllerFactory;
-            _userDirectoryRepository = _userDirectoryRepository = new DirectoryRepository(DirectoryRepository.UserRepositoryDirectory);
+            _userDirectoryRepository = _userDirectoryRepository = new NotifyDirectoryRepository(DirectoryRepository.UserRepositoryDirectory);
         }
 
         public FirmwareSelectorViewModel GetViewModel(int CellKindId, int ModificationId, int ModuleId, int ChannelsCount)
@@ -29,11 +29,8 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                                                               .Select(channel => new ComponentTarget(CellKindId, ModificationId, channel, ModuleId))
                                                               .ToList();
             return new IntegratedFirmwareSelectorViewModel(
-                new[]
-                {
-                    new BackgroundRepositoryLoader(_userDirectoryRepository, requiredTargets)
-                },
-                new IRepositoryLoader[0],
+                _userDirectoryRepository,
+                requiredTargets,
                 _loadControllerFactory);
         }
     }

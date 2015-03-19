@@ -21,14 +21,8 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
                                                               .ToList();
 
             return new IntegratedFirmwareSelectorViewModel(
-                new[]
-                {
-                    new BackgroundRepositoryLoader(new FakeRepository(0, 6, false), requiredTargets)
-                },
-                new[]
-                {
-                    new BackgroundRepositoryLoader(new FakeRepository(2, 8, true), requiredTargets)
-                },
+                new FakeRepository(0, 6, false),
+                requiredTargets,
                 _loadControllerFactory);
         }
     }

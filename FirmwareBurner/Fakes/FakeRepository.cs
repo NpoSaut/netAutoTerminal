@@ -6,7 +6,7 @@ using FirmwarePacking.Repositories;
 
 namespace FirmwareBurner.Fakes
 {
-    public class FakeRepository : IRepository
+    public class FakeRepository : INotifyRepository
     {
         private readonly int _endVersionIndex;
         private readonly bool _setReleaseStatus;
@@ -28,6 +28,14 @@ namespace FirmwareBurner.Fakes
         /// <summary>Находит пакет прошивки, содержащий компоненты для всех указанных целей</summary>
         /// <param name="Targets">Цели прошивки</param>
         public ICollection<IRepositoryElement> GetPackagesForTargets(ICollection<ComponentTarget> Targets) { return GetPackages(Targets); }
+
+        /// <summary>
+        ///     Выполняет определяемые приложением задачи, связанные с удалением, высвобождением или сбросом неуправляемых
+        ///     ресурсов.
+        /// </summary>
+        public void Dispose() { throw new NotImplementedException(); }
+
+        public event EventHandler<RepositoryUpdatedEventArgs> Updated;
 
         private ICollection<IRepositoryElement> GetPackages(ICollection<ComponentTarget> Targets)
         {

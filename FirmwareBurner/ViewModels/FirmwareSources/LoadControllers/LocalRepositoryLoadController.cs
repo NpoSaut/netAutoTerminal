@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using FirmwarePacking;
 using FirmwarePacking.Repositories;
 using Microsoft.Practices.Prism.Events;
 
@@ -9,10 +10,11 @@ namespace FirmwareBurner.ViewModels.FirmwareSources.LoadControllers
     {
         private readonly IFirmwarePackageViewModelFactory _packageViewModelFactory;
 
-        public LocalRepositoryLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection, IDispatcherFacade Dispatcher,
+        public LocalRepositoryLoadController(INotifyRepository Repository, ICollection<FirmwarePackageViewModel> PackagesCollection,
+                                             List<ComponentTarget> RequiredTargets, IDispatcherFacade Dispatcher,
                                              IFirmwarePackageViewModelKeyFormatter KeyFormatter, CancellationTokenSource CancellationTokenSource,
                                              IFirmwarePackageViewModelFactory PackageViewModelFactory)
-            : base(Loader, PackagesCollection, Dispatcher, KeyFormatter, CancellationTokenSource)
+            : base(Repository, PackagesCollection, RequiredTargets, Dispatcher, KeyFormatter, CancellationTokenSource)
         {
             _packageViewModelFactory = PackageViewModelFactory;
         }

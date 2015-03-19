@@ -1,17 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using FirmwareBurner.Annotations;
+using FirmwarePacking;
+using FirmwarePacking.Repositories;
 using Microsoft.Practices.Prism.Events;
 
 namespace FirmwareBurner.ViewModels.FirmwareSources.LoadControllers
 {
     public interface ILoadControllerFactory
     {
-        IRepositoryLoadController GetLocalLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection,
-                                                         CancellationTokenSource CancellationTokenSource);
+        IRepositoryLoadController GetLocalLoadController(INotifyRepository Repository, ICollection<FirmwarePackageViewModel> PackagesCollection,
+                                                         List<ComponentTarget> RequiredTargets, CancellationTokenSource CancellationTokenSource);
 
-        IRepositoryLoadController GetRemoteLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection,
-                                                          CancellationTokenSource CancellationTokenSource);
+        IRepositoryLoadController GetRemoteLoadController(INotifyRepository Repository, ICollection<FirmwarePackageViewModel> PackagesCollection,
+                                                          List<ComponentTarget> RequiredTargets, CancellationTokenSource CancellationTokenSource);
     }
 
     [UsedImplicitly]
@@ -29,17 +31,17 @@ namespace FirmwareBurner.ViewModels.FirmwareSources.LoadControllers
             _firmwarePackageViewModelFactory = FirmwarePackageViewModelFactory;
         }
 
-        public IRepositoryLoadController GetLocalLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection,
-                                                                CancellationTokenSource CancellationTokenSource)
+        public IRepositoryLoadController GetLocalLoadController(INotifyRepository Repository, ICollection<FirmwarePackageViewModel> PackagesCollection,
+                                                                List<ComponentTarget> RequiredTargets, CancellationTokenSource CancellationTokenSource)
         {
-            return new LocalRepositoryLoadController(Loader, PackagesCollection, _dispatcher, _keyFormatter, CancellationTokenSource,
-                                                     _firmwarePackageViewModelFactory);
+            return new LocalRepositoryLoadController(Repository, PackagesCollection, RequiredTargets,
+                                                     _dispatcher, _keyFormatter, CancellationTokenSource, _firmwarePackageViewModelFactory);
         }
 
-        public IRepositoryLoadController GetRemoteLoadController(IRepositoryLoader Loader, ICollection<FirmwarePackageViewModel> PackagesCollection,
-                                                                 CancellationTokenSource CancellationTokenSource)
+        public IRepositoryLoadController GetRemoteLoadController(INotifyRepository Repository, ICollection<FirmwarePackageViewModel> PackagesCollection,
+                                                                 List<ComponentTarget> RequiredTargets, CancellationTokenSource CancellationTokenSource)
         {
-            return new RemoteRepositoryLoadController(Loader, PackagesCollection, _dispatcher, _keyFormatter, CancellationTokenSource,
+            return new RemoteRepositoryLoadController(Repository, PackagesCollection, RequiredTargets, _dispatcher, _keyFormatter, CancellationTokenSource,
                                                       _firmwarePackageViewModelFactory);
         }
     }
