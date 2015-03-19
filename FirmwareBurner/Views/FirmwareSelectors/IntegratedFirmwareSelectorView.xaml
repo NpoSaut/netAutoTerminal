@@ -44,7 +44,7 @@
             </DataTemplate.Resources>
             <DockPanel Name="ItemRoot">
                 <StackPanel DockPanel.Dock="Bottom" VerticalAlignment="Center" Margin="6, 4"
-                               Visibility="Collapsed">
+                            Visibility="Collapsed">
                     <TextBlock Name="VersionStatusLabel" Text="{Binding Status, Mode=OneWay}" TextAlignment="Center"
                                Foreground="{Binding ElementName=VersionEllipse, Path=Stroke}"
                                Visibility="Collapsed" />
@@ -100,6 +100,11 @@
                     <Setter TargetName="DownloadProgressBar" Property="Visibility" Value="Visible" />
                 </DataTrigger>
                 <DataTrigger
+                    Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsMouseOver}"
+                    Value="True">
+                    <Setter TargetName="VersionEllipse" Property="Fill" Value="LightGray" />
+                </DataTrigger>
+                <DataTrigger
                     Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=ListBoxItem}, Path=IsSelected}"
                     Value="True">
                     <Setter TargetName="VersionEllipse" Property="Fill"
@@ -125,7 +130,39 @@
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
 
+        <Style x:Key="BrowseFirmwaresButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{StaticResource ProjectLinkBrush}" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <DockPanel VerticalAlignment="Center" Background="Transparent">
+                            <Grid Width="45" Height="45" Margin="2">
+                                <Ellipse Name="Ellipse" DockPanel.Dock="Left" Stroke="DimGray"
+                                         StrokeThickness="0.9" />
+                                <TextBlock Name="Content" Style="{StaticResource TextIconBoxStyle}"
+                                           Foreground="DimGray" Text="{TemplateBinding Content}"
+                                           FontSize="24" />
+                            </Grid>
+                            <TextBlock Text="{TemplateBinding ToolTip}" TextWrapping="Wrap" VerticalAlignment="Center"
+                                       Margin="2" />
+                        </DockPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Ellipse" Property="Fill" Value="LightGray" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Ellipse" Property="Fill" Value="DarkGray" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
+
 
     <Grid>
         <ListBox Name="PackagesList"
@@ -136,7 +173,7 @@
                  Background="Transparent">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <StackPanel Orientation="Horizontal" IsItemsHost="True" />
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemContainerStyle>
@@ -158,9 +195,6 @@
                                     <ContentPresenter Content="{TemplateBinding Content}" />
                                 </Border>
                                 <ControlTemplate.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="ItemRoot" Property="Background" Value="LightGray" />
-                                    </Trigger>
                                     <EventTrigger RoutedEvent="Loaded">
                                         <BeginStoryboard Storyboard="{StaticResource ItemLoadedStoryboard}" />
                                     </EventTrigger>
@@ -170,6 +204,24 @@
                     </Setter>
                 </Style>
             </ListBox.ItemContainerStyle>
+            <ListBox.Template>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ItemsPresenter Grid.Column="0" />
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,0,0,0">
+                                <Button Style="{StaticResource BrowseFirmwaresButtonStyle}" Width="120" Margin="4"
+                                        VerticalAlignment="Center" Command="{Binding BrowseFolderCommand}"
+                                        Content="+" ToolTip="Добавить прошивку" />
+                            </StackPanel>
+                        </Grid>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ListBox.Template>
         </ListBox>
     </Grid>
 </UserControl>

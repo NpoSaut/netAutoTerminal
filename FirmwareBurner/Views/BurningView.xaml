@@ -102,7 +102,7 @@
         </ControlTemplate>
 
         <Style x:Key="SelectMethodButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Foreground" Value="#FF1E5183" />
+            <Setter Property="Foreground" Value="{StaticResource ProjectLinkBrush}" />
             <Setter Property="Template" Value="{StaticResource SelectMethodButtonControlTemplate}" />
             <Setter Property="Padding" Value="3,0" />
             <Style.Triggers>
