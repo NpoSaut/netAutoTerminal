@@ -107,7 +107,7 @@ namespace FirmwareBurner.ViewModels
             public override FirmwarePackageViewModel SelectedPackage { get; set; }
         }
 
-        private class FakeRepository : Repository
+        private class FakeRepository : RepositoryBase
         {
             private readonly IEnumerable<IRepositoryElement> _packages =
                 Enumerable.Range(0, 6)
@@ -121,9 +121,9 @@ namespace FirmwareBurner.ViewModels
                           .ToList();
 
             /// <summary>Список всех пакетов в репозитории</summary>
-            public override IEnumerable<IRepositoryElement> Packages
+            public override ICollection<IRepositoryElement> Packages
             {
-                get { return _packages; }
+                get { return (ICollection<IRepositoryElement>)_packages; }
             }
 
             private class FakeRepositoryElement : IRepositoryElement

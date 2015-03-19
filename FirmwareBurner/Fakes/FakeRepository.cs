@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using FirmwarePacking;
 using FirmwarePacking.Repositories;
 
@@ -9,49 +8,46 @@ namespace FirmwareBurner.Fakes
 {
     public class FakeRepository : IRepository
     {
-        private int _startVersionIndex;
-        private int _endVersionIndex;
-        private readonly int _loadingDelayMs;
+        private readonly int _endVersionIndex;
         private readonly bool _setReleaseStatus;
+        private readonly int _startVersionIndex;
 
-        public FakeRepository(int StartVersionIndex, int EndVersionIndex, int LoadingDelayMs = 0, bool SetReleaseStatus = false)
+        public FakeRepository(int StartVersionIndex, int EndVersionIndex, bool SetReleaseStatus = false)
         {
-            _loadingDelayMs = LoadingDelayMs;
             _setReleaseStatus = SetReleaseStatus;
             _startVersionIndex = StartVersionIndex;
             _endVersionIndex = EndVersionIndex;
         }
 
         /// <summary>Список всех пакетов в репозитории</summary>
-        public IEnumerable<IRepositoryElement> Packages
+        public ICollection<IRepositoryElement> Packages
         {
             get { throw new NotImplementedException(); }
         }
 
         /// <summary>Находит пакет прошивки, содержащий компоненты для всех указанных целей</summary>
         /// <param name="Targets">Цели прошивки</param>
-        public IEnumerable<IRepositoryElement> GetPackagesForTargets(ICollection<ComponentTarget> Targets) { return GetPackages(Targets); }
+        public ICollection<IRepositoryElement> GetPackagesForTargets(ICollection<ComponentTarget> Targets) { return GetPackages(Targets); }
 
-        private IEnumerable<IRepositoryElement> GetPackages(ICollection<ComponentTarget> Targets)
+        private ICollection<IRepositoryElement> GetPackages(ICollection<ComponentTarget> Targets)
         {
-            for (int i = _startVersionIndex; i < _endVersionIndex; i++)
-            {
-                foreach (string label in new[] { "P", "DZR" })
-                {
-                    Thread.Sleep(_loadingDelayMs);
-                    yield return new FakeRepositoryElement(
-                        new PackageInformation
-                        {
-                            FirmwareVersion = new Version(1, i),
-                            FirmwareVersionLabel = label,
-                            ReleaseDate = DateTime.Now.AddMonths(-1).AddDays(i),
-                        },
-                        Targets.ToList(),
-                        _setReleaseStatus
-                            ? (i == 5 ? ReleaseStatus.Actual : ReleaseStatus.Archive)
-                            : ReleaseStatus.Unknown);
-                }
-            }
+            return
+                Enumerable.Range(_startVersionIndex, _endVersionIndex)
+                          .SelectMany(i =>
+                                      new[] { "P", "DZR" }.Select(label =>
+                                                                  new FakeRepositoryElement(
+                                                                      new PackageInformation
+                                                                      {
+                                                                          FirmwareVersion = new Version(1, i),
+                                                                          FirmwareVersionLabel = label,
+                                                                          ReleaseDate = DateTime.Now.AddMonths(-1).AddDays(i),
+                                                                      },
+                                                                      Targets.ToList(),
+                                                                      _setReleaseStatus
+                                                                          ? (i == 5 ? ReleaseStatus.Actual : ReleaseStatus.Archive)
+                                                                          : ReleaseStatus.Unknown)))
+                          .OfType<IRepositoryElement>()
+                          .ToList();
         }
 
         private class FakeRepositoryElement : IRepositoryElement
