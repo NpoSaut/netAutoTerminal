@@ -52,7 +52,7 @@ namespace FirmwareBurner.ViewModels.FirmwareSources
             }
         }
 
-        private void ExecuteMethod() { Process.Start(@"C:\Users\plyusnin\Documents\Firmwares"); }
+        private void ExecuteMethod() { Process.Start(DirectoryRepository.UserRepositoryDirectory); }
     }
 
     public interface IFirmwarePackageViewModelKeyFormatter
