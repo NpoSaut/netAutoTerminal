@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FirmwareBurner.Annotations;
 using FirmwareBurner.Burning;
+using FirmwareBurner.Settings;
 using FirmwareBurner.Validation;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Prism.Events;
@@ -17,12 +18,15 @@ namespace FirmwareBurner.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly IIndexHelper _indexHelper;
 
+        private readonly ISettingsService _settingsService;
+
         public BurningViewModelFactory(IBurningReceiptsCatalog BurningReceiptsCatalog, IIndexHelper IndexHelper, IExceptionService ExceptionService,
-                                       IBurningService BurningService, IEventAggregator EventAggregator)
+                                       IBurningService BurningService, IEventAggregator EventAggregator, ISettingsService SettingsService)
         {
             _indexHelper = IndexHelper;
             _burningService = BurningService;
             _eventAggregator = EventAggregator;
+            _settingsService = SettingsService;
         }
 
         public BurningViewModel GetViewModel(int CellKindId, int ModificationId, IValidationContext ValidationContext, IProjectAssembler projectAssembler)
@@ -39,9 +43,9 @@ namespace FirmwareBurner.ViewModels
                                                                              new BurningMethodViewModel(burningMethod.Name, burningMethod.Receipt))
                                                                          .ToList();
 
-            return new BurningViewModel(projectAssembler, _burningService, _eventAggregator,
+            return new BurningViewModel(CellKindId, projectAssembler, _burningService, _eventAggregator,
                                         burningOptions, burningMethods,
-                                        ValidationContext);
+                                        ValidationContext, _settingsService);
         }
     }
 }
