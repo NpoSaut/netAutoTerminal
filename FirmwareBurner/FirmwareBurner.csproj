@@ -146,7 +146,16 @@
     <Compile Include="Fakes\FakeRepository.cs" />
     <Compile Include="ImageScroller.cs" />
     <Compile Include="IProjectAssembler.cs" />
+    <Compile Include="Settings\ISettingsService.cs" />
     <Compile Include="Modules\FirmwareSelectorsModule.cs" />
+    <Compile Include="Settings\PropertiesSettingsService.cs" />
+    <Compile Include="Settings\SettingsModule.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="TriggerActions\CloseWindowTriggerAction.cs" />
     <Compile Include="TriggerActions\ShowContextMenuAction.cs" />
     <Compile Include="TriggerActions\ShowDialogTriggerAction.cs" />
@@ -345,12 +354,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <Resource Include="icon.ico" />
+    <None Include="app.config" />
     <None Include="SautCodeSigning.pfx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

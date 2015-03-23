@@ -20,7 +20,7 @@
                    FontWeight="UltraLight" TextOptions.TextFormattingMode="Ideal" />
 
         <!--Название модификации-->
-        <Border Grid.Column="1" Name="ModificationPresenter" Background="#20ffffff" Visibility="Collapsed">
+        <Border Grid.Column="1" Name="ModificationPresenter" Background="#20ffffff" Visibility="Collapsed" Padding="0,0,20,0">
             <TextBlock Text="{Binding ModificationName}" Margin="15,15,15,10" FontSize="26"
                        FontWeight="UltraLight" TextOptions.TextFormattingMode="Ideal" />
         </Border>

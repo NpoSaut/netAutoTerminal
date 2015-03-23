@@ -4,6 +4,7 @@ using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Modules;
 using FirmwareBurner.Receipts.Avr;
+using FirmwareBurner.Settings;
 using FirmwareBurner.Validation;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
@@ -35,6 +36,7 @@ namespace FirmwareBurner
             mc.AddModule(typeof (AvrReceiptsModule));
 
             // Модули интерфейса
+            mc.AddModule(typeof (SettingsModule));
             mc.AddModule(typeof (ValidationsModule));
             mc.AddModule(typeof (FirmwareSelectorsModule));
             mc.AddModule(typeof (MainModule));
