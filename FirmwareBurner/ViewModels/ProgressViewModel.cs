@@ -82,6 +82,8 @@ namespace FirmwareBurner.ViewModels
         void IProgressToken.OnCompleated()
         {
             IsActive = false;
+            IsIntermediate = false;
+            Complete = 1.0;
             OnCompleated();
         }
 

@@ -42,6 +42,7 @@
 
         <DataTemplate DataType="{x:Type viewModels:BurningOptionViewModel}">
             <Grid Width="60" Height="60" Margin="8">
+                <Ellipse Fill="{StaticResource ProjectArrowBrushLight}" />
                 <firmwareBurner:CircleProgress Background="{StaticResource ProjectArrowBrushLight}"
                                                x:Name="BurningProgress"
                                                DataContext="{Binding Path=Progress}"
