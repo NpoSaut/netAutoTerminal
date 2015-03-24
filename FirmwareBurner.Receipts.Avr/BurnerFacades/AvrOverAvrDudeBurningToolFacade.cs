@@ -41,7 +41,7 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             }
         }
 
-        private void WriteBuffer(IBuffer Buffer, Action<FileInfo, IProgressToken> WriteMethod, IProgressToken FlashToken)
+        private void WriteBuffer(IBuffer Buffer, Action<FileInfo, IProgressToken> WriteMethod, IProgressToken ProgressToken)
         {
             if (Buffer.IsEmpty) return;
             var hexStream = new IntelHexStream();
@@ -49,7 +49,7 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             IntelHexFile hexFile = hexStream.GetHexFile();
             using (var file = new TemporaryFile(hexFile.OpenIntelHexStream()))
             {
-                WriteMethod(file.FileInfo, FlashToken);
+                WriteMethod(file.FileInfo, ProgressToken);
             }
         }
     }

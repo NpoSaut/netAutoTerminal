@@ -1,6 +1,9 @@
-﻿using FirmwareBurner.Burning;
+﻿using System;
+using System.IO;
+using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
+using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Receipts.Avr.Utilities;
@@ -11,6 +14,8 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
     /// </summary>
     public class AvrOverStk500BurningToolFacade : IBurningToolFacade<AvrImage>
     {
+        const bool EraseBeforeWrite = true;
+
         private readonly Stk500BurningToolFactory _burningToolFactory;
         private readonly string _chipName;
         private readonly IProgressControllerFactory _progressControllerFactory;
@@ -31,20 +36,22 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
             {
                 Stk500BurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
                 var fuses = new Fuses { FuseH = Image.Fuses.FuseH, FuseL = Image.Fuses.FuseL, FuseE = Image.Fuses.FuseX };
+                
                 burner.WriteFuse(fuses);
+                WriteBuffer(Image.FlashBuffer, burner.WriteFlash);
+                WriteBuffer(Image.EepromBuffer, burner.WriteEeprom);
+            }
+        }
 
-                IntelHexStream flashHexStream = new IntelHexStream(),
-                               eepromHexStream = new IntelHexStream();
-
-                Image.FlashBuffer.CopyTo(flashHexStream);
-                Image.EepromBuffer.CopyTo(eepromHexStream);
-
-                using (TemporaryFile flashFile = new TemporaryFile(flashHexStream),
-                                     eepromFile = new TemporaryFile(eepromHexStream))
-                {
-                    burner.WriteFlash(flashFile.FileInfo);
-                    burner.WriteFlash(eepromFile.FileInfo);
-                }
+        private void WriteBuffer(IBuffer Buffer, Action<FileInfo, bool> WriteMethod)
+        {
+            if (Buffer.IsEmpty) return;
+            var hexStream = new IntelHexStream();
+            Buffer.CopyTo(hexStream);
+            IntelHexFile hexFile = hexStream.GetHexFile();
+            using (var file = new TemporaryFile(hexFile.OpenIntelHexStream()))
+            {
+                WriteMethod(file.FileInfo, EraseBeforeWrite);
             }
         }
     }
