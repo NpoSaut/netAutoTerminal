@@ -19,7 +19,7 @@ namespace FirmwareBurner.Project
         {
             return
                 new FirmwareProject(
-                    new TargetInformation(1, CellKindId, CellModificationId, SerialNumber, AssemblyDate),
+                    new TargetInformation(ChannelNumber, CellKindId, CellModificationId, SerialNumber, AssemblyDate),
                     Modules.Select(module =>
                                    new ModuleProject(
                                        new ModuleInformation(module.Item1),
