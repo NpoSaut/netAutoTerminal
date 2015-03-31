@@ -11,14 +11,14 @@ namespace FirmwareBurner.ImageFormatters.Avr
     {
         private readonly IAvrBootloadersCatalog _bootloadersCatalog;
         private readonly IBufferFactory _bufferFactory;
-        private readonly IBinaryFileTableFormatter _filesTableFormatter;
+        private readonly IAvrFileTableFormatter _filesTableFormatter;
         private readonly IProgressControllerFactory _progressControllerFactory;
-        private readonly IBinaryPropertiesTableFormatter _propertiesTableFormatter;
+        private readonly IAvrPropertiesTableFormatter _propertiesTableFormatter;
         private readonly IPropertiesTableGenerator _propertiesTableGenerator;
 
         public AvrImageFormatterFactory(IPropertiesTableGenerator PropertiesTableGenerator, IAvrBootloadersCatalog BootloadersCatalog,
-                                        IBufferFactory BufferFactory, IBinaryFileTableFormatter FilesTableFormatter,
-                                        IBinaryPropertiesTableFormatter PropertiesTableFormatter, IProgressControllerFactory ProgressControllerFactory)
+                                        IBufferFactory BufferFactory, IAvrFileTableFormatter FilesTableFormatter,
+                                        IAvrPropertiesTableFormatter PropertiesTableFormatter, IProgressControllerFactory ProgressControllerFactory)
         {
             _propertiesTableGenerator = PropertiesTableGenerator;
             _bootloadersCatalog = BootloadersCatalog;

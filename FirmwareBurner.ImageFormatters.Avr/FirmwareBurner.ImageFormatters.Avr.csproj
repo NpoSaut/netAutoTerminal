@@ -60,6 +60,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvrImageFormatterParseFilenameException.cs" />
+    <Compile Include="AvrImageFile.cs" />
+    <Compile Include="IAvrFileTableFormatter.cs" />
+    <Compile Include="IAvrPropertiesTableFormatter.cs" />
+    <Compile Include="MemoryKind.cs" />
     <Compile Include="TablesFormatters\AvrBootloaderFileTableFormatter.cs" />
     <Compile Include="TablesFormatters\AvrBootloaderPropertiesTableFormatter.cs" />
     <Compile Include="AvrFuses.cs" />

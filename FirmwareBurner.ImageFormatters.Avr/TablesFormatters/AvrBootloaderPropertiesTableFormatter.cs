@@ -6,7 +6,7 @@ using FirmwareBurner.Imaging.Binary.Buffers;
 namespace FirmwareBurner.ImageFormatters.Avr.TablesFormatters
 {
     /// <summary>Формирователь таблицы свойств для Диминого AVR-загрузчика</summary>
-    public class AvrBootloaderPropertiesTableFormatter : IBinaryPropertiesTableFormatter
+    public class AvrBootloaderPropertiesTableFormatter : IAvrPropertiesTableFormatter
     {
         /// <summary>
         ///     Записывает в выходной бинарный поток <paramref name="DestinationBuffer" /> в указанные свойства в нужном

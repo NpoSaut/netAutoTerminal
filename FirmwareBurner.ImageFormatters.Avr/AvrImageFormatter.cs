@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
+using FirmwarePacking;
 
 namespace FirmwareBurner.ImageFormatters.Avr
 {
@@ -16,15 +18,15 @@ namespace FirmwareBurner.ImageFormatters.Avr
         private readonly AvrBootloaderInformation _bootloaderInformation;
         private readonly IBufferFactory _bufferFactory;
 
-        private readonly IBinaryFileTableFormatter _fileTableFormatter;
+        private readonly IAvrFileTableFormatter _fileTableFormatter;
         private readonly IProgressControllerFactory _progressControllerFactory;
-        private readonly IBinaryPropertiesTableFormatter _propertiesTableFormatter;
+        private readonly IAvrPropertiesTableFormatter _propertiesTableFormatter;
 
         private readonly IPropertiesTableGenerator _propertiesTableGenerator;
 
         public AvrImageFormatter(AvrBootloaderInformation BootloaderInformation,
-                                 IPropertiesTableGenerator PropertiesTableGenerator, IBufferFactory BufferFactory, IBinaryFileTableFormatter FileTableFormatter,
-                                 IBinaryPropertiesTableFormatter PropertiesTableFormatter, IProgressControllerFactory ProgressControllerFactory)
+                                 IPropertiesTableGenerator PropertiesTableGenerator, IBufferFactory BufferFactory, IAvrFileTableFormatter FileTableFormatter,
+                                 IAvrPropertiesTableFormatter PropertiesTableFormatter, IProgressControllerFactory ProgressControllerFactory)
         {
             _bootloaderInformation = BootloaderInformation;
             _propertiesTableGenerator = PropertiesTableGenerator;
@@ -46,28 +48,22 @@ namespace FirmwareBurner.ImageFormatters.Avr
                 IBuffer flashBuffer = _bufferFactory.CreateBuffer();
                 IBuffer eepromBuffer = _bufferFactory.CreateBuffer();
 
-                var buffers = new Dictionary<string, IBuffer>
+                var buffers = new Dictionary<MemoryKind, IBuffer>
                               {
-                                  { "f", flashBuffer },
-                                  { "e", eepromBuffer }
+                                  { MemoryKind.Flash, flashBuffer },
+                                  { MemoryKind.Eeprom, eepromBuffer }
                               };
 
                 // Подготовка списка файлов
                 ModuleProject moduleProject = Project.Modules.Single();
-                Dictionary<string, ImageFile> firmwareFiles = moduleProject.FirmwareContent.Files
-                                                                           .Select(f => new { nameParts = f.RelativePath.Split('/'), f.Content })
-                                                                           .ToDictionary(fx => fx.nameParts[0],
-                                                                                         fx =>
-                                                                                         new ImageFile(UInt32.Parse(fx.nameParts[1], NumberStyles.HexNumber),
-                                                                                                       fx.Content,
-                                                                                                       FudpCrc.CalcCrc(fx.Content)));
+                var firmwareFiles = moduleProject.FirmwareContent.Files.Select(ParsePackageFile).ToList();
 
                 // Запись таблицы файлов
-                _fileTableFormatter.PlaceFiles(flashBuffer, firmwareFiles.Values, _bootloaderInformation.Placements.FilesystemIntexPlacement);
+                _fileTableFormatter.PlaceFiles(flashBuffer, firmwareFiles, _bootloaderInformation.Placements.FilesystemIntexPlacement);
 
                 // Запись содержимого файлов
                 foreach (var file in firmwareFiles)
-                    buffers[file.Key].Write((int)file.Value.Address, file.Value.Content);
+                    buffers[file.Memory].Write((int)file.Address, file.Content);
 
                 // Запись свойств
                 var overallProperties = new List<ParamRecord>();
@@ -84,6 +80,31 @@ namespace FirmwareBurner.ImageFormatters.Avr
                     flashBuffer,
                     eepromBuffer);
             }
+        }
+
+        private AvrImageFile ParsePackageFile(FirmwareFile File)
+        {
+            string[] nameParts = File.RelativePath.Split('/');
+            if (nameParts.Length != 2) throw new AvrImageFormatterParseFilenameException(File);
+
+            MemoryKind memoryKind;
+            switch (nameParts[0].ToLower())
+            {
+                case "f":
+                    memoryKind = MemoryKind.Flash;
+                    break;
+                case "e":
+                    memoryKind = MemoryKind.Eeprom;
+                    break;
+                default:
+                    throw new AvrImageFormatterParseFilenameException(File, "Не удаётся определить тип памяти");
+            }
+
+            uint address;
+            if (!UInt32.TryParse(nameParts[1], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out address))
+                throw new AvrImageFormatterParseFilenameException(File, "Не удаётся определить тип памяти");
+
+            return new AvrImageFile(memoryKind, address, File.Content, FudpCrc.CalcCrc(File.Content));
         }
     }
 }

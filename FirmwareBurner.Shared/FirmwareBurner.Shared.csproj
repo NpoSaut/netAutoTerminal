@@ -75,7 +75,6 @@
     <Compile Include="CommonsModule.cs" />
     <Compile Include="Imaging\Binary\Buffers\BufferWriter.cs" />
     <Compile Include="Imaging\Binary\Buffers\SegmentedBuffer.cs" />
-    <Compile Include="Imaging\Binary\IBinaryBootloaderBodyFormatter.cs" />
     <Compile Include="Imaging\Binary\Buffers\IBuffer.cs" />
     <Compile Include="Imaging\Binary\Buffers\IBufferFactory.cs" />
     <Compile Include="Imaging\IImageFormatterFactory.cs" />
@@ -97,8 +96,6 @@
     <Compile Include="Imaging\Binary\BootloaderBody.cs" />
     <Compile Include="Imaging\Binary\FileRecord.cs" />
     <Compile Include="Imaging\Binary\FirmwareImage.cs" />
-    <Compile Include="Imaging\Binary\IBinaryFileTableFormatter.cs" />
-    <Compile Include="Imaging\Binary\IBinaryPropertiesTableFormatter.cs" />
     <Compile Include="Imaging\Binary\ImageFile.cs" />
     <Compile Include="Imaging\Binary\ParamRecord.cs" />
     <Compile Include="Imaging\IBinaryImage.cs" />
