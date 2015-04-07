@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace FirmwareBurner.IntelHex
 {
-    internal class IntelHexExAddressLine : IntelHexLine
+    public class IntelHexExAddressLine : IntelHexLine
     {
         public IntelHexExAddressLine(UInt16 AddressExtension) { this.AddressExtension = AddressExtension; }
 

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FirmwareBurner.IntelHex
 {
-    internal class IntelHexDataLine : IntelHexLine
+    public class IntelHexDataLine : IntelHexLine
     {
         public IntelHexDataLine(UInt16 StartAddress, Byte[] DataBuffer)
             : this(StartAddress, new MemoryStream(DataBuffer)) { }
