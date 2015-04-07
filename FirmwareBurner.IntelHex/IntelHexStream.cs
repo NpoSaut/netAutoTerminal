@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 
 namespace FirmwareBurner.IntelHex
 {
@@ -30,13 +29,13 @@ namespace FirmwareBurner.IntelHex
 
         #endregion
 
-        private long _Length;
+        private long _length;
         public IntelHexStream() { Substreams = new List<SubStream>(); }
         private List<SubStream> Substreams { get; set; }
 
         public override long Length
         {
-            get { return _Length; }
+            get { return _length; }
         }
 
         public override long Position { get; set; }
@@ -58,7 +57,7 @@ namespace FirmwareBurner.IntelHex
             return Position;
         }
 
-        public override void SetLength(long value) { _Length = value; }
+        public override void SetLength(long value) { _length = value; }
 
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -96,27 +95,26 @@ namespace FirmwareBurner.IntelHex
 
         public String ToHexFormat() { return GetHexFile().ToHexFileString(); }
 
-        public static IEnumerable<IntelHexLine> GetHexSegment(Byte[] Data, int StartAdress) { return GetHexSegment(new MemoryStream(Data), StartAdress); }
+        public static IEnumerable<IntelHexLine> GetHexSegment(Byte[] Data, int StartAddress) { return GetHexSegment(new MemoryStream(Data), StartAddress); }
 
-        public static IEnumerable<IntelHexLine> GetHexSegment(Stream Data, int StartAdress)
+        public static IEnumerable<IntelHexLine> GetHexSegment(Stream Data, int StartAddress)
         {
-            Int64 BlockStartAdress = Int64.MinValue;
+            Int64 blockStartAddress = Int64.MinValue;
             Data.Seek(0, SeekOrigin.Begin);
-            const int MaxLength = 0x10;
-            var sb = new StringBuilder();
+            const int maxLength = 0x10;
             while (Data.Position != Data.Length)
             {
-                int FullStartAdress = StartAdress + (int)Data.Position;
-                if (FullStartAdress > BlockStartAdress + UInt16.MaxValue)
+                int fullStartAddress = StartAddress + (int)Data.Position;
+                if (fullStartAddress > blockStartAddress + UInt16.MaxValue)
                 {
-                    BlockStartAdress = (FullStartAdress & 0xFFFF0000);
-                    yield return new IntelHexExAdressLine((UInt16)(BlockStartAdress >> 16));
+                    blockStartAddress = (fullStartAddress & 0xFFFF0000);
+                    yield return new IntelHexExAddressLine((UInt16)(blockStartAddress >> 16));
                 }
 
-                var buff = new byte[MaxLength];
-                int len = Data.Read(buff, 0, MaxLength);
+                var buff = new byte[maxLength];
+                int len = Data.Read(buff, 0, maxLength);
 
-                var line = new IntelHexDataLine((UInt16)(FullStartAdress - BlockStartAdress), new MemoryStream(buff, 0, len));
+                var line = new IntelHexDataLine((UInt16)(fullStartAddress - blockStartAddress), new MemoryStream(buff, 0, len));
                 yield return line;
             }
         }

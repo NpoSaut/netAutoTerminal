@@ -6,12 +6,12 @@ namespace FirmwareBurner.IntelHex
 {
     internal class IntelHexDataLine : IntelHexLine
     {
-        public IntelHexDataLine(UInt16 StartAdress, Byte[] DataBuffer)
-            : this(StartAdress, new MemoryStream(DataBuffer)) { }
+        public IntelHexDataLine(UInt16 StartAddress, Byte[] DataBuffer)
+            : this(StartAddress, new MemoryStream(DataBuffer)) { }
 
-        public IntelHexDataLine(UInt16 StartAdress, Stream DataStream)
+        public IntelHexDataLine(UInt16 StartAddress, Stream DataStream)
         {
-            Adress = StartAdress;
+            Address = StartAddress;
             Data = DataStream;
         }
 
@@ -20,11 +20,11 @@ namespace FirmwareBurner.IntelHex
             get { return 0x00; }
         }
 
-        public UInt16 Adress { get; set; }
+        public UInt16 Address { get; set; }
 
-        protected override ushort InternalAdress
+        protected override ushort InternalAddress
         {
-            get { return Adress; }
+            get { return Address; }
         }
 
         public Stream Data { get; private set; }
@@ -42,7 +42,7 @@ namespace FirmwareBurner.IntelHex
 
         public override string ToString()
         {
-            return string.Format("[{0}] DATA      {1:X4} : {2}", Key, InternalAdress, string.Join(" ", GetDataArray().Select(b => b.ToString("X2"))));
+            return string.Format("[{0}] DATA      {1:X4} : {2}", Key, InternalAddress, string.Join(" ", GetDataArray().Select(b => b.ToString("X2"))));
         }
     }
 }

@@ -41,7 +41,7 @@
   <ItemGroup>
     <Compile Include="IntelHexDataLine.cs" />
     <Compile Include="IntelHexEndLine.cs" />
-    <Compile Include="IntelHexExAdressLine.cs" />
+    <Compile Include="IntelHexExAddressLine.cs" />
     <Compile Include="IntelHexFile.cs" />
     <Compile Include="IntelHexLine.cs" />
     <Compile Include="IntelHexStream.cs" />
