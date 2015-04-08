@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Project;
-using FirmwarePacking;
 
 namespace FirmwareBurner.Imaging
 {
     public class PropertiesTableGenerator : IPropertiesTableGenerator
     {
+        private readonly IStringEncoder _stringEncoder;
+        public PropertiesTableGenerator(IStringEncoder StringEncoder) { _stringEncoder = StringEncoder; }
+
         /// <summary>Формирует список FUDP-свойств, связанных с устройством</summary>
         /// <param name="Target">Целевое устройство</param>
         public IEnumerable<ParamRecord> GetDeviceProperties(TargetInformation Target)
@@ -24,19 +27,20 @@ namespace FirmwareBurner.Imaging
         }
 
         /// <summary>Формирует список FUDP-свойств, связанных с программным модулем</summary>
-        /// <param name="Information">Информация о программном модуле</param>
-        /// <param name="FirmwareInformation">Информация о прошивке</param>
-        public IEnumerable<ParamRecord> GetModuleProperties(ModuleInformation Information, PackageInformation FirmwareInformation)
+        /// <param name="Project">Проект</param>
+        public IEnumerable<ParamRecord> GetModuleProperties(ModuleProject Project)
         {
             return new List<ParamRecord>
                    {
                        // Информация о модуле
-                       new ParamRecord(130, Information.ModuleId),
+                       new ParamRecord(130, Project.Information.ModuleId),
                        
                        // Информация о прошивке
-                       new ParamRecord(1, FirmwareInformation.FirmwareVersion.Major),
-                       new ParamRecord(2, FirmwareInformation.FirmwareVersion.Minor),
+                       new ParamRecord(1, Project.FirmwareInformation.FirmwareVersion.Major),
+                       new ParamRecord(2, Project.FirmwareInformation.FirmwareVersion.Minor),
                        new ParamRecord(3, (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds),
+                       new ParamRecord(6, Project.FirmwareContent.Files.Select(f => FudpCrc.CalcCrc(f.Content)).Aggregate((res, fcs) => (ushort)(res ^ fcs))),
+                       new ParamRecord(7, _stringEncoder.Encode(Project.FirmwareInformation.FirmwareVersionLabel))
                    };
         }
     }

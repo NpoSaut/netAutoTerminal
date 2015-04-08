@@ -13,8 +13,7 @@ namespace FirmwareBurner.Imaging
         IEnumerable<ParamRecord> GetDeviceProperties(TargetInformation Target);
 
         /// <summary>Формирует список FUDP-свойств, связанных с программным модулем</summary>
-        /// <param name="Information">Информация о программном модуле</param>
-        /// <param name="FirmwareInformation">Информация о прошивке</param>
-        IEnumerable<ParamRecord> GetModuleProperties(ModuleInformation Information, PackageInformation FirmwareInformation);
+        /// <param name="Project">Проект</param>
+        IEnumerable<ParamRecord> GetModuleProperties(ModuleProject Project);
     }
 }

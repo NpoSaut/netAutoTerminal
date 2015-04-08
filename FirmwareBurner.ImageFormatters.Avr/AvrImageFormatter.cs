@@ -68,7 +68,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
                 // Запись свойств
                 var overallProperties = new List<ParamRecord>();
                 overallProperties.AddRange(_propertiesTableGenerator.GetDeviceProperties(Project.Target));
-                overallProperties.AddRange(_propertiesTableGenerator.GetModuleProperties(moduleProject.Information, moduleProject.FirmwareInformation));
+                overallProperties.AddRange(_propertiesTableGenerator.GetModuleProperties(moduleProject));
                 _propertiesTableFormatter.WriteProperties(flashBuffer, overallProperties, _bootloaderInformation.Placements.PropertiesTablePlacement);
 
                 // Запись тела загрузчика
