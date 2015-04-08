@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IntelHexChecksum.cs" />
     <Compile Include="IntelHexDataLine.cs" />
     <Compile Include="IntelHexEndLine.cs" />
     <Compile Include="IntelHexExAddressLine.cs" />

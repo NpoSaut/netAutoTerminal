@@ -10,7 +10,7 @@ namespace FirmwareBurner.IntelHex.Tests
     {
         private byte[] GetDataBytes(int Length) { return Enumerable.Range(0, Length).Select(i => (Byte)i).ToArray(); }
 
-        [Test]
+        [Test, Description("Проверка правильности определения адреса смещения")]
         public void TestAddressing()
         {
             byte[] data = GetDataBytes(3);
@@ -23,7 +23,7 @@ namespace FirmwareBurner.IntelHex.Tests
             Assert.AreEqual(0x100, dataLine.Address, "Данные записались по неверному адресу");
         }
 
-        [Test]
+        [Test, Description("Проверка правильности определения адреса смещения при расширенной адресации")]
         public void TestExtendedAddressing()
         {
             byte[] data = GetDataBytes(3);

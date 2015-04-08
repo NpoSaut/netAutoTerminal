@@ -50,6 +50,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AddressingTests.cs" />
+    <Compile Include="ChecksumTests.cs" />
+    <Compile Include="HexLineFortamTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
