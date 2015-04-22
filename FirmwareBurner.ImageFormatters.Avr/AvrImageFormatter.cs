@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Imaging.Binary.Buffers;
@@ -55,19 +54,19 @@ namespace FirmwareBurner.ImageFormatters.Avr
                               };
 
                 // Подготовка списка файлов
-                ModuleProject moduleProject = Project.Modules.Single();
-                var firmwareFiles = moduleProject.FirmwareContent.Files.Select(ParsePackageFile).ToList();
+                ModuleProject moduleProject = project.Modules.Single();
+                List<AvrImageFile> firmwareFiles = moduleProject.FirmwareContent.Files.Select(ParsePackageFile).ToList();
 
                 // Запись таблицы файлов
                 _fileTableFormatter.PlaceFiles(flashBuffer, firmwareFiles, _bootloaderInformation.Placements.FilesystemIntexPlacement);
 
                 // Запись содержимого файлов
-                foreach (var file in firmwareFiles)
+                foreach (AvrImageFile file in firmwareFiles)
                     buffers[file.Memory].Write((int)file.Address, file.Content);
 
                 // Запись свойств
                 var overallProperties = new List<ParamRecord>();
-                overallProperties.AddRange(_propertiesTableGenerator.GetDeviceProperties(Project.Target));
+                overallProperties.AddRange(_propertiesTableGenerator.GetDeviceProperties(project, moduleProject.Information.ModuleId));
                 overallProperties.AddRange(_propertiesTableGenerator.GetModuleProperties(moduleProject));
                 _propertiesTableFormatter.WriteProperties(flashBuffer, overallProperties, _bootloaderInformation.Placements.PropertiesTablePlacement);
 
