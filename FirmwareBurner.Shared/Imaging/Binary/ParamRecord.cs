@@ -10,5 +10,7 @@
 
         public byte Key { get; private set; }
         public int Value { get; private set; }
+
+        public override string ToString() { return string.Format("{0} = {1}", Key, Value); }
     }
 }
