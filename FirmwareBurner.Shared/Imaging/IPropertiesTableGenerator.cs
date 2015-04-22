@@ -9,8 +9,9 @@ namespace FirmwareBurner.Imaging
     public interface IPropertiesTableGenerator
     {
         /// <summary>Формирует список FUDP-свойств, связанных с устройством</summary>
-        /// <param name="Target">Целевое устройство</param>
-        IEnumerable<ParamRecord> GetDeviceProperties(TargetInformation Target);
+        /// <param name="Project">Проект</param>
+        /// <param name="ModuleId">Идентификатор модуля</param>
+        IEnumerable<ParamRecord> GetDeviceProperties(FirmwareProject Project, int ModuleId);
 
         /// <summary>Формирует список FUDP-свойств, связанных с программным модулем</summary>
         /// <param name="Project">Проект</param>

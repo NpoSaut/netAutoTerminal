@@ -12,17 +12,19 @@ namespace FirmwareBurner.Imaging
         public PropertiesTableGenerator(IStringEncoder StringEncoder) { _stringEncoder = StringEncoder; }
 
         /// <summary>Формирует список FUDP-свойств, связанных с устройством</summary>
-        /// <param name="Target">Целевое устройство</param>
-        public IEnumerable<ParamRecord> GetDeviceProperties(TargetInformation Target)
+        /// <param name="Project">Проект</param>
+        /// <param name="ModuleId">Идентификатор модуля</param>
+        public IEnumerable<ParamRecord> GetDeviceProperties(FirmwareProject Project, int ModuleId)
         {
             return new List<ParamRecord>
                    {
                        // Информация о блоке
-                       new ParamRecord(129, Target.CellId),
-                       new ParamRecord(131, Target.SerialNumber),
-                       new ParamRecord(132, Target.AssemblyDate.Year * 100 + Target.AssemblyDate.Month),
-                       new ParamRecord(133, Target.ChannelNumber),
-                       new ParamRecord(134, Target.ModificationId),
+                       new ParamRecord(129, Project.Target.CellId),
+                       new ParamRecord(131, Project.Target.SerialNumber),
+                       new ParamRecord(132, Project.Target.AssemblyDate.Year * 100 + Project.Target.AssemblyDate.Month),
+                       new ParamRecord(133, Project.Target.ChannelNumber),
+                       new ParamRecord(134, Project.Target.ModificationId),
+                       new ParamRecord(130, ModuleId),
                    };
         }
 
@@ -32,9 +34,6 @@ namespace FirmwareBurner.Imaging
         {
             return new List<ParamRecord>
                    {
-                       // Информация о модуле
-                       new ParamRecord(130, Project.Information.ModuleId),
-                       
                        // Информация о прошивке
                        new ParamRecord(1, Project.FirmwareInformation.FirmwareVersion.Major),
                        new ParamRecord(2, Project.FirmwareInformation.FirmwareVersion.Minor),
