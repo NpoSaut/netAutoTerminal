@@ -54,7 +54,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
                               };
 
                 // Подготовка списка файлов
-                ModuleProject moduleProject = project.Modules.Single();
+                ModuleProject moduleProject = Project.Modules.Single();
                 List<AvrImageFile> firmwareFiles = moduleProject.FirmwareContent.Files.Select(ParsePackageFile).ToList();
 
                 // Запись таблицы файлов
@@ -66,7 +66,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
 
                 // Запись свойств
                 var overallProperties = new List<ParamRecord>();
-                overallProperties.AddRange(_propertiesTableGenerator.GetDeviceProperties(project, moduleProject.Information.ModuleId));
+                overallProperties.AddRange(_propertiesTableGenerator.GetDeviceProperties(Project, moduleProject.Information.ModuleId));
                 overallProperties.AddRange(_propertiesTableGenerator.GetModuleProperties(moduleProject));
                 _propertiesTableFormatter.WriteProperties(flashBuffer, overallProperties, _bootloaderInformation.Placements.PropertiesTablePlacement);
 
