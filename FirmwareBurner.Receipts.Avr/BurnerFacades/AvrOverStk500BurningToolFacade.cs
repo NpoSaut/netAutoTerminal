@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
+using ExternalTools;
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
 using FirmwareBurner.Progress;
-using FirmwareBurner.Receipts.Avr.Utilities;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
