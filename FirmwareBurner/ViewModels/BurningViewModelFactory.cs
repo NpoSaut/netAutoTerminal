@@ -43,9 +43,10 @@ namespace FirmwareBurner.ViewModels
                                                                              new BurningMethodViewModel(burningMethod.Name, burningMethod.Receipt))
                                                                          .ToList();
 
-            return new BurningViewModel(CellKindId, projectAssembler, _burningService, _eventAggregator,
-                                        burningOptions, burningMethods,
-                                        ValidationContext, _settingsService);
+            var viewModel = new BurningViewModel(burningOptions, burningMethods);
+            var controller = new BurningViewModelController(viewModel, CellKindId, _eventAggregator, _settingsService, ValidationContext, projectAssembler,
+                                                            _burningService);
+            return viewModel;
         }
     }
 }

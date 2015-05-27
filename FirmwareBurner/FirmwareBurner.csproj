@@ -180,6 +180,7 @@
     <Compile Include="AsyncOperations\AsyncOperationTokenBase.cs" />
     <Compile Include="ViewModels\BurningMethodViewModel.cs" />
     <Compile Include="ViewModels\BurningOptionViewModel.cs" />
+    <Compile Include="ViewModels\BurningViewModelController.cs" />
     <Compile Include="ViewModels\BurningViewModelFactory.cs" />
     <Compile Include="ViewModels\ChannelSelectorViewModel.cs" />
     <Compile Include="ViewModels\Dialogs\DialogViewModelBase.cs" />

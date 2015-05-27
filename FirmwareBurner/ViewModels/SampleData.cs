@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using FirmwareBurner.Burning;
+using FirmwareBurner.Progress;
+using FirmwareBurner.Project;
+using FirmwareBurner.Settings;
 using FirmwareBurner.ViewModels.Dialogs;
 using FirmwareBurner.ViewModels.FirmwareSources;
 using FirmwareBurner.ViewModels.Property;
@@ -54,25 +59,35 @@ namespace FirmwareBurner.ViewModels
         private static readonly ExceptionDialogViewModel _exceptionDialog =
             new ExceptionDialogViewModel("Не удалось отобразить страницу",
                                          "Не удаётся установить соединение с сервером. Возможно, сервер недоступен или требуется проверка настроек сетевого подключения",
+                                         // ReSharper disable StringLiteralTypo
                                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
+                                         // ReSharper restore StringLiteralTypo
 
         private static readonly BurningViewModel _burning =
-            new BurningViewModel(1, null, null, new EventAggregator(),
-                                 new[]
+            new BurningViewModel(new[]
                                  {
                                      new BurningOptionViewModel("Канал 1", 1),
                                      new BurningOptionViewModel("Канал 2", 2)
                                  },
                                  new[]
                                  {
-                                     new BurningMethodViewModel("Прошить через AVRDude", null),
-                                     new BurningMethodViewModel("Сохранить в .hex", null)
-                                 },
-                                 null, null);
+                                     new BurningMethodViewModel("Прошить через AVRDude", new FakeReceipt()),
+                                     new BurningMethodViewModel("Сохранить в .hex", new FakeReceipt())
+                                 }) { SelectedBurningMethod = new BurningMethodViewModel("Прошить через AVRDude", new FakeReceipt()) };
 
         private static TargetSelectorViewModel _targetSelector = new TargetSelectorViewModel(new FakeCellsCatalogProvider(), new EventAggregator());
 
         #region Fake Classes
+
+        private class FakeReceipt : IBurningReceipt
+        {
+            public string Name
+            {
+                get { return "Прошить через палец"; }
+            }
+
+            public void Burn(FirmwareProject Project, IProgressToken Progress) {  }
+        }
 
         private class FakeCellsCatalogProvider : ICellsCatalogProvider
         {
