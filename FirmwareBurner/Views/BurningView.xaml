@@ -77,6 +77,7 @@
             </Grid>
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=Status}" Value="InProgress">
+                    <Setter TargetName="BurnButton" Property="IsEnabled" Value="False" />
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource ShowProgressStoryboard}" />
                     </DataTrigger.EnterActions>
