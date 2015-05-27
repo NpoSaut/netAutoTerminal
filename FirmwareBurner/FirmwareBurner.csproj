@@ -140,6 +140,7 @@
     <Compile Include="Burning\BurningMethod.cs" />
     <Compile Include="Burning\BurningModule.cs" />
     <Compile Include="Burning\BurningService.cs" />
+    <Compile Include="Burning\EmulationBurningReceiptsCatalog.cs" />
     <Compile Include="Burning\IBurningMethod.cs" />
     <Compile Include="Burning\IBurningService.cs" />
     <Compile Include="DialogShell.xaml.cs">
@@ -176,6 +177,7 @@
     <Compile Include="Validation\ValidationContext.cs" />
     <Compile Include="Validation\ValidationContextFactory.cs" />
     <Compile Include="Validation\ValidationsModule.cs" />
+    <Compile Include="AsyncOperations\AsyncOperationTokenBase.cs" />
     <Compile Include="ViewModels\BurningMethodViewModel.cs" />
     <Compile Include="ViewModels\BurningOptionViewModel.cs" />
     <Compile Include="ViewModels\BurningViewModelFactory.cs" />
@@ -206,6 +208,7 @@
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\IRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\LocalRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\RemoteRepositoryLoadController.cs" />
+    <Compile Include="AsyncOperations\IAsyncOperationToken.cs" />
     <Compile Include="ViewModels\IBurningViewModelFactory.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IExceptionDialogSource.cs" />

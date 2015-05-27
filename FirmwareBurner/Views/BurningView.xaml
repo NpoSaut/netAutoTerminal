@@ -63,7 +63,7 @@
                 </Grid.Effect>
             </Grid>
             <DataTemplate.Triggers>
-                <DataTrigger Binding="{Binding Path=Progress.IsActive}" Value="True">
+                <DataTrigger Binding="{Binding Path=Status}" Value="InProgress">
                     <DataTrigger.EnterActions>
                         <BeginStoryboard Storyboard="{StaticResource BurnStartedStoryboard}" />
                     </DataTrigger.EnterActions>
@@ -71,7 +71,7 @@
                         <BeginStoryboard Storyboard="{StaticResource BurnCompleatedStoryboard}" />
                     </DataTrigger.ExitActions>
                 </DataTrigger>
-                <DataTrigger Binding="{Binding Path=Progress.Complete}" Value="1.0">
+                <DataTrigger Binding="{Binding Path=Status}" Value="Compleated">
                     <Setter TargetName="BurnButton" Property="Visibility" Value="Hidden" />
                 </DataTrigger>
             </DataTemplate.Triggers>

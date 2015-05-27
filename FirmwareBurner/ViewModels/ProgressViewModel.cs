@@ -4,11 +4,46 @@ using FirmwareBurner.ViewModels.Bases;
 
 namespace FirmwareBurner.ViewModels
 {
-    public class ProgressViewModel : ViewModelBase, IProgressToken
+    public class ProgressViewModel : ViewModelBase
     {
         private double _complete;
         private bool _isActive;
         private bool _isIntermediate;
+
+        public ProgressViewModel(IProgressPublisher ProgressPublisher)
+        {
+            ProgressPublisher.Started += ProgressPublisherOnStarted;
+            ProgressPublisher.Changed += ProgressPublisherOnChanged;
+            ProgressPublisher.Compleated += ProgressPublisherOnCompleated;
+        }
+
+        #region Обработка событий IProgressPublisher
+
+        private void ProgressPublisherOnStarted(object Sender, EventArgs Args)
+        {
+            IsActive = true;
+            IsIntermediate = true;
+        }
+
+        private void ProgressPublisherOnChanged(object Sender, EventArgs Args)
+        {
+            var progress = (IProgressPublisher)Sender;
+            IsActive = true;
+            IsIntermediate = progress.IsIntermediate;
+            Complete = progress.Progress;
+        }
+
+        private void ProgressPublisherOnCompleated(object Sender, EventArgs Args)
+        {
+            IsActive = false;
+            IsIntermediate = false;
+            Complete = 1.0;
+            OnCompleated();
+        }
+
+        #endregion
+
+        #region Реализация внешних свойст
 
         public Boolean IsActive
         {
@@ -56,35 +91,6 @@ namespace FirmwareBurner.ViewModels
             IsIntermediate = false;
             Complete = 0;
             IsActive = false;
-        }
-
-        #region Реализация IProgressToken
-
-        void IProgressToken.Start()
-        {
-            IsActive = true;
-            IsIntermediate = true;
-        }
-
-        void IProgressToken.SetProgress(double Progress)
-        {
-            IsActive = true;
-            IsIntermediate = false;
-            Complete = Progress;
-        }
-
-        void IProgressToken.SetToIntermediate()
-        {
-            IsActive = true;
-            IsIntermediate = true;
-        }
-
-        void IProgressToken.OnCompleated()
-        {
-            IsActive = false;
-            IsIntermediate = false;
-            Complete = 1.0;
-            OnCompleated();
         }
 
         #endregion

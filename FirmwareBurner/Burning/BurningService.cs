@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FirmwareBurner.AsyncOperations;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
@@ -30,28 +32,47 @@ namespace FirmwareBurner.Burning
                                           .ToList();
         }
 
-        public void BeginBurn(IBurningReceipt Receipt, FirmwareProject Project, IProgressToken ProgressToken)
+        public IAsyncOperationToken BeginBurn(IBurningReceipt Receipt, FirmwareProject Project)
         {
-            Task.Factory.StartNew(() => Burn(Receipt, Project, ProgressToken));
+            var token = new BurningAsyncOperationToken(new ProgressProxy());
+            Task.Factory.StartNew(() => Burn(Receipt, Project, token));
+            return token;
         }
 
-        private void Burn(IBurningReceipt Receipt, FirmwareProject Project, IProgressToken ProgressToken)
+        private void Burn(IBurningReceipt Receipt, FirmwareProject Project, BurningAsyncOperationToken OperationToken)
         {
-            using (_progressControllerFactory.CreateController(ProgressToken))
+            using (_progressControllerFactory.CreateController(OperationToken.ProgressToken))
             {
                 try
                 {
-                    Receipt.Burn(Project, ProgressToken);
+                    Receipt.Burn(Project, OperationToken.ProgressToken);
+                    OperationToken.Success();
                 }
                 catch (CreateImageException exception)
                 {
                     _exceptionService.PublishException("Не удалось составить образ для прошивки", exception.InnerException);
+                    OperationToken.Error(exception);
                 }
                 catch (BurningException exception)
                 {
                     _exceptionService.PublishException("Не удалось прошить устройство", exception.InnerException);
+                    OperationToken.Error(exception);
                 }
             }
+        }
+
+        private class BurningAsyncOperationToken : AsyncOperationTokenBase
+        {
+            public BurningAsyncOperationToken(ProgressProxy ProgressProxy) : base(ProgressProxy, false) { ProgressToken = ProgressProxy; }
+            public IProgressToken ProgressToken { get; private set; }
+
+            public void Error(Exception Exception)
+            {
+                OnExceptionHandled(new ExceptionHandledEventArgs(Exception));
+                OnCompleated(new AsyncOperationCompleatedEventArgs(AsyncOperationCompleatingStatus.Error));
+            }
+
+            public void Success() { OnCompleated(new AsyncOperationCompleatedEventArgs(AsyncOperationCompleatingStatus.Success)); }
         }
     }
 }

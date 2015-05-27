@@ -61,7 +61,7 @@ namespace FirmwareBurner.ViewModels
         private void OnProjectChanged(ProjectChangedArgs e)
         {
             foreach (BurningOptionViewModel burningOption in BurningOptions)
-                burningOption.Progress.Reset();
+                burningOption.ResetOperation();
         }
 
         private void BurningOptionOnActivated(object Sender, EventArgs EventArgs)
@@ -70,10 +70,9 @@ namespace FirmwareBurner.ViewModels
             if (_validationContext.Check())
             {
                 FirmwareProject project = _projectAssembler.GetProject(activatedOption.ChannelNumber);
-                _burningService.BeginBurn(SelectedBurningMethod.Receipt, project, activatedOption.Progress);
+                activatedOption.ProcessAsyncOperation(
+                    _burningService.BeginBurn(SelectedBurningMethod.Receipt, project));
             }
-            else
-                activatedOption.PulseError();
         }
     }
 }

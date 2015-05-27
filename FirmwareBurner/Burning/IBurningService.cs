@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FirmwareBurner.Progress;
+using FirmwareBurner.AsyncOperations;
 using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Burning
@@ -10,6 +10,6 @@ namespace FirmwareBurner.Burning
         /// <param name="DeviceName">Название устройства</param>
         ICollection<IBurningMethod> GetBurningMethods(string DeviceName);
 
-        void BeginBurn(IBurningReceipt Receipt, FirmwareProject Project, IProgressToken ProgressToken);
+        IAsyncOperationToken BeginBurn(IBurningReceipt Receipt, FirmwareProject Project);
     }
 }
