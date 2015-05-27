@@ -15,18 +15,27 @@
 
         <BackEase x:Key="BackEaseOut" />
 
-        <Storyboard x:Key="BurnStartedStoryboard">
+        <Storyboard x:Key="ShowProgressStoryboard">
             <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleX"
                              To="1.15" EasingFunction="{StaticResource BackEaseOut}" Duration="0:0:0.12" />
             <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleY"
                              To="1.15" EasingFunction="{StaticResource BackEaseOut}" Duration="0:0:0.12" />
         </Storyboard>
 
-        <Storyboard x:Key="BurnCompleatedStoryboard">
+        <Storyboard x:Key="HideProgressStoryboard">
             <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleX"
                              EasingFunction="{StaticResource PowerEaseOut}" Duration="0:0:0.2" />
             <DoubleAnimation Storyboard.TargetName="BurningProgress" Storyboard.TargetProperty="RenderTransform.ScaleY"
                              EasingFunction="{StaticResource PowerEaseOut}" Duration="0:0:0.2" />
+        </Storyboard>
+
+        <Storyboard x:Key="BurnCompleatedStoryboard">
+            <DoubleAnimation Storyboard.TargetName="BurningSuccessIcon" Storyboard.TargetProperty="Opacity"
+                             From="0" Duration="0:0:0.3" />
+            <DoubleAnimation Storyboard.TargetName="BurningSuccessIcon" Storyboard.TargetProperty="RenderTransform.ScaleX"
+                             From="0.7" EasingFunction="{StaticResource BackEaseOut}" Duration="0:0:0.4" />
+            <DoubleAnimation Storyboard.TargetName="BurningSuccessIcon" Storyboard.TargetProperty="RenderTransform.ScaleY"
+                             From="0.7" EasingFunction="{StaticResource BackEaseOut}" Duration="0:0:0.4" />
         </Storyboard>
 
         <Style x:Key="ChannelPushButtonStyle" TargetType="{x:Type Button}"
@@ -54,7 +63,11 @@
                         <ScaleTransform />
                     </firmwareBurner:CircleProgress.RenderTransform>
                 </firmwareBurner:CircleProgress>
-                <TextBlock Text="o" Style="{StaticResource TextIconBoxStyle}" Foreground="White" FontSize="40" />
+                <TextBlock Text="o" Name="BurningSuccessIcon"  Style="{StaticResource TextIconBoxStyle}" Foreground="White" FontSize="40" RenderTransformOrigin="0.4, 0.7">
+                    <TextBlock.RenderTransform>
+                        <ScaleTransform />
+                    </TextBlock.RenderTransform>
+                </TextBlock>
                 <Button Style="{StaticResource ChannelPushButtonStyle}" Name="BurnButton"
                         Command="{Binding BurnCommand}"
                         Content="{Binding Name}" />
@@ -65,14 +78,17 @@
             <DataTemplate.Triggers>
                 <DataTrigger Binding="{Binding Path=Status}" Value="InProgress">
                     <DataTrigger.EnterActions>
-                        <BeginStoryboard Storyboard="{StaticResource BurnStartedStoryboard}" />
+                        <BeginStoryboard Storyboard="{StaticResource ShowProgressStoryboard}" />
                     </DataTrigger.EnterActions>
                     <DataTrigger.ExitActions>
-                        <BeginStoryboard Storyboard="{StaticResource BurnCompleatedStoryboard}" />
+                        <BeginStoryboard Storyboard="{StaticResource HideProgressStoryboard}" />
                     </DataTrigger.ExitActions>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Path=Status}" Value="Compleated">
                     <Setter TargetName="BurnButton" Property="Visibility" Value="Hidden" />
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard Storyboard="{StaticResource BurnCompleatedStoryboard}" />
+                    </DataTrigger.EnterActions>
                 </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
