@@ -1,4 +1,4 @@
-﻿using FirmwareBurner.Progress;
+﻿using AsyncOperations.Progress;
 
 namespace FirmwareBurner.Burning
 {

@@ -83,15 +83,6 @@
     <Compile Include="Interaction\FileRequestArguments.cs" />
     <Compile Include="Interaction\IFileSelectorService.cs" />
     <Compile Include="Interaction\SaveFileRequestArguments.cs" />
-    <Compile Include="Progress\CompositeProgressManager.cs" />
-    <Compile Include="Progress\IProgressControllerFactory.cs" />
-    <Compile Include="Progress\IProgressPublisher.cs" />
-    <Compile Include="Progress\IProgressToken.cs" />
-    <Compile Include="Progress\IProgressController.cs" />
-    <Compile Include="Progress\ProgressController.cs" />
-    <Compile Include="Progress\ProgressControllerFactory.cs" />
-    <Compile Include="Progress\ProgressProxy.cs" />
-    <Compile Include="Progress\SubprocessProgressToken.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Attributes\TargetDeviceAttribute.cs" />
     <Compile Include="FudpCrc.cs" />
@@ -116,6 +107,10 @@
     <Compile Include="TargetInformation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
+      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
+      <Name>AsyncOperations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
       <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
       <Name>FirmwarePacking</Name>

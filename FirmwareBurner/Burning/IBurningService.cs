@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using FirmwareBurner.AsyncOperations;
+using AsyncOperations.OperationTokens;
 using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Burning

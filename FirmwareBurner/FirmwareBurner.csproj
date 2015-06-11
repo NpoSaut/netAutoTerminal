@@ -177,7 +177,6 @@
     <Compile Include="Validation\ValidationContext.cs" />
     <Compile Include="Validation\ValidationContextFactory.cs" />
     <Compile Include="Validation\ValidationsModule.cs" />
-    <Compile Include="AsyncOperations\AsyncOperationTokenBase.cs" />
     <Compile Include="ViewModels\BurningMethodViewModel.cs" />
     <Compile Include="ViewModels\BurningOptionViewModel.cs" />
     <Compile Include="ViewModels\BurningViewModelController.cs" />
@@ -209,7 +208,6 @@
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\IRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\LocalRepositoryLoadController.cs" />
     <Compile Include="ViewModels\FirmwareSources\LoadControllers\RemoteRepositoryLoadController.cs" />
-    <Compile Include="AsyncOperations\IAsyncOperationToken.cs" />
     <Compile Include="ViewModels\IBurningViewModelFactory.cs" />
     <Compile Include="ViewModels\IChannelSelector.cs" />
     <Compile Include="ViewModels\IExceptionDialogSource.cs" />
@@ -382,6 +380,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
+      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
+      <Name>AsyncOperations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExternalTools\ExternalTools.csproj">
       <Project>{61C24D4C-9079-4E7C-8B59-023890A7A8CD}</Project>
       <Name>ExternalTools</Name>

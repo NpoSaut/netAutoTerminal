@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AsyncOperations.Progress;
 using FirmwareBurner.Burning;
-using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 using FirmwareBurner.Settings;
 using FirmwareBurner.ViewModels.Dialogs;

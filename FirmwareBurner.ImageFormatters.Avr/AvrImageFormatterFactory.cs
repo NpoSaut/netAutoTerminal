@@ -1,8 +1,8 @@
-﻿using FirmwareBurner.Annotations;
+﻿using AsyncOperations.Progress;
+using FirmwareBurner.Annotations;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Imaging.Binary.Buffers;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.ImageFormatters.Avr
 {

@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CC97A6BE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.IntelHex.Tests", "FirmwareBurner.IntelHex.Tests\FirmwareBurner.IntelHex.Tests.csproj", "{FF144D53-22F6-445E-A113-C8218E015980}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncOperations", "AsyncOperations\AsyncOperations.csproj", "{6E69A70E-1915-44ED-AD9C-228DF3532029}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -191,6 +193,16 @@ Global
 		{FF144D53-22F6-445E-A113-C8218E015980}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{FF144D53-22F6-445E-A113-C8218E015980}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{FF144D53-22F6-445E-A113-C8218E015980}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6E69A70E-1915-44ED-AD9C-228DF3532029}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

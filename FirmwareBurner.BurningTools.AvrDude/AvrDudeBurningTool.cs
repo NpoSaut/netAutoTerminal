@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
+using AsyncOperations.Progress;
 using ExternalTools.Interfaces;
 using FirmwareBurner.BurningTools.AvrDude.Exceptions;
 using FirmwareBurner.BurningTools.AvrDude.Parameters;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.BurningTools.AvrDude
 {

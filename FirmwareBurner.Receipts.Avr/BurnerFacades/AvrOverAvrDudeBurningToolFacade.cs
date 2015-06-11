@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
+using AsyncOperations.Progress;
 using ExternalTools;
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.AvrDude;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {

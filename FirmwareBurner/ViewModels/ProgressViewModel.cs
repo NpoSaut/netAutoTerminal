@@ -1,5 +1,5 @@
 ﻿using System;
-using FirmwareBurner.Progress;
+using AsyncOperations.Progress;
 using FirmwareBurner.ViewModels.Bases;
 
 namespace FirmwareBurner.ViewModels

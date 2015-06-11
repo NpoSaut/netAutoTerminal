@@ -4,3 +4,6 @@
 [submodule "WpfLib"]
 	path = WpfLib
 	url = ../WpfLib.git
+[submodule "AsyncOperations"]
+	path = AsyncOperations
+	url = ../netAsyncOperations.git

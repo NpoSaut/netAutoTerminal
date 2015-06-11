@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FirmwareBurner.AsyncOperations;
+using AsyncOperations.OperationTokens;
+using AsyncOperations.Progress;
 using FirmwareBurner.Burning.Exceptions;
-using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 

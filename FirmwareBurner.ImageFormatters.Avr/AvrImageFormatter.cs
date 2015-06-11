@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AsyncOperations.Progress;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Imaging.Binary.Buffers;
-using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 using FirmwarePacking;
 

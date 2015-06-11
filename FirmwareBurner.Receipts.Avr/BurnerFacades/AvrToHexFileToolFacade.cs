@@ -1,10 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using AsyncOperations.Progress;
 using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
 using FirmwareBurner.Interaction;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {

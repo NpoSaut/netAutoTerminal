@@ -1,8 +1,8 @@
-﻿using FirmwareBurner.Attributes;
+﻿using AsyncOperations.Progress;
+using FirmwareBurner.Attributes;
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {

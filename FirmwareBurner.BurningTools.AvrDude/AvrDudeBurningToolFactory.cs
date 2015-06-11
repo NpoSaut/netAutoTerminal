@@ -1,7 +1,7 @@
-﻿using ExternalTools.Implementations;
+﻿using AsyncOperations.Progress;
+using ExternalTools.Implementations;
 using ExternalTools.Interfaces;
 using FirmwareBurner.BurningTools.AvrDude.AvrDudeBody;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.BurningTools.AvrDude
 {
