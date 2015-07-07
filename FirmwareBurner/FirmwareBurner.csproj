@@ -173,7 +173,7 @@
     <Compile Include="Validation\IValidationContext.cs" />
     <Compile Include="Validation\Rules\AssemblyDateNumberValidationRule.cs" />
     <Compile Include="Validation\Rules\HaveFirmwareValidationRule.cs" />
-    <Compile Include="Validation\Rules\SerialNumberValidationRule.cs" />
+    <Compile Include="Validation\Rules\SerialNumberLengthValidationRule.cs" />
     <Compile Include="Validation\ValidationContext.cs" />
     <Compile Include="Validation\ValidationContextFactory.cs" />
     <Compile Include="Validation\ValidationsModule.cs" />
@@ -217,6 +217,8 @@
     <Compile Include="ViewModels\ProgressViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModel.cs" />
     <Compile Include="ViewModels\ProjectManagerViewModelFactory.cs" />
+    <Compile Include="ViewModels\Property\DateTimeTextValueConverter.cs" />
+    <Compile Include="ViewModels\Property\TextPrevalidatorDecorator.cs" />
     <Compile Include="ViewModels\RequestDialogInteractionContext.cs" />
     <Compile Include="ViewModels\Property\IntTextValueConverter.cs" />
     <Compile Include="ViewModels\Property\ITextValueConverter.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="ViewModels\Property\ValidateableTextPropertyViewModel.cs" />
     <Compile Include="ViewModels\Property\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModels\SampleData.cs" />
+    <Compile Include="ViewModels\Targeting\IntBoundsValidator.cs" />
     <Compile Include="ViewModels\TargetPresenterViewModel.cs" />
     <Compile Include="Views\BurningView.xaml.cs">
       <DependentUpon>BurningView.xaml</DependentUpon>

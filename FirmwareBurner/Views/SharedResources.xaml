@@ -102,7 +102,7 @@
                                        Foreground="{StaticResource ProjectOkayBrush}" Text="o" />
                             <TextBlock Grid.Row="1" Name="ErrorTextLabel" FontSize="11"
                                        Foreground="{StaticResource ProjectErrorBrush}"
-                                       Text="{Binding ValidationErrorsText}" TextAlignment="Center" Opacity="0" />
+                                       Text="{Binding FirstValidationError}" TextAlignment="Center" Opacity="0" />
                             <Grid.RenderTransform>
                                 <TranslateTransform />
                             </Grid.RenderTransform>

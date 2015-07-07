@@ -40,6 +40,11 @@ namespace FirmwareBurner.ViewModels.Property
             get { return string.Join(Environment.NewLine, ValidationErrors); }
         }
 
+        public string FirstValidationError
+        {
+            get { return ValidationErrors.DefaultIfEmpty(string.Empty).First(); }
+        }
+
         public event EventHandler Signal;
 
         public bool Check()
@@ -62,6 +67,7 @@ namespace FirmwareBurner.ViewModels.Property
             RaisePropertyChanged(() => IsInitialized);
             RaisePropertyChanged(() => ValidationErrors);
             RaisePropertyChanged(() => ValidationErrorsText);
+            RaisePropertyChanged(() => FirstValidationError);
         }
     }
 
