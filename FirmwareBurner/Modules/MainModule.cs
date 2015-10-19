@@ -42,6 +42,7 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IExceptionDialogSource, EventAggregatorExceptionDialogSource>(new ContainerControlledLifetimeManager())
 
                 // Различные утилиты
+                .RegisterType<IChecksumProvider, FudpCrcChecksumProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IStringEncoder, Cp1251StringEncoder>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProgressControllerFactory, ProgressControllerFactory>(new ContainerControlledLifetimeManager())
 

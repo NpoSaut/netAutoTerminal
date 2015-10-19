@@ -395,6 +395,10 @@
       <Project>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</Project>
       <Name>FirmwareBurner.ImageFormatters.Avr</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Cortex\FirmwareBurner.ImageFormatters.Cortex.csproj">
+      <Project>{E2D67FE6-60E8-47D9-9FF8-131842BDB86E}</Project>
+      <Name>FirmwareBurner.ImageFormatters.Cortex</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.IntelHex\FirmwareBurner.IntelHex.csproj">
       <Project>{3bb47bef-9b6f-408a-ab8a-4b1414492d01}</Project>
       <Name>FirmwareBurner.IntelHex</Name>
@@ -402,6 +406,10 @@
     <ProjectReference Include="..\FirmwareBurner.Receipts.Avr\FirmwareBurner.Receipts.Avr.csproj">
       <Project>{461BC597-308C-4C8C-8BB8-80ED6230C386}</Project>
       <Name>FirmwareBurner.Receipts.Avr</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.Receipts.Cortex\FirmwareBurner.Receipts.Cortex.csproj">
+      <Project>{B0318B72-BC21-4872-BA79-20BD9D6ED207}</Project>
+      <Name>FirmwareBurner.Receipts.Cortex</Name>
     </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>

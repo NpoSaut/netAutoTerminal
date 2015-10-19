@@ -9,7 +9,7 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
     [TargetDevice("at90can128"), TargetDevice("at90can64")]
     public class AvrToHexFileToolFacadeFactory : IBurningToolFacadeFactory<AvrImage>
     {
-        private IFileSelectorService _fileSelectorService;
+        private readonly IFileSelectorService _fileSelectorService;
         public AvrToHexFileToolFacadeFactory(IFileSelectorService FileSelectorService) { _fileSelectorService = FileSelectorService; }
 
         /// <summary>Создаёт фасад взаимодействия с инструментом прошивки для указанного типа устройства</summary>

@@ -2,8 +2,10 @@
 using System.Windows;
 using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Avr;
+using FirmwareBurner.ImageFormatters.Cortex;
 using FirmwareBurner.Modules;
 using FirmwareBurner.Receipts.Avr;
+using FirmwareBurner.Receipts.Cortex;
 using FirmwareBurner.Settings;
 using FirmwareBurner.Validation;
 using Microsoft.Practices.Prism.Modularity;
@@ -30,10 +32,12 @@ namespace FirmwareBurner
             mc.AddModule(typeof (BurningModule));
 
             // Модули сборщиков образов
-            mc.AddModule(typeof (AvrImagesModule));
+            mc.AddModule(typeof(AvrImagesModule));
+            mc.AddModule(typeof(CortexImagesModule));
 
             // Модули рецептов прошивки
-            mc.AddModule(typeof (AvrReceiptsModule));
+            mc.AddModule(typeof(AvrReceiptsModule));
+            mc.AddModule(typeof(CortexReceiptsModule));
 
             // Модули интерфейса
             mc.AddModule(typeof (SettingsModule));

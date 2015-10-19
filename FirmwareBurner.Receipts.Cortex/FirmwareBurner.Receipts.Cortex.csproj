@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2D67FE6-60E8-47D9-9FF8-131842BDB86E}</ProjectGuid>
+    <ProjectGuid>{B0318B72-BC21-4872-BA79-20BD9D6ED207}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirmwareBurner.ImageFormatters.Cortex</RootNamespace>
-    <AssemblyName>FirmwareBurner.ImageFormatters.Cortex</AssemblyName>
+    <RootNamespace>FirmwareBurner.Receipts.Cortex</RootNamespace>
+    <AssemblyName>FirmwareBurner.Receipts.Cortex</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -67,43 +67,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Catalog\IBootloaderConfigurationCatalog.cs" />
-    <Compile Include="Catalog\ICortexBootloaderInformationCatalog.cs" />
-    <Compile Include="Catalog\StaticBootloaderConfigurationCatalog.cs" />
-    <Compile Include="Catalog\StaticCortexBootloaderInformationCatalog.cs" />
-    <Compile Include="CortexBootloaderInformation.cs" />
-    <Compile Include="CortexBootloaderPropertiesProvider.cs" />
-    <Compile Include="CortexImageFormatterFactory.cs" />
-    <Compile Include="CortexImagesModule.cs" />
-    <Compile Include="Exceptions\BootloaderConfigurationNotFoundException.cs" />
-    <Compile Include="Sections\CortexFileTableSectionContent.cs" />
-    <Compile Include="CortexImage.cs" />
-    <Compile Include="CortexImageFormatter.cs" />
-    <Compile Include="CortexMemoryKind.cs" />
-    <Compile Include="Sections\CortexPropertiesSectionContent.cs" />
-    <Compile Include="Exceptions\TooManyFilesException.cs" />
-    <Compile Include="Exceptions\TooManyPropertiesException.cs" />
+    <Compile Include="BurnerFacades\CortexToHexFileToolFacade.cs" />
+    <Compile Include="BurnerFacades\CortexToHexFileToolFacadeFactory.cs" />
+    <Compile Include="CortexReceiptsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
       <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
       <Name>AsyncOperations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Binary\FirmwareBurner.ImageFormatters.Binary.csproj">
-      <Project>{2B34A3AE-B635-4F22-8982-5ACA97A801CE}</Project>
-      <Name>FirmwareBurner.ImageFormatters.Binary</Name>
+    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Cortex\FirmwareBurner.ImageFormatters.Cortex.csproj">
+      <Project>{E2D67FE6-60E8-47D9-9FF8-131842BDB86E}</Project>
+      <Name>FirmwareBurner.ImageFormatters.Cortex</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.IntelHex\FirmwareBurner.IntelHex.csproj">
+      <Project>{3BB47BEF-9B6F-408A-AB8A-4B1414492D01}</Project>
+      <Name>FirmwareBurner.IntelHex</Name>
     </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bootloaders\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

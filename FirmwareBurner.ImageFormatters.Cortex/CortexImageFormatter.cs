@@ -3,6 +3,7 @@ using AsyncOperations.Progress;
 using FirmwareBurner.ImageFormatters.Binary;
 using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
+using FirmwareBurner.ImageFormatters.Cortex.Catalog;
 using FirmwareBurner.ImageFormatters.Cortex.Sections;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Imaging.PropertiesProviders;
@@ -10,7 +11,7 @@ using FirmwareBurner.Project;
 
 namespace FirmwareBurner.ImageFormatters.Cortex
 {
-    internal abstract class CortexImageFormatter : BinaryFormatterBase<CortexImage, CortexMemoryKind, CortexBootloaderInformation>
+    public class CortexImageFormatter : BinaryFormatterBase<CortexImage, CortexMemoryKind, CortexBootloaderInformation>
     {
         private static readonly IDictionary<string, CortexMemoryKind> _memoryKinds =
             new Dictionary<string, CortexMemoryKind>
@@ -18,19 +19,26 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                 { "f", CortexMemoryKind.Flash }
             };
 
+        private readonly IBootloaderConfigurationCatalog _bootloaderConfigurationCatalog;
+
         private readonly IChecksumProvider _checksumProvider;
         private readonly IStringEncoder _stringEncoder;
 
-        protected CortexImageFormatter(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
-                                           CortexBootloaderInformation BootloaderInformation, IChecksumProvider ChecksumProvider, IStringEncoder StringEncoder)
+        public CortexImageFormatter(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
+                                    IChecksumProvider ChecksumProvider, IStringEncoder StringEncoder, IBootloaderConfigurationCatalog BootloaderConfigurationCatalog,
+                                    CortexBootloaderInformation BootloaderInformation)
             : base(ProgressControllerFactory, BufferFactory, BootloaderInformation, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds))
         {
             _checksumProvider = ChecksumProvider;
             _stringEncoder = StringEncoder;
+            _bootloaderConfigurationCatalog = BootloaderConfigurationCatalog;
         }
 
         /// <summary>Перечислите типы памяти, присутствующие в образе</summary>
-        protected override IEnumerable<CortexMemoryKind> EnumerateMemoryKinds() { yield return CortexMemoryKind.Flash; }
+        protected override IEnumerable<CortexMemoryKind> EnumerateMemoryKinds()
+        {
+            yield return CortexMemoryKind.Flash;
+        }
 
         protected override IEnumerable<IDataSection<CortexMemoryKind>> GetCustomDataSections(FirmwareProject Project, ModuleProject ModuleProject,
                                                                                              ICollection<BinaryImageFile<CortexMemoryKind>> Files)
@@ -41,7 +49,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                     new CompositePropertiesProvider(
                         new DevicePropertiesProvider(Project.Target),
                         new ModulePropertiesProvider(ModuleProject.Information),
-                        new CortexBootloaderPropertiesProvider(Project.Target))));
+                        new CortexBootloaderPropertiesProvider(Project.Target, _bootloaderConfigurationCatalog))));
 
             yield return new DataSection<CortexMemoryKind>(
                 BootloaderInformation.DynamicPropertiesPlacement,
@@ -52,12 +60,15 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                         new CortexPropertiesSectionContent(
                             new CompositePropertiesProvider(
                                 new SoftwarePropertiesProvider(ModuleProject, _stringEncoder, _checksumProvider))),
-                        new CortexFileTableSectionContent(Files))));
+                        new CortexFileTableSectionContent(Files, _memoryKinds))));
         }
 
         /// <summary>Создайте экземпляр образа прошивки</summary>
         /// <param name="Buffers">Буферы для всех перечисленных в
         ///     <see cref="BinaryFormatterBase{TImage,TMemoryKind,TBootloaderInformationKind}.EnumerateMemoryKinds" /> типов памяти</param>
-        protected override CortexImage CreateImage(IDictionary<CortexMemoryKind, IBuffer> Buffers) { return new CortexImage(Buffers[CortexMemoryKind.Flash]); }
+        protected override CortexImage CreateImage(IDictionary<CortexMemoryKind, IBuffer> Buffers)
+        {
+            return new CortexImage(Buffers[CortexMemoryKind.Flash]);
+        }
     }
 }

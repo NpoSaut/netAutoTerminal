@@ -7,7 +7,6 @@ using FirmwareBurner.ImageFormatters.Binary.FileParsers;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Project;
-using FirmwarePacking;
 
 namespace FirmwareBurner.ImageFormatters.Binary
 {
@@ -83,9 +82,6 @@ namespace FirmwareBurner.ImageFormatters.Binary
 
         /// <summary>Перечислите типы памяти, присутствующие в образе</summary>
         protected abstract IEnumerable<TMemoryKind> EnumerateMemoryKinds();
-
-        /// <summary>Распознаёт расположение файла в образе</summary>
-        protected abstract BinaryImageFile<TMemoryKind> ParsePackageFile(FirmwareFile PackageFile);
 
         /// <summary>Создайте экземпляр образа прошивки</summary>
         /// <param name="Buffers">Буферы для всех перечисленных в <see cref="EnumerateMemoryKinds" /> типов памяти</param>

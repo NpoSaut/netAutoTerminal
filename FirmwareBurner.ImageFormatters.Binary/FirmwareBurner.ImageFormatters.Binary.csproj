@@ -42,16 +42,20 @@
     <Compile Include="BinaryBootloaderInformation.cs" />
     <Compile Include="BinaryFormatterBase.cs" />
     <Compile Include="BinaryImageFile.cs" />
+    <Compile Include="BodyLoaders\IBodyLoader.cs" />
+    <Compile Include="BodyLoaders\ResourceBodyLoader.cs" />
     <Compile Include="DataSections\Special\BootloaderBodyDataSection.cs" />
     <Compile Include="DataSections\ChecksumSectionContentDecorator.cs" />
     <Compile Include="DataSections\ConsecutiveSectionContent.cs" />
     <Compile Include="DataSections\DataSection.cs" />
     <Compile Include="DataSections\IDataSection.cs" />
     <Compile Include="DataSections\ISectionContent.cs" />
+    <Compile Include="Exceptions\BootloaderBodyNotFoundException.cs" />
     <Compile Include="FileParsers\DoubleLayerFileParser.cs" />
     <Compile Include="Exceptions\BadPackageFilenameFormatException.cs" />
     <Compile Include="FileParsers\IFileParser.cs" />
     <Compile Include="DataSections\Special\ImageFileDataSection.cs" />
+    <Compile Include="IBootloaderInformationCatalog.cs" />
     <Compile Include="Placement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
