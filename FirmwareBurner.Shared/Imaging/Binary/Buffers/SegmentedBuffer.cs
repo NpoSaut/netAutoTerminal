@@ -58,6 +58,17 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
             }
         }
 
+        /// <summary>Записывает данные из буфера в другой буфер</summary>
+        /// <param name="DestinationBuffer">Буфер, в который необходимо совершить копирование</param>
+        public void CopyTo(IBuffer DestinationBuffer)
+        {
+            foreach (BufferSegment segment in _segments.OrderBy(s => s.StartPosition))
+            {
+                segment.Seek(0, SeekOrigin.Begin);
+                DestinationBuffer.Write(segment.StartPosition, segment.ToArray());
+            }
+        }
+
         public override string ToString() { return String.Format("SegmentedBuffer: {0} сегментов на {1} Байт", _segments.Count, _segments.Sum(s => s.Length)); }
 
         private class BufferSegment : MemoryStream

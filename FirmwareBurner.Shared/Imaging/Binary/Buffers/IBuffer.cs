@@ -20,5 +20,9 @@ namespace FirmwareBurner.Imaging.Binary.Buffers
         /// <summary>Записывает данные из буфера в указанный поток</summary>
         /// <param name="DestinationStream">Поток, в который будут записаны данные из буфера</param>
         void CopyTo([NotNull] Stream DestinationStream);
+
+        /// <summary>Записывает данные из буфера в другой буфер</summary>
+        /// <param name="DestinationBuffer">Буфер, в который необходимо совершить копирование</param>
+        void CopyTo([NotNull] IBuffer DestinationBuffer);
     }
 }
