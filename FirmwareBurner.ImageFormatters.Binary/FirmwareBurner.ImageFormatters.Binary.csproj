@@ -50,6 +50,7 @@
     <Compile Include="DataSections\DataSection.cs" />
     <Compile Include="DataSections\IDataSection.cs" />
     <Compile Include="DataSections\ISectionContent.cs" />
+    <Compile Include="DataSections\StaticSectionContent.cs" />
     <Compile Include="Exceptions\BootloaderBodyNotFoundException.cs" />
     <Compile Include="FileParsers\DoubleLayerFileParser.cs" />
     <Compile Include="Exceptions\BadPackageFilenameFormatException.cs" />

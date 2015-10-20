@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FirmwareBurner.Annotations;
 using FirmwareBurner.ImageFormatters.Binary;
 using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Cortex.Exceptions;
@@ -12,13 +13,18 @@ namespace FirmwareBurner.ImageFormatters.Cortex.Sections
     internal class CortexFileTableSectionContent : ISectionContent<CortexMemoryKind>
     {
         private static readonly Encoding _encoding = Encoding.GetEncoding(1251);
+        private readonly IChecksumProvider _checksumProvider;
         private readonly ICollection<BinaryImageFile<CortexMemoryKind>> _files;
         private readonly IDictionary<string, CortexMemoryKind> _memoryKinds;
 
-        public CortexFileTableSectionContent(ICollection<BinaryImageFile<CortexMemoryKind>> Files, IDictionary<string, CortexMemoryKind> MemoryKinds)
+        public CortexFileTableSectionContent([NotNull] ICollection<BinaryImageFile<CortexMemoryKind>> Files,
+                                             [NotNull] IDictionary<string, CortexMemoryKind> MemoryKinds,
+                                             [NotNull] IChecksumProvider ChecksumProvider)
         {
+            if (ChecksumProvider == null) throw new ArgumentNullException("ChecksumProvider");
             _files = Files;
             _memoryKinds = MemoryKinds;
+            _checksumProvider = ChecksumProvider;
         }
 
         public void WriteTo(IWriter Writer)
@@ -31,6 +37,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex.Sections
                 Writer.WriteBytes(EncodeMemoryKind(file.Placement.MemoryKind));
                 Writer.WriteInt32(file.Placement.Address);
                 Writer.WriteInt32(file.Content.Length);
+                Writer.WriteUInt16(_checksumProvider.GetChecksum(file.Content));
             }
         }
 

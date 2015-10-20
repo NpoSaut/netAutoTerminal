@@ -57,10 +57,11 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                     RelativePosition.Enclosing,
                     new FudpCrcChecksumProvider(),
                     new ConsecutiveSectionContent<CortexMemoryKind>(
+                        new StaticSectionContent<CortexMemoryKind>(0x56, 0x65),
                         new CortexPropertiesSectionContent(
                             new CompositePropertiesProvider(
                                 new SoftwarePropertiesProvider(ModuleProject, _stringEncoder, _checksumProvider))),
-                        new CortexFileTableSectionContent(Files, _memoryKinds))));
+                        new CortexFileTableSectionContent(Files, _memoryKinds, _checksumProvider))));
         }
 
         /// <summary>Создайте экземпляр образа прошивки</summary>
