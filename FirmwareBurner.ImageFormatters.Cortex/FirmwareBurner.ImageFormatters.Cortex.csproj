@@ -100,11 +100,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Bootloaders\at91sam7a3.bin" />
+    <EmbeddedResource Include="Bootloaders\mdr32f9q2i.bin" />
+    <EmbeddedResource Include="Bootloaders\stm32f4.bin" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bootloaders\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
