@@ -44,7 +44,7 @@ namespace FirmwareBurner.Burning
                 }
                 try
                 {
-                    _burningToolFacade.Burn(image, burnProgress);
+                    _burningToolFacade.Burn(image, Project.Target, burnProgress);
                 }
                 catch (Exception e)
                 {

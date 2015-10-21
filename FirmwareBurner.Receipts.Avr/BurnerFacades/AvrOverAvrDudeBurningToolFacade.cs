@@ -23,8 +23,9 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
+        /// <param name="Target">Цель прошивки</param>
         /// <param name="ProgressToken"></param>
-        public void Burn(AvrImage Image, IProgressToken ProgressToken)
+        public void Burn(AvrImage Image, TargetInformation Target, IProgressToken ProgressToken)
         {
             AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
             var fuses = new Fuses(Image.Fuses.FuseH, Image.Fuses.FuseL, Image.Fuses.FuseX);

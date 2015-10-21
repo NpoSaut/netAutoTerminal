@@ -17,8 +17,9 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
-        /// <param name="ProgressToken"></param>
-        public void Burn(AvrImage Image, IProgressToken ProgressToken)
+        /// <param name="Target">Цель прошивки</param>
+        /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
+        public void Burn(AvrImage Image, TargetInformation Target, IProgressToken ProgressToken)
         {
             SaveBuffer(Image.FlashBuffer, "flash", "Куда сохранить файл с Flash?");
             SaveBuffer(Image.EepromBuffer, "eeprom", "Куда сохранить файл с EEPROM?");
