@@ -47,6 +47,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.ImageFormatt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.Receipts.Cortex", "FirmwareBurner.Receipts.Cortex\FirmwareBurner.Receipts.Cortex.csproj", "{B0318B72-BC21-4872-BA79-20BD9D6ED207}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.BurningTools.OpenOcd", "FirmwareBurner.BurningTools.OpenOcd\FirmwareBurner.BurningTools.OpenOcd.csproj", "{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -227,6 +229,16 @@ Global
 		{B0318B72-BC21-4872-BA79-20BD9D6ED207}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{B0318B72-BC21-4872-BA79-20BD9D6ED207}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B0318B72-BC21-4872-BA79-20BD9D6ED207}.Release|x86.ActiveCfg = Release|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,6 +256,7 @@ Global
 		{FF144D53-22F6-445E-A113-C8218E015980} = {CC97A6BE-9951-41AC-BFCE-E7F27248A525}
 		{2B34A3AE-B635-4F22-8982-5ACA97A801CE} = {49AD1DB4-091A-47D3-83F2-2C10CEAA9C1B}
 		{B0318B72-BC21-4872-BA79-20BD9D6ED207} = {49BAFDB6-9F31-45A8-877D-7EB29CBC9851}
+		{5B3DEB0A-EF74-4EB6-A15E-ABD18FE23133} = {68890B6A-A57C-431C-B8BA-53F6C320A7D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
