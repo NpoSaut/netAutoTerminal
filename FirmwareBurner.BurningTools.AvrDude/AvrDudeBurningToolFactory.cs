@@ -10,12 +10,12 @@ namespace FirmwareBurner.BurningTools.AvrDude
         private readonly IChipPseudonameProvider _chipPseudonameProvider;
         private readonly IProgressControllerFactory _progressControllerFactory;
         private readonly IToolBodyFactory _toolBodyFactory;
-        private readonly IToolLauncher _toolLauncherFactory;
+        private readonly IToolLauncher _toolLauncher;
 
-        public AvrDudeBurningToolFactory(IToolLauncher ToolLauncherFactoryFactory, IChipPseudonameProvider ChipPseudonameProvider,
+        public AvrDudeBurningToolFactory(IToolLauncher ToolLauncher, IChipPseudonameProvider ChipPseudonameProvider,
                                          IProgressControllerFactory ProgressControllerFactory)
         {
-            _toolLauncherFactory = ToolLauncherFactoryFactory;
+            _toolLauncher = ToolLauncher;
             _chipPseudonameProvider = ChipPseudonameProvider;
             _progressControllerFactory = ProgressControllerFactory;
             _toolBodyFactory = new SingletonEmbeddedToolBodyFactoryBase(typeof (AvrDudeBodyMarker), "avrdude.exe");
@@ -23,7 +23,7 @@ namespace FirmwareBurner.BurningTools.AvrDude
 
         public AvrDudeBurningTool GetBurningTool(string ChipName)
         {
-            return new AvrDudeBurningTool(_chipPseudonameProvider.GetChipPseudoname(ChipName), _toolBodyFactory.GetToolBody(), _toolLauncherFactory,
+            return new AvrDudeBurningTool(_chipPseudonameProvider.GetChipPseudoname(ChipName), _toolBodyFactory.GetToolBody(), _toolLauncher,
                                           _progressControllerFactory);
         }
     }
