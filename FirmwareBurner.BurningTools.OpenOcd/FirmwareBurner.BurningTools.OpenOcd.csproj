@@ -90,19 +90,19 @@
     <Content Include="Tools\OpenOCD\scripts\board\APPI-03.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tools\OpenOCD\scripts\board\BoardMDR.cfg">
+    <Content Include="Tools\OpenOCD\scripts\board\MDR.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tools\OpenOCD\scripts\board\BoardSAM7.cfg">
+    <Content Include="Tools\OpenOCD\scripts\board\SAM7.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tools\OpenOCD\scripts\board\BoardSTM32F2.cfg">
+    <Content Include="Tools\OpenOCD\scripts\board\STM32F2.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tools\OpenOCD\scripts\board\BoardSTM32F4.cfg">
+    <Content Include="Tools\OpenOCD\scripts\board\STM32F4.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Tools\OpenOCD\scripts\board\ShluzCAN-01.cfg">
+    <Content Include="Tools\OpenOCD\scripts\board\CanGateway-01.cfg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Tools\OpenOCD\scripts\chip\atmel\at91\aic.tcl">

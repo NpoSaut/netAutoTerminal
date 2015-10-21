@@ -21,9 +21,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd
         public void Burn(string BoardName, string TargetName, string FirmwareHexPath)
         {
             Process process = _launcher.Execute(_toolBody, GetLaunchParameters(BoardName, TargetName, FirmwareHexPath));
-            //process.WaitForExit();
-            var error = process.StandardError.ReadToEnd();
-            var output = process.StandardOutput.ReadToEnd();
+            process.WaitForExit();
             if (process.ExitCode != 0)
                 throw new OpenOcdException(process.ExitCode);
         }
