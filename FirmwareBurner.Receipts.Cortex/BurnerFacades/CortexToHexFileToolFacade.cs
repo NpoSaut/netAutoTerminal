@@ -22,8 +22,9 @@ namespace FirmwareBurner.Receipts.Cortex.BurnerFacades
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
+        /// <param name="Target">Цель прошивки</param>
         /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
-        public void Burn(CortexImage Image, IProgressToken ProgressToken) { SaveBuffer(Image.FlashBuffer, "flash", "Куда сохранить файл с прошивкой?"); }
+        public void Burn(CortexImage Image, TargetInformation Target, IProgressToken ProgressToken) { SaveBuffer(Image.FlashBuffer, "flash", "Куда сохранить файл с прошивкой?"); }
 
         private void SaveBuffer(IBuffer Buffer, string FileName, string Message)
         {
