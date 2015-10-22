@@ -12,11 +12,14 @@ namespace FirmwareBurner.Receipts.Cortex.BurnerFacades
     {
         private readonly IOcdBurningParametersProvider _ocdBurningParametersProvider;
         private readonly OpenOcdToolFactory _openOcdToolFactory;
+        private readonly IProgressControllerFactory _progressControllerFactory;
 
-        public CortexOverOpenOcdToolFacade(OpenOcdToolFactory OpenOcdToolFactory, IOcdBurningParametersProvider OcdBurningParametersProvider)
+        public CortexOverOpenOcdToolFacade(OpenOcdToolFactory OpenOcdToolFactory, IOcdBurningParametersProvider OcdBurningParametersProvider,
+                                           IProgressControllerFactory ProgressControllerFactory)
         {
             _openOcdToolFactory = OpenOcdToolFactory;
             _ocdBurningParametersProvider = OcdBurningParametersProvider;
+            _progressControllerFactory = ProgressControllerFactory;
         }
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
@@ -25,16 +28,19 @@ namespace FirmwareBurner.Receipts.Cortex.BurnerFacades
         /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
         public void Burn(CortexImage Image, TargetInformation Target, IProgressToken ProgressToken)
         {
-            OpenOcdTool openOcd = _openOcdToolFactory.GetBurningTool();
-
-            var hexStream = new IntelHexStream();
-            Image.FlashBuffer.CopyTo(hexStream);
-            IntelHexFile hexFile = hexStream.GetHexFile();
-            using (var file = new TemporaryFile(hexFile.OpenIntelHexStream()))
+            using (IProgressController progress = _progressControllerFactory.CreateController(ProgressToken))
             {
-                openOcd.Burn(_ocdBurningParametersProvider.GetBoardName(Target),
-                             _ocdBurningParametersProvider.GetTargetName(Target),
-                             file.FileInfo.FullName);
+                OpenOcdTool openOcd = _openOcdToolFactory.GetBurningTool();
+
+                var hexStream = new IntelHexStream();
+                Image.FlashBuffer.CopyTo(hexStream);
+                IntelHexFile hexFile = hexStream.GetHexFile();
+                using (var file = new TemporaryFile(hexFile.OpenIntelHexStream()))
+                {
+                    openOcd.Burn(_ocdBurningParametersProvider.GetBoardName(Target),
+                                 _ocdBurningParametersProvider.GetTargetName(Target),
+                                 file.FileInfo.FullName);
+                }
             }
         }
     }
