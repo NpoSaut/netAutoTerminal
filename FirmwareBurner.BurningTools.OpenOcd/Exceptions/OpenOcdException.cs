@@ -12,6 +12,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Exceptions
             this.ErrorCode = ErrorCode;
         }
 
+        public OpenOcdException(string Message) : base(Message) { }
         public OpenOcdException(Exception inner) : base("Ошибка при работе с программой OpenOCD", inner) { }
 
         protected OpenOcdException(

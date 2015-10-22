@@ -39,7 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\OpenOcdConfigurationFileNotFoundException.cs" />
+    <Compile Include="Exceptions\OpenOcdDeviceNotConnectedException.cs" />
     <Compile Include="Exceptions\OpenOcdException.cs" />
+    <Compile Include="Exceptions\OpenOcdProgrammerNotConnectedException.cs" />
     <Compile Include="OpenOcdTool.cs" />
     <Compile Include="OpenOcdToolFactory.cs" />
     <Compile Include="Parameters\BoardConfigurationOpenOcdLaunchParameter.cs" />
