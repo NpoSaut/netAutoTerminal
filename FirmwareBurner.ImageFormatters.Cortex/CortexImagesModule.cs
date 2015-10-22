@@ -14,7 +14,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         {
             _container
                 .RegisterType<ICortexBootloaderInformationCatalog, StaticCortexBootloaderInformationCatalog>(new ContainerControlledLifetimeManager())
-                .RegisterType<IBootloaderConfigurationCatalog, StaticBootloaderConfigurationCatalog>(new ContainerControlledLifetimeManager())
+                .RegisterType<IBootloaderConfigurationCatalog, IndexBootloaderConfigurationCatalog>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICortexBootloaderInformationCatalog, StaticCortexBootloaderInformationCatalog>(new ContainerControlledLifetimeManager());
 
             _container

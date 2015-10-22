@@ -69,7 +69,7 @@
   <ItemGroup>
     <Compile Include="Catalog\IBootloaderConfigurationCatalog.cs" />
     <Compile Include="Catalog\ICortexBootloaderInformationCatalog.cs" />
-    <Compile Include="Catalog\StaticBootloaderConfigurationCatalog.cs" />
+    <Compile Include="Catalog\IndexBootloaderConfigurationCatalog.cs" />
     <Compile Include="Catalog\StaticCortexBootloaderInformationCatalog.cs" />
     <Compile Include="CortexBootloaderInformation.cs" />
     <Compile Include="CortexBootloaderPropertiesProvider.cs" />
@@ -97,6 +97,10 @@
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
+      <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
+      <Name>FirmwarePacking</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
