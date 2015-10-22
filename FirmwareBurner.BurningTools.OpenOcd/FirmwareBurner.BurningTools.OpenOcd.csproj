@@ -43,6 +43,7 @@
     <Compile Include="Exceptions\OpenOcdDeviceNotConnectedException.cs" />
     <Compile Include="Exceptions\OpenOcdException.cs" />
     <Compile Include="Exceptions\OpenOcdProgrammerNotConnectedException.cs" />
+    <Compile Include="Exceptions\UnknownOpenOcdException.cs" />
     <Compile Include="OpenOcdTool.cs" />
     <Compile Include="OpenOcdToolFactory.cs" />
     <Compile Include="Parameters\BoardConfigurationOpenOcdLaunchParameter.cs" />
