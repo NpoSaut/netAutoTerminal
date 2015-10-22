@@ -7,7 +7,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Exceptions
     [Serializable]
     public class OpenOcdDeviceNotConnectedException : OpenOcdException
     {
-        public OpenOcdDeviceNotConnectedException() : base("Ячейка не подключена") { }
+        public OpenOcdDeviceNotConnectedException(string Output) : base("Ячейка не подключена", Output) { }
 
         protected OpenOcdDeviceNotConnectedException(
             SerializationInfo info,

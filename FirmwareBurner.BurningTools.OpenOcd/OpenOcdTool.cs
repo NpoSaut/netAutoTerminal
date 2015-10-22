@@ -26,14 +26,14 @@ namespace FirmwareBurner.BurningTools.OpenOcd
             string output = process.StandardError.ReadToEnd();
 
             CheckOutput(output, "Error: no device found",
-                g => new OpenOcdProgrammerNotConnectedException());
+                g => new OpenOcdProgrammerNotConnectedException(output));
             CheckOutput(output, "Error: JTAG scan chain interrogation failed",
-                g => new OpenOcdDeviceNotConnectedException());
+                g => new OpenOcdDeviceNotConnectedException(output));
             CheckOutput(output, @"Runtime Error: embedded:startup\.tcl:\d+: Can't find /board/(?<BoardName>.+)\.cfg",
-                g => new OpenOcdConfigurationFileNotFoundException(g["BoardName"].Value));
+                g => new OpenOcdConfigurationFileNotFoundException(g["BoardName"].Value, output));
 
             if (process.ExitCode != 0)
-                throw new OpenOcdException(process.ExitCode);
+                throw new OpenOcdException(process.ExitCode, output);
         }
 
         private void CheckOutput(string Output, string Expression, Func<GroupCollection, OpenOcdException> ExceptionFactory)

@@ -7,7 +7,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Exceptions
     [Serializable]
     public class OpenOcdProgrammerNotConnectedException : OpenOcdException
     {
-        public OpenOcdProgrammerNotConnectedException() : base("Программатор не подключен") { }
+        public OpenOcdProgrammerNotConnectedException(string Output) : base("Программатор не подключен", Output) { }
 
         protected OpenOcdProgrammerNotConnectedException(
             SerializationInfo info,

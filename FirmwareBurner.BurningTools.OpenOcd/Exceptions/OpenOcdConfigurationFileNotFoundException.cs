@@ -7,8 +7,8 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Exceptions
     [Serializable]
     public class OpenOcdConfigurationFileNotFoundException : OpenOcdException
     {
-        public OpenOcdConfigurationFileNotFoundException(string FileName)
-            : base(string.Format("Не найден файл конфигурации, необходимый для прошивки ({0})", FileName)) { }
+        public OpenOcdConfigurationFileNotFoundException(string FileName, string Output)
+            : base(string.Format("Не найден файл конфигурации, необходимый для прошивки ({0})", FileName), Output) { }
 
         protected OpenOcdConfigurationFileNotFoundException(
             SerializationInfo info,
