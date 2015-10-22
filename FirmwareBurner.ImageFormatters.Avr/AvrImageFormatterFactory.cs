@@ -1,7 +1,9 @@
-﻿using AsyncOperations.Progress;
+﻿using System.Collections.Generic;
+using AsyncOperations.Progress;
 using FirmwareBurner.Annotations;
+using FirmwareBurner.ImageFormatters.Avr.Catalog;
+using FirmwareBurner.ImageFormatters.Binary.FileParsers;
 using FirmwareBurner.Imaging;
-using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Imaging.Binary.Buffers;
 
 namespace FirmwareBurner.ImageFormatters.Avr
@@ -9,29 +11,36 @@ namespace FirmwareBurner.ImageFormatters.Avr
     [UsedImplicitly]
     public class AvrImageFormatterFactory : IImageFormatterFactory<AvrImage>
     {
-        private readonly IAvrBootloadersCatalog _bootloadersCatalog;
-        private readonly IBufferFactory _bufferFactory;
-        private readonly IAvrFileTableFormatter _filesTableFormatter;
-        private readonly IProgressControllerFactory _progressControllerFactory;
-        private readonly IAvrPropertiesTableFormatter _propertiesTableFormatter;
-        private readonly IPropertiesTableGenerator _propertiesTableGenerator;
+        private static readonly IDictionary<string, AvrMemoryKind> _memoryKinds =
+            new Dictionary<string, AvrMemoryKind>
+            {
+                { "f", AvrMemoryKind.Flash },
+                { "e", AvrMemoryKind.Eeprom }
+            };
 
-        public AvrImageFormatterFactory(IPropertiesTableGenerator PropertiesTableGenerator, IAvrBootloadersCatalog BootloadersCatalog,
-                                        IBufferFactory BufferFactory, IAvrFileTableFormatter FilesTableFormatter,
-                                        IAvrPropertiesTableFormatter PropertiesTableFormatter, IProgressControllerFactory ProgressControllerFactory)
+        private readonly IAvrBootloadersCatalog _bootloadersCatalog;
+
+        private readonly IBufferFactory _bufferFactory;
+        private readonly IChecksumProvider _checksumProvider;
+        private readonly IProgressControllerFactory _progressControllerFactory;
+        private readonly IStringEncoder _stringEncoder;
+
+        public AvrImageFormatterFactory(IAvrBootloadersCatalog BootloadersCatalog, IBufferFactory BufferFactory,
+                                        IProgressControllerFactory ProgressControllerFactory, IChecksumProvider ChecksumProvider, IStringEncoder StringEncoder)
         {
-            _propertiesTableGenerator = PropertiesTableGenerator;
             _bootloadersCatalog = BootloadersCatalog;
             _bufferFactory = BufferFactory;
-            _filesTableFormatter = FilesTableFormatter;
-            _propertiesTableFormatter = PropertiesTableFormatter;
             _progressControllerFactory = ProgressControllerFactory;
+            _checksumProvider = ChecksumProvider;
+            _stringEncoder = StringEncoder;
         }
 
+        /// <summary>Создаёт сборщик образа для указанного типа устройства</summary>
+        /// <param name="DeviceName">Тип устройства</param>
         public IImageFormatter<AvrImage> GetFormatter(string DeviceName)
         {
-            return new AvrImageFormatter(_bootloadersCatalog.GetBootloaderInformation(DeviceName), _propertiesTableGenerator, _bufferFactory,
-                                         _filesTableFormatter, _propertiesTableFormatter, _progressControllerFactory);
+            return new AvrImageFormatter(_progressControllerFactory, _bufferFactory, _bootloadersCatalog.GetBootloaderInformation(DeviceName),
+                                         new DoubleLayerFileParser<AvrMemoryKind>(_memoryKinds), _checksumProvider, _stringEncoder);
         }
     }
 }
