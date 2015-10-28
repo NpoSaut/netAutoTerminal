@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="BinaryBootloaderInformation.cs" />
     <Compile Include="BinaryFormatterBase.cs" />
+    <Compile Include="BootloaderBinaryFormatterBase.cs" />
     <Compile Include="BinaryImageFile.cs" />
     <Compile Include="BodyLoaders\IBodyLoader.cs" />
     <Compile Include="BodyLoaders\ResourceBodyLoader.cs" />

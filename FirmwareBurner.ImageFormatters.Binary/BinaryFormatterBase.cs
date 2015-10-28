@@ -1,8 +1,7 @@
-п»їusing System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using AsyncOperations.Progress;
 using FirmwareBurner.ImageFormatters.Binary.DataSections;
-using FirmwareBurner.ImageFormatters.Binary.DataSections.Special;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
@@ -10,88 +9,58 @@ using FirmwareBurner.Project;
 
 namespace FirmwareBurner.ImageFormatters.Binary
 {
-    public abstract class BinaryFormatterBase<TImage, TMemoryKind, TBootloaderInformationKind> : IImageFormatter<TImage>
-        where TBootloaderInformationKind : BinaryBootloaderInformation<TMemoryKind>
-        where TImage : IImage
+    public abstract class BinaryFormatterBase<TImage, TMemoryKind> : IImageFormatter<TImage> where TImage : IImage
     {
-        protected readonly TBootloaderInformationKind BootloaderInformation;
         private readonly IBufferFactory _bufferFactory;
         private readonly IFileParser<TMemoryKind> _fileParser;
         private readonly IProgressControllerFactory _progressControllerFactory;
 
-        public BinaryFormatterBase(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
-                                   TBootloaderInformationKind BootloaderInformation, IFileParser<TMemoryKind> FileParser)
+        protected BinaryFormatterBase(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
+                                      IFileParser<TMemoryKind> FileParser)
         {
             _progressControllerFactory = ProgressControllerFactory;
             _bufferFactory = BufferFactory;
-            this.BootloaderInformation = BootloaderInformation;
             _fileParser = FileParser;
         }
 
-        /// <summary>Р“РµРЅРµСЂРёСЂСѓРµС‚ РѕР±СЂР°Р· РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РїСЂРѕРµРєС‚Р° РїСЂРѕС€РёРІРєРё</summary>
-        /// <param name="Project">РџСЂРѕРµРєС‚ РѕР±СЂР°Р·Р°</param>
-        /// <param name="ProgressToken">РўРѕРєРµРЅ РїСЂРѕРіСЂРµСЃСЃР° РІС‹РїРѕР»РЅРµРЅРёСЏ РѕРїРµСЂР°С†РёРё</param>
-        /// <returns>РћР±СЂР°Р· РїСЂРѕС€РёРІРєРё</returns>
+        /// <summary>Генерирует образ для указанного проекта прошивки</summary>
+        /// <param name="Project">Проект образа</param>
+        /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
+        /// <returns>Образ прошивки</returns>
         public TImage GetImage(FirmwareProject Project, IProgressToken ProgressToken)
         {
             using (_progressControllerFactory.CreateController(ProgressToken))
             {
-                // РџРѕРґРіРѕС‚РѕРІРєР° Р±СѓС„РµСЂРѕРІ
+                // Подготовка буферов
                 Dictionary<TMemoryKind, IBuffer> buffers = EnumerateMemoryKinds().ToDictionary(mk => mk, mk => _bufferFactory.CreateBuffer());
 
-                // РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє СЃРµРєС†РёР№
-                IEnumerable<IDataSection<TMemoryKind>> dataSections = GetDataSections(Project);
+                ModuleProject moduleProject = Project.Modules.Single();
+                IList<BinaryImageFile<TMemoryKind>> firmwareFiles = moduleProject.FirmwareContent.Files.Select(_fileParser.GetImageFile).ToList();
 
-                // Р—Р°РїРёСЃС‹РІР°РµРј СЃРµРєС†РёРё РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёРµ Р±СѓС„РµСЂС‹
+                // Получаем список секций
+                IEnumerable<IDataSection<TMemoryKind>> dataSections = GetDataSections(Project, moduleProject, firmwareFiles);
+
+                // Записываем секции в соответствующие буферы
                 foreach (var dataSection in dataSections)
                     dataSection.WriteTo(buffers[dataSection.Placement.MemoryKind]);
 
-                // РЎРѕР·РґР°РЅРёРµ РѕР±СЂР°Р·Р° РёР· Р±СѓС„РµСЂРѕРІ
+                // Создание образа из буферов
                 return CreateImage(buffers);
             }
         }
 
-        /// <summary>РџРµСЂРµС‡РёСЃР»СЏРµС‚ РІСЃРµ СЃРµРєС†РёРё РґР°РЅРЅС‹С… РІ РѕР±СЂР°Р·Рµ</summary>
-        /// <param name="Project">РџСЂРѕРµРєС‚ РѕР±СЂР°Р·Р°</param>
-        protected virtual IEnumerable<IDataSection<TMemoryKind>> GetDataSections(FirmwareProject Project)
-        {
-            ModuleProject moduleProject = Project.Modules.Single();
-            IList<BinaryImageFile<TMemoryKind>> firmwareFiles = moduleProject.FirmwareContent.Files.Select(_fileParser.GetImageFile).ToList();
+        /// <summary>Перечисляет все секции данных в образе</summary>
+        /// <param name="Project">Проект образа</param>
+        /// <param name="ModuleProject"></param>
+        /// <param name="FirmwareFiles"></param>
+        protected abstract IEnumerable<IDataSection<TMemoryKind>> GetDataSections(FirmwareProject Project, ModuleProject ModuleProject,
+                                                                                  IList<BinaryImageFile<TMemoryKind>> FirmwareFiles);
 
-            foreach (var customDataSection in GetCustomDataSections(Project, moduleProject, firmwareFiles))
-                yield return customDataSection;
-
-            foreach (var file in firmwareFiles)
-                yield return GetImageFileDataSection(file);
-
-            yield return GetBootloaderBodyDataSection();
-        }
-
-        /// <summary>РЎРѕР·РґР°С‘С‚ СЃРµРєС†РёСЋ РІ РѕР±СЂР°Р·Рµ РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ С„Р°Р№Р»Р°</summary>
-        /// <param name="File">Р¤Р°Р№Р», РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ СЃРѕР·РґР°С‘С‚СЃСЏ СЃРµРєС†РёСЏ</param>
-        private static ImageFileDataSection<TMemoryKind> GetImageFileDataSection(BinaryImageFile<TMemoryKind> File)
-        {
-            return new ImageFileDataSection<TMemoryKind>(File);
-        }
-
-        /// <summary>РЎРѕР·РґР°С‘С‚ СЃРµРєС†РёСЋ СЃ С‚РµР»РѕРј Р·Р°РіСЂСѓР·С‡РёРєР°</summary>
-        protected virtual BootloaderBodyDataSection<TMemoryKind> GetBootloaderBodyDataSection()
-        {
-            return new BootloaderBodyDataSection<TMemoryKind>(BootloaderInformation);
-        }
-
-        /// <summary>РџРµСЂРµС‡РёСЃР»РёС‚Рµ С‚РёРїС‹ РїР°РјСЏС‚Рё, РїСЂРёСЃСѓС‚СЃС‚РІСѓСЋС‰РёРµ РІ РѕР±СЂР°Р·Рµ</summary>
+        /// <summary>Перечислите типы памяти, присутствующие в образе</summary>
         protected abstract IEnumerable<TMemoryKind> EnumerateMemoryKinds();
 
-        /// <summary>РЎРѕР·РґР°Р№С‚Рµ СЌРєР·РµРјРїР»СЏСЂ РѕР±СЂР°Р·Р° РїСЂРѕС€РёРІРєРё</summary>
-        /// <param name="Buffers">Р‘СѓС„РµСЂС‹ РґР»СЏ РІСЃРµС… РїРµСЂРµС‡РёСЃР»РµРЅРЅС‹С… РІ <see cref="EnumerateMemoryKinds" /> С‚РёРїРѕРІ РїР°РјСЏС‚Рё</param>
+        /// <summary>Создайте экземпляр образа прошивки</summary>
+        /// <param name="Buffers">Буферы для всех перечисленных в <see cref="EnumerateMemoryKinds" /> типов памяти</param>
         protected abstract TImage CreateImage(IDictionary<TMemoryKind, IBuffer> Buffers);
-
-        /// <summary>РџРµСЂРµС‡РёСЃР»РёС‚Рµ СѓРЅРёРєР°Р»СЊРЅС‹Рµ СЃРµРєС†РёРё СЃ РґР°РЅРЅС‹РјРё РґР»СЏ РІР°С€РµРіРѕ Р·Р°РіСЂСѓР·С‡РёРєР° (С‚Р°Р±Р»РёС†С‹ СЃРІРѕР№СЃС‚РІ, С„Р°Р№Р»РѕРІ Рё РґСЂСѓРіРѕРµ)</summary>
-        /// <param name="Project">РџСЂРѕРµРєС‚ РѕР±СЂР°Р·Р°</param>
-        /// <param name="ModuleProject">РџСЂРѕРіСЂР°РјРјРЅС‹Р№ РјРѕРґСѓР»СЊ, РґР»СЏ РєРѕС‚РѕСЂРѕРіРѕ С„РѕСЂРјРёСЂСѓСЋС‚СЃСЏ СЃРµРєС†РёРё</param>
-        /// <param name="Files">РЎРїРёСЃРѕРє С„Р°Р№Р»РѕРІ РѕР±СЂР°Р·Р°</param>
-        protected abstract IEnumerable<IDataSection<TMemoryKind>> GetCustomDataSections(FirmwareProject Project, ModuleProject ModuleProject,
-                                                                                        ICollection<BinaryImageFile<TMemoryKind>> Files);
     }
 }

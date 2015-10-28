@@ -11,7 +11,7 @@ using FirmwareBurner.Project;
 
 namespace FirmwareBurner.ImageFormatters.Cortex
 {
-    public class CortexImageFormatter : BinaryFormatterBase<CortexImage, CortexMemoryKind, CortexBootloaderInformation>
+    public class CortexImageFormatter : BootloaderBinaryFormatterBase<CortexImage, CortexMemoryKind, CortexBootloaderInformation>
     {
         private static readonly IDictionary<string, CortexMemoryKind> _memoryKinds =
             new Dictionary<string, CortexMemoryKind>
