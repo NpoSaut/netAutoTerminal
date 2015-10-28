@@ -1,5 +1,4 @@
 ﻿using AsyncOperations.Progress;
-using FirmwareBurner.Burning;
 using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
 
@@ -20,7 +19,8 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         /// <param name="DeviceName">Тип устройства</param>
         public IImageFormatter<CortexImage> GetFormatter(string DeviceName)
         {
-            return new CortexEmptyImageFormatter(_progressControllerFactory, _bufferFactory);
+            return new CortexEmptyImageFormatter(new ImageFormatterInformation("Без загрузчика", new BootloaderApi(0, 0, int.MaxValue)),
+                                                 _progressControllerFactory, _bufferFactory);
         }
     }
 }

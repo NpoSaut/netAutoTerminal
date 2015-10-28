@@ -5,6 +5,7 @@ using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
 using FirmwareBurner.ImageFormatters.Cortex.Catalog;
 using FirmwareBurner.ImageFormatters.Cortex.Sections;
+using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Imaging.PropertiesProviders;
 using FirmwareBurner.Project;
@@ -24,10 +25,10 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         private readonly IChecksumProvider _checksumProvider;
         private readonly IStringEncoder _stringEncoder;
 
-        public CortexImageFormatter(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
-                                    IChecksumProvider ChecksumProvider, IStringEncoder StringEncoder, IBootloaderConfigurationCatalog BootloaderConfigurationCatalog,
-                                    CortexBootloaderInformation BootloaderInformation)
-            : base(ProgressControllerFactory, BufferFactory, BootloaderInformation, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds))
+        public CortexImageFormatter(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
+                                    IChecksumProvider ChecksumProvider, IStringEncoder StringEncoder,
+                                    IBootloaderConfigurationCatalog BootloaderConfigurationCatalog, CortexBootloaderInformation BootloaderInformation)
+            : base(Information, ProgressControllerFactory, BufferFactory, BootloaderInformation, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds))
         {
             _checksumProvider = ChecksumProvider;
             _stringEncoder = StringEncoder;
@@ -35,10 +36,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         }
 
         /// <summary>Перечислите типы памяти, присутствующие в образе</summary>
-        protected override IEnumerable<CortexMemoryKind> EnumerateMemoryKinds()
-        {
-            yield return CortexMemoryKind.Flash;
-        }
+        protected override IEnumerable<CortexMemoryKind> EnumerateMemoryKinds() { yield return CortexMemoryKind.Flash; }
 
         protected override IEnumerable<IDataSection<CortexMemoryKind>> GetCustomDataSections(FirmwareProject Project, ModuleProject ModuleProject,
                                                                                              ICollection<BinaryImageFile<CortexMemoryKind>> Files)
@@ -65,11 +63,11 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         }
 
         /// <summary>Создайте экземпляр образа прошивки</summary>
-        /// <param name="Buffers">Буферы для всех перечисленных в
-        ///     <see cref="BinaryFormatterBase{TImage,TMemoryKind,TBootloaderInformationKind}.EnumerateMemoryKinds" /> типов памяти</param>
-        protected override CortexImage CreateImage(IDictionary<CortexMemoryKind, IBuffer> Buffers)
-        {
-            return new CortexImage(Buffers[CortexMemoryKind.Flash]);
-        }
+        /// <param name="Buffers">
+        ///     Буферы для всех перечисленных в
+        ///     <see cref="BinaryFormatterBase{TImage,TMemoryKind,TBootloaderInformationKind}.EnumerateMemoryKinds" />
+        ///     типов памяти
+        /// </param>
+        protected override CortexImage CreateImage(IDictionary<CortexMemoryKind, IBuffer> Buffers) { return new CortexImage(Buffers[CortexMemoryKind.Flash]); }
     }
 }

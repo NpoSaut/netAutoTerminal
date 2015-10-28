@@ -33,9 +33,11 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         /// <param name="DeviceName">Тип устройства</param>
         public IImageFormatter<CortexImage> GetFormatter(string DeviceName)
         {
-            return new CortexImageFormatter(_progressControllerFactory, _bufferFactory, _checksumProvider, _stringEncoder,
+            CortexBootloaderInformation bootloaderInformation = _bootloaderInformationCatalog.GetBootloaderInformation(DeviceName);
+            return new CortexImageFormatter(new ImageFormatterInformation("С загрузчиком", bootloaderInformation.Api),
+                                            _progressControllerFactory, _bufferFactory, _checksumProvider, _stringEncoder,
                                             _bootloaderConfigurationCatalog,
-                                            _bootloaderInformationCatalog.GetBootloaderInformation(DeviceName));
+                                            bootloaderInformation);
         }
     }
 }

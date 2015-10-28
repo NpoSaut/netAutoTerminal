@@ -81,9 +81,11 @@
     <Compile Include="Imaging\Binary\Buffers\IBuffer.cs" />
     <Compile Include="Imaging\Binary\Buffers\IBufferFactory.cs" />
     <Compile Include="Imaging\Binary\Buffers\WriterBase.cs" />
+    <Compile Include="Imaging\BootloaderApi.cs" />
     <Compile Include="Imaging\IImageFormatterFactory.cs" />
     <Compile Include="Imaging\IImageFormattersRepository.cs" />
     <Compile Include="Imaging\ImageFormatterException.cs" />
+    <Compile Include="Imaging\ImageFormatterInformation.cs" />
     <Compile Include="Imaging\IPropertiesProvider.cs" />
     <Compile Include="Imaging\PropertiesProviders\CompositePropertiesProvider.cs" />
     <Compile Include="Imaging\PropertiesProviders\DevicePropertiesProvider.cs" />

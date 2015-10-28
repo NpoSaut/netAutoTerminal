@@ -18,7 +18,8 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                 .RegisterType<ICortexBootloaderInformationCatalog, StaticCortexBootloaderInformationCatalog>(new ContainerControlledLifetimeManager());
 
             _container
-                .RegisterType<IImageFormatterFactory<CortexImage>, CortexImageFormatterFactory>(new ContainerControlledLifetimeManager());
+                .RegisterType<IImageFormatterFactory<CortexImage>, CortexImageFormatterFactory>("Раз", new ContainerControlledLifetimeManager())
+                .RegisterType<IImageFormatterFactory<CortexImage>, CortexEmptyImageFormatterFactory>("Два", new ContainerControlledLifetimeManager());
         }
     }
 }

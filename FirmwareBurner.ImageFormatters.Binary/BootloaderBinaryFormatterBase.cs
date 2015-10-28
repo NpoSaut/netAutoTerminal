@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using AsyncOperations.Progress;
-using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Binary.DataSections.Special;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
@@ -17,9 +15,10 @@ namespace FirmwareBurner.ImageFormatters.Binary
     {
         protected readonly TBootloaderInformationKind BootloaderInformation;
 
-        protected BootloaderBinaryFormatterBase(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
-                                                TBootloaderInformationKind BootloaderInformation, IFileParser<TMemoryKind> FileParser)
-            : base(ProgressControllerFactory, BufferFactory, FileParser)
+        protected BootloaderBinaryFormatterBase(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
+                                                IBufferFactory BufferFactory, TBootloaderInformationKind BootloaderInformation,
+                                                IFileParser<TMemoryKind> FileParser)
+            : base(Information, ProgressControllerFactory, BufferFactory, FileParser)
         {
             this.BootloaderInformation = BootloaderInformation;
         }
@@ -28,7 +27,8 @@ namespace FirmwareBurner.ImageFormatters.Binary
         /// <param name="Project">Проект образа</param>
         /// <param name="ModuleProject"></param>
         /// <param name="FirmwareFiles"></param>
-        protected override IEnumerable<IDataSection<TMemoryKind>> GetDataSections(FirmwareProject Project, ModuleProject ModuleProject, IList<BinaryImageFile<TMemoryKind>> FirmwareFiles)
+        protected override IEnumerable<IDataSection<TMemoryKind>> GetDataSections(FirmwareProject Project, ModuleProject ModuleProject,
+                                                                                  IList<BinaryImageFile<TMemoryKind>> FirmwareFiles)
         {
             foreach (var customDataSection in GetCustomDataSections(Project, ModuleProject, FirmwareFiles))
                 yield return customDataSection;

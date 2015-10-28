@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AsyncOperations.Progress;
-using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Binary;
 using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Binary.DataSections.Special;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
+using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Project;
 
@@ -19,9 +19,9 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                 { "f", CortexMemoryKind.Flash }
             };
 
-        public CortexEmptyImageFormatter(IProgressControllerFactory ProgressControllerFactory,
+        public CortexEmptyImageFormatter(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
                                          IBufferFactory BufferFactory)
-            : base(ProgressControllerFactory, BufferFactory, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds)) { }
+            : base(Information, ProgressControllerFactory, BufferFactory, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds)) { }
 
         /// <summary>Перечисляет все секции данных в образе</summary>
         /// <param name="Project">Проект образа</param>

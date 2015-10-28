@@ -15,13 +15,17 @@ namespace FirmwareBurner.ImageFormatters.Binary
         private readonly IFileParser<TMemoryKind> _fileParser;
         private readonly IProgressControllerFactory _progressControllerFactory;
 
-        protected BinaryFormatterBase(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
-                                      IFileParser<TMemoryKind> FileParser)
+        protected BinaryFormatterBase(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
+                                      IBufferFactory BufferFactory, IFileParser<TMemoryKind> FileParser)
         {
             _progressControllerFactory = ProgressControllerFactory;
             _bufferFactory = BufferFactory;
             _fileParser = FileParser;
+            this.Information = Information;
         }
+
+        /// <summary>Информация о составителе образа</summary>
+        public ImageFormatterInformation Information { get; private set; }
 
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
         /// <param name="Project">Проект образа</param>
