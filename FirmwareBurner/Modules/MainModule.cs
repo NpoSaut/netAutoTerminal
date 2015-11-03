@@ -1,6 +1,7 @@
 ﻿using AsyncOperations.Progress;
 using ExternalTools.Implementations;
 using ExternalTools.Interfaces;
+using FirmwareBurner.Imaging;
 using FirmwareBurner.Interaction;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;

@@ -1,4 +1,5 @@
 ﻿using System;
+using FirmwareBurner.Annotations;
 
 namespace FirmwareBurner.Imaging
 {
@@ -10,5 +11,8 @@ namespace FirmwareBurner.Imaging
         /// <summary>Создаёт сборщик образа для указанного типа устройства</summary>
         /// <param name="DeviceName">Тип устройства</param>
         IImageFormatter<TImage> GetFormatter(String DeviceName);
+
+        [NotNull]
+        ImageFormatterInformation Information { get; }
     }
 }

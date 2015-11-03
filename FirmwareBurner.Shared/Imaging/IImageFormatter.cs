@@ -7,9 +7,6 @@ namespace FirmwareBurner.Imaging
     /// <typeparam name="TImage">Тип получаемого образа</typeparam>
     public interface IImageFormatter<out TImage> where TImage : IImage
     {
-        /// <summary>Информация о составителе образа</summary>
-        ImageFormatterInformation Information { get; }
-
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
         /// <param name="Project">Проект образа</param>
         /// <param name="ProgressToken">Токен прогресса выполнения операции</param>

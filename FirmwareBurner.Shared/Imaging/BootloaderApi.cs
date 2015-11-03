@@ -21,5 +21,11 @@
 
         /// <summary>Последняя совместимая версия загрузчика</summary>
         public int BootloaderCompatibleVersion { get; private set; }
+
+        /// <summary>Без загрузчика</summary>
+        public static BootloaderApi Empty
+        {
+            get { return new BootloaderApi(0, int.MaxValue, 0); }
+        }
     }
 }

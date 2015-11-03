@@ -21,11 +21,7 @@ namespace FirmwareBurner.ImageFormatters.Binary
             _progressControllerFactory = ProgressControllerFactory;
             _bufferFactory = BufferFactory;
             _fileParser = FileParser;
-            this.Information = Information;
         }
-
-        /// <summary>Информация о составителе образа</summary>
-        public ImageFormatterInformation Information { get; private set; }
 
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
         /// <param name="Project">Проект образа</param>

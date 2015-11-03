@@ -13,6 +13,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         {
             _bufferFactory = BufferFactory;
             _progressControllerFactory = ProgressControllerFactory;
+            Information = new ImageFormatterInformation("Без загрузчика", BootloaderApi.Empty);
         }
 
         /// <summary>Создаёт сборщик образа для указанного типа устройства</summary>
@@ -22,5 +23,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
             return new CortexEmptyImageFormatter(new ImageFormatterInformation("Без загрузчика", new BootloaderApi(0, 0, int.MaxValue)),
                                                  _progressControllerFactory, _bufferFactory);
         }
+
+        public ImageFormatterInformation Information { get; private set; }
     }
 }

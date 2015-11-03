@@ -39,5 +39,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                                             _bootloaderConfigurationCatalog,
                                             bootloaderInformation);
         }
+
+        public ImageFormatterInformation Information { get; private set; }
     }
 }

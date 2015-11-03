@@ -23,7 +23,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
 
         private readonly IPropertiesTableGenerator _propertiesTableGenerator;
 
-        public AvrImageFormatter(ImageFormatterInformation Information, AvrBootloaderInformation BootloaderInformation,
+        public AvrImageFormatter(AvrBootloaderInformation BootloaderInformation,
                                  IPropertiesTableGenerator PropertiesTableGenerator, IBufferFactory BufferFactory, IAvrFileTableFormatter FileTableFormatter,
                                  IAvrPropertiesTableFormatter PropertiesTableFormatter, IProgressControllerFactory ProgressControllerFactory)
         {
@@ -33,7 +33,6 @@ namespace FirmwareBurner.ImageFormatters.Avr
             _fileTableFormatter = FileTableFormatter;
             _propertiesTableFormatter = PropertiesTableFormatter;
             _progressControllerFactory = ProgressControllerFactory;
-            this.Information = Information;
         }
 
         /// <summary>Генерирует образ для указанного проекта прошивки</summary>
@@ -81,8 +80,6 @@ namespace FirmwareBurner.ImageFormatters.Avr
                     eepromBuffer);
             }
         }
-
-        public ImageFormatterInformation Information { get; private set; }
 
         private AvrImageFile ParsePackageFile(FirmwareFile File)
         {

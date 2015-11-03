@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using AsyncOperations.Progress;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Imaging;
@@ -11,11 +12,13 @@ namespace FirmwareBurner.Burning
     public class BurningReceipt<TImage> : IBurningReceipt where TImage : IImage
     {
         private readonly IBurningToolFacade<TImage> _burningToolFacade;
-        private readonly IImageFormatter<TImage> _formatter;
+        private readonly string _deviceName;
+        private readonly IImageFormattersCatalog<TImage> _formattersCatalog;
 
-        public BurningReceipt(string Name, IImageFormatter<TImage> Formatter, IBurningToolFacade<TImage> BurningToolFacade)
+        public BurningReceipt(string Name, string DeviceName, IImageFormattersCatalog<TImage> FormattersCatalog, IBurningToolFacade<TImage> BurningToolFacade)
         {
-            _formatter = Formatter;
+            _deviceName = DeviceName;
+            _formattersCatalog = FormattersCatalog;
             _burningToolFacade = BurningToolFacade;
             this.Name = Name;
         }
@@ -33,10 +36,12 @@ namespace FirmwareBurner.Burning
 
             using (new CompositeProgressManager(Progress, imageProgress, burnProgress))
             {
+                var formatter = _formattersCatalog.GetFormatterFactory(_deviceName, Project.Modules.Select(m => m.FirmwareContent.BootloaderRequirement).ToList());
+
                 TImage image;
                 try
                 {
-                    image = _formatter.GetImage(Project, imageProgress);
+                    image = formatter.GetImage(Project, imageProgress);
                 }
                 catch (Exception e)
                 {

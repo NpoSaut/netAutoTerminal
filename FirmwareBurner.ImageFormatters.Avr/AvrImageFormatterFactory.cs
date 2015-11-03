@@ -25,13 +25,15 @@ namespace FirmwareBurner.ImageFormatters.Avr
             _filesTableFormatter = FilesTableFormatter;
             _propertiesTableFormatter = PropertiesTableFormatter;
             _progressControllerFactory = ProgressControllerFactory;
+            Information = new ImageFormatterInformation("С загрузчиком", new BootloaderApi(1, 9, 1));
         }
 
         public IImageFormatter<AvrImage> GetFormatter(string DeviceName)
         {
-            return new AvrImageFormatter(new ImageFormatterInformation("С загрузчиком", new BootloaderApi(1, 9, 1)),
-                                         _bootloadersCatalog.GetBootloaderInformation(DeviceName), _propertiesTableGenerator, _bufferFactory,
+            return new AvrImageFormatter(_bootloadersCatalog.GetBootloaderInformation(DeviceName), _propertiesTableGenerator, _bufferFactory,
                                          _filesTableFormatter, _propertiesTableFormatter, _progressControllerFactory);
         }
+
+        public ImageFormatterInformation Information { get; private set; }
     }
 }
