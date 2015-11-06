@@ -61,22 +61,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AvrImageFormatterCatalog.cs" />
-    <Compile Include="AvrImageFormatterParseFilenameException.cs" />
-    <Compile Include="AvrImageFile.cs" />
-    <Compile Include="IAvrFileTableFormatter.cs" />
-    <Compile Include="IAvrPropertiesTableFormatter.cs" />
-    <Compile Include="MemoryKind.cs" />
-    <Compile Include="TablesFormatters\AvrBootloaderFileTableFormatter.cs" />
-    <Compile Include="TablesFormatters\AvrBootloaderPropertiesTableFormatter.cs" />
+    <Compile Include="AvrImageFormatter.cs" />
+    <Compile Include="AvrMemoryKind.cs" />
+    <Compile Include="Sections\FilesTableSectionContent.cs" />
+    <Compile Include="Sections\PropertiesTableSectionContent.cs" />
     <Compile Include="AvrFuses.cs" />
     <Compile Include="AvrImage.cs" />
-    <Compile Include="AvrImageFormatter.cs" />
     <Compile Include="AvrImageFormatterFactory.cs" />
     <Compile Include="AvrImagesModule.cs" />
     <Compile Include="AvrBootloaderInformation.cs" />
-    <Compile Include="IAvrBootloadersCatalog.cs" />
-    <Compile Include="PlacementsInformation.cs" />
-    <Compile Include="StaticAvrBootloadersCatalog.cs" />
+    <Compile Include="Catalog\IAvrBootloadersCatalog.cs" />
+    <Compile Include="Catalog\StaticAvrBootloadersCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +82,10 @@
     <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
       <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
       <Name>AsyncOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Binary\FirmwareBurner.ImageFormatters.Binary.csproj">
+      <Project>{2B34A3AE-B635-4F22-8982-5ACA97A801CE}</Project>
+      <Name>FirmwareBurner.ImageFormatters.Binary</Name>
     </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>

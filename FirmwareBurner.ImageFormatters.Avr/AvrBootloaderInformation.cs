@@ -1,40 +1,26 @@
 using System;
-using System.IO;
-using System.Reflection;
-using FirmwareBurner.Annotations;
+using FirmwareBurner.ImageFormatters.Binary;
+using FirmwareBurner.ImageFormatters.Binary.BodyLoaders;
 
 namespace FirmwareBurner.ImageFormatters.Avr
 {
-    public class AvrBootloaderInformation
+    public class AvrBootloaderInformation : BinaryBootloaderInformation<AvrMemoryKind>
     {
-        private readonly string _bootloaderBodyResourceName;
-
-        /// <summary>Инициализирует новый экземпляр класса <see cref="T:System.Object" />.</summary>
-        public AvrBootloaderInformation(AvrFuses RequiredFuses, PlacementsInformation Placements, string BootloaderBodyResourceName)
+        public AvrBootloaderInformation(String DeviceName, AvrFuses RequiredFuses, IBodyLoader BodyLoader, Placement<AvrMemoryKind> BootloaderPlacement,
+                                        Placement<AvrMemoryKind> FilesTablePlacement, Placement<AvrMemoryKind> PropertiesTablePlacement) : base(DeviceName, BootloaderPlacement, BodyLoader)
         {
-            _bootloaderBodyResourceName = BootloaderBodyResourceName;
-            this.Placements = Placements;
+            this.PropertiesTablePlacement = PropertiesTablePlacement;
+            this.FilesTablePlacement = FilesTablePlacement;
             this.RequiredFuses = RequiredFuses;
         }
 
-        /// <summary>Размещение разделов в бинарной прошивке</summary>
-        public PlacementsInformation Placements { get; private set; }
+        /// <summary>Размещение таблицы свойств</summary>
+        public Placement<AvrMemoryKind> PropertiesTablePlacement { get; private set; }
+
+        /// <summary>Размещение таблицы файлов</summary>
+        public Placement<AvrMemoryKind> FilesTablePlacement { get; private set; }
 
         /// <summary>Необходимые значения FUSE-битов</summary>
         public AvrFuses RequiredFuses { get; private set; }
-
-        /// <summary>Получает тело загрузчика</summary>
-        [NotNull]
-        public byte[] GetBootloaderBody()
-        {
-            Stream bodyResourceStream = Assembly.GetAssembly(typeof (StaticAvrBootloadersCatalog)).GetManifestResourceStream(_bootloaderBodyResourceName);
-            if (bodyResourceStream == null)
-                throw new ApplicationException("Не удалось найти ресурс с телом загрузчика");
-            using (var body = new MemoryStream())
-            {
-                bodyResourceStream.CopyTo(body);
-                return body.ToArray();
-            }
-        }
     }
 }

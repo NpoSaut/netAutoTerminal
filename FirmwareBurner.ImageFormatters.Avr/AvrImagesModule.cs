@@ -1,4 +1,4 @@
-﻿using FirmwareBurner.ImageFormatters.Avr.TablesFormatters;
+﻿using FirmwareBurner.ImageFormatters.Avr.Catalog;
 using FirmwareBurner.Imaging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
@@ -14,10 +14,6 @@ namespace FirmwareBurner.ImageFormatters.Avr
         {
             _container
                 .RegisterType<IAvrBootloadersCatalog, StaticAvrBootloadersCatalog>(new ContainerControlledLifetimeManager())
-                .RegisterType<IAvrFileTableFormatter, AvrBootloaderFileTableFormatter>(new ContainerControlledLifetimeManager())
-                .RegisterType<IAvrPropertiesTableFormatter, AvrBootloaderPropertiesTableFormatter>(new ContainerControlledLifetimeManager());
-
-            _container
                 .RegisterType<IImageFormattersCatalog<AvrImage>, AvrImageFormatterCatalog>("Раз", new ContainerControlledLifetimeManager());
         }
     }
