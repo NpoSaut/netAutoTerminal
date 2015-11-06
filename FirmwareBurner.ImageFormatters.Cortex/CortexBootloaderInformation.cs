@@ -6,9 +6,9 @@ namespace FirmwareBurner.ImageFormatters.Cortex
 {
     public class CortexBootloaderInformation : BinaryBootloaderInformation<CortexMemoryKind>
     {
-        public CortexBootloaderInformation(Placement<CortexMemoryKind> StaticPropertiesPlacement, Placement<CortexMemoryKind> DynamicPropertiesPlacement,
+        public CortexBootloaderInformation(string DeviceName, Placement<CortexMemoryKind> StaticPropertiesPlacement, Placement<CortexMemoryKind> DynamicPropertiesPlacement,
                                            Placement<CortexMemoryKind> BootloaderPlacement, IBodyLoader BodyLoader, BootloaderApi Api)
-            : base(BootloaderPlacement, BodyLoader)
+            : base(DeviceName, BootloaderPlacement, BodyLoader)
         {
             this.Api = Api;
             this.DynamicPropertiesPlacement = DynamicPropertiesPlacement;

@@ -32,12 +32,12 @@ namespace FirmwareBurner.Burning
         where TImage : IImage
         where TBurningToolFacadeFactory : class, IBurningToolFacadeFactory<TImage>
     {
-        private readonly IImageFormattersCatalog<TImage> _imageFormattersCatalog;
+        private readonly IImageFormatterFactoryProvider<TImage> _imageFormatterFactoryProvider;
         private readonly TBurningToolFacadeFactory _toolFacadeFactory;
 
-        public BurningReceiptFactory(IImageFormattersCatalog<TImage> ImageFormattersCatalog, TBurningToolFacadeFactory ToolFacadeFactory)
+        public BurningReceiptFactory(IImageFormatterFactoryProvider<TImage> ImageFormatterFactoryProvider, TBurningToolFacadeFactory ToolFacadeFactory)
         {
-            _imageFormattersCatalog = ImageFormattersCatalog;
+            _imageFormatterFactoryProvider = ImageFormatterFactoryProvider;
             _toolFacadeFactory = ToolFacadeFactory;
         }
 
@@ -71,7 +71,7 @@ namespace FirmwareBurner.Burning
         public IBurningReceipt GetReceipt(string DeviceName)
         {
             return new BurningReceipt<TImage>(ReceiptName, DeviceName,
-                                              _imageFormattersCatalog,
+                                              _imageFormatterFactoryProvider,
                                               _toolFacadeFactory.GetBurningToolFacade(DeviceName));
         }
     }

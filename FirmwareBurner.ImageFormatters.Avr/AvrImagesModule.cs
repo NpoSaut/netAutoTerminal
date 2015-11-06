@@ -18,7 +18,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
                 .RegisterType<IAvrPropertiesTableFormatter, AvrBootloaderPropertiesTableFormatter>(new ContainerControlledLifetimeManager());
 
             _container
-                .RegisterType<IImageFormatterFactory<AvrImage>, AvrImageFormatterFactory>("Раз", new ContainerControlledLifetimeManager());
+                .RegisterType<IImageFormattersCatalog<AvrImage>, AvrImageFormatterCatalog>("Раз", new ContainerControlledLifetimeManager());
         }
     }
 }

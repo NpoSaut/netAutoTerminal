@@ -13,12 +13,12 @@ namespace FirmwareBurner.Burning
     {
         private readonly IBurningToolFacade<TImage> _burningToolFacade;
         private readonly string _deviceName;
-        private readonly IImageFormattersCatalog<TImage> _formattersCatalog;
+        private readonly IImageFormatterFactoryProvider<TImage> _formatterFactoryProvider;
 
-        public BurningReceipt(string Name, string DeviceName, IImageFormattersCatalog<TImage> FormattersCatalog, IBurningToolFacade<TImage> BurningToolFacade)
+        public BurningReceipt(string Name, string DeviceName, IImageFormatterFactoryProvider<TImage> FormatterFactoryProvider, IBurningToolFacade<TImage> BurningToolFacade)
         {
             _deviceName = DeviceName;
-            _formattersCatalog = FormattersCatalog;
+            _formatterFactoryProvider = FormatterFactoryProvider;
             _burningToolFacade = BurningToolFacade;
             this.Name = Name;
         }
@@ -36,7 +36,7 @@ namespace FirmwareBurner.Burning
 
             using (new CompositeProgressManager(Progress, imageProgress, burnProgress))
             {
-                var formatter = _formattersCatalog.GetFormatterFactory(_deviceName, Project.Modules.Select(m => m.FirmwareContent.BootloaderRequirement).ToList());
+                var formatter = _formatterFactoryProvider.GetFormatterFactory(_deviceName, Project.Modules.Select(m => m.FirmwareContent.BootloaderRequirement).ToList()).GetFormatter();
 
                 TImage image;
                 try

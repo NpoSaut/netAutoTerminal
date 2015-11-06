@@ -21,7 +21,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
 
         public CortexEmptyImageFormatter(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
                                          IBufferFactory BufferFactory)
-            : base(Information, ProgressControllerFactory, BufferFactory, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds)) { }
+            : base(ProgressControllerFactory, BufferFactory, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds)) { }
 
         /// <summary>Перечисляет все секции данных в образе</summary>
         /// <param name="Project">Проект образа</param>

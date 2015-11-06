@@ -74,7 +74,9 @@
     <Compile Include="CortexBootloaderInformation.cs" />
     <Compile Include="CortexBootloaderPropertiesProvider.cs" />
     <Compile Include="CortexEmptyImageFormatter.cs" />
+    <Compile Include="CortexEmptyImageFormatterCatalog.cs" />
     <Compile Include="CortexEmptyImageFormatterFactory.cs" />
+    <Compile Include="CortexImageFormatterCatalog.cs" />
     <Compile Include="CortexImageFormatterFactory.cs" />
     <Compile Include="CortexImagesModule.cs" />
     <Compile Include="Exceptions\BootloaderConfigurationNotFoundException.cs" />

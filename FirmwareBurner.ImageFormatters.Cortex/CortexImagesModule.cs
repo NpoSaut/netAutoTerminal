@@ -1,5 +1,6 @@
 ﻿using FirmwareBurner.ImageFormatters.Cortex.Catalog;
 using FirmwareBurner.Imaging;
+using FirmwarePacking;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
 
@@ -18,8 +19,8 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                 .RegisterType<ICortexBootloaderInformationCatalog, StaticCortexBootloaderInformationCatalog>(new ContainerControlledLifetimeManager());
 
             _container
-                .RegisterType<IImageFormatterFactory<CortexImage>, CortexImageFormatterFactory>("Раз", new ContainerControlledLifetimeManager())
-                .RegisterType<IImageFormatterFactory<CortexImage>, CortexEmptyImageFormatterFactory>("Два", new ContainerControlledLifetimeManager());
+                .RegisterType<IImageFormattersCatalog<CortexImage>, CortexImageFormatterCatalog>("Раз", new ContainerControlledLifetimeManager())
+                .RegisterType<IImageFormattersCatalog<CortexImage>, CortexEmptyImageFormatterCatalog>("Два", new ContainerControlledLifetimeManager());
         }
     }
 }

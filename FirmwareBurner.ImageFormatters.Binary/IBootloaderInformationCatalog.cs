@@ -1,8 +1,10 @@
-﻿namespace FirmwareBurner.ImageFormatters.Binary
+﻿using System.Collections.Generic;
+
+namespace FirmwareBurner.ImageFormatters.Binary
 {
     public interface IBootloaderInformationCatalog<out TBootloaderInformation, TMemoryKind>
         where TBootloaderInformation : BinaryBootloaderInformation<TMemoryKind>
     {
-        TBootloaderInformation GetBootloaderInformation(string DeviceName);
+        IEnumerable<TBootloaderInformation> GetBootloaderInformations();
     }
 }

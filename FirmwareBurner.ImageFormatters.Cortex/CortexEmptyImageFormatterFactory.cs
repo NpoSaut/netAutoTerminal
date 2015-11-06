@@ -17,8 +17,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         }
 
         /// <summary>Создаёт сборщик образа для указанного типа устройства</summary>
-        /// <param name="DeviceName">Тип устройства</param>
-        public IImageFormatter<CortexImage> GetFormatter(string DeviceName)
+        public IImageFormatter<CortexImage> GetFormatter()
         {
             return new CortexEmptyImageFormatter(new ImageFormatterInformation("Без загрузчика", new BootloaderApi(0, 0, int.MaxValue)),
                                                  _progressControllerFactory, _bufferFactory);

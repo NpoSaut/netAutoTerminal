@@ -7,12 +7,14 @@ namespace FirmwareBurner.ImageFormatters.Binary
     {
         private readonly Lazy<Byte[]> _body;
 
-        protected BinaryBootloaderInformation(Placement<TMemoryKind> BootloaderPlacement, IBodyLoader BodyLoader)
+        protected BinaryBootloaderInformation(string DeviceName, Placement<TMemoryKind> BootloaderPlacement, IBodyLoader BodyLoader)
         {
+            this.DeviceName = DeviceName;
             this.BootloaderPlacement = BootloaderPlacement;
             _body = new Lazy<byte[]>(BodyLoader.LoadBootloaderBody);
         }
 
+        public string DeviceName { get; private set; }
         public Placement<TMemoryKind> BootloaderPlacement { get; private set; }
 
         public byte[] GetBootloaderBody() { return _body.Value; }

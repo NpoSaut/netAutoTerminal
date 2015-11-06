@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvrImageFormatterCatalog.cs" />
     <Compile Include="AvrImageFormatterParseFilenameException.cs" />
     <Compile Include="AvrImageFile.cs" />
     <Compile Include="IAvrFileTableFormatter.cs" />

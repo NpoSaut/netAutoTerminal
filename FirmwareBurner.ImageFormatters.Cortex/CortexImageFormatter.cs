@@ -5,7 +5,6 @@ using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
 using FirmwareBurner.ImageFormatters.Cortex.Catalog;
 using FirmwareBurner.ImageFormatters.Cortex.Sections;
-using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Imaging.PropertiesProviders;
 using FirmwareBurner.Project;
@@ -25,10 +24,10 @@ namespace FirmwareBurner.ImageFormatters.Cortex
         private readonly IChecksumProvider _checksumProvider;
         private readonly IStringEncoder _stringEncoder;
 
-        public CortexImageFormatter(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
+        public CortexImageFormatter(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory,
                                     IChecksumProvider ChecksumProvider, IStringEncoder StringEncoder,
                                     IBootloaderConfigurationCatalog BootloaderConfigurationCatalog, CortexBootloaderInformation BootloaderInformation)
-            : base(Information, ProgressControllerFactory, BufferFactory, BootloaderInformation, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds))
+            : base(ProgressControllerFactory, BufferFactory, BootloaderInformation, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds))
         {
             _checksumProvider = ChecksumProvider;
             _stringEncoder = StringEncoder;
@@ -62,12 +61,6 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                         new CortexFileTableSectionContent(Files, _memoryKinds, _checksumProvider))));
         }
 
-        /// <summary>Создайте экземпляр образа прошивки</summary>
-        /// <param name="Buffers">
-        ///     Буферы для всех перечисленных в
-        ///     <see cref="BinaryFormatterBase{TImage,TMemoryKind,TBootloaderInformationKind}.EnumerateMemoryKinds" />
-        ///     типов памяти
-        /// </param>
         protected override CortexImage CreateImage(IDictionary<CortexMemoryKind, IBuffer> Buffers) { return new CortexImage(Buffers[CortexMemoryKind.Flash]); }
     }
 }

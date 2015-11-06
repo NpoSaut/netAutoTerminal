@@ -15,7 +15,7 @@ namespace FirmwareBurner.ImageFormatters.Binary
         private readonly IFileParser<TMemoryKind> _fileParser;
         private readonly IProgressControllerFactory _progressControllerFactory;
 
-        protected BinaryFormatterBase(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
+        protected BinaryFormatterBase(IProgressControllerFactory ProgressControllerFactory,
                                       IBufferFactory BufferFactory, IFileParser<TMemoryKind> FileParser)
         {
             _progressControllerFactory = ProgressControllerFactory;

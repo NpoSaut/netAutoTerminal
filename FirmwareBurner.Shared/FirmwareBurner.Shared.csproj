@@ -82,12 +82,14 @@
     <Compile Include="Imaging\Binary\Buffers\IBufferFactory.cs" />
     <Compile Include="Imaging\Binary\Buffers\WriterBase.cs" />
     <Compile Include="Imaging\BootloaderApi.cs" />
+    <Compile Include="Imaging\EnumerableImageFormattersCatalogBase.cs" />
     <Compile Include="Imaging\IImageFormatterFactory.cs" />
+    <Compile Include="Imaging\IImageFormatterFactoryProvider.cs" />
     <Compile Include="Imaging\IImageFormattersCatalog.cs" />
     <Compile Include="Imaging\ImageFormatterException.cs" />
     <Compile Include="Imaging\ImageFormatterInformation.cs" />
     <Compile Include="Imaging\ImageFormatterNotFoundException.cs" />
-    <Compile Include="Imaging\ImageFormattersCatalog.cs" />
+    <Compile Include="Imaging\ImageFormattersProvider.cs" />
     <Compile Include="Imaging\IPropertiesProvider.cs" />
     <Compile Include="Imaging\PropertiesProviders\CompositePropertiesProvider.cs" />
     <Compile Include="Imaging\PropertiesProviders\DevicePropertiesProvider.cs" />

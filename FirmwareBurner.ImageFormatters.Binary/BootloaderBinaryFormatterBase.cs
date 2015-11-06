@@ -15,10 +15,10 @@ namespace FirmwareBurner.ImageFormatters.Binary
     {
         protected readonly TBootloaderInformationKind BootloaderInformation;
 
-        protected BootloaderBinaryFormatterBase(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
+        protected BootloaderBinaryFormatterBase(IProgressControllerFactory ProgressControllerFactory,
                                                 IBufferFactory BufferFactory, TBootloaderInformationKind BootloaderInformation,
                                                 IFileParser<TMemoryKind> FileParser)
-            : base(Information, ProgressControllerFactory, BufferFactory, FileParser)
+            : base(ProgressControllerFactory, BufferFactory, FileParser)
         {
             this.BootloaderInformation = BootloaderInformation;
         }
