@@ -19,7 +19,7 @@ namespace FirmwareBurner.Imaging
 
         private bool Satisfies(BootloaderApi BootloaderApi, BootloaderRequirement Requirement)
         {
-            return BootloaderApi.BootloaderId != Requirement.BootloaderId
+            return BootloaderApi.BootloaderId == Requirement.BootloaderId
                    && BootloaderApi.BootloaderVersion >= Requirement.BootloaderVersion.Minimum
                    && BootloaderApi.BootloaderCompatibleVersion <= Requirement.BootloaderVersion.Maximum;
         }
