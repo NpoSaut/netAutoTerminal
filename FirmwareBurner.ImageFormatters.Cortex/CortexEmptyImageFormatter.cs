@@ -5,7 +5,6 @@ using FirmwareBurner.ImageFormatters.Binary;
 using FirmwareBurner.ImageFormatters.Binary.DataSections;
 using FirmwareBurner.ImageFormatters.Binary.DataSections.Special;
 using FirmwareBurner.ImageFormatters.Binary.FileParsers;
-using FirmwareBurner.Imaging;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.Project;
 
@@ -19,8 +18,7 @@ namespace FirmwareBurner.ImageFormatters.Cortex
                 { "f", CortexMemoryKind.Flash }
             };
 
-        public CortexEmptyImageFormatter(ImageFormatterInformation Information, IProgressControllerFactory ProgressControllerFactory,
-                                         IBufferFactory BufferFactory)
+        public CortexEmptyImageFormatter(IProgressControllerFactory ProgressControllerFactory, IBufferFactory BufferFactory)
             : base(ProgressControllerFactory, BufferFactory, new DoubleLayerFileParser<CortexMemoryKind>(_memoryKinds)) { }
 
         /// <summary>Перечисляет все секции данных в образе</summary>

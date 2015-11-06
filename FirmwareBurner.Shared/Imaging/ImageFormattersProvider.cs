@@ -15,7 +15,6 @@ namespace FirmwareBurner.Imaging
                 _formattersCatalogs.SelectMany(catalog => catalog.GetAppropriateFormatterFactories(DeviceName, Requirements))
                                    .OrderByDescending(f => f.Information.BootloaderApi.BootloaderId)
                                    .ThenByDescending(f => f.Information.BootloaderApi.BootloaderVersion)
-                                   .ToList()
                                    .FirstOrDefault();
             if (appropriatedFormatterFactory == null)
                 throw new ImageFormatterNotFoundException();
