@@ -3,11 +3,9 @@
     /// <summary>Цель компонента</summary>
     public class ComponentProjectTarget
     {
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="T:System.Object"/>.
-        /// </summary>
-        public ComponentProjectTarget(int Cell, int Modification, int Channel)
+        public ComponentProjectTarget(int Cell, int Modification, int Module, int Channel)
         {
+            this.Module = Module;
             this.Cell = Cell;
             this.Modification = Modification;
             this.Channel = Channel;
@@ -21,5 +19,8 @@
 
         /// <summary>Номер канала (полукомплекта)</summary>
         public int Channel { get; private set; }
+
+        /// <summary>Номер программного модуля</summary>
+        public int Module { get; private set; }
     }
 }

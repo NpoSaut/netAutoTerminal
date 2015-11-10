@@ -1,10 +1,13 @@
-﻿namespace FirmwarePacker.Project
+﻿using System;
+
+namespace FirmwarePacker.Project
 {
     /// <summary>Версия пакета ПО</summary>
     public class PackageVersion
     {
-        public PackageVersion(int Major, int Minor, string Label = null)
+        public PackageVersion(int Major, int Minor, DateTime ReleaseDate, string Label = null)
         {
+            this.ReleaseDate = ReleaseDate;
             this.Major = Major;
             this.Minor = Minor;
             this.Label = Label;
@@ -18,5 +21,8 @@
 
         /// <summary>Текстовая метка</summary>
         public string Label { get; private set; }
+
+        /// <summary>Дата выпуска пакета</summary>
+        public DateTime ReleaseDate { get; private set; }
     }
 }
