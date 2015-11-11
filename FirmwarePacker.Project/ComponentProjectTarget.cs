@@ -22,5 +22,10 @@
 
         /// <summary>Номер программного модуля</summary>
         public int Module { get; private set; }
+
+        public override string ToString()
+        {
+            return string.Format("Cell: {0}, Modification: {1}, Channel: {2}, Module: {3}", Cell, Modification, Channel, Module);
+        }
     }
 }

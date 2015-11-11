@@ -2,7 +2,7 @@
 {
     public interface IProjectSerializer
     {
-        PackageProject Load();
-        void Save(PackageProject Project);
+        PackageProject Load(string FileName);
+        void Save(PackageProject Project, string FileName);
     }
 }

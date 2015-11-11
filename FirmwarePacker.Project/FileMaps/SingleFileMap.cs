@@ -15,5 +15,7 @@ namespace FirmwarePacker.Project.FileMaps
         }
 
         protected override IEnumerable<MapingItem> EnumerateMapingItems() { yield return new MapingItem(new FileInfo(_sourceFileName), _destinationName); }
+
+        public override string ToString() { return string.Format("{0} -> {1}", _sourceFileName, _destinationName); }
     }
 }

@@ -15,19 +15,16 @@ namespace FirmwarePacker.Project.Serializers
                 { "MapFolder", new FolderMapFactory() }
             };
 
-        private readonly string _fileName;
-        public XmlProjectSerializer(string FileName) { _fileName = FileName; }
-
-        public PackageProject Load()
+        public PackageProject Load(string FileName)
         {
-            XDocument document = XDocument.Load(_fileName);
+            XDocument document = XDocument.Load(FileName);
             XElement xProject = document.Root;
 
             return
                 new PackageProject(xProject.Elements("Component").Select(LoadComponent).ToList());
         }
 
-        public void Save(PackageProject Project)
+        public void Save(PackageProject Project, string FileName)
         {
             var xDoc = new XDocument(
                 new XElement("Project",
@@ -41,7 +38,7 @@ namespace FirmwarePacker.Project.Serializers
                                                                                                           new XAttribute("Channel", target.Channel))),
                                                                     new XElement("Files")))));
             throw new NotImplementedException("На самом деле не написал я :(");
-            xDoc.Save(_fileName);
+            xDoc.Save(FileName);
         }
 
         private ComponentProject LoadComponent(XElement XComponent)

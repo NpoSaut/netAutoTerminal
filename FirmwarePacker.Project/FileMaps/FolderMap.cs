@@ -21,12 +21,14 @@ namespace FirmwarePacker.Project.FileMaps
         protected override IEnumerable<MapingItem> EnumerateMapingItems()
         {
             var source = new DirectoryInfo(_sourceFolder);
-            int fullNameOffset = source.FullName.Length;
+            int fullNameOffset = source.FullName.Length + 1;
             return source.EnumerateFiles(_searchPattern, SearchOption.AllDirectories)
                          .Select(f => new MapingItem(f,
                                                      String.Format("{0}/{1}",
                                                                    _destinationFolder,
                                                                    f.FullName.Substring(fullNameOffset).Replace(Path.DirectorySeparatorChar, '/'))));
         }
+
+        public override string ToString() { return string.Format("{0} ({1}) -> {2}", _sourceFolder, _searchPattern, _destinationFolder); }
     }
 }

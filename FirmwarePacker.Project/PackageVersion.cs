@@ -5,7 +5,7 @@ namespace FirmwarePacker.Project
     /// <summary>Версия пакета ПО</summary>
     public class PackageVersion
     {
-        public PackageVersion(int Major, int Minor, DateTime ReleaseDate, string Label = null)
+        public PackageVersion(int Major, int Minor, string Label, DateTime ReleaseDate)
         {
             this.ReleaseDate = ReleaseDate;
             this.Major = Major;

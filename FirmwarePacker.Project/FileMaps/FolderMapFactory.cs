@@ -6,7 +6,9 @@ namespace FirmwarePacker.Project.FileMaps
     {
         public IFileMap CreateFileMap(IDictionary<string, string> Parameters)
         {
-            return new FolderMap(Parameters["From"], Parameters["Pattern"], Parameters["To"]);
+            string value;
+            string searchPattern = Parameters.TryGetValue("Pattern", out value) ? value : "*";
+            return new FolderMap(Parameters["From"], searchPattern, Parameters["To"]);
         }
     }
 }
