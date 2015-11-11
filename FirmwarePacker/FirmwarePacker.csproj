@@ -142,6 +142,10 @@
     <Compile Include="LaunchParameters\CommandLineLaunchParameters.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="PackerBootstrapper.cs" />
+    <Compile Include="TriggerActions\Notifications\FileRequestArguments.cs" />
+    <Compile Include="TriggerActions\Notifications\SaveFileInteractionContexts.cs" />
+    <Compile Include="TriggerActions\Notifications\SaveFileRequestArguments.cs" />
+    <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="VersionToStringConverter.cs" />
     <Compile Include="ViewModels\FirmwareVersionViewModel.cs" />
     <Compile Include="LaunchParameters\ILaunchParameters.cs" />
