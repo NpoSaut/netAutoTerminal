@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace FirmwarePacker
 {
@@ -11,18 +10,19 @@ namespace FirmwarePacker
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            //Current.DispatcherUnhandledException += CurrentOnDispatcherUnhandledException;
+            //Current.DispatcherUnhandledException += (s, a) => ShowExceptionMessage(a.Exception);
+            AppDomain.CurrentDomain.UnhandledException += (s, a) => ShowExceptionMessage((Exception)a.ExceptionObject);
             base.OnStartup(e);
             _bootstrapper = new PackerBootstrapper(e.Args);
             _bootstrapper.Run();
         }
 
-        private void CurrentOnDispatcherUnhandledException(object Sender, DispatcherUnhandledExceptionEventArgs e)
+        private static void ShowExceptionMessage(Exception Exc)
         {
             if (MessageBox.Show(
-                String.Format("Непредвиденная ошибка при работе приложения:\n{0}\nСкопировать сведения об ошибке в буфер обмена?", e.Exception),
+                String.Format("Непредвиденная ошибка при работе приложения:\n{0}\n\nСкопировать сведения об ошибке в буфер обмена?", Exc.Message),
                 "Ошибка в приложении", MessageBoxButton.YesNo, MessageBoxImage.Error) == MessageBoxResult.Yes)
-                Clipboard.SetText(e.Exception.ToString());
+                Clipboard.SetText(Exc.ToString());
         }
     }
 }

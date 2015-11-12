@@ -20,6 +20,10 @@ namespace FirmwarePacker.LaunchParameters
         /// <summary>Дата сборки ПО в проекте</summary>
         DateTime? ReleaseDate { get; }
 
+        /// <summary>Имя файла, в который сохранится пакет</summary>
         string OutputFileName { get; }
+
+        /// <summary>Запуск в тихом режиме</summary>
+        bool SilentMode { get; }
     }
 }

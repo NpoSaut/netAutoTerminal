@@ -18,12 +18,17 @@ namespace FirmwarePacker.LaunchParameters
                 _outputFileName = Arguments[1];
             _parameters = Arguments.Where(p => p.StartsWith("-"))
                                    .Select(p => p.Split('='))
-                                   .ToDictionary(pa => pa[0].Substring(1), pa => pa.Length > 0 ? pa[1] : null);
+                                   .ToDictionary(pa => pa[0].Substring(1), pa => pa.Length > 1 ? pa[1] : null);
         }
 
         public string OutputFileName
         {
             get { return _outputFileName; }
+        }
+
+        public bool SilentMode
+        {
+            get { return _parameters.ContainsKey("silent"); }
         }
 
         public string ProjectFileName
