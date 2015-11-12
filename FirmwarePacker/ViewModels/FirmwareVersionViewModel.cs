@@ -18,14 +18,17 @@ namespace FirmwarePacker.ViewModels
 
         public PackageVersion GetModel()
         {
-            var versionParts = Version.Split('.');
-            var major = versionParts.Length > 0
+            string[] versionParts = Version.Split('.');
+            int major = versionParts.Length > 0
                             ? int.Parse(versionParts[0])
                             : 0;
-            var minor = versionParts.Length > 1
+            int minor = versionParts.Length > 1
                             ? int.Parse(versionParts[1])
                             : 0;
-            return new PackageVersion(major, minor, Label, ReleaseDate);
+            string label = string.IsNullOrWhiteSpace(Label)
+                               ? Label.Substring(0, Math.Min(Label.Length, 4))
+                               : null;
+            return new PackageVersion(major, minor, label, ReleaseDate);
         }
     }
 }

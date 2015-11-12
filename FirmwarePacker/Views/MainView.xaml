@@ -6,35 +6,14 @@
              xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
+             xmlns:views="clr-namespace:FirmwarePacker.Views"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:MainViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" DataContext="{Binding Path=Version}">
-            <Grid.Resources>
-                <Style TargetType="{x:Type TextBox}">
-                    <Setter Property="Padding" Value="4,3" />
-                    <Setter Property="Margin" Value="2" />
-                </Style>
-            </Grid.Resources>
-            <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-                <ColumnDefinition Width="120" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.Column="0" Content="Версия" />
-            <Label Grid.Row="0" Grid.Column="1" Content="Метка" />
-            <Label Grid.Row="0" Grid.Column="2" Content="Дата сборки" />
-            <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Version}" />
-            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Label}" />
-            <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding ReleaseDate}" />
-        </Grid>
+        <views:VersionView DataContext="{Binding Version}" />
         <Button Grid.Row="1" Margin="20, 2" Content="Сохранить" IsDefault="True" Command="{Binding SaveCommand}" />
     </Grid>
 
