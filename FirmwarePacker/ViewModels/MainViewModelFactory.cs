@@ -9,11 +9,14 @@ namespace FirmwarePacker.ViewModels
         private readonly ILaunchParameters _launchParameters;
         private readonly IPackageSavingTool _packageSavingTool;
         private readonly ProjectViewModelFactory _projectViewModelFactory;
+        private readonly IVariablesProcessor _variablesProcessor;
 
-        public MainViewModelFactory(ProjectViewModelFactory ProjectViewModelFactory, ILaunchParameters LaunchParameters, IPackageSavingTool PackageSavingTool)
+        public MainViewModelFactory(ProjectViewModelFactory ProjectViewModelFactory, ILaunchParameters LaunchParameters, IPackageSavingTool PackageSavingTool,
+                                    IVariablesProcessor VariablesProcessor)
         {
             _projectViewModelFactory = ProjectViewModelFactory;
             _packageSavingTool = PackageSavingTool;
+            _variablesProcessor = VariablesProcessor;
             _launchParameters = LaunchParameters;
         }
 
@@ -22,7 +25,8 @@ namespace FirmwarePacker.ViewModels
             return new MainViewModel(GetFirmwareVersionViewModel(),
                                      _projectViewModelFactory.GetInstance(),
                                      _packageSavingTool,
-                                     _launchParameters);
+                                     _launchParameters,
+                                     _variablesProcessor);
         }
 
         private FirmwareVersionViewModel GetFirmwareVersionViewModel()

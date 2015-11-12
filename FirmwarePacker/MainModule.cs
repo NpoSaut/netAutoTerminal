@@ -19,10 +19,9 @@ namespace FirmwarePacker
             _container
                 .RegisterType<IFileSelector, DialogFileSelector>(new ContainerControlledLifetimeManager())
                 .RegisterType<IDirectorySelector, DialogDirectorySelector>(new ContainerControlledLifetimeManager())
-
-                .RegisterType<Index, ResourceXmlIndex>(new ContainerControlledLifetimeManager())
+                .RegisterType<IIndex, ResourceXmlIndex>(new ContainerControlledLifetimeManager())
                 .RegisterType<IIndexHelper, IndexHelper>(new ContainerControlledLifetimeManager())
-
+                .RegisterType<IVariablesProcessor, VariablesProcessor>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectSerializer, XmlProjectSerializer>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEnpacker, Enpacker>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPackageSavingTool, PackageSavingTool>(new ContainerControlledLifetimeManager());

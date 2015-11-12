@@ -43,8 +43,10 @@
     <Compile Include="Enpacker.cs" />
     <Compile Include="IEnpacker.cs" />
     <Compile Include="IPackageSavingTool.cs" />
+    <Compile Include="IVariablesProcessor.cs" />
     <Compile Include="PackageSavingTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VariablesProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FirmwarePacker.Project\FirmwarePacker.Project.csproj">

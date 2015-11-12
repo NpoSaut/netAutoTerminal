@@ -21,6 +21,7 @@ namespace FirmwarePacker.TriggerActions
             var context = (SaveFileInteractionContext)e.Context;
             var dlg = new SaveFileDialog
                       {
+                          FileName = context.RequestArguments.DefaultFileName,
                           CheckPathExists = true,
                           DefaultExt = context.RequestArguments.DefaultFileType,
                           Title = context.RequestArguments.Message,

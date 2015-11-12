@@ -12,12 +12,15 @@ namespace FirmwarePacker.ViewModels
     {
         private readonly ILaunchParameters _launchParameters;
         private readonly IPackageSavingTool _savingTool;
+        private readonly IVariablesProcessor _variablesProcessor;
 
-        public MainViewModel(FirmwareVersionViewModel Version, ProjectViewModel Project, IPackageSavingTool SavingTool, ILaunchParameters LaunchParameters)
+        public MainViewModel(FirmwareVersionViewModel Version, ProjectViewModel Project, IPackageSavingTool SavingTool, ILaunchParameters LaunchParameters,
+                             IVariablesProcessor VariablesProcessor)
         {
             this.Project = Project;
             _savingTool = SavingTool;
             _launchParameters = LaunchParameters;
+            _variablesProcessor = VariablesProcessor;
             this.Version = Version;
             SaveCommand = new DelegateCommand(Save, Verify);
             SaveFileRequest = new InteractionRequest<SaveFileInteractionContext>();
@@ -34,7 +37,10 @@ namespace FirmwarePacker.ViewModels
         {
             SaveFileRequest.Raise(new SaveFileInteractionContext(new SaveFileRequestArguments("Куда сохранить?", _savingTool.FileExtension)
                                                                  {
-                                                                     DefaultFileName = _launchParameters.OutputFileName,
+                                                                     DefaultFileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName
+                                                                                                                            ?? "{cell} ver. {version}.sfv",
+                                                                                                                            Project.GetModel(),
+                                                                                                                            Version.GetModel()),
                                                                      FileTypes = new[]
                                                                                  {
                                                                                      new FileRequestArguments.FileTypeDescription(_savingTool.FileExtension,

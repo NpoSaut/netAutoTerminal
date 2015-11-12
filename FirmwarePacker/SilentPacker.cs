@@ -14,12 +14,15 @@ namespace FirmwarePacker
         private readonly ILaunchParameters _launchParameters;
         private readonly IProjectSerializer _projectSerializer;
         private readonly IPackageSavingTool _savingTool;
+        private readonly IVariablesProcessor _variablesProcessor;
 
-        public SilentPacker(ILaunchParameters LaunchParameters, IPackageSavingTool SavingTool, IProjectSerializer ProjectSerializer)
+        public SilentPacker(ILaunchParameters LaunchParameters, IPackageSavingTool SavingTool, IProjectSerializer ProjectSerializer,
+                            IVariablesProcessor VariablesProcessor)
         {
             _launchParameters = LaunchParameters;
             _savingTool = SavingTool;
             _projectSerializer = ProjectSerializer;
+            _variablesProcessor = VariablesProcessor;
         }
 
         public static IEnumerable<String> EnumerateMissingParemeters(ILaunchParameters Parameters)
@@ -53,7 +56,8 @@ namespace FirmwarePacker
                                              _launchParameters.ReleaseDate.Value);
             // ReSharper restore PossibleInvalidOperationException
             PackageProject project = _projectSerializer.Load(_launchParameters.ProjectFileName);
-            _savingTool.SavePackage(project, version, _launchParameters.OutputFileName);
+            string fileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName, project, version);
+            _savingTool.SavePackage(project, version, fileName);
         }
     }
 }
