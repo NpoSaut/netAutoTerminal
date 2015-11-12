@@ -22,7 +22,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Parameters
 
         private IEnumerable<string> EnumerateProgramActions()
         {
-            yield return string.Format("program {0}", ProcessFilePath(_firmwareHex.FullName));
+            yield return string.Format("program \"{0}\"", ProcessFilePath(_firmwareHex.FullName));
             if (_verify) yield return "verify";
             if (_reset) yield return "reset";
         }
