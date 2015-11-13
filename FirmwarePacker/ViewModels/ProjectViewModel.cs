@@ -4,6 +4,7 @@ using System.Windows.Input;
 using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.TriggerActions.Notifications;
+using FirmwarePacker.ViewModels.Factories;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 

@@ -1,8 +1,10 @@
 using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project.Serializers;
+using FirmwarePacking.Annotations;
 
-namespace FirmwarePacker.ViewModels
+namespace FirmwarePacker.ViewModels.Factories
 {
+    [UsedImplicitly]
     public class ProjectViewModelFactory
     {
         private readonly ProjectInformationViewModelFactory _informationViewModelFactory;

@@ -1,9 +1,11 @@
 ﻿using System;
 using FirmwarePacker.Enpacking;
 using FirmwarePacker.LaunchParameters;
+using FirmwarePacking.Annotations;
 
-namespace FirmwarePacker.ViewModels
+namespace FirmwarePacker.ViewModels.Factories
 {
+    [UsedImplicitly]
     public class MainViewModelFactory
     {
         private readonly ILaunchParameters _launchParameters;

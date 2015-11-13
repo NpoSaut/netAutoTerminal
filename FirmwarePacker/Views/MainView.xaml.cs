@@ -1,5 +1,6 @@
 ﻿using System.Windows.Controls;
 using FirmwarePacker.ViewModels;
+using FirmwarePacker.ViewModels.Factories;
 
 namespace FirmwarePacker.Views
 {

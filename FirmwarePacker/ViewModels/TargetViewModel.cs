@@ -4,7 +4,7 @@ namespace FirmwarePacker.ViewModels
 {
     public class TargetViewModel : ViewModel
     {
-        private static readonly IEqualityComparer<TargetViewModel> _cellModuleComparerInstance = new EqualityComparer();
+        private static readonly IEqualityComparer<TargetViewModel> _comparerInstance = new EqualityComparer();
 
         public TargetViewModel(string Cell, string Module)
         {
@@ -15,12 +15,12 @@ namespace FirmwarePacker.ViewModels
         public string Cell { get; private set; }
         public string Module { get; private set; }
 
-        public static IEqualityComparer<TargetViewModel> CellModuleComparer
+        public static IEqualityComparer<TargetViewModel> Comparer
         {
-            get { return _cellModuleComparerInstance; }
+            get { return _comparerInstance; }
         }
 
-        public sealed class EqualityComparer : IEqualityComparer<TargetViewModel>
+        private sealed class EqualityComparer : IEqualityComparer<TargetViewModel>
         {
             public bool Equals(TargetViewModel x, TargetViewModel y)
             {

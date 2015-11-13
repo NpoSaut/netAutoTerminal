@@ -152,11 +152,11 @@
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="VersionToStringConverter.cs" />
     <Compile Include="ViewModels\FirmwareVersionViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\MainViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectInformationViewModel.cs" />
-    <Compile Include="ViewModels\ProjectInformationViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\ProjectInformationViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
-    <Compile Include="ViewModels\ProjectViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\ProjectViewModelFactory.cs" />
     <Compile Include="ViewModels\TargetViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
