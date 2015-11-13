@@ -1,0 +1,46 @@
+﻿<UserControl x:Class="FirmwarePacker.Views.ProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectViewModel}">
+    <UserControl.Resources>
+        <DataTemplate x:Key="ProjectTargetTemplate" DataType="{x:Type viewModels:TargetViewModel}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Ellipse Grid.Column="0" Width="5" Height="5" Fill="#905400" Margin="2" />
+                <TextBlock Grid.Column="1" Text="{Binding Cell, Mode=OneWay}" FontWeight="SemiBold" Margin="2" />
+                <TextBlock Grid.Column="2" Text="{Binding Module, Mode=OneWay}" Opacity="0.7" Margin="2" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" TextWrapping="Wrap">
+            <Run Text="Проект:" />
+            <Hyperlink Command="{Binding LoadProjectCommand}">
+                <Run Text="{Binding Path=Information.FileName, Mode=OneWay}" />
+            </Hyperlink>
+        </TextBlock>
+        <ItemsControl Grid.Row="1" Focusable="False"
+                      ItemsSource="{Binding Path=Information.Targets}"
+                      ItemTemplate="{StaticResource ProjectTargetTemplate}" />
+    </Grid>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger SourceObject="{Binding Path=OpenFileRequest}" EventName="Raised">
+            <triggerActions:ShowOpenFileDialog />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+</UserControl>

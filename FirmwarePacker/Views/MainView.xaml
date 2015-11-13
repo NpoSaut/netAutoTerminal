@@ -12,11 +12,27 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <views:VersionView DataContext="{Binding Version}" />
-        <Button Grid.Row="1" Margin="20, 2" Content="Сохранить" IsDefault="True" Command="{Binding SaveCommand}" />
+        <Border Grid.Row="0" BorderBrush="#ACFF9400" BorderThickness="0,0,0,1" Padding="4">
+            <Border.Resources>
+                <Style TargetType="{x:Type Label}">
+                    <Setter Property="Foreground" Value="#3B2200" />
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="0" />
+                </Style>
+            </Border.Resources>
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#00FFC500" Offset="0" />
+                    <GradientStop Color="#48FFC500" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <views:VersionView DataContext="{Binding Version}" />
+        </Border>
+        <views:ProjectView Grid.Row="1" Margin="8,4" DataContext="{Binding Project}" />
+        <Button Grid.Row="2" Content="Сохранить" IsDefault="True" Command="{Binding SaveCommand}" />
     </Grid>
-
 
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=SaveFileRequest}" EventName="Raised">

@@ -10,6 +10,8 @@
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Padding" Value="4,3" />
                 <Setter Property="Margin" Value="2" />
+                <Setter Property="TextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="13" />
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -17,9 +19,9 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="120" />
-            <ColumnDefinition Width="120" />
-            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Grid.Column="0" Content="Версия" />
         <Label Grid.Row="0" Grid.Column="1" Content="Метка" />

@@ -2,11 +2,11 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:regions="http://www.codeplex.com/CompositeWPF"
-        Title="Упаковка ПО" Height="135.525" Width="500" MaxHeight="600"
+        Title="Упаковка ПО" Height="135.525" Width="380" MaxHeight="600"
         SnapsToDevicePixels="True" TextOptions.TextFormattingMode="Display"
         Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize"
-        SizeToContent="WidthAndHeight">
-    
-    <ContentControl regions:RegionManager.RegionName="MainView" Margin="8" Focusable="False" />
+        SizeToContent="Height">
+
+    <ContentControl regions:RegionManager.RegionName="MainView" Focusable="False" />
 
 </Window>

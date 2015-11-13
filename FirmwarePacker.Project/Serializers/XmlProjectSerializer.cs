@@ -41,6 +41,11 @@ namespace FirmwarePacker.Project.Serializers
             xDoc.Save(FileName);
         }
 
+        public string FileExtension
+        {
+            get { return "fpc"; }
+        }
+
         private ComponentProject LoadComponent(XElement XComponent)
         {
             return new ComponentProject(XComponent.Elements("Target")
