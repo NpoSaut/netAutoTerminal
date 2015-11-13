@@ -20,6 +20,15 @@ namespace FirmwareBurner.BurningTools.OpenOcd
             _launcher = Launcher;
         }
 
+        public void InitializeProgrammer()
+        {
+            Process process = _launcher.Execute(_toolBody,
+                                                new ScriptsLocationOpenOcdLaunchParameter(Path.Combine(_toolBody.WorkingDirectoryPath, "scripts")),
+                                                new ProgrammerConfigurationOpenOcdLaunchParameter("ftdi/olimex-arm-usb-tiny-h.cfg"),
+                                                new ShutdownOpenOcdLaunchParameter());
+            string output = process.StandardError.ReadToEnd();
+        }
+
         public void Burn(string BoardName, string TargetName, string FirmwareHexPath)
         {
             Process process = _launcher.Execute(_toolBody, GetLaunchParameters(BoardName, TargetName, FirmwareHexPath));
