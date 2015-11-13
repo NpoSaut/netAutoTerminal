@@ -25,7 +25,7 @@ namespace FirmwarePacker.ViewModels
             int minor = versionParts.Length > 1
                             ? int.Parse(versionParts[1])
                             : 0;
-            string label = string.IsNullOrWhiteSpace(Label)
+            string label = !string.IsNullOrWhiteSpace(Label)
                                ? Label.Substring(0, Math.Min(Label.Length, 4))
                                : null;
             return new PackageVersion(major, minor, label, ReleaseDate);
