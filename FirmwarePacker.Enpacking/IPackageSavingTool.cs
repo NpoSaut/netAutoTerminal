@@ -1,6 +1,6 @@
 ﻿using FirmwarePacker.Project;
 
-namespace FirmwarePacker.Shared
+namespace FirmwarePacker.Enpacking
 {
     public interface IPackageSavingTool
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FirmwarePacker.Shared.LaunchParameters
+namespace FirmwarePacker.LaunchParameters
 {
     public class CommandLineLaunchParameters : ILaunchParameters
     {

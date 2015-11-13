@@ -1,7 +1,7 @@
 ﻿using FirmwarePacker.Project;
 using FirmwarePacking;
 
-namespace FirmwarePacker.Shared
+namespace FirmwarePacker.Enpacking
 {
     public interface IEnpacker
     {

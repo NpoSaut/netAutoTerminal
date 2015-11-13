@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwarePacker.Shared.LaunchParameters
+namespace FirmwarePacker.LaunchParameters
 {
     /// <summary>Параметры, переданные приложению при его запуске</summary>
     public interface ILaunchParameters

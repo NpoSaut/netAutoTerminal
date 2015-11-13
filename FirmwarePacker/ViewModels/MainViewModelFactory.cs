@@ -1,6 +1,6 @@
 ﻿using System;
-using FirmwarePacker.Shared;
-using FirmwarePacker.Shared.LaunchParameters;
+using FirmwarePacker.Enpacking;
+using FirmwarePacker.LaunchParameters;
 
 namespace FirmwarePacker.ViewModels
 {

@@ -1,6 +1,6 @@
 ﻿using FirmwarePacker.Project;
 
-namespace FirmwarePacker.Shared
+namespace FirmwarePacker
 {
     public interface IVariablesProcessor
     {

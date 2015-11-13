@@ -1,5 +1,5 @@
+using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project.Serializers;
-using FirmwarePacker.Shared.LaunchParameters;
 
 namespace FirmwarePacker.ViewModels
 {

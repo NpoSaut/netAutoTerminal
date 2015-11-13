@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
+using FirmwarePacker.Enpacking;
+using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
-using FirmwarePacker.Shared;
-using FirmwarePacker.Shared.LaunchParameters;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;

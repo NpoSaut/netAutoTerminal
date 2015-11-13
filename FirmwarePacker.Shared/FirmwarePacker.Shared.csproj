@@ -7,7 +7,7 @@
     <ProjectGuid>{1077A9C3-DB36-4CE9-A95A-C805718A99D9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirmwarePacker.Shared</RootNamespace>
+    <RootNamespace>FirmwarePacker</RootNamespace>
     <AssemblyName>FirmwarePacker.Shared</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

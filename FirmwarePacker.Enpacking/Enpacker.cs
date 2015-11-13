@@ -3,7 +3,7 @@ using System.Linq;
 using FirmwarePacker.Project;
 using FirmwarePacking;
 
-namespace FirmwarePacker.Shared
+namespace FirmwarePacker.Enpacking
 {
     public class Enpacker : IEnpacker
     {

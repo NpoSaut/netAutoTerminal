@@ -2,7 +2,6 @@
 using System.Globalization;
 using System.Linq;
 using FirmwarePacker.Project;
-using FirmwarePacker.Shared;
 using FirmwarePacking.SystemsIndexes;
 
 namespace FirmwarePacker.Enpacking

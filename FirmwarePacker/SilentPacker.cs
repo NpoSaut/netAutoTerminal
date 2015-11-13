@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FirmwarePacker.Enpacking;
 using FirmwarePacker.Exceptions;
+using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
-using FirmwarePacker.Shared;
-using FirmwarePacker.Shared.LaunchParameters;
 
 namespace FirmwarePacker
 {
