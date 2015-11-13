@@ -26,7 +26,8 @@ namespace FirmwarePacker.Project.FileMaps
                          .Select(f => new MapingItem(f,
                                                      String.Format("{0}/{1}",
                                                                    _destinationFolder,
-                                                                   f.FullName.Substring(fullNameOffset).Replace(Path.DirectorySeparatorChar, '/'))));
+                                                                   f.FullName.Substring(fullNameOffset).Replace(Path.DirectorySeparatorChar, '/'))
+                                                           .TrimStart('/')));
         }
 
         public override string ToString() { return string.Format("{0} ({1}) -> {2}", _sourceFolder, _searchPattern, _destinationFolder); }
