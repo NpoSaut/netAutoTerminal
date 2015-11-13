@@ -30,7 +30,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Parameters
         /// <summary>Возвращает содержимое параметра</summary>
         protected override string GetParameterContent()
         {
-            return string.Join(" ", EnumerateProgramActions());
+            return string.Format("\"{0}\"", string.Join(" ", EnumerateProgramActions()));
         }
     }
 }
