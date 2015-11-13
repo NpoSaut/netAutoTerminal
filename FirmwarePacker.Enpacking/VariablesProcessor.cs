@@ -2,9 +2,10 @@
 using System.Globalization;
 using System.Linq;
 using FirmwarePacker.Project;
+using FirmwarePacker.Shared;
 using FirmwarePacking.SystemsIndexes;
 
-namespace FirmwarePacker.Shared
+namespace FirmwarePacker.Enpacking
 {
     public class VariablesProcessor : IVariablesProcessor
     {

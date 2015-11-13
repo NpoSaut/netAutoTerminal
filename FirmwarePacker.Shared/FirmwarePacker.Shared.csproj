@@ -40,19 +40,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enpacker.cs" />
-    <Compile Include="IEnpacker.cs" />
-    <Compile Include="IPackageSavingTool.cs" />
     <Compile Include="IVariablesProcessor.cs" />
-    <Compile Include="PackageSavingTool.cs" />
+    <Compile Include="LaunchParameters\CommandLineLaunchParameters.cs" />
+    <Compile Include="LaunchParameters\ILaunchParameters.cs" />
+    <Compile Include="Project\ComponentProject.cs" />
+    <Compile Include="Project\ComponentProjectTarget.cs" />
+    <Compile Include="Project\FileMaps\FileMap.cs" />
+    <Compile Include="Project\FileMaps\FolderMap.cs" />
+    <Compile Include="Project\FileMaps\FolderMapFactory.cs" />
+    <Compile Include="Project\FileMaps\IFileMapFactory.cs" />
+    <Compile Include="Project\FileMaps\SingleFileMap.cs" />
+    <Compile Include="Project\FileMaps\SingleFileMapFactory.cs" />
+    <Compile Include="Project\IFileMap.cs" />
+    <Compile Include="Project\PackageFile.cs" />
+    <Compile Include="Project\PackageProject.cs" />
+    <Compile Include="Project\PackageVersion.cs" />
+    <Compile Include="Project\Serializers\IProjectSerializer.cs" />
+    <Compile Include="Project\Serializers\XmlProjectSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VariablesProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirmwarePacker.Project\FirmwarePacker.Project.csproj">
-      <Project>{EF71AA0E-93A9-4736-96C2-E44D45D948AA}</Project>
-      <Name>FirmwarePacker.Project</Name>
-    </ProjectReference>
     <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
       <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
       <Name>FirmwarePacking</Name>

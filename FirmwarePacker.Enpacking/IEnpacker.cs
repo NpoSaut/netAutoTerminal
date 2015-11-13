@@ -5,6 +5,6 @@ namespace FirmwarePacker.Shared
 {
     public interface IEnpacker
     {
-        FirmwarePackage Enpack(PackageProject Project, PackageVersion Version);
+        FirmwarePackage Enpack(PackageProject Project, PackageVersion Version, string RootDirectory);
     }
 }

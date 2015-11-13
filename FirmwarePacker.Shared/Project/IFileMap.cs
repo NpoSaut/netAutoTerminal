@@ -9,6 +9,6 @@ namespace FirmwarePacker.Project
         ///// <param name="FilesCollection">Список файлов</param>
         //void IncludeTo(ICollection<PackageFile> FilesCollection);
 
-        IEnumerable<PackageFile> EnumerateFiles();
+        IEnumerable<PackageFile> EnumerateFiles(string RootDirectory);
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FirmwarePacker.LaunchParameters
+namespace FirmwarePacker.Shared.LaunchParameters
 {
-    internal class CommandLineLaunchParameters : ILaunchParameters
+    public class CommandLineLaunchParameters : ILaunchParameters
     {
         private readonly string _outputFileName;
         private readonly Dictionary<string, string> _parameters;
@@ -24,6 +24,11 @@ namespace FirmwarePacker.LaunchParameters
         public string OutputFileName
         {
             get { return _outputFileName; }
+        }
+
+        public string RootDirectory
+        {
+            get { return GetNullableString("root") ?? ""; }
         }
 
         public bool SilentMode

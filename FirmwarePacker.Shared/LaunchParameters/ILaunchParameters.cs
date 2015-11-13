@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FirmwarePacker.LaunchParameters
+namespace FirmwarePacker.Shared.LaunchParameters
 {
     /// <summary>Параметры, переданные приложению при его запуске</summary>
     public interface ILaunchParameters
@@ -22,6 +22,9 @@ namespace FirmwarePacker.LaunchParameters
 
         /// <summary>Имя файла, в который сохранится пакет</summary>
         string OutputFileName { get; }
+
+        /// <summary>Корневая директория, от которой отсчитываются</summary>
+        string RootDirectory { get; }
 
         /// <summary>Запуск в тихом режиме</summary>
         bool SilentMode { get; }

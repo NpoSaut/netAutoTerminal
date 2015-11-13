@@ -6,12 +6,12 @@ namespace FirmwarePacker.Project.FileMaps
 {
     internal abstract class FileMap : IFileMap
     {
-        public IEnumerable<PackageFile> EnumerateFiles()
+        public IEnumerable<PackageFile> EnumerateFiles(string RootDirectory)
         {
-            return EnumerateMapingItems().Select(item => new PackageFile(item.PackageFileName, File.ReadAllBytes(item.LocalFile.FullName)));
+            return EnumerateMapingItems(RootDirectory).Select(item => new PackageFile(item.PackageFileName, File.ReadAllBytes(item.LocalFile.FullName)));
         }
 
-        protected abstract IEnumerable<MapingItem> EnumerateMapingItems();
+        protected abstract IEnumerable<MapingItem> EnumerateMapingItems(string RootDirectory);
 
         protected class MapingItem
         {

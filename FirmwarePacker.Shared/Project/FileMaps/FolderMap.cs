@@ -18,9 +18,9 @@ namespace FirmwarePacker.Project.FileMaps
             _searchPattern = SearchPattern ?? "*";
         }
 
-        protected override IEnumerable<MapingItem> EnumerateMapingItems()
+        protected override IEnumerable<MapingItem> EnumerateMapingItems(string RootDirectory)
         {
-            var source = new DirectoryInfo(_sourceFolder);
+            var source = new DirectoryInfo(Path.Combine(RootDirectory, _sourceFolder));
             int fullNameOffset = source.FullName.Length + 1;
             return source.EnumerateFiles(_searchPattern, SearchOption.AllDirectories)
                          .Select(f => new MapingItem(f,

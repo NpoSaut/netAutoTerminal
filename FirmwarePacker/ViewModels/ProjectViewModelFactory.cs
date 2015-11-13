@@ -1,5 +1,5 @@
-using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project.Serializers;
+using FirmwarePacker.Shared.LaunchParameters;
 
 namespace FirmwarePacker.ViewModels
 {
@@ -19,7 +19,7 @@ namespace FirmwarePacker.ViewModels
 
         public ProjectViewModel GetInstance()
         {
-            return new ProjectViewModel(_launchParameters.ProjectFileName, _projectSerializer, _informationViewModelFactory);
+            return new ProjectViewModel(_launchParameters.ProjectFileName, _projectSerializer, _informationViewModelFactory, _launchParameters.RootDirectory);
         }
     }
 }

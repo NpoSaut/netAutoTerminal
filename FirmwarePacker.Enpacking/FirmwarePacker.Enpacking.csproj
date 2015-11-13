@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EF71AA0E-93A9-4736-96C2-E44D45D948AA}</ProjectGuid>
+    <ProjectGuid>{B6D4C531-D00A-41FD-B4A9-46A1DEB94AE8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirmwarePacker.Project</RootNamespace>
-    <AssemblyName>FirmwarePacker.Project</AssemblyName>
+    <RootNamespace>FirmwarePacker.Enpacking</RootNamespace>
+    <AssemblyName>FirmwarePacker.Enpacking</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -40,23 +40,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComponentProject.cs" />
-    <Compile Include="ComponentProjectTarget.cs" />
-    <Compile Include="FileMaps\FileMap.cs" />
-    <Compile Include="FileMaps\FolderMap.cs" />
-    <Compile Include="FileMaps\FolderMapFactory.cs" />
-    <Compile Include="FileMaps\SingleFileMap.cs" />
-    <Compile Include="FileMaps\SingleFileMapFactory.cs" />
-    <Compile Include="IFileMap.cs" />
-    <Compile Include="PackageProject.cs" />
-    <Compile Include="PackageVersion.cs" />
-    <Compile Include="PackageFile.cs" />
+    <Compile Include="Enpacker.cs" />
+    <Compile Include="IEnpacker.cs" />
+    <Compile Include="IPackageSavingTool.cs" />
+    <Compile Include="PackageSavingTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FileMaps\IFileMapFactory.cs" />
-    <Compile Include="Serializers\IProjectSerializer.cs" />
-    <Compile Include="Serializers\XmlProjectSerializer.cs" />
+    <Compile Include="VariablesProcessor.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\FirmwarePacker.Shared\FirmwarePacker.Shared.csproj">
+      <Project>{1077A9C3-DB36-4CE9-A95A-C805718A99D9}</Project>
+      <Name>FirmwarePacker.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
+      <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
+      <Name>FirmwarePacking</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

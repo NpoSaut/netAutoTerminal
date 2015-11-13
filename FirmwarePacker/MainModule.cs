@@ -1,4 +1,5 @@
 ﻿using FirmwarePacker.Dialogs;
+using FirmwarePacker.Enpacking;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.Shared;
 using FirmwarePacker.Views;

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется с помощью 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("FirmwarePacker.Project")]
+[assembly: AssemblyTitle("FirmwarePacker.Enpacking")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FirmwarePacker.Project")]
+[assembly: AssemblyProduct("FirmwarePacker.Enpacking")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("7745719f-bdd9-4938-ab15-83ffa77a8a4f")]
+[assembly: Guid("3d40a0ac-7dcd-400b-b2c7-42a19fcd1253")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
-using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
 using FirmwarePacker.Shared;
+using FirmwarePacker.Shared.LaunchParameters;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -22,7 +22,7 @@ namespace FirmwarePacker.ViewModels
             _launchParameters = LaunchParameters;
             _variablesProcessor = VariablesProcessor;
             this.Version = Version;
-            SaveCommand = new DelegateCommand(Save, Verify);
+            SaveCommand = new DelegateCommand(BeginSave, Verify);
             SaveFileRequest = new InteractionRequest<SaveFileInteractionContext>();
         }
 
@@ -33,7 +33,7 @@ namespace FirmwarePacker.ViewModels
 
         private bool Verify() { return Project.Check(); }
 
-        private void Save()
+        private void BeginSave()
         {
             SaveFileRequest.Raise(new SaveFileInteractionContext(new SaveFileRequestArguments("Куда сохранить?", _savingTool.FileExtension)
                                                                  {
@@ -60,7 +60,7 @@ namespace FirmwarePacker.ViewModels
         private void SavePackage(string FileName)
         {
             PackageProject model = Project.GetModel();
-            _savingTool.SavePackage(model, Version.GetModel(), FileName);
+            _savingTool.SavePackage(model, Version.GetModel(), FileName, Project.ProjectRoot);
         }
     }
 }

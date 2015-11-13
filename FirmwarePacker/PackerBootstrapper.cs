@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-using FirmwarePacker.LaunchParameters;
+using FirmwarePacker.Shared.LaunchParameters;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;

@@ -7,7 +7,7 @@ namespace FirmwarePacker.Shared
 {
     public class Enpacker : IEnpacker
     {
-        public FirmwarePackage Enpack(PackageProject Project, PackageVersion Version)
+        public FirmwarePackage Enpack(PackageProject Project, PackageVersion Version, string RootDirectory)
         {
             return new FirmwarePackage
                    {
@@ -18,7 +18,7 @@ namespace FirmwarePacker.Shared
                                                            t => new ComponentTarget(t.Cell, t.Modification, t.Channel, t.Module)).ToList())
                                                    {
                                                        Files = componentProject.FileMaps
-                                                                               .SelectMany(fm => fm.EnumerateFiles())
+                                                                               .SelectMany(fm => fm.EnumerateFiles(RootDirectory))
                                                                                .Select(f => new FirmwareFile(f.Name, f.Content))
                                                                                .ToList()
                                                    })

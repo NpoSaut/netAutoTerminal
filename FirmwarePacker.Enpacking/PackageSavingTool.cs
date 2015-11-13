@@ -8,7 +8,10 @@ namespace FirmwarePacker.Shared
         private readonly IEnpacker _enpacker;
         public PackageSavingTool(IEnpacker Enpacker) { _enpacker = Enpacker; }
 
-        public void SavePackage(PackageProject Model, PackageVersion Version, string FileName) { _enpacker.Enpack(Model, Version).Save(FileName); }
+        public void SavePackage(PackageProject Model, PackageVersion Version, string FileName, string RootDirectory)
+        {
+            _enpacker.Enpack(Model, Version, RootDirectory).Save(FileName);
+        }
 
         public string FileExtension
         {

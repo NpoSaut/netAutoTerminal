@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using FirmwarePacker.Exceptions;
-using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.Shared;
+using FirmwarePacker.Shared.LaunchParameters;
 
 namespace FirmwarePacker
 {
@@ -57,7 +57,7 @@ namespace FirmwarePacker
             // ReSharper restore PossibleInvalidOperationException
             PackageProject project = _projectSerializer.Load(_launchParameters.ProjectFileName);
             string fileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName, project, version);
-            _savingTool.SavePackage(project, version, fileName);
+            _savingTool.SavePackage(project, version, fileName, _launchParameters.RootDirectory);
         }
     }
 }

@@ -140,7 +140,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Exceptions\MisingRequiredParameters.cs" />
-    <Compile Include="LaunchParameters\CommandLineLaunchParameters.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="PackerBootstrapper.cs" />
     <Compile Include="SilentPacker.cs" />
@@ -153,7 +152,6 @@
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="VersionToStringConverter.cs" />
     <Compile Include="ViewModels\FirmwareVersionViewModel.cs" />
-    <Compile Include="LaunchParameters\ILaunchParameters.cs" />
     <Compile Include="ViewModels\MainViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectInformationViewModel.cs" />
     <Compile Include="ViewModels\ProjectInformationViewModelFactory.cs" />
@@ -233,9 +231,9 @@
     <None Include="SautCodeSigning.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FirmwarePacker.Project\FirmwarePacker.Project.csproj">
-      <Project>{EF71AA0E-93A9-4736-96C2-E44D45D948AA}</Project>
-      <Name>FirmwarePacker.Project</Name>
+    <ProjectReference Include="..\FirmwarePacker.Enpacking\FirmwarePacker.Enpacking.csproj">
+      <Project>{b6d4c531-d00a-41fd-b4a9-46a1deb94ae8}</Project>
+      <Name>FirmwarePacker.Enpacking</Name>
     </ProjectReference>
     <ProjectReference Include="..\FirmwarePacker.Shared\FirmwarePacker.Shared.csproj">
       <Project>{1077A9C3-DB36-4CE9-A95A-C805718A99D9}</Project>
