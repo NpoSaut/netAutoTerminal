@@ -61,6 +61,8 @@ namespace FirmwarePacker.LaunchParameters
             string value;
             if (!_parameters.TryGetValue(PropertyKey, out value))
                 return null;
+            if (value == "today")
+                return DateTime.Now;
             DateTime result;
             if (!DateTime.TryParse(value, out result))
                 return null;
