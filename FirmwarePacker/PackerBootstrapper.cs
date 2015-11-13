@@ -38,7 +38,10 @@ namespace FirmwarePacker
         {
             base.Run(runWithDefaultConfiguration);
             if (_launchParameters.SilentMode)
+            {
                 Container.Resolve<SilentPacker>().Run();
+                Application.Current.Shutdown();
+            }
         }
 
         protected override void InitializeShell()
