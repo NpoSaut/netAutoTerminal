@@ -10,7 +10,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Parameters
         public BoardConfigurationOpenOcdLaunchParameter(string BoardName) { _boardName = BoardName; }
 
         /// <summary>Возвращает содержимое параметра</summary>
-        protected override string GetParameterContent() { return String.Format("/board/{0}.cfg", _boardName); }
+        protected override string GetParameterContent() { return String.Format("\"/board/{0}.cfg\"", _boardName); }
     }
 
     internal class ProgrammerConfigurationOpenOcdLaunchParameter : OpenOcdLaunchParameter
