@@ -39,7 +39,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=OpenFileRequest}" EventName="Raised">
-            <triggerActions:ShowOpenFileDialog />
+            <triggerActions:ShowOpenFileDialog Title="Открыть файл проекта" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 

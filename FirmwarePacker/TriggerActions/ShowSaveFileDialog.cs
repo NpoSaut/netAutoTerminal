@@ -10,6 +10,15 @@ namespace FirmwarePacker.TriggerActions
 {
     public class ShowSaveFileDialog : TriggerAction<UIElement>
     {
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof (String), typeof (ShowSaveFileDialog), new PropertyMetadata("Сохранить файл"));
+
+        public String Title
+        {
+            get { return (String)GetValue(TitleProperty); }
+            set { SetValue(TitleProperty, value); }
+        }
+
         /// <summary>Invokes the action.</summary>
         /// <param name="parameter">
         ///     The parameter to the action. If the action does not require a parameter, the parameter may be
@@ -24,7 +33,7 @@ namespace FirmwarePacker.TriggerActions
                           FileName = context.RequestArguments.DefaultFileName,
                           CheckPathExists = true,
                           DefaultExt = context.RequestArguments.DefaultFileType,
-                          Title = context.RequestArguments.Message,
+                          Title = Title,
                           FilterIndex = 0,
                           Filter =
                               string.Join("|", context.RequestArguments.FileTypes.Select(ft => String.Format("{1} (*.{0})|*.{0}", ft.Extension, ft.Description)))

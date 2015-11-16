@@ -36,7 +36,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=SaveFileRequest}" EventName="Raised">
-            <triggerActions:ShowSaveFileDialog />
+            <triggerActions:ShowSaveFileDialog Title="Сохранить пакет с прошивкой" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 </UserControl>

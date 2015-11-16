@@ -54,16 +54,11 @@ namespace FirmwarePacker.ViewModels
 
         private void BeginLoadProject()
         {
-            OpenFileRequest.Raise(new OpenFileInteractionContext(new OpenFileRequestArguments("Открыть файл проекта", _projectSerializer.FileExtension)
-                                                                 {
-                                                                     FileTypes = new[]
-                                                                                 {
-                                                                                     new FileRequestArguments.FileTypeDescription(
-                                                                                         _projectSerializer.FileExtension,
-                                                                                         "Проект пакета прошивок")
-                                                                                 }
-                                                                 }),
-                                  c => LoadProject(c.FileName));
+            OpenFileRequest.Raise(
+                new OpenFileInteractionContext(
+                    new OpenFileRequestArguments(_projectSerializer.FileExtension,
+                                                 new FileRequestArguments.FileTypeDescription(_projectSerializer.FileExtension, "Проект пакета прошивок"))),
+                c => LoadProject(c.FileName));
         }
 
         private void LoadProject(string ProjectFileName)

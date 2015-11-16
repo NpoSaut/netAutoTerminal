@@ -35,17 +35,14 @@ namespace FirmwarePacker.ViewModels
 
         private void BeginSave()
         {
-            SaveFileRequest.Raise(new SaveFileInteractionContext(new SaveFileRequestArguments("Куда сохранить?", _savingTool.FileExtension)
+            SaveFileRequest.Raise(new SaveFileInteractionContext(new SaveFileRequestArguments(_savingTool.FileExtension,
+                                                                                              new FileRequestArguments.FileTypeDescription(
+                                                                                                  _savingTool.FileExtension, "Файл пакета прошивок"))
                                                                  {
                                                                      DefaultFileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName
                                                                                                                             ?? "{cell} ver. {version}.sfp",
                                                                                                                             Project.GetModel(),
-                                                                                                                            Version.GetModel()),
-                                                                     FileTypes = new[]
-                                                                                 {
-                                                                                     new FileRequestArguments.FileTypeDescription(_savingTool.FileExtension,
-                                                                                                                                  "Файл пакета прошивок")
-                                                                                 }
+                                                                                                                            Version.GetModel())
                                                                  }),
                                   OnFileSelected);
         }
