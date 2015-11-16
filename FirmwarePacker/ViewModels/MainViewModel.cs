@@ -1,7 +1,4 @@
 ﻿using System.Windows.Input;
-using FirmwarePacker.Enpacking;
-using FirmwarePacker.LaunchParameters;
-using FirmwarePacker.Project;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
@@ -10,19 +7,14 @@ namespace FirmwarePacker.ViewModels
 {
     public class MainViewModel : ViewModel
     {
-        private readonly ILaunchParameters _launchParameters;
-        private readonly IPackageSavingTool _savingTool;
-        private readonly IVariablesProcessor _variablesProcessor;
+        private readonly IPackageSavingService _packageSavingService;
 
-        public MainViewModel(FirmwareVersionViewModel Version, ProjectViewModel Project, IPackageSavingTool SavingTool, ILaunchParameters LaunchParameters,
-                             IVariablesProcessor VariablesProcessor)
+        public MainViewModel(FirmwareVersionViewModel Version, ProjectViewModel Project, IPackageSavingService PackageSavingService)
         {
             this.Project = Project;
-            _savingTool = SavingTool;
-            _launchParameters = LaunchParameters;
-            _variablesProcessor = VariablesProcessor;
+            _packageSavingService = PackageSavingService;
             this.Version = Version;
-            SaveCommand = new DelegateCommand(BeginSave, Verify);
+            SaveCommand = new DelegateCommand(Save, Verify);
             SaveFileRequest = new InteractionRequest<SaveFileInteractionContext>();
         }
 
@@ -32,32 +24,6 @@ namespace FirmwarePacker.ViewModels
         public InteractionRequest<SaveFileInteractionContext> SaveFileRequest { get; private set; }
 
         private bool Verify() { return Project.Check(); }
-
-        private void BeginSave()
-        {
-            SaveFileRequest.Raise(new SaveFileInteractionContext(new SaveFileRequestArguments(_savingTool.FileExtension,
-                                                                                              new FileRequestArguments.FileTypeDescription(
-                                                                                                  _savingTool.FileExtension, "Файл пакета прошивок"))
-                                                                 {
-                                                                     DefaultFileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName
-                                                                                                                            ?? "{cell} ver. {version}.sfp",
-                                                                                                                            Project.GetModel(),
-                                                                                                                            Version.GetModel())
-                                                                 }),
-                                  OnFileSelected);
-        }
-
-        private void OnFileSelected(SaveFileInteractionContext InteractionContext)
-        {
-            if (InteractionContext.FileName == null)
-                return;
-            SavePackage(InteractionContext.FileName);
-        }
-
-        private void SavePackage(string FileName)
-        {
-            PackageProject model = Project.GetModel();
-            _savingTool.SavePackage(model, Version.GetModel(), FileName, Project.ProjectRoot);
-        }
+        private void Save() { _packageSavingService.SavePackage(SaveFileRequest, Project.GetModel(), Version.GetModel(), Project.ProjectRoot); }
     }
 }

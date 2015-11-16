@@ -140,7 +140,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Exceptions\MisingRequiredParameters.cs" />
+    <Compile Include="IPackageSavingService.cs" />
     <Compile Include="MainModule.cs" />
+    <Compile Include="PackageSavingService.cs" />
     <Compile Include="PackerBootstrapper.cs" />
     <Compile Include="SilentPacker.cs" />
     <Compile Include="TriggerActions\Notifications\FileRequestArguments.cs" />

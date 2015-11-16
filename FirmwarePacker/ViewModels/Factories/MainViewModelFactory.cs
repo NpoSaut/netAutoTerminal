@@ -9,26 +9,20 @@ namespace FirmwarePacker.ViewModels.Factories
     public class MainViewModelFactory
     {
         private readonly ILaunchParameters _launchParameters;
-        private readonly IPackageSavingTool _packageSavingTool;
+        private readonly IPackageSavingService _packageSavingService;
         private readonly ProjectViewModelFactory _projectViewModelFactory;
-        private readonly IVariablesProcessor _variablesProcessor;
 
         public MainViewModelFactory(ProjectViewModelFactory ProjectViewModelFactory, ILaunchParameters LaunchParameters, IPackageSavingTool PackageSavingTool,
-                                    IVariablesProcessor VariablesProcessor)
+                                    IVariablesProcessor VariablesProcessor, IPackageSavingService PackageSavingService)
         {
             _projectViewModelFactory = ProjectViewModelFactory;
-            _packageSavingTool = PackageSavingTool;
-            _variablesProcessor = VariablesProcessor;
             _launchParameters = LaunchParameters;
+            _packageSavingService = PackageSavingService;
         }
 
         public MainViewModel GetInstance()
         {
-            return new MainViewModel(GetFirmwareVersionViewModel(),
-                                     _projectViewModelFactory.GetInstance(),
-                                     _packageSavingTool,
-                                     _launchParameters,
-                                     _variablesProcessor);
+            return new MainViewModel(GetFirmwareVersionViewModel(), _projectViewModelFactory.GetInstance(), _packageSavingService);
         }
 
         private FirmwareVersionViewModel GetFirmwareVersionViewModel()

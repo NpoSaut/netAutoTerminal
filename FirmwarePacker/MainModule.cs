@@ -24,7 +24,8 @@ namespace FirmwarePacker
                 .RegisterType<IVariablesProcessor, VariablesProcessor>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProjectSerializer, XmlProjectSerializer>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEnpacker, Enpacker>(new ContainerControlledLifetimeManager())
-                .RegisterType<IPackageSavingTool, PackageSavingTool>(new ContainerControlledLifetimeManager());
+                .RegisterType<IPackageSavingTool, PackageSavingTool>(new ContainerControlledLifetimeManager())
+                .RegisterType<IPackageSavingService, PackageSavingService>(new ContainerControlledLifetimeManager());
 
             var regionManager = _container.Resolve<RegionManager>();
             regionManager.RegisterViewWithRegion("MainView", typeof (MainView));
