@@ -1,74 +1,46 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Windows.Input;
+using FirmwarePacker.Events;
 using FirmwarePacker.Project;
-using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.TriggerActions.Notifications;
-using FirmwarePacker.ViewModels.Factories;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwarePacker.ViewModels
 {
     public class ProjectViewModel : ViewModel
     {
-        private readonly ProjectInformationViewModelFactory _informationViewModelFactory;
-        private readonly IProjectSerializer _projectSerializer;
-        private ProjectInformationViewModel _information;
-        private PackageProject _project;
-        private string _projectRoot;
+        private readonly IEventAggregator _eventAggregator;
+        private readonly ILoadProjectService _loadProjectService;
+        private readonly PackageProject _project;
 
-        public ProjectViewModel(string ProjectFileName, IProjectSerializer ProjectSerializer, ProjectInformationViewModelFactory InformationViewModelFactory,
-                                string ProjectRoot)
+        public ProjectViewModel(PackageProject Project, string FileName, string ProjectRoot,
+                                ICollection<TargetViewModel> Targets, ILoadProjectService LoadProjectService, IEventAggregator EventAggregator)
         {
-            _projectSerializer = ProjectSerializer;
-            _informationViewModelFactory = InformationViewModelFactory;
-            _projectRoot = ProjectRoot;
-            LoadProjectCommand = new DelegateCommand(BeginLoadProject);
+            _loadProjectService = LoadProjectService;
+            _eventAggregator = EventAggregator;
+            _project = Project;
+            this.FileName = FileName;
+            this.Targets = Targets;
+            this.ProjectRoot = ProjectRoot;
+            LoadProjectCommand = new DelegateCommand(LoadProject);
             OpenFileRequest = new InteractionRequest<OpenFileInteractionContext>();
-
-            if (!string.IsNullOrWhiteSpace(ProjectFileName))
-                LoadProject(ProjectFileName);
-            else
-                _project = new PackageProject(new Collection<ComponentProject>());
         }
 
-        public ProjectInformationViewModel Information
-        {
-            get { return _information; }
-            private set
-            {
-                if (Equals(value, _information)) return;
-                _information = value;
-                RaisePropertyChanged("Information");
-            }
-        }
+        public string FileName { get; private set; }
+        public ICollection<TargetViewModel> Targets { get; private set; }
 
         public ICommand LoadProjectCommand { get; private set; }
+
         public InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; private set; }
 
-        public string ProjectRoot
-        {
-            get { return _projectRoot; }
-        }
+        public string ProjectRoot { get; private set; }
 
-        private void BeginLoadProject()
+        private void LoadProject()
         {
-            OpenFileRequest.Raise(
-                new OpenFileInteractionContext(
-                    new OpenFileRequestArguments(_projectSerializer.FileExtension,
-                                                 new FileRequestArguments.FileTypeDescription(_projectSerializer.FileExtension, "Проект пакета прошивок"))),
-                c => LoadProject(c.FileName));
-        }
-
-        private void LoadProject(string ProjectFileName)
-        {
-            if (ProjectFileName != null)
-            {
-                _project = _projectSerializer.Load(ProjectFileName);
-                _projectRoot = Path.GetDirectoryName(ProjectFileName);
-                Information = _informationViewModelFactory.GetViewModel(ProjectFileName, _project);
-            }
+            _loadProjectService.RequestLoadProject(OpenFileRequest,
+                                                   p => _eventAggregator.GetEvent<ProjectLoadedEvent>().Publish(new ProjectLoadedEvent.Payload(p)));
         }
 
         public bool Check() { return true; }

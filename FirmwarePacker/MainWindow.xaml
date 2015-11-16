@@ -7,6 +7,6 @@
         Background="{StaticResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="CanMinimize"
         SizeToContent="Height">
 
-    <ContentControl regions:RegionManager.RegionName="MainView" Focusable="False" />
+    <ContentControl regions:RegionManager.RegionName="RootRegion" Focusable="False" />
 
 </Window>

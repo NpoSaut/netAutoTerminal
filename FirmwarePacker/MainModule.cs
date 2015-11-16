@@ -25,10 +25,11 @@ namespace FirmwarePacker
                 .RegisterType<IProjectSerializer, XmlProjectSerializer>(new ContainerControlledLifetimeManager())
                 .RegisterType<IEnpacker, Enpacker>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPackageSavingTool, PackageSavingTool>(new ContainerControlledLifetimeManager())
-                .RegisterType<IPackageSavingService, PackageSavingService>(new ContainerControlledLifetimeManager());
+                .RegisterType<IPackageSavingService, PackageSavingService>(new ContainerControlledLifetimeManager())
+                .RegisterType<ILoadProjectService, LoadProjectService>(new ContainerControlledLifetimeManager());
 
             var regionManager = _container.Resolve<RegionManager>();
-            regionManager.RegisterViewWithRegion("MainView", typeof (MainView));
+            regionManager.RegisterViewWithRegion("RootRegion", typeof (RootView));
         }
     }
 }

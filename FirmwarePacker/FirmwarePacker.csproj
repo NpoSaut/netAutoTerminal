@@ -139,8 +139,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Events\ProjectLoadedEvent.cs" />
     <Compile Include="Exceptions\MisingRequiredParameters.cs" />
+    <Compile Include="ILoadProjectService.cs" />
     <Compile Include="IPackageSavingService.cs" />
+    <Compile Include="LoadProjectService.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="PackageSavingService.cs" />
     <Compile Include="PackerBootstrapper.cs" />
@@ -153,18 +156,26 @@
     <Compile Include="TriggerActions\ShowOpenFileDialog.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
     <Compile Include="VersionToStringConverter.cs" />
+    <Compile Include="ViewModels\Factories\RootViewModelFactory.cs" />
+    <Compile Include="ViewModels\Factories\SelectProjectViewModelFactory.cs" />
     <Compile Include="ViewModels\FirmwareVersionViewModel.cs" />
     <Compile Include="ViewModels\Factories\MainViewModelFactory.cs" />
-    <Compile Include="ViewModels\ProjectInformationViewModel.cs" />
-    <Compile Include="ViewModels\Factories\ProjectInformationViewModelFactory.cs" />
     <Compile Include="ViewModels\ProjectViewModel.cs" />
     <Compile Include="ViewModels\Factories\ProjectViewModelFactory.cs" />
+    <Compile Include="ViewModels\RootViewModel.cs" />
+    <Compile Include="ViewModels\SelectProjectViewModel.cs" />
     <Compile Include="ViewModels\TargetViewModel.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProjectView.xaml.cs">
       <DependentUpon>ProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RootView.xaml.cs">
+      <DependentUpon>RootView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectProjectView.xaml.cs">
+      <DependentUpon>SelectProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VersionView.xaml.cs">
       <DependentUpon>VersionView.xaml</DependentUpon>
@@ -194,6 +205,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RootView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

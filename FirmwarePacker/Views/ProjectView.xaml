@@ -29,11 +29,11 @@
         <TextBlock Grid.Row="0" TextWrapping="Wrap">
             <Run Text="Проект:" />
             <Hyperlink Command="{Binding LoadProjectCommand}">
-                <Run Text="{Binding Path=Information.FileName, Mode=OneWay}" />
+                <Run Text="{Binding Path=FileName, Mode=OneWay}" />
             </Hyperlink>
         </TextBlock>
         <ItemsControl Grid.Row="1" Focusable="False"
-                      ItemsSource="{Binding Path=Information.Targets}"
+                      ItemsSource="{Binding Path=Targets}"
                       ItemTemplate="{StaticResource ProjectTargetTemplate}" />
     </Grid>
 
