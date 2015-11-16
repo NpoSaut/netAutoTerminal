@@ -38,7 +38,7 @@ namespace FirmwarePacker.ViewModels
             SaveFileRequest.Raise(new SaveFileInteractionContext(new SaveFileRequestArguments("Куда сохранить?", _savingTool.FileExtension)
                                                                  {
                                                                      DefaultFileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName
-                                                                                                                            ?? "{cell} ver. {version}.sfv",
+                                                                                                                            ?? "{cell} ver. {version}.sfp",
                                                                                                                             Project.GetModel(),
                                                                                                                             Version.GetModel()),
                                                                      FileTypes = new[]
