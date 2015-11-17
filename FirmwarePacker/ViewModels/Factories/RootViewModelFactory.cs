@@ -1,4 +1,5 @@
 ﻿using FirmwarePacker.LaunchParameters;
+using FirmwarePacker.RecentProjects;
 using FirmwarePacking.Annotations;
 using Microsoft.Practices.Prism.Events;
 
@@ -11,21 +12,25 @@ namespace FirmwarePacker.ViewModels.Factories
         private readonly ILaunchParameters _launchParameters;
         private readonly ILoadProjectService _loadProjectService;
         private readonly MainViewModelFactory _mainViewModelFactory;
+        private readonly IRecentProjectsService _recentProjectsService;
         private readonly SelectProjectViewModelFactory _selectProjectViewModelFactory;
 
         public RootViewModelFactory(MainViewModelFactory MainViewModelFactory, SelectProjectViewModelFactory SelectProjectViewModelFactory,
-                                    IEventAggregator EventAggregator, ILaunchParameters LaunchParameters, ILoadProjectService LoadProjectService)
+                                    IEventAggregator EventAggregator, ILaunchParameters LaunchParameters, ILoadProjectService LoadProjectService,
+                                    IRecentProjectsService RecentProjectsService)
         {
             _mainViewModelFactory = MainViewModelFactory;
             _eventAggregator = EventAggregator;
             _selectProjectViewModelFactory = SelectProjectViewModelFactory;
             _launchParameters = LaunchParameters;
             _loadProjectService = LoadProjectService;
+            _recentProjectsService = RecentProjectsService;
         }
 
         public RootViewModel GetViewModel()
         {
-            return new RootViewModel(_mainViewModelFactory, _selectProjectViewModelFactory, _eventAggregator, _launchParameters, _loadProjectService);
+            return new RootViewModel(_mainViewModelFactory, _selectProjectViewModelFactory, _eventAggregator, _launchParameters, _loadProjectService,
+                                     _recentProjectsService);
         }
     }
 }
