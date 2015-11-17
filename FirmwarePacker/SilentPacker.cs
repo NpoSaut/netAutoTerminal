@@ -6,6 +6,7 @@ using FirmwarePacker.Exceptions;
 using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
+using FirmwarePacker.RecentProjects;
 
 namespace FirmwarePacker
 {
@@ -13,16 +14,18 @@ namespace FirmwarePacker
     {
         private readonly ILaunchParameters _launchParameters;
         private readonly IProjectSerializer _projectSerializer;
+        private readonly IRecentProjectsService _recentProjectsService;
         private readonly IPackageSavingTool _savingTool;
         private readonly IVariablesProcessor _variablesProcessor;
 
         public SilentPacker(ILaunchParameters LaunchParameters, IPackageSavingTool SavingTool, IProjectSerializer ProjectSerializer,
-                            IVariablesProcessor VariablesProcessor)
+                            IVariablesProcessor VariablesProcessor, IRecentProjectsService RecentProjectsService)
         {
             _launchParameters = LaunchParameters;
             _savingTool = SavingTool;
             _projectSerializer = ProjectSerializer;
             _variablesProcessor = VariablesProcessor;
+            _recentProjectsService = RecentProjectsService;
         }
 
         public static IEnumerable<String> EnumerateMissingParemeters(ILaunchParameters Parameters)
@@ -58,6 +61,12 @@ namespace FirmwarePacker
             PackageProject project = _projectSerializer.Load(_launchParameters.ProjectFileName);
             string fileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName, project, version);
             _savingTool.SavePackage(project, version, fileName, _launchParameters.RootDirectory);
+            _recentProjectsService.UpdateRecentProject(new RecentProject
+                                                       {
+                                                           FileName = _launchParameters.ProjectFileName,
+                                                           MajorVersion = version.Major,
+                                                           MinorVersion = version.Minor
+                                                       });
         }
     }
 }
