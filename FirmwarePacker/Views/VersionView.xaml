@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
+             xmlns:firmwarePacker="clr-namespace:FirmwarePacker"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:FirmwareVersionViewModel}">
     <Grid>
         <Grid.Resources>
@@ -26,7 +27,7 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Версия" />
         <Label Grid.Row="0" Grid.Column="1" Content="Метка" />
         <Label Grid.Row="0" Grid.Column="2" Content="Дата сборки" />
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Version, UpdateSourceTrigger=PropertyChanged}" />
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Version, UpdateSourceTrigger=PropertyChanged}" firmwarePacker:Masking.Mask="^\d{1,4}(\.\d{0,4})?$" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Label, UpdateSourceTrigger=PropertyChanged}" MaxLength="4" />
         <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding ReleaseDate, UpdateSourceTrigger=PropertyChanged}" Margin="3,1" />
     </Grid>

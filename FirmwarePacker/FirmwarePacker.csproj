@@ -146,6 +146,7 @@
     <Compile Include="IPackageSavingService.cs" />
     <Compile Include="LoadProjectService.cs" />
     <Compile Include="MainModule.cs" />
+    <Compile Include="Masking.cs" />
     <Compile Include="PackageSavingService.cs" />
     <Compile Include="PackerBootstrapper.cs" />
     <Compile Include="PathTrimmingTextBlock.cs" />
