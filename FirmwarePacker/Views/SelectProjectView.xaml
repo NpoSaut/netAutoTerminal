@@ -7,37 +7,49 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
              xmlns:pathTrimmingTextBlock="clr-namespace:Lovatts.Controls.PathTrimmingTextBlock"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SelectProjectViewModel}">
     <UserControl.Resources>
+        <Style x:Key="RecentProjectItemContainerStyle" TargetType="ListBoxItem">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
         <DataTemplate x:Key="RecentProjectTemplate" DataType="{x:Type viewModels:RecentProjectViewModel}">
-            <Grid>
+            <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="13" FontWeight="SemiBold" />
-                <!--<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Directory}"
-                           FontWeight="Light" TextTrimming="CharacterEllipsis" />-->
                 <pathTrimmingTextBlock:PathTrimmingTextBlock Grid.Row="1" Path="{Binding Directory}" FontWeight="Light" />
+                <Grid.InputBindings>
+                    <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding LoadCommand}" />
+                    <KeyBinding Key="Enter" Command="{Binding LoadCommand}" />
+                </Grid.InputBindings>
             </Grid>
         </DataTemplate>
-        <Style x:Key="RecentProjectItemContainerStyle" TargetType="ListBoxItem">
-            <Setter Property="HorizontalAlignment" Value="Stretch" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        </Style>
     </UserControl.Resources>
     <Grid Margin="4">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ListBox Grid.Row="0" Margin="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+        <TextBlock Grid.Row="0" Margin="3" Name="NoRecentProjectsLabel"
+                   TextWrapping="Wrap" Visibility="Collapsed"
+                   Text="Нет недавних проектов" />
+        <ListBox Grid.Row="0" Margin="2" Name="RecentProjectsList"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding RecentProjects}"
-                 ItemTemplate="{StaticResource RecentProjectTemplate}" ItemContainerStyle="{StaticResource RecentProjectItemContainerStyle}" />
+                 ItemTemplate="{StaticResource RecentProjectTemplate}"
+                 ItemContainerStyle="{StaticResource RecentProjectItemContainerStyle}" />
         <Button Grid.Row="1" Content="Открыть файл проекта..." Command="{Binding LoadProjectCommand}" />
     </Grid>
 
     <i:Interaction.Triggers>
+        <ei:DataTrigger Binding="{Binding Path=RecentProjects.Count}" Value="0" Comparison="Equal">
+            <ei:ChangePropertyAction TargetName="NoRecentProjectsLabel" PropertyName="Visibility" Value="Visible" />
+            <ei:ChangePropertyAction TargetName="RecentProjectsList" PropertyName="Visibility" Value="Collapsed" />
+        </ei:DataTrigger>
         <i:EventTrigger SourceObject="{Binding Path=OpenFileRequest}" EventName="Raised">
             <triggerActions:ShowOpenFileDialog Title="Открыть файл проекта" />
         </i:EventTrigger>
