@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
 using ExternalTools.Interfaces;
 
 namespace FirmwareBurner.BurningTools.OpenOcd.Parameters
@@ -37,12 +39,28 @@ namespace FirmwareBurner.BurningTools.OpenOcd.Parameters
         {
             OpenOcdParameterKind parameterKind =
                 GetType().GetCustomAttributes(typeof (ParameterKindAttribute), true).OfType<ParameterKindAttribute>().First().ParameterKind;
-            return string.Format("-{0} \"{1}\"", _parameterKeys[parameterKind], GetParameterContent());
+            return string.Format("-{0} {1}", _parameterKeys[parameterKind], GetParameterContent());
         }
 
         /// <summary>Возвращает содержимое параметра</summary>
         protected abstract String GetParameterContent();
 
-        protected string ProcessFilePath(string LocalPath) { return LocalPath.Replace(Path.DirectorySeparatorChar, '/'); }
+        protected string ProcessFilePath(string LocalPath)
+        {
+            return GetShortPathName(LocalPath).Replace(Path.DirectorySeparatorChar, '/');
+        }
+
+        private static String GetShortPathName(String longPath)
+        {
+            var shortPath = new StringBuilder(longPath.Length + 1);
+
+            if (0 == GetShortPathName(longPath, shortPath, shortPath.Capacity))
+                return longPath;
+
+            return shortPath.ToString();
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern Int32 GetShortPathName(String path, StringBuilder shortPath, Int32 shortPathLength);
     }
 }
