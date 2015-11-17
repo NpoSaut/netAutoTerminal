@@ -1,6 +1,7 @@
 ﻿using FirmwarePacker.Dialogs;
 using FirmwarePacker.Enpacking;
 using FirmwarePacker.Project.Serializers;
+using FirmwarePacker.RecentProjects;
 using FirmwarePacker.Views;
 using FirmwarePacking.SystemsIndexes;
 using Microsoft.Practices.Prism.Modularity;
@@ -26,7 +27,8 @@ namespace FirmwarePacker
                 .RegisterType<IEnpacker, Enpacker>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPackageSavingTool, PackageSavingTool>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPackageSavingService, PackageSavingService>(new ContainerControlledLifetimeManager())
-                .RegisterType<ILoadProjectService, LoadProjectService>(new ContainerControlledLifetimeManager());
+                .RegisterType<ILoadProjectService, LoadProjectService>(new ContainerControlledLifetimeManager())
+                .RegisterType<IRecentProjectsService, SettingsRecentProjectsService>(new ContainerControlledLifetimeManager());
 
             var regionManager = _container.Resolve<RegionManager>();
             regionManager.RegisterViewWithRegion("RootRegion", typeof (RootView));

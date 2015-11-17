@@ -6,9 +6,35 @@
              xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
+             xmlns:pathTrimmingTextBlock="clr-namespace:Lovatts.Controls.PathTrimmingTextBlock"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SelectProjectViewModel}">
-    <Grid>
-        <Button Content="Открыть файл проекта..." Command="{Binding LoadProjectCommand}" />
+    <UserControl.Resources>
+        <DataTemplate x:Key="RecentProjectTemplate" DataType="{x:Type viewModels:RecentProjectViewModel}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="13" FontWeight="SemiBold" />
+                <!--<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Directory}"
+                           FontWeight="Light" TextTrimming="CharacterEllipsis" />-->
+                <pathTrimmingTextBlock:PathTrimmingTextBlock Grid.Row="1" Path="{Binding Directory}" FontWeight="Light" />
+            </Grid>
+        </DataTemplate>
+        <Style x:Key="RecentProjectItemContainerStyle" TargetType="ListBoxItem">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="4">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" Margin="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ItemsSource="{Binding RecentProjects}"
+                 ItemTemplate="{StaticResource RecentProjectTemplate}" ItemContainerStyle="{StaticResource RecentProjectItemContainerStyle}" />
+        <Button Grid.Row="1" Content="Открыть файл проекта..." Command="{Binding LoadProjectCommand}" />
     </Grid>
 
     <i:Interaction.Triggers>

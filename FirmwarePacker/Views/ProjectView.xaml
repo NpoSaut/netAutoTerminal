@@ -21,21 +21,11 @@
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" TextWrapping="Wrap">
-            <Run Text="Проект:" />
-            <Hyperlink Command="{Binding LoadProjectCommand}">
-                <Run Text="{Binding Path=FileName, Mode=OneWay}" />
-            </Hyperlink>
+    <Border BorderBrush="#FFC762" BorderThickness="0,3,0,0" Padding="1">
+        <TextBlock TextWrapping="Wrap" Foreground="#CE8500" TextAlignment="Center" FontSize="14">
+            <Run Text="{Binding Path=Name, Mode=OneWay}" />
         </TextBlock>
-        <ItemsControl Grid.Row="1" Focusable="False"
-                      ItemsSource="{Binding Path=Targets}"
-                      ItemTemplate="{StaticResource ProjectTargetTemplate}" />
-    </Grid>
+    </Border>
 
     <i:Interaction.Triggers>
         <i:EventTrigger SourceObject="{Binding Path=OpenFileRequest}" EventName="Raised">

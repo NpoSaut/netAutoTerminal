@@ -15,20 +15,22 @@ namespace FirmwarePacker.ViewModels
         private readonly ILoadProjectService _loadProjectService;
         private readonly PackageProject _project;
 
-        public ProjectViewModel(PackageProject Project, string FileName, string ProjectRoot,
-                                ICollection<TargetViewModel> Targets, ILoadProjectService LoadProjectService, IEventAggregator EventAggregator)
+        public ProjectViewModel(PackageProject Project, string Name, string FilePath,
+                                string ProjectRoot, ICollection<TargetViewModel> Targets, ILoadProjectService LoadProjectService, IEventAggregator EventAggregator)
         {
             _loadProjectService = LoadProjectService;
             _eventAggregator = EventAggregator;
+            this.Name = Name;
             _project = Project;
-            this.FileName = FileName;
+            this.FilePath = FilePath;
             this.Targets = Targets;
             this.ProjectRoot = ProjectRoot;
             LoadProjectCommand = new DelegateCommand(LoadProject);
             OpenFileRequest = new InteractionRequest<OpenFileInteractionContext>();
         }
 
-        public string FileName { get; private set; }
+        public string FilePath { get; private set; }
+        public string Name { get; private set; }
         public ICollection<TargetViewModel> Targets { get; private set; }
 
         public ICommand LoadProjectCommand { get; private set; }

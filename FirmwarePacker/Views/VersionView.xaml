@@ -9,7 +9,7 @@
         <Grid.Resources>
             <Style TargetType="{x:Type TextBox}">
                 <Setter Property="Padding" Value="4,3" />
-                <Setter Property="Margin" Value="2" />
+                <Setter Property="Margin" Value="3,1" />
                 <Setter Property="TextAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="13" />
             </Style>
@@ -28,6 +28,6 @@
         <Label Grid.Row="0" Grid.Column="2" Content="Дата сборки" />
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Version}" />
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Label}" MaxLength="4" />
-        <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding ReleaseDate}" />
+        <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding ReleaseDate}" Margin="3,1" />
     </Grid>
 </UserControl>

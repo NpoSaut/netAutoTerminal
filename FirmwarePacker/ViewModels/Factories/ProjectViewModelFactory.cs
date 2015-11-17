@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
@@ -29,8 +30,8 @@ namespace FirmwarePacker.ViewModels.Factories
                                                                                                                     _indexHelper.GetModuleName(t.Cell, t.Module))))
                                                    .Distinct(TargetViewModel.Comparer)
                                                    .ToList();
-            return new ProjectViewModel(Project, ProjectFileName, RootDirectory,
-                                        targets, LoadProjectService, _eventAggregator);
+            string name = Path.GetFileName(ProjectFileName);
+            return new ProjectViewModel(Project, name, ProjectFileName, RootDirectory, targets, LoadProjectService, _eventAggregator);
         }
     }
 }

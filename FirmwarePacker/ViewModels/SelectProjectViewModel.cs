@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using FirmwarePacker.Events;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
@@ -12,14 +13,16 @@ namespace FirmwarePacker.ViewModels
         private readonly IEventAggregator _eventAggregator;
         private readonly ILoadProjectService _loadProjectService;
 
-        public SelectProjectViewModel(ILoadProjectService LoadProjectService, IEventAggregator EventAggregator)
+        public SelectProjectViewModel(ILoadProjectService LoadProjectService, IEventAggregator EventAggregator, IList<RecentProjectViewModel> RecentProjects)
         {
+            this.RecentProjects = RecentProjects;
             _loadProjectService = LoadProjectService;
             _eventAggregator = EventAggregator;
             OpenFileRequest = new InteractionRequest<OpenFileInteractionContext>();
             LoadProjectCommand = new DelegateCommand(Load);
         }
 
+        public IList<RecentProjectViewModel> RecentProjects { get; private set; }
         public ICommand LoadProjectCommand { get; private set; }
 
         public InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; private set; }

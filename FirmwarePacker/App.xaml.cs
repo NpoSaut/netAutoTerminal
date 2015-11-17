@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using FirmwarePacker.Properties;
+using FirmwarePacker.RecentProjects;
 
 namespace FirmwarePacker
 {

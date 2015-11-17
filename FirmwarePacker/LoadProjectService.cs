@@ -25,7 +25,11 @@ namespace FirmwarePacker
                 new OpenFileInteractionContext(
                     new OpenFileRequestArguments(_projectSerializer.FileExtension,
                                                  new FileRequestArguments.FileTypeDescription(_projectSerializer.FileExtension, "Проект пакета прошивок"))),
-                c => CallbackAction(LoadProject(c.FileName)));
+                c =>
+                {
+                    if (c.FileName != null)
+                        CallbackAction(LoadProject(c.FileName));
+                });
         }
 
         public ProjectViewModel LoadProject(string FileName)
