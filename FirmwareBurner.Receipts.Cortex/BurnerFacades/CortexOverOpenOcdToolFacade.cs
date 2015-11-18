@@ -31,7 +31,6 @@ namespace FirmwareBurner.Receipts.Cortex.BurnerFacades
             using (IProgressController progress = _progressControllerFactory.CreateController(ProgressToken))
             {
                 OpenOcdTool openOcd = _openOcdToolFactory.GetBurningTool();
-                //openOcd.InitializeProgrammer();
 
                 var hexStream = new IntelHexStream();
                 Image.FlashBuffer.CopyTo(hexStream);
