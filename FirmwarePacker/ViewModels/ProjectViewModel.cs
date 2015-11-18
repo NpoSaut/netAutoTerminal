@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using FirmwarePacker.Events;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.Project;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
@@ -41,8 +42,7 @@ namespace FirmwarePacker.ViewModels
 
         private void LoadProject()
         {
-            _loadProjectService.RequestLoadProject(OpenFileRequest,
-                                                   p => _eventAggregator.GetEvent<ProjectLoadedEvent>().Publish(new ProjectLoadedEvent.Payload(p)));
+            _loadProjectService.RequestLoadProject(p => _eventAggregator.GetEvent<ProjectLoadedEvent>().Publish(new ProjectLoadedEvent.Payload(p)));
         }
 
         public bool Check() { return true; }

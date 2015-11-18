@@ -1,13 +1,17 @@
 ﻿using System;
 using System.IO;
+using FirmwarePacker.Exceptions;
+using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels;
 using FirmwarePacker.ViewModels.Factories;
+using FirmwarePacking.Annotations;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace FirmwarePacker
+namespace FirmwarePacker.LoadingServices
 {
+    [UsedImplicitly]
     public class LoadProjectService : ILoadProjectService
     {
         private readonly IProjectSerializer _projectSerializer;
@@ -17,9 +21,13 @@ namespace FirmwarePacker
         {
             _projectSerializer = ProjectSerializer;
             _projectViewModelFactory = ProjectViewModelFactory;
+
+            OpenFileRequest = new InteractionRequest<OpenFileInteractionContext>();
         }
 
-        public void RequestLoadProject(InteractionRequest<OpenFileInteractionContext> OpenFileRequest, Action<ProjectViewModel> CallbackAction)
+        public InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; private set; }
+
+        public void RequestLoadProject(Action<ProjectViewModel> CallbackAction)
         {
             OpenFileRequest.Raise(
                 new OpenFileInteractionContext(
@@ -34,8 +42,16 @@ namespace FirmwarePacker
 
         public ProjectViewModel LoadProject(string FileName)
         {
-            return _projectViewModelFactory.GetInstance(_projectSerializer.Load(FileName),
-                                                        FileName, Path.GetDirectoryName(FileName), this);
+            PackageProject project;
+            try
+            {
+                project = _projectSerializer.Load(FileName);
+            }
+            catch (Exception exception)
+            {
+                throw new BadProjectFileException(exception);
+            }
+            return _projectViewModelFactory.GetInstance(project, FileName, Path.GetDirectoryName(FileName), this);
         }
     }
 }

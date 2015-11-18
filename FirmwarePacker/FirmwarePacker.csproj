@@ -140,14 +140,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\ProjectLoadedEvent.cs" />
+    <Compile Include="Exceptions\BadProjectFileException.cs" />
     <Compile Include="Exceptions\MisingRequiredParameters.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="ILoadProjectService.cs" />
-    <Compile Include="IPackageSavingService.cs" />
-    <Compile Include="LoadProjectService.cs" />
+    <Compile Include="LoadingServices\ILoadProjectService.cs" />
+    <Compile Include="LoadingServices\IPackageSavingService.cs" />
+    <Compile Include="LoadingServices\LoadProjectService.cs" />
     <Compile Include="MainModule.cs" />
     <Compile Include="Masking.cs" />
-    <Compile Include="PackageSavingService.cs" />
+    <Compile Include="LoadingServices\PackageSavingService.cs" />
     <Compile Include="PackerBootstrapper.cs" />
     <Compile Include="PathTrimmingTextBlock.cs" />
     <Compile Include="RecentProjects\IRecentProjectsService.cs" />
@@ -162,7 +162,6 @@
     <Compile Include="TriggerActions\Notifications\SaveFileRequestArguments.cs" />
     <Compile Include="TriggerActions\ShowOpenFileDialog.cs" />
     <Compile Include="TriggerActions\ShowSaveFileDialog.cs" />
-    <Compile Include="VersionToStringConverter.cs" />
     <Compile Include="ViewModels\Factories\RecentProjectViewModelFactory.cs" />
     <Compile Include="ViewModels\Factories\RootViewModelFactory.cs" />
     <Compile Include="ViewModels\Factories\SelectProjectViewModelFactory.cs" />
@@ -197,10 +196,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Dialogs\DialogDirectorySelector.cs" />
-    <Compile Include="Dialogs\IDirectorySelector.cs" />
-    <Compile Include="Dialogs\IFileSelector.cs" />
-    <Compile Include="Dialogs\DialogFileSelector.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -304,6 +299,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

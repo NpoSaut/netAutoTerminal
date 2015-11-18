@@ -6,33 +6,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Lovatts.Controls.PathTrimmingTextBlock
+namespace FirmwarePacker
 {
     public class PathTrimmingTextBlock : TextBlock, INotifyPropertyChanged
     {
-       
-        FrameworkElement _container;
+        public static readonly DependencyProperty PathProperty =
+            DependencyProperty.Register("Path", typeof (string), typeof (PathTrimmingTextBlock), new UIPropertyMetadata(""));
 
+        private FrameworkElement _container;
 
-        public PathTrimmingTextBlock()
-        {
-            this.Loaded += new RoutedEventHandler(PathTrimmingTextBlock_Loaded);
-        }
-
-        void PathTrimmingTextBlock_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (this.Parent == null) throw new InvalidOperationException("PathTrimmingTextBlock must have a container such as a Grid.");
-
-            _container = (FrameworkElement)this.Parent;
-            _container.SizeChanged += new SizeChangedEventHandler(container_SizeChanged);
-
-            Text = GetTrimmedPath(_container.ActualWidth);
-        }
-
-        void container_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Text = GetTrimmedPath(_container.ActualWidth);
-        }
+        public PathTrimmingTextBlock() { Loaded += PathTrimmingTextBlock_Loaded; }
 
         public string Path
         {
@@ -40,24 +23,31 @@ namespace Lovatts.Controls.PathTrimmingTextBlock
             set { SetValue(PathProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Path.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty PathProperty =
-            DependencyProperty.Register("Path", typeof(string), typeof(PathTrimmingTextBlock), new UIPropertyMetadata(""));
+        private void PathTrimmingTextBlock_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Parent == null) throw new InvalidOperationException("PathTrimmingTextBlock must have a container such as a Grid.");
 
-        string GetTrimmedPath(double width)
+            _container = (FrameworkElement)Parent;
+            _container.SizeChanged += container_SizeChanged;
+
+            Text = GetTrimmedPath(_container.ActualWidth);
+        }
+
+        private void container_SizeChanged(object sender, SizeChangedEventArgs e) { Text = GetTrimmedPath(_container.ActualWidth); }
+
+        private string GetTrimmedPath(double width)
         {
             string filename = System.IO.Path.GetFileName(Path);
             string directory = System.IO.Path.GetDirectoryName(Path);
             string drive = directory.Substring(0, directory.IndexOf(System.IO.Path.VolumeSeparatorChar) + 2);
             directory = directory.Substring(drive.Length);
-            FormattedText formatted;
-            bool widthOK = false;
+            bool widthOk = false;
             bool changedWidth = false;
 
             do
             {
-                formatted = new FormattedText(
-                    "{2}:\\...{0}\\{1}".FormatWith(directory, filename, drive),
+                var formatted = new FormattedText(
+                    string.Format("{2}:\\...{0}\\{1}", directory, filename, drive),
                     CultureInfo.CurrentCulture,
                     FlowDirection.LeftToRight,
                     FontFamily.GetTypefaces().First(),
@@ -65,33 +55,27 @@ namespace Lovatts.Controls.PathTrimmingTextBlock
                     Foreground
                     );
 
-                widthOK = formatted.Width < width;
+                widthOk = formatted.Width < width;
 
-                if (!widthOK)
+                if (!widthOk)
                 {
                     changedWidth = true;
                     directory = directory.Substring(directory.IndexOf(System.IO.Path.VolumeSeparatorChar) + 2);
 
                     if (directory.Length == 0) return "...\\" + filename;
                 }
-
-            } while (!widthOK);
+            } while (!widthOk);
 
             if (!changedWidth)
-            {
                 return Path;
-            }
-            return "{2}...{0}\\{1}".FormatWith(directory, filename, drive);
+            return string.Format("{2}...{0}\\{1}", directory, filename, drive);
         }
 
         #region Implementation of INotifyPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void RaisePropertyChanged(string name)
-        {
-            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name));
-        }
+        private void RaisePropertyChanged(string name) { if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(name)); }
 
         #endregion
     }

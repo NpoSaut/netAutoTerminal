@@ -2,10 +2,12 @@
 using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.Project;
 using FirmwarePacker.TriggerActions.Notifications;
+using FirmwarePacking.Annotations;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace FirmwarePacker
+namespace FirmwarePacker.LoadingServices
 {
+    [UsedImplicitly]
     internal class PackageSavingService : IPackageSavingService
     {
         private readonly ILaunchParameters _launchParameters;
@@ -17,9 +19,13 @@ namespace FirmwarePacker
             _launchParameters = LaunchParameters;
             _savingTool = SavingTool;
             _variablesProcessor = VariablesProcessor;
+
+            SaveFileRequest = new InteractionRequest<SaveFileInteractionContext>();
         }
 
-        public void SavePackage(InteractionRequest<SaveFileInteractionContext> SaveFileRequest, PackageProject PackageProject, PackageVersion PackageVersion,
+        public InteractionRequest<SaveFileInteractionContext> SaveFileRequest { get; private set; }
+
+        public void SavePackage(PackageProject PackageProject, PackageVersion PackageVersion,
                                 string ProjectRoot)
         {
             string defaultFileName = _variablesProcessor.ReplaceVariables(_launchParameters.OutputFileName ?? "{cell} ver. {version}.sfp",

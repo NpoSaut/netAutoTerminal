@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.Project;
 using FirmwarePacker.RecentProjects;
 using FirmwarePacker.TriggerActions.Notifications;
@@ -33,7 +34,7 @@ namespace FirmwarePacker.ViewModels
         private void Save()
         {
             PackageVersion version = Version.GetModel();
-            _packageSavingService.SavePackage(SaveFileRequest, Project.GetModel(), version, Project.ProjectRoot);
+            _packageSavingService.SavePackage(Project.GetModel(), version, Project.ProjectRoot);
 
             _recentProjectsService.UpdateRecentProject(
                 new RecentProject { FileName = Project.FilePath, MajorVersion = version.Major, MinorVersion = version.Minor });

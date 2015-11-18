@@ -3,11 +3,12 @@ using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace FirmwarePacker
+namespace FirmwarePacker.LoadingServices
 {
     public interface ILoadProjectService
     {
-        void RequestLoadProject(InteractionRequest<OpenFileInteractionContext> OpenFileRequest, Action<ProjectViewModel> CallbackAction);
+        void RequestLoadProject(Action<ProjectViewModel> CallbackAction);
         ProjectViewModel LoadProject(string FileName);
+        InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; }
     }
 }

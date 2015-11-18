@@ -1,4 +1,5 @@
-﻿using FirmwarePacker.RecentProjects;
+﻿using FirmwarePacker.LoadingServices;
+using FirmwarePacker.RecentProjects;
 using FirmwarePacking.Annotations;
 
 namespace FirmwarePacker.ViewModels.Factories

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using FirmwarePacker.Events;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -26,7 +27,7 @@ namespace FirmwarePacker.ViewModels
         public ICommand LoadProjectCommand { get; private set; }
 
         public InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; private set; }
-        private void Load() { _loadProjectService.RequestLoadProject(OpenFileRequest, PackageLoaded); }
+        private void Load() { _loadProjectService.RequestLoadProject(PackageLoaded); }
 
         private void PackageLoaded(ProjectViewModel ProjectViewModel)
         {

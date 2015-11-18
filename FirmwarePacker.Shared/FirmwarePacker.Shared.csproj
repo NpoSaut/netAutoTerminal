@@ -55,8 +55,14 @@
     <Compile Include="Project\PackageFile.cs" />
     <Compile Include="Project\PackageProject.cs" />
     <Compile Include="Project\PackageVersion.cs" />
+    <Compile Include="Project\Serializers\Exceptions\BadAttributeValueException.cs" />
+    <Compile Include="Project\Serializers\Exceptions\ProjectDeserializationException.cs" />
+    <Compile Include="Project\Serializers\Exceptions\RequiredAttributeMissed.cs" />
+    <Compile Include="Project\Serializers\Exceptions\RequiredElementMissedException.cs" />
+    <Compile Include="Project\Serializers\Exceptions\RequiredXmlNodeMissedBase.cs" />
     <Compile Include="Project\Serializers\IProjectSerializer.cs" />
     <Compile Include="Project\Serializers\XmlProjectSerializer.cs" />
+    <Compile Include="Project\Serializers\XmlReaderHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

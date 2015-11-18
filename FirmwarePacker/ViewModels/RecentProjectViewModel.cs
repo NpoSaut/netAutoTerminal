@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Input;
 using FirmwarePacker.Events;
+using FirmwarePacker.LoadingServices;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 
