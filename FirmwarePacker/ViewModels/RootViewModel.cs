@@ -3,8 +3,10 @@ using System.Linq;
 using FirmwarePacker.Events;
 using FirmwarePacker.LaunchParameters;
 using FirmwarePacker.RecentProjects;
+using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels.Factories;
 using Microsoft.Practices.Prism.Events;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwarePacker.ViewModels
 {
@@ -13,20 +15,32 @@ namespace FirmwarePacker.ViewModels
         private readonly ILaunchParameters _launchParameters;
         private readonly ILoadProjectService _loadProjectService;
         private readonly MainViewModelFactory _mainViewModelFactory;
+        private readonly IPackageSavingService _packageSavingService;
         private readonly IRecentProjectsService _recentProjectsService;
         private ViewModel _actualViewModel;
 
         public RootViewModel(MainViewModelFactory MainViewModelFactory, SelectProjectViewModelFactory SelectProjectViewModelFactory,
                              IEventAggregator EventAggregator, ILaunchParameters LaunchParameters, ILoadProjectService LoadProjectService,
-                             IRecentProjectsService RecentProjectsService)
+                             IRecentProjectsService RecentProjectsService, IPackageSavingService PackageSavingService)
         {
             _mainViewModelFactory = MainViewModelFactory;
             _launchParameters = LaunchParameters;
             _loadProjectService = LoadProjectService;
             _recentProjectsService = RecentProjectsService;
+            _packageSavingService = PackageSavingService;
 
             ActualViewModel = GetDefaultViewModel(SelectProjectViewModelFactory);
             EventAggregator.GetEvent<ProjectLoadedEvent>().Subscribe(ReloadViewModel);
+        }
+
+        public InteractionRequest<OpenFileInteractionContext> OpenProjectRequest
+        {
+            get { return _loadProjectService.OpenFileRequest; }
+        }
+
+        public InteractionRequest<SaveFileInteractionContext> SavePackageRequest
+        {
+            get { return _packageSavingService.SaveFileRequest; }
         }
 
         public ViewModel ActualViewModel

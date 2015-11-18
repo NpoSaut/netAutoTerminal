@@ -141,7 +141,6 @@
     </ApplicationDefinition>
     <Compile Include="Events\ProjectLoadedEvent.cs" />
     <Compile Include="Exceptions\MisingRequiredParameters.cs" />
-    <Compile Include="Extensions.cs" />
     <Compile Include="ILoadProjectService.cs" />
     <Compile Include="IPackageSavingService.cs" />
     <Compile Include="LoadProjectService.cs" />

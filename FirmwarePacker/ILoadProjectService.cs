@@ -7,7 +7,8 @@ namespace FirmwarePacker
 {
     public interface ILoadProjectService
     {
-        void RequestLoadProject(InteractionRequest<OpenFileInteractionContext> OpenFileRequest, Action<ProjectViewModel> CallbackAction);
+        void RequestLoadProject(Action<ProjectViewModel> CallbackAction);
         ProjectViewModel LoadProject(string FileName);
+        InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; }
     }
 }

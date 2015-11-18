@@ -6,8 +6,8 @@
              xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
-             xmlns:pathTrimmingTextBlock="clr-namespace:Lovatts.Controls.PathTrimmingTextBlock"
              xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:firmwarePacker="clr-namespace:FirmwarePacker"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:SelectProjectViewModel}">
     <UserControl.Resources>
         <Style x:Key="RecentProjectItemContainerStyle" TargetType="ListBoxItem">
@@ -21,7 +21,7 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding Name}" FontSize="13" FontWeight="SemiBold" />
-                <pathTrimmingTextBlock:PathTrimmingTextBlock Grid.Row="1" Path="{Binding Directory}" FontWeight="Light" />
+                <firmwarePacker:PathTrimmingTextBlock Grid.Row="1" Path="{Binding Directory}" FontWeight="Light" />
                 <Grid.InputBindings>
                     <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding LoadCommand}" />
                     <KeyBinding Key="Enter" Command="{Binding LoadCommand}" />

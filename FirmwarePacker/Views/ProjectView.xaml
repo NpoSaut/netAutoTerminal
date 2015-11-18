@@ -4,33 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
              mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectViewModel}">
-    <UserControl.Resources>
-        <DataTemplate x:Key="ProjectTargetTemplate" DataType="{x:Type viewModels:TargetViewModel}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <Ellipse Grid.Column="0" Width="5" Height="5" Fill="#905400" Margin="2" />
-                <TextBlock Grid.Column="1" Text="{Binding Cell, Mode=OneWay}" FontWeight="SemiBold" Margin="2" />
-                <TextBlock Grid.Column="2" Text="{Binding Module, Mode=OneWay}" Opacity="0.7" Margin="2" />
-            </Grid>
-        </DataTemplate>
-    </UserControl.Resources>
-    <Border BorderBrush="#FFC762" BorderThickness="0,3,0,0" Padding="1">
-        <TextBlock TextWrapping="Wrap" Foreground="#CE8500" TextAlignment="Center" FontSize="14">
-            <Run Text="{Binding Path=Name, Mode=OneWay}" />
-        </TextBlock>
-    </Border>
 
-    <i:Interaction.Triggers>
-        <i:EventTrigger SourceObject="{Binding Path=OpenFileRequest}" EventName="Raised">
-            <triggerActions:ShowOpenFileDialog Title="Открыть файл проекта" />
-        </i:EventTrigger>
-    </i:Interaction.Triggers>
+    <TextBlock TextWrapping="Wrap" Foreground="#CE8500" TextAlignment="Center" FontSize="14">
+        <Run Text="{Binding Path=Name, Mode=OneWay}" />
+    </TextBlock>
 
 </UserControl>

@@ -4,10 +4,12 @@ using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels;
 using FirmwarePacker.ViewModels.Factories;
+using FirmwarePacking.Annotations;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
 namespace FirmwarePacker
 {
+    [UsedImplicitly]
     public class LoadProjectService : ILoadProjectService
     {
         private readonly IProjectSerializer _projectSerializer;
@@ -17,9 +19,13 @@ namespace FirmwarePacker
         {
             _projectSerializer = ProjectSerializer;
             _projectViewModelFactory = ProjectViewModelFactory;
+
+            OpenFileRequest = new InteractionRequest<OpenFileInteractionContext>();
         }
 
-        public void RequestLoadProject(InteractionRequest<OpenFileInteractionContext> OpenFileRequest, Action<ProjectViewModel> CallbackAction)
+        public InteractionRequest<OpenFileInteractionContext> OpenFileRequest { get; private set; }
+
+        public void RequestLoadProject(Action<ProjectViewModel> CallbackAction)
         {
             OpenFileRequest.Raise(
                 new OpenFileInteractionContext(
