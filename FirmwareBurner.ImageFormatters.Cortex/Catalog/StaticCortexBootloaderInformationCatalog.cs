@@ -11,9 +11,9 @@ namespace FirmwareBurner.ImageFormatters.Cortex.Catalog
         private static readonly ICollection<CortexBootloaderInformation> _list =
             new[]
             {
-                CreateInformationInstance("stm32f4", "stm32f4", 0x08000000, 0x08003E00, 0x08004000, 3, 1, 1),
-                CreateInformationInstance("at91sam7a3", "at91sam7a3", 0x00100000, 0x00102E00, 0x00103000, 4, 1, 1),
-                CreateInformationInstance("mdr32f9q2i", "mdr32f9q2i", 0x08000000, 0x08002E00, 0x08003000, 5, 1, 1)
+                CreateInformationInstance("stm32f4", "stm32f4", 0x08000000, 0x08003E00, 0x08004000, 3, 1, 2),
+                CreateInformationInstance("at91sam7a3", "at91sam7a3", 0x00100000, 0x00102E00, 0x00103000, 4, 1, 2),
+                CreateInformationInstance("mdr32f9q2i", "mdr32f9q2i", 0x08000000, 0x08002E00, 0x08003000, 5, 1, 2)
             };
 
         public IEnumerable<CortexBootloaderInformation> GetBootloaderInformations() { return _list; }
