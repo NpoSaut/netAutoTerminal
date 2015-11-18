@@ -140,6 +140,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Events\ProjectLoadedEvent.cs" />
+    <Compile Include="Exceptions\BadProjectFileException.cs" />
     <Compile Include="Exceptions\MisingRequiredParameters.cs" />
     <Compile Include="LoadingServices\ILoadProjectService.cs" />
     <Compile Include="LoadingServices\IPackageSavingService.cs" />

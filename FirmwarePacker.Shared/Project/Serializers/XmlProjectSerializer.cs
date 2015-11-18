@@ -50,12 +50,12 @@ namespace FirmwarePacker.Project.Serializers
         {
             return new ComponentProject(XComponent.Elements("Target")
                                                   .Select(xTarget =>
-                                                          new ComponentProjectTarget((int)xTarget.Attribute("Cell"),
-                                                                                     (int)xTarget.Attribute("Modification"),
-                                                                                     (int)xTarget.Attribute("Module"),
-                                                                                     (int)xTarget.Attribute("Channel")))
+                                                          new ComponentProjectTarget(xTarget.GetAttribute<int>("Cell"),
+                                                                                     xTarget.GetAttribute<int>("Modification"),
+                                                                                     xTarget.GetAttribute<int>("Module"),
+                                                                                     xTarget.GetAttribute<int>("Channel")))
                                                   .ToList(),
-                                        XComponent.Element("Files").Elements().Select(LoadFileMap).ToList());
+                                        XComponent.GetElement("Files").Elements().Select(LoadFileMap).ToList());
         }
 
         private IFileMap LoadFileMap(XElement XFileMap)

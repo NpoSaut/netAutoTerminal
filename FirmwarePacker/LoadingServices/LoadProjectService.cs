@@ -1,5 +1,7 @@
 ﻿using System;
 using System.IO;
+using FirmwarePacker.Exceptions;
+using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels;
@@ -40,8 +42,16 @@ namespace FirmwarePacker.LoadingServices
 
         public ProjectViewModel LoadProject(string FileName)
         {
-            return _projectViewModelFactory.GetInstance(_projectSerializer.Load(FileName),
-                                                        FileName, Path.GetDirectoryName(FileName), this);
+            PackageProject project;
+            try
+            {
+                project = _projectSerializer.Load(FileName);
+            }
+            catch (Exception exception)
+            {
+                throw new BadProjectFileException(exception);
+            }
+            return _projectViewModelFactory.GetInstance(project, FileName, Path.GetDirectoryName(FileName), this);
         }
     }
 }
