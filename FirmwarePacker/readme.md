@@ -46,6 +46,7 @@
 	<Component>
 		<Target Cell="20" Modification="1" Module="1" Channel="1" />
 		<Target Cell="20" Modification="2" Module="1" Channel="1" />
+		<BootloaderRequirement Id="1" Version="5" CompatibleVersion="1" />
 		<Files>
 			<MapFile From="release\binary1.bin" To="f/0" />
 			<MapFolder From="release\commons\" Pattern="*.dll" To="f/" />
@@ -54,6 +55,7 @@
 	<Component>
 		<Target Cell="20" Modification="1" Module="1" Channel="2" />
 		<Target Cell="20" Modification="2" Module="1" Channel="2" />
+		<BootloaderRequirement Id="1" Version="5" CompatibleVersion="1" />
 		<Files>
 			<MapFile From="release\binary2.bin" To="f/0" />
 			<MapFolder From="release\commons" Pattern="*.dll" To="f/" />
@@ -67,6 +69,22 @@
 Компонент прошивки - независимый набор файлов, который будет скопирован на устройство. Пакет прошивки чаще всего состоит из одного компонента, однако может содержать и несколько (например, если необходимо использовать разные бинарники для разных полукомплектов или модификаций устройства).
 
 Элемент `Component` содержит список целей (элементы `Target`), для которых применим этот компонент (одну или несколько). Идентификаторы для целей можно узнать в [каталоге ячеек](https://github.com/NpoSaut/netFirmwarePacking/blob/master/BlockKinds.xml).
+
+Элемент `Component` должен содержать элемент `BootloaderRequirement`, представляющий требования компонента прошивки к загрузчику. Эти требования будут учитываться при выборе загрузчика при первоначальной прошивке ячейки и при обновлении прошивки. Идентификаторы загрузчиков можно получить из таблицы ниже:
+
+| ID загрузчика | Устройство |
+|---------------|------------|
+| 1             | AVR 128KB  |
+| 2             | AVR 64BK   |
+| 3             | STM32      |
+| 4             | SAM7A3     |
+| 5             | MDR32      |
+| 6             | Linux      |
+
+Атрибуты `MinVersion` и `MaxVersion` позволяют указать диапазон версий загрузчика, с которыми совместима прошивка. В свою очередь, загрузчик содержит свои MinVersion и MaxVersion и совместимость определяется пересечением этих параметров.
+
+Значение "0" для для идентификатора загрузчика используется в случае, если прошивку необходимо использовать без загрузчика. В этом случае можно указать любые значения атрибутов `MinVersion` и `MaxVersion`.
+
 Так же элемент `Component` содержит элемент `Files` со списком маппингов файлов.
 
 ##Маппинг файлов
