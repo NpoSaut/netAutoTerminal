@@ -55,7 +55,15 @@ namespace FirmwarePacker.Project.Serializers
                                                                                      xTarget.GetAttribute<int>("Module"),
                                                                                      xTarget.GetAttribute<int>("Channel")))
                                                   .ToList(),
+                                        LoadBootloaderRequirement(XComponent.GetElement("BootloaderRequirement")),
                                         XComponent.GetElement("Files").Elements().Select(LoadFileMap).ToList());
+        }
+
+        private BootloaderRequirement LoadBootloaderRequirement(XElement XRequirement)
+        {
+            return new BootloaderRequirement(XRequirement.GetAttribute<int>("Id"),
+                                             XRequirement.GetAttribute<int>("Version"),
+                                             XRequirement.GetAttribute<int>("CompatibleVersion"));
         }
 
         private IFileMap LoadFileMap(XElement XFileMap)

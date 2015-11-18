@@ -2,6 +2,7 @@
 using System.Linq;
 using FirmwarePacker.Project;
 using FirmwarePacking;
+using BootloaderRequirement = FirmwarePacking.BootloaderRequirement;
 
 namespace FirmwarePacker.Enpacking
 {
@@ -20,7 +21,12 @@ namespace FirmwarePacker.Enpacking
                                                        Files = componentProject.FileMaps
                                                                                .SelectMany(fm => fm.EnumerateFiles(RootDirectory))
                                                                                .Select(f => new FirmwareFile(f.Name, f.Content))
-                                                                               .ToList()
+                                                                               .ToList(),
+                                                       BootloaderRequirement =
+                                                           new BootloaderRequirement(componentProject.BootloaderRequirement.BootloaderId,
+                                                                                     new VersionRequirements(
+                                                                                         componentProject.BootloaderRequirement.CompatibleVersion,
+                                                                                         componentProject.BootloaderRequirement.Version))
                                                    })
                                            .ToList(),
                        Information = new PackageInformation(new Version(Version.Major, Version.Minor), Version.Label, Version.ReleaseDate)

@@ -43,6 +43,7 @@
     <Compile Include="IVariablesProcessor.cs" />
     <Compile Include="LaunchParameters\CommandLineLaunchParameters.cs" />
     <Compile Include="LaunchParameters\ILaunchParameters.cs" />
+    <Compile Include="Project\BootloaderRequirement.cs" />
     <Compile Include="Project\ComponentProject.cs" />
     <Compile Include="Project\ComponentProjectTarget.cs" />
     <Compile Include="Project\FileMaps\FileMap.cs" />
