@@ -2,7 +2,7 @@
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace FirmwarePacker
+namespace FirmwarePacker.LoadingServices
 {
     public interface IPackageSavingService
     {

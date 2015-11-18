@@ -2,6 +2,7 @@
 using System.Linq;
 using FirmwarePacker.Events;
 using FirmwarePacker.LaunchParameters;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.RecentProjects;
 using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels.Factories;

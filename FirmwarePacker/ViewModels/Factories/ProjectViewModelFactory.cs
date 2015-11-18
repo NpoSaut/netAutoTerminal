@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using FirmwarePacker.LaunchParameters;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.Project;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacking.Annotations;

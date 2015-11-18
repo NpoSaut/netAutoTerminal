@@ -1,5 +1,5 @@
-﻿using FirmwarePacker.Dialogs;
-using FirmwarePacker.Enpacking;
+﻿using FirmwarePacker.Enpacking;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.Project.Serializers;
 using FirmwarePacker.RecentProjects;
 using FirmwarePacker.Views;
@@ -18,8 +18,6 @@ namespace FirmwarePacker
         public void Initialize()
         {
             _container
-                .RegisterType<IFileSelector, DialogFileSelector>(new ContainerControlledLifetimeManager())
-                .RegisterType<IDirectorySelector, DialogDirectorySelector>(new ContainerControlledLifetimeManager())
                 .RegisterType<IIndex, ResourceXmlIndex>(new ContainerControlledLifetimeManager())
                 .RegisterType<IIndexHelper, IndexHelper>(new ContainerControlledLifetimeManager())
                 .RegisterType<IVariablesProcessor, VariablesProcessor>(new ContainerControlledLifetimeManager())

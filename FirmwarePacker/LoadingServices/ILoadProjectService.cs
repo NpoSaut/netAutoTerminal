@@ -3,7 +3,7 @@ using FirmwarePacker.TriggerActions.Notifications;
 using FirmwarePacker.ViewModels;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace FirmwarePacker
+namespace FirmwarePacker.LoadingServices
 {
     public interface ILoadProjectService
     {

@@ -7,7 +7,7 @@ using FirmwarePacker.ViewModels.Factories;
 using FirmwarePacking.Annotations;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 
-namespace FirmwarePacker
+namespace FirmwarePacker.LoadingServices
 {
     [UsedImplicitly]
     public class LoadProjectService : ILoadProjectService

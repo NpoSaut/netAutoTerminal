@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.Project;
 using FirmwarePacker.RecentProjects;
 using FirmwarePacker.TriggerActions.Notifications;

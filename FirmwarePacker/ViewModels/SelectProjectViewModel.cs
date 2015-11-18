@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Input;
 using FirmwarePacker.Events;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.TriggerActions.Notifications;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using FirmwarePacker.LoadingServices;
 using FirmwarePacker.RecentProjects;
 using Microsoft.Practices.Prism.Events;
 
