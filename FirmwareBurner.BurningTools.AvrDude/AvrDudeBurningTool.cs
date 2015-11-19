@@ -122,7 +122,7 @@ namespace FirmwareBurner.BurningTools.AvrDude
                 throw new DeviceNotConnectedAvrDudeException(output);
 
             if (!output.Contains("OK"))
-                throw new AvrDudeException { Output = output };
+                throw new AvrDudeException("Неизвестная ошибка при работе с AVRDude", output);
 
             return string.Empty;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Text;
 
 namespace FirmwareBurner.BurningTools.AvrDude.Exceptions
 {
@@ -7,15 +8,23 @@ namespace FirmwareBurner.BurningTools.AvrDude.Exceptions
     [Serializable]
     public class AvrDudeException : ApplicationException
     {
-        public AvrDudeException() : base("Исключение при работе с программой AVRDude") { }
-        public AvrDudeException(Exception inner) : base("Исключение при работе с программой AVRDude", inner) { }
-        public AvrDudeException(string message) : base(message) { }
-        public AvrDudeException(string message, Exception inner) : base(message, inner) { }
+        public AvrDudeException(string message, string Output) : base(message) { this.Output = Output; }
 
         protected AvrDudeException(
             SerializationInfo info,
             StreamingContext context) : base(info, context) { }
 
-        public String Output { get; set; }
+        public String Output { get; private set; }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(base.ToString());
+            sb.AppendLine();
+            sb.AppendLine("-------------------- Output --------------------");
+            sb.AppendLine();
+            sb.AppendLine(Output);
+            return sb.ToString();
+        }
     }
 }
