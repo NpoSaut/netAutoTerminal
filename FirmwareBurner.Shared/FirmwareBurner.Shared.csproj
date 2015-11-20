@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\BurningReceiptFactoryAttribute.cs" />
+    <Compile Include="BootloadersCatalog\BootloaderCatalogRecord.cs" />
     <Compile Include="Burning\BurningReceiptFactory.cs" />
     <Compile Include="Burning\BurningReceiptFactoryHelper.cs" />
     <Compile Include="Burning\BurningReceiptsCatalog.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Burning\BurningReceipt.cs" />
     <Compile Include="CommonsModule.cs" />
     <Compile Include="FudpCrcChecksumProvider.cs" />
+    <Compile Include="BootloadersCatalog\IBootloadersCatalog.cs" />
     <Compile Include="IChecksumProvider.cs" />
     <Compile Include="Imaging\Binary\Buffers\BufferWriter.cs" />
     <Compile Include="Imaging\Binary\Buffers\IWriter.cs" />

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ACB4B15A-9B69-4817-BC4E-B8FCEB6E3EFF}</ProjectGuid>
+    <ProjectGuid>{7F9966C6-A563-42DF-8A00-53AA90AC3BF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirmwareBurner.ImageFormatters.Avr</RootNamespace>
-    <AssemblyName>FirmwareBurner.ImageFormatters.Avr</AssemblyName>
+    <RootNamespace>FirmwareBurner.BootloadersCatalog</RootNamespace>
+    <AssemblyName>FirmwareBurner.BootloadersCatalog</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,26 +32,33 @@
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Expression.Interactions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism">
+    <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Prism.Interactivity">
+    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
+    <Reference Include="Microsoft.Practices.Unity, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=2.1.505.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.2.1.505.2\lib\NET35\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Prism.4.1.0.0\lib\NET40\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,39 +67,37 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AvrImageFormatterCatalog.cs" />
-    <Compile Include="AvrImageFormatter.cs" />
-    <Compile Include="AvrMemoryKind.cs" />
-    <Compile Include="Sections\FilesTableSectionContent.cs" />
-    <Compile Include="Sections\PropertiesTableSectionContent.cs" />
-    <Compile Include="AvrFuses.cs" />
-    <Compile Include="AvrImage.cs" />
-    <Compile Include="AvrImageFormatterFactory.cs" />
-    <Compile Include="AvrImagesModule.cs" />
-    <Compile Include="AvrBootloaderInformation.cs" />
-    <Compile Include="Catalog\IAvrBootloadersCatalog.cs" />
-    <Compile Include="Catalog\AvrBootloadersCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlBootloaderCatalogModule.cs" />
+    <Compile Include="XmlBootloadersCatalog.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
-      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
-      <Name>AsyncOperations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Binary\FirmwareBurner.ImageFormatters.Binary.csproj">
-      <Project>{2B34A3AE-B635-4F22-8982-5ACA97A801CE}</Project>
-      <Name>FirmwareBurner.ImageFormatters.Binary</Name>
-    </ProjectReference>
+    <Content Include="Bootloaders\Bootloaders.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>
     </ProjectReference>
-    <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
-      <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
-      <Name>FirmwarePacking</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bootloaders\Avr\Bootloader_128k.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Bootloaders\Avr\Bootloader_64k.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <EmbeddedResource Include="Bootloaders\Cortex\at91sam7a3.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bootloaders\Cortex\mdr32f9q2i.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bootloaders\Cortex\stm32f4.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

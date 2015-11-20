@@ -70,7 +70,7 @@
     <Compile Include="Catalog\IBootloaderConfigurationCatalog.cs" />
     <Compile Include="Catalog\ICortexBootloaderInformationCatalog.cs" />
     <Compile Include="Catalog\IndexBootloaderConfigurationCatalog.cs" />
-    <Compile Include="Catalog\StaticCortexBootloaderInformationCatalog.cs" />
+    <Compile Include="Catalog\CortexBootloaderInformationCatalog.cs" />
     <Compile Include="CortexBootloaderInformation.cs" />
     <Compile Include="CortexBootloaderPropertiesProvider.cs" />
     <Compile Include="CortexEmptyImageFormatter.cs" />
@@ -108,9 +108,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Bootloaders\at91sam7a3.bin" />
-    <EmbeddedResource Include="Bootloaders\mdr32f9q2i.bin" />
-    <EmbeddedResource Include="Bootloaders\stm32f4.bin" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

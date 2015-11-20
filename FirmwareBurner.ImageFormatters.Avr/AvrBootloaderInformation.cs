@@ -1,13 +1,16 @@
 using System;
 using FirmwareBurner.ImageFormatters.Binary;
 using FirmwareBurner.ImageFormatters.Binary.BodyLoaders;
+using FirmwareBurner.Imaging;
 
 namespace FirmwareBurner.ImageFormatters.Avr
 {
     public class AvrBootloaderInformation : BinaryBootloaderInformation<AvrMemoryKind>
     {
-        public AvrBootloaderInformation(String DeviceName, AvrFuses RequiredFuses, IBodyLoader BodyLoader, Placement<AvrMemoryKind> BootloaderPlacement,
-                                        Placement<AvrMemoryKind> FilesTablePlacement, Placement<AvrMemoryKind> PropertiesTablePlacement) : base(DeviceName, BootloaderPlacement, BodyLoader)
+        public AvrBootloaderInformation(String DeviceName, BootloaderApi Api, AvrFuses RequiredFuses, IBodyLoader BodyLoader,
+                                        Placement<AvrMemoryKind> BootloaderPlacement, Placement<AvrMemoryKind> FilesTablePlacement,
+                                        Placement<AvrMemoryKind> PropertiesTablePlacement)
+            : base(DeviceName, BootloaderPlacement, BodyLoader, Api)
         {
             this.PropertiesTablePlacement = PropertiesTablePlacement;
             this.FilesTablePlacement = FilesTablePlacement;

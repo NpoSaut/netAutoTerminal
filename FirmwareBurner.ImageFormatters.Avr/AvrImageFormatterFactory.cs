@@ -31,7 +31,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
             _checksumProvider = ChecksumProvider;
             _bootloaderInformation = BootloaderInformation;
             _stringEncoder = StringEncoder;
-            Information = new ImageFormatterInformation("С загрузчиком", new BootloaderApi(1, 9, 1));
+            Information = new ImageFormatterInformation("С загрузчиком", _bootloaderInformation.Api);
         }
 
         public IImageFormatter<AvrImage> GetFormatter()

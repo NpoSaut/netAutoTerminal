@@ -13,7 +13,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
         public void Initialize()
         {
             _container
-                .RegisterType<IAvrBootloadersCatalog, StaticAvrBootloadersCatalog>(new ContainerControlledLifetimeManager())
+                .RegisterType<IAvrBootloadersCatalog, AvrBootloadersCatalog>(new ContainerControlledLifetimeManager())
                 .RegisterType<IImageFormattersCatalog<AvrImage>, AvrImageFormatterCatalog>("Раз", new ContainerControlledLifetimeManager());
         }
     }

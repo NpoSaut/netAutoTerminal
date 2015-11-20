@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using FirmwareBurner.BootloadersCatalog;
 using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.ImageFormatters.Cortex;
@@ -31,13 +32,16 @@ namespace FirmwareBurner
             mc.AddModule(typeof (CommonsModule));
             mc.AddModule(typeof (BurningModule));
 
+            // Каталог загрузчиков
+            mc.AddModule(typeof (XmlBootloaderCatalogModule));
+
             // Модули сборщиков образов
-            mc.AddModule(typeof(AvrImagesModule));
-            mc.AddModule(typeof(CortexImagesModule));
+            mc.AddModule(typeof (AvrImagesModule));
+            mc.AddModule(typeof (CortexImagesModule));
 
             // Модули рецептов прошивки
-            mc.AddModule(typeof(AvrReceiptsModule));
-            mc.AddModule(typeof(CortexReceiptsModule));
+            mc.AddModule(typeof (AvrReceiptsModule));
+            mc.AddModule(typeof (CortexReceiptsModule));
 
             // Модули интерфейса
             mc.AddModule(typeof (SettingsModule));
