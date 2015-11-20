@@ -42,6 +42,8 @@
     <Compile Include="Entities\ToolWorkResult.cs" />
     <Compile Include="Implementations\EmbeddedToolBody.cs" />
     <Compile Include="Implementations\SingletonEmbeddedToolBodyFactoryBase.cs" />
+    <Compile Include="Implementations\StaticToolBody.cs" />
+    <Compile Include="Implementations\StaticToolBodyFactory.cs" />
     <Compile Include="Implementations\ToolLauncher.cs" />
     <Compile Include="Interfaces\ToolLauncherHelper.cs" />
     <Compile Include="Interfaces\IToolBody.cs" />

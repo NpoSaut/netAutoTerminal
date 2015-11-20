@@ -24,6 +24,7 @@
             <ContentControl regions:RegionManager.RegionName="Root" ClipToBounds="True" />
             <Button HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource SquareTextIconButton}"
                     Content="x" FontSize="16" Click="CloseButton_Click" Padding="4" />
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" IsHitTestVisible="False" Name="VersionIndicator" Margin="3" Opacity="0.6" FontSize="9" />
         </Grid>
         <Border.Effect>
             <DropShadowEffect BlurRadius="13" ShadowDepth="2" Opacity="0.5" />

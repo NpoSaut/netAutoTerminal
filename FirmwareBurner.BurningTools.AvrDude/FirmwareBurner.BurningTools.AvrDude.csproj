@@ -69,6 +69,10 @@
     <None Include="Resources\ChipPseudonames.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
+      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
+      <Name>AsyncOperations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ExternalTools\ExternalTools.csproj">
       <Project>{61C24D4C-9079-4E7C-8B59-023890A7A8CD}</Project>
       <Name>ExternalTools</Name>

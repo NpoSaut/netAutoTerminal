@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="FirmwarePacker.Views.ProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:ProjectViewModel}">
+
+    <TextBlock TextWrapping="Wrap" Foreground="#CE8500" TextAlignment="Center" FontSize="14">
+        <Run Text="{Binding Path=Name, Mode=OneWay}" />
+    </TextBlock>
+
+</UserControl>

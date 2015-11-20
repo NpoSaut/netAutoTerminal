@@ -4,3 +4,9 @@
 [submodule "WpfLib"]
 	path = WpfLib
 	url = ../WpfLib.git
+[submodule "AsyncOperations"]
+	path = AsyncOperations
+	url = ../netAsyncOperations.git
+[submodule "FirmwareBurner.BootloadersCatalog/Bootloaders"]
+	path = FirmwareBurner.BootloadersCatalog/Bootloaders
+	url = https://git.nposaut.ru:443/binBootloadersCatalog.git

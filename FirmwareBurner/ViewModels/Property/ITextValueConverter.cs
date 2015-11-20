@@ -1,24 +1,20 @@
-using System;
-using System.Globalization;
+using System.Collections.Generic;
 
 namespace FirmwareBurner.ViewModels.Property
 {
+    /// <summary>Конвертер из строки в объект</summary>
+    /// <typeparam name="TValue">Тип объекта для конверсии</typeparam>
     public interface ITextValueConverter<TValue>
     {
-        bool TryConvert(string Text, out TValue Value);
+        /// <summary>Конвертирует строку в объект</summary>
+        /// <param name="Text">Строковое значение</param>
+        /// <param name="Value">Выходное значение</param>
+        /// <returns>Список ошибок конвертации</returns>
+        IEnumerable<string> TryConvert(string Text, out TValue Value);
+
+        /// <summary>Получает строковое представление объекта</summary>
+        /// <param name="Value">Значение объекта</param>
+        /// <returns>Строковое представление</returns>
         string GetText(TValue Value);
-    }
-
-    public class DateTimeTextValueConverter : ITextValueConverter<DateTime>
-    {
-        private readonly string _formatString;
-        public DateTimeTextValueConverter(string FormatString) { _formatString = FormatString; }
-
-        public bool TryConvert(string Text, out DateTime Value)
-        {
-            return DateTime.TryParseExact(Text, _formatString, CultureInfo.CurrentUICulture, DateTimeStyles.AllowWhiteSpaces, out Value);
-        }
-
-        public string GetText(DateTime Value) { return Value.ToString(_formatString); }
     }
 }

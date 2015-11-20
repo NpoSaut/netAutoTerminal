@@ -7,7 +7,7 @@ namespace FirmwareBurner.BurningTools.AvrDude.Exceptions
     [Serializable]
     public class ProgrammerNotConnectedAvrDudeException : AvrDudeException
     {
-        public ProgrammerNotConnectedAvrDudeException(String Output) : base("Программатор не подключен к компьютеру") { this.Output = Output; }
+        public ProgrammerNotConnectedAvrDudeException(String Output) : base("Программатор не подключен к компьютеру", Output) { }
 
         protected ProgrammerNotConnectedAvrDudeException(
             SerializationInfo info,

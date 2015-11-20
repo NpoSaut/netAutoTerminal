@@ -23,7 +23,10 @@ namespace FirmwareBurner.ViewModels
                 if (Equals(value, _selectedBurningMethod)) return;
                 _selectedBurningMethod = value;
                 if (SelectedBurningMethodChanged != null)
+                {
                     SelectedBurningMethodChanged(this, new EventArgs());
+                    RaisePropertyChanged("SelectedBurningMethod");
+                }
             }
         }
 

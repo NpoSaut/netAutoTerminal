@@ -1,7 +1,8 @@
-﻿using ExternalTools.Implementations;
+﻿using AsyncOperations.Progress;
+using ExternalTools.Implementations;
 using ExternalTools.Interfaces;
+using FirmwareBurner.Imaging;
 using FirmwareBurner.Interaction;
-using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 using FirmwareBurner.ViewModels;
 using FirmwareBurner.ViewModels.Tools;
@@ -42,11 +43,13 @@ namespace FirmwareBurner.Modules
                 .RegisterType<IExceptionDialogSource, EventAggregatorExceptionDialogSource>(new ContainerControlledLifetimeManager())
 
                 // Различные утилиты
+                .RegisterType<IChecksumProvider, FudpCrcChecksumProvider>(new ContainerControlledLifetimeManager())
                 .RegisterType<IStringEncoder, Cp1251StringEncoder>(new ContainerControlledLifetimeManager())
                 .RegisterType<IProgressControllerFactory, ProgressControllerFactory>(new ContainerControlledLifetimeManager())
 
                 // Инструменты перехода на уровень бизнес-логики
-                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager());
+                .RegisterType<IFirmwareProjectFactory, FirmwareProjectFactory>(new ContainerControlledLifetimeManager())
+                .RegisterType(typeof(IImageFormatterFactoryProvider<>), typeof(ImageFormattersProvider<>), new ContainerControlledLifetimeManager());
 
             var regionManager = _container.Resolve<IRegionManager>();
             regionManager.RegisterViewWithRegion("Root", typeof (MainView));

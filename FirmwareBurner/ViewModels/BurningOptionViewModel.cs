@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using FirmwareBurner.AsyncOperations;
+using AsyncOperations.OperationTokens;
 using FirmwareBurner.ViewModels.Bases;
 using Microsoft.Practices.Prism.Commands;
 

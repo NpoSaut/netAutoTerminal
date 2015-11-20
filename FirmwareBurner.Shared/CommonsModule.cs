@@ -16,7 +16,8 @@ namespace FirmwareBurner
             _container
                 .RegisterType<IPropertiesTableGenerator, PropertiesTableGenerator>(new ContainerControlledLifetimeManager())
                 .RegisterType<IPropertiesTableGenerator, PropertiesTableGenerator>(new ContainerControlledLifetimeManager())
-                .RegisterType<IBufferFactory, SegmentedBufferFactory>(new ContainerControlledLifetimeManager());
+                .RegisterType<IBufferFactory, SegmentedBufferFactory>(new ContainerControlledLifetimeManager())
+                .RegisterType(typeof(IImageFormatterFactoryProvider<>), typeof(ImageFormattersProvider<>), new ContainerControlledLifetimeManager());
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.IO;
+using AsyncOperations.Progress;
 using ExternalTools;
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.Stk500;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
-using FirmwareBurner.Progress;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
@@ -29,8 +29,9 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
+        /// <param name="Target">Цель прошивки</param>
         /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
-        public void Burn(AvrImage Image, IProgressToken ProgressToken)
+        public void Burn(AvrImage Image, TargetInformation Target, IProgressToken ProgressToken)
         {
             using (IProgressController progress = _progressControllerFactory.CreateController(ProgressToken))
             {

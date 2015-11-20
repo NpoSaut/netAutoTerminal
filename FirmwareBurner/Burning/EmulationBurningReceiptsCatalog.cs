@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using AsyncOperations.Progress;
 using FirmwareBurner.Burning.Exceptions;
-using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Burning

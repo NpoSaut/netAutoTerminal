@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Linq;
+using AsyncOperations.Progress;
 using FirmwareBurner.Burning.Exceptions;
 using FirmwareBurner.Imaging;
-using FirmwareBurner.Progress;
 using FirmwareBurner.Project;
 
 namespace FirmwareBurner.Burning
@@ -11,11 +12,13 @@ namespace FirmwareBurner.Burning
     public class BurningReceipt<TImage> : IBurningReceipt where TImage : IImage
     {
         private readonly IBurningToolFacade<TImage> _burningToolFacade;
-        private readonly IImageFormatter<TImage> _formatter;
+        private readonly string _deviceName;
+        private readonly IImageFormatterFactoryProvider<TImage> _formatterFactoryProvider;
 
-        public BurningReceipt(string Name, IImageFormatter<TImage> Formatter, IBurningToolFacade<TImage> BurningToolFacade)
+        public BurningReceipt(string Name, string DeviceName, IImageFormatterFactoryProvider<TImage> FormatterFactoryProvider, IBurningToolFacade<TImage> BurningToolFacade)
         {
-            _formatter = Formatter;
+            _deviceName = DeviceName;
+            _formatterFactoryProvider = FormatterFactoryProvider;
             _burningToolFacade = BurningToolFacade;
             this.Name = Name;
         }
@@ -33,10 +36,12 @@ namespace FirmwareBurner.Burning
 
             using (new CompositeProgressManager(Progress, imageProgress, burnProgress))
             {
+                var formatter = _formatterFactoryProvider.GetFormatterFactory(_deviceName, Project.Modules.Select(m => m.FirmwareContent.BootloaderRequirement).ToList()).GetFormatter();
+
                 TImage image;
                 try
                 {
-                    image = _formatter.GetImage(Project, imageProgress);
+                    image = formatter.GetImage(Project, imageProgress);
                 }
                 catch (Exception e)
                 {
@@ -44,7 +49,7 @@ namespace FirmwareBurner.Burning
                 }
                 try
                 {
-                    _burningToolFacade.Burn(image, burnProgress);
+                    _burningToolFacade.Burn(image, Project.Target, burnProgress);
                 }
                 catch (Exception e)
                 {

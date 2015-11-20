@@ -1,4 +1,4 @@
-﻿using FirmwareBurner.Progress;
+﻿using AsyncOperations.Progress;
 
 namespace FirmwareBurner.Burning
 {
@@ -9,7 +9,8 @@ namespace FirmwareBurner.Burning
     {
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
         /// <param name="Image">Образ для прошивки</param>
+        /// <param name="Target">Цель прошивки</param>
         /// <param name="ProgressToken">Токен прогресса выполнения операции</param>
-        void Burn(TImage Image, IProgressToken ProgressToken);
+        void Burn(TImage Image, TargetInformation Target, IProgressToken ProgressToken);
     }
 }

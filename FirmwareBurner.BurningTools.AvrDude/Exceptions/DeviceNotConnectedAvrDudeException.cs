@@ -7,7 +7,7 @@ namespace FirmwareBurner.BurningTools.AvrDude.Exceptions
     [Serializable]
     public class DeviceNotConnectedAvrDudeException : AvrDudeException
     {
-        public DeviceNotConnectedAvrDudeException(String Output) : base("Программируемое устройство не подключено") { this.Output = Output; }
+        public DeviceNotConnectedAvrDudeException(String Output) : base("Программируемое устройство не подключено", Output) { }
 
         protected DeviceNotConnectedAvrDudeException(
             SerializationInfo info,

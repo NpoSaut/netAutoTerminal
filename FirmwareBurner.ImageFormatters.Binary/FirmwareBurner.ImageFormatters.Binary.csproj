@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2B34A3AE-B635-4F22-8982-5ACA97A801CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FirmwareBurner.ImageFormatters.Binary</RootNamespace>
+    <AssemblyName>FirmwareBurner.ImageFormatters.Binary</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BinaryBootloaderInformation.cs" />
+    <Compile Include="BinaryFormatterBase.cs" />
+    <Compile Include="BodyLoaders\FileBodyLoader.cs" />
+    <Compile Include="BootloaderBinaryFormatterBase.cs" />
+    <Compile Include="BinaryImageFile.cs" />
+    <Compile Include="BodyLoaders\IBodyLoader.cs" />
+    <Compile Include="BodyLoaders\ResourceBodyLoader.cs" />
+    <Compile Include="DataSections\Special\BootloaderBodyDataSection.cs" />
+    <Compile Include="DataSections\ChecksumSectionContentDecorator.cs" />
+    <Compile Include="DataSections\ConsecutiveSectionContent.cs" />
+    <Compile Include="DataSections\DataSection.cs" />
+    <Compile Include="DataSections\IDataSection.cs" />
+    <Compile Include="DataSections\ISectionContent.cs" />
+    <Compile Include="DataSections\StaticSectionContent.cs" />
+    <Compile Include="Exceptions\BootloaderBodyNotFoundException.cs" />
+    <Compile Include="FileParsers\DoubleLayerFileParser.cs" />
+    <Compile Include="Exceptions\BadPackageFilenameFormatException.cs" />
+    <Compile Include="FileParsers\IFileParser.cs" />
+    <Compile Include="DataSections\Special\ImageFileDataSection.cs" />
+    <Compile Include="IBootloaderInformationCatalog.cs" />
+    <Compile Include="Placement.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
+      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
+      <Name>AsyncOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
+      <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
+      <Name>FirmwareBurner.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
+      <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
+      <Name>FirmwarePacking</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

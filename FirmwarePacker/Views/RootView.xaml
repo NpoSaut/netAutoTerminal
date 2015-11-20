@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="FirmwarePacker.Views.RootView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:FirmwarePacker.ViewModels"
+             xmlns:views="clr-namespace:FirmwarePacker.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:triggerActions="clr-namespace:FirmwarePacker.TriggerActions"
+             mc:Ignorable="d" d:DataContext="{d:DesignInstance viewModels:RootViewModel}">
+
+    <ContentPresenter Content="{Binding Path=ActualViewModel}">
+        <ContentPresenter.Resources>
+            <DataTemplate DataType="{x:Type viewModels:MainViewModel}">
+                <views:MainView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModels:SelectProjectViewModel}">
+                <views:SelectProjectView />
+            </DataTemplate>
+        </ContentPresenter.Resources>
+    </ContentPresenter>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger SourceObject="{Binding Path=OpenProjectRequest}" EventName="Raised">
+            <triggerActions:ShowOpenFileDialog Title="Открыть файл проекта" />
+        </i:EventTrigger>
+        <i:EventTrigger SourceObject="{Binding Path=SavePackageRequest}" EventName="Raised">
+            <triggerActions:ShowSaveFileDialog Title="Сохранить пакет с прошивкой" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+</UserControl>

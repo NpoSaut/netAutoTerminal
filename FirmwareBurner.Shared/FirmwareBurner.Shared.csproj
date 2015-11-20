@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\BurningReceiptFactoryAttribute.cs" />
+    <Compile Include="BootloadersCatalog\BootloaderCatalogRecord.cs" />
     <Compile Include="Burning\BurningReceiptFactory.cs" />
     <Compile Include="Burning\BurningReceiptFactoryHelper.cs" />
     <Compile Include="Burning\BurningReceiptsCatalog.cs" />
@@ -73,25 +74,33 @@
     <Compile Include="Burning\IBurningReceiptFactory.cs" />
     <Compile Include="Burning\BurningReceipt.cs" />
     <Compile Include="CommonsModule.cs" />
+    <Compile Include="FudpCrcChecksumProvider.cs" />
+    <Compile Include="BootloadersCatalog\IBootloadersCatalog.cs" />
+    <Compile Include="IChecksumProvider.cs" />
     <Compile Include="Imaging\Binary\Buffers\BufferWriter.cs" />
+    <Compile Include="Imaging\Binary\Buffers\IWriter.cs" />
     <Compile Include="Imaging\Binary\Buffers\SegmentedBuffer.cs" />
     <Compile Include="Imaging\Binary\Buffers\IBuffer.cs" />
     <Compile Include="Imaging\Binary\Buffers\IBufferFactory.cs" />
+    <Compile Include="Imaging\Binary\Buffers\WriterBase.cs" />
+    <Compile Include="Imaging\BootloaderApi.cs" />
+    <Compile Include="Imaging\EnumerableImageFormattersCatalogBase.cs" />
     <Compile Include="Imaging\IImageFormatterFactory.cs" />
-    <Compile Include="Imaging\IImageFormattersRepository.cs" />
+    <Compile Include="Imaging\IImageFormatterFactoryProvider.cs" />
+    <Compile Include="Imaging\IImageFormattersCatalog.cs" />
+    <Compile Include="Imaging\ImageFormatterException.cs" />
+    <Compile Include="Imaging\ImageFormatterInformation.cs" />
+    <Compile Include="Imaging\ImageFormatterNotFoundException.cs" />
+    <Compile Include="Imaging\ImageFormattersProvider.cs" />
+    <Compile Include="Imaging\IPropertiesProvider.cs" />
+    <Compile Include="Imaging\PropertiesProviders\CompositePropertiesProvider.cs" />
+    <Compile Include="Imaging\PropertiesProviders\DevicePropertiesProvider.cs" />
+    <Compile Include="Imaging\PropertiesProviders\ModulePropertiesProvider.cs" />
+    <Compile Include="Imaging\PropertiesProviders\SoftwarePropertiesProvider.cs" />
     <Compile Include="Imaging\PropertiesTableGenerator.cs" />
     <Compile Include="Interaction\FileRequestArguments.cs" />
     <Compile Include="Interaction\IFileSelectorService.cs" />
     <Compile Include="Interaction\SaveFileRequestArguments.cs" />
-    <Compile Include="Progress\CompositeProgressManager.cs" />
-    <Compile Include="Progress\IProgressControllerFactory.cs" />
-    <Compile Include="Progress\IProgressPublisher.cs" />
-    <Compile Include="Progress\IProgressToken.cs" />
-    <Compile Include="Progress\IProgressController.cs" />
-    <Compile Include="Progress\ProgressController.cs" />
-    <Compile Include="Progress\ProgressControllerFactory.cs" />
-    <Compile Include="Progress\ProgressProxy.cs" />
-    <Compile Include="Progress\SubprocessProgressToken.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Attributes\TargetDeviceAttribute.cs" />
     <Compile Include="FudpCrc.cs" />
@@ -116,6 +125,10 @@
     <Compile Include="TargetInformation.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
+      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
+      <Name>AsyncOperations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\netFirmwarePacking\FirmwarePacking.csproj">
       <Project>{ACAFB9B6-F2F8-4B22-8E8A-0C453FBF71B6}</Project>
       <Name>FirmwarePacking</Name>

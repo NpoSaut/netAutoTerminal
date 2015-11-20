@@ -1,5 +1,4 @@
 ﻿using FirmwareBurner.Imaging;
-using FirmwareBurner.Imaging.Binary;
 using FirmwareBurner.Imaging.Binary.Buffers;
 
 namespace FirmwareBurner.ImageFormatters.Avr
