@@ -5,7 +5,10 @@ namespace FirmwareBurner.BurningTools.AvrDude.Parameters
 {
     public enum ProgrammerType
     {
-        AvrIsp
+        AvrIsp,
+        ArmUsbTinyH,
+        ArmUsbTinyHChannel1,
+        ArmUsbTinyHChannel2
     }
 
     /// <summary>Параметр идентификатора программатора</summary>
@@ -16,7 +19,10 @@ namespace FirmwareBurner.BurningTools.AvrDude.Parameters
             new Dictionary<ProgrammerType, string>
             {
                 // ReSharper disable StringLiteralTypo
-                { ProgrammerType.AvrIsp, "avrisp2" }
+                { ProgrammerType.AvrIsp, "avrisp2" },
+                { ProgrammerType.ArmUsbTinyH, "ARM-USB-TINY-H" },
+                { ProgrammerType.ArmUsbTinyHChannel1, "ARM-USB-TINY-H_CH1" },
+                { ProgrammerType.ArmUsbTinyHChannel2, "ARM-USB-TINY-H_CH2" }
                 // ReSharper restore StringLiteralTypo
             };
 

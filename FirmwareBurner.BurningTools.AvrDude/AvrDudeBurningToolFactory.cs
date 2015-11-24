@@ -2,6 +2,7 @@
 using ExternalTools.Implementations;
 using ExternalTools.Interfaces;
 using FirmwareBurner.BurningTools.AvrDude.AvrDudeBody;
+using FirmwareBurner.BurningTools.AvrDude.Parameters;
 
 namespace FirmwareBurner.BurningTools.AvrDude
 {
@@ -21,10 +22,10 @@ namespace FirmwareBurner.BurningTools.AvrDude
             _toolBodyFactory = new SingletonEmbeddedToolBodyFactoryBase(typeof (AvrDudeBodyMarker), "avrdude.exe");
         }
 
-        public AvrDudeBurningTool GetBurningTool(string ChipName)
+        public AvrDudeBurningTool GetBurningTool(string ChipName, ProgrammerType ProgrammerKind)
         {
             return new AvrDudeBurningTool(_chipPseudonameProvider.GetChipPseudoname(ChipName), _toolBodyFactory.GetToolBody(), _toolLauncher,
-                                          _progressControllerFactory);
+                                          _progressControllerFactory, ProgrammerKind);
         }
     }
 }

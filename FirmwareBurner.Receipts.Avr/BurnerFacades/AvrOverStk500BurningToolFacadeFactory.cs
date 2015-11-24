@@ -6,7 +6,7 @@ using FirmwareBurner.ImageFormatters.Avr;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
-    [BurningReceiptFactory("Прошить через STK500")]
+    [BurningReceiptFactory("Прошить через AVRISP (Драйвер Atmel Studio)")]
     [TargetDevice("at90can128"), TargetDevice("at90can64")]
     public class AvrOverStk500BurningToolFacadeFactory : IBurningToolFacadeFactory<AvrImage>
     {

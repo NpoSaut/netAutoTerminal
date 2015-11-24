@@ -7,6 +7,7 @@ using FirmwareBurner.BurningTools.AvrDude;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.Imaging.Binary.Buffers;
 using FirmwareBurner.IntelHex;
+using FirmwareBurner.Receipts.Avr.Tools;
 
 namespace FirmwareBurner.Receipts.Avr.BurnerFacades
 {
@@ -14,11 +15,13 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
     {
         private readonly AvrDudeBurningToolFactory _burningToolFactory;
         private readonly string _chipName;
+        private readonly IProgrammerTypeSelector _programmerTypeSelector;
 
-        public AvrOverAvrDudeBurningToolFacade(string ChipName, AvrDudeBurningToolFactory BurningToolFactory)
+        public AvrOverAvrDudeBurningToolFacade(string ChipName, AvrDudeBurningToolFactory BurningToolFactory, IProgrammerTypeSelector ProgrammerTypeSelector)
         {
             _chipName = ChipName;
             _burningToolFactory = BurningToolFactory;
+            _programmerTypeSelector = ProgrammerTypeSelector;
         }
 
         /// <summary>Подготавливает инструментарий и прошивает указанный образ</summary>
@@ -27,7 +30,7 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
         /// <param name="ProgressToken"></param>
         public void Burn(AvrImage Image, TargetInformation Target, IProgressToken ProgressToken)
         {
-            AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName);
+            AvrDudeBurningTool burner = _burningToolFactory.GetBurningTool(_chipName, _programmerTypeSelector.GetProgrammerType(Target));
             var fuses = new Fuses(Image.Fuses.FuseH, Image.Fuses.FuseL, Image.Fuses.FuseX);
 
             var fuseToken = new SubprocessProgressToken(50);

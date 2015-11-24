@@ -15,12 +15,14 @@ namespace FirmwareBurner.BurningTools.AvrDude
         private readonly IProgressControllerFactory _progressControllerFactory;
         private readonly IToolBody _toolBody;
         private readonly IToolLauncher _toolLauncher;
+        private readonly ProgrammerType _programmerKind;
 
-        public AvrDudeBurningTool(string ChipPseudoname, IToolBody ToolBody, IToolLauncher ToolLauncher, IProgressControllerFactory ProgressControllerFactory)
+        public AvrDudeBurningTool(string ChipPseudoname, IToolBody ToolBody, IToolLauncher ToolLauncher, IProgressControllerFactory ProgressControllerFactory, ProgrammerType ProgrammerKind)
         {
             _toolBody = ToolBody;
             _toolLauncher = ToolLauncher;
             _progressControllerFactory = ProgressControllerFactory;
+            _programmerKind = ProgrammerKind;
             _chipPseudoname = ChipPseudoname;
         }
 
@@ -57,7 +59,7 @@ namespace FirmwareBurner.BurningTools.AvrDude
         {
             Process p = _toolLauncher.Execute(_toolBody,
                                               new ConnectionAvrDudeParameter(AvrIspConnectionType.Usb),
-                                              new ProgrammerIdAvrDudeParameter(ProgrammerType.AvrIsp),
+                                              new ProgrammerIdAvrDudeParameter(_programmerKind),
                                               new ChipIdAvrDudeParameter(_chipPseudoname),
                                               new UCommandParameter(MemoryType,
                                                                     Operation,
