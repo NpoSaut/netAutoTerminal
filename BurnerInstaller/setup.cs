@@ -22,29 +22,37 @@ public class Script
 
         string targetDirectoryPath = string.Format("%ProgramFiles%\\Saut\\{0}", projectName);
 
-        var items = new Files(dir.FullName + "\\*.*", CheckFile);
+        var mainFeature = new Feature("Программа", true) { AllowChange = false, ConfigurableDir = "INSTALLDIR" };
+
         var project = new Project(projectName,
-                                  new Dir(targetDirectoryPath,
-                                          items),
+                                  new Dir(mainFeature, targetDirectoryPath, new Files(dir.FullName + "\\*.*", CheckFile)),
+                                  new Dir(mainFeature, @"%PersonalFolder%\Firmwares"),
 
                                   // Shortcuts
-                                  new Dir(@"%ProgramMenu%",
+                                  new Dir(mainFeature, @"%ProgramMenu%",
                                           new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" }
                                       ),
-                                  new Dir("%Desktop%",
-                                          new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" }
+                                  new Dir(mainFeature, "%Desktop%",
+                                          new ExeFileShortcut(mainFeature, projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" }
                                       ));
 
         File exeFile = project.ResolveWildCards(true)
                               .FindFile(f => f.Name.EndsWith(exeFileName))
                               .First();
 
-        //exeFile.AddShortcut(new FileShortcut(projectName, "%ProgramMenu%"));
+        exeFile.AddShortcut(new FileShortcut("Run " + projectName, @"%ProgramMenu%\" + company) { WorkingDirectory = "INSTALLDIR" });
+
+        project.DefaultFeature = mainFeature;
 
         project.UI = WUI.WixUI_InstallDir;
         project.CustomUI = new DialogSequence()
             .On(NativeDialogs.WelcomeDlg, Buttons.Next, new ShowDialog(NativeDialogs.InstallDirDlg))
             .On(NativeDialogs.InstallDirDlg, Buttons.Back, new ShowDialog(NativeDialogs.WelcomeDlg));
+
+        //project.UI = WUI.WixUI_FeatureTree;
+        //project.CustomUI = new DialogSequence()
+        //    .On(NativeDialogs.WelcomeDlg, Buttons.Next, new ShowDialog(NativeDialogs.CustomizeDlg))
+        //    .On(NativeDialogs.CustomizeDlg, Buttons.Back, new ShowDialog(NativeDialogs.WelcomeDlg));
 
         project.Language = "ru-RU";
         project.Version = assembly.GetName().Version;
@@ -75,6 +83,7 @@ public class Script
             Console.WriteLine("Could not sign the MSI file.");
         else
             Console.WriteLine("the MSI file was signed successfully.");
+        Console.ReadLine();
     }
 
     private static bool CheckFile(string file)
