@@ -29,11 +29,7 @@ public class Script
 
                                   // Shortcuts
                                   new Dir(@"%ProgramMenu%",
-                                          new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" },
-                                          new ExeFileShortcut("Удалить " + projectName, "[System64Folder]msiexec.exe", "/x [ProductCode]")
-                                          {
-                                              WorkingDirectory = "INSTALLDIR"
-                                          }
+                                          new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" }
                                       ),
                                   new Dir("%Desktop%",
                                           new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" }
