@@ -1,47 +1,71 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using WixSharp;
+using WixSharp.CommonTasks;
+using Assembly = System.Reflection.Assembly;
 using File = WixSharp.File;
 
 public class Script
 {
     public static void Main(string[] args)
     {
-        var dir = new DirectoryInfo(@"bin\Release");
-        File[] files = dir.EnumerateFiles("*.*", SearchOption.AllDirectories)
-                          .Where(f => CheckFile(f))
-                          .Select(f => new File(f.FullName)).ToArray();
+        var dir = new DirectoryInfo(@"..\..\..\FirmwareBurner\bin\Release");
+        string exeFileFullName = dir.EnumerateFiles("*.exe").First().FullName;
+        string exeFileName = Path.GetFileName(exeFileFullName);
+        Assembly assembly = Assembly.LoadFile(exeFileFullName);
 
-        var project =
-            new Project("Burner",
-                        MapDirectory(new DirectoryInfo(@"bin\Release"), @"%ProgramFiles%\Saut\Burner"));
+        string projectName = assembly.GetCustomAttributes<AssemblyTitleAttribute>().First().Title;
+        string company = assembly.GetCustomAttributes<AssemblyCompanyAttribute>().First().Company;
+
+        string targetDirectoryPath = string.Format("%ProgramFiles%\\Saut\\{0}", projectName);
+
+        var items = new Files(dir.FullName + "\\*.*", CheckFile);
+        var project = new Project(projectName,
+                                  new Dir(targetDirectoryPath,
+                                          items),
+
+                                  // Shortcuts
+                                  new Dir(Path.Combine("%ProgramMenu%", company),
+                                          new ExeFileShortcut(projectName, "[INSTALL_DIR]" + exeFileName, "") { WorkingDirectory = "INSTALL_DIR" },
+                                          new ExeFileShortcut("Удалить " + projectName, "[System64Folder]msiexec.exe", "/x [ProductCode]")
+                                          {
+                                              WorkingDirectory = "INSTALLDIR"
+                                          }
+                                      ),
+                                  new Dir("%Desktop%",
+                                          new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALL_DIR" }
+                                      ));
+
+        File exeFile = project.ResolveWildCards(true)
+                              .FindFile(f => f.Name.EndsWith(exeFileName))
+                              .First();
 
         project.UI = WUI.WixUI_InstallDir;
-        //project.Version = System.Reflection.Assembly.GetAssembly(typeof (FirmwareBurner.App)).GetName().Version;
-        project.Version = new Version(1, 6);
+
+        project.Language = "ru-RU";
+        project.Version = assembly.GetName().Version;
+        project.Description = assembly.GetCustomAttributes<AssemblyDescriptionAttribute>().First().Description;
+        project.ControlPanelInfo.Manufacturer = company;
+        project.ControlPanelInfo.ProductIcon = @"..\..\..\FirmwareBurner\icon.ico";
+        project.ControlPanelInfo.HelpLink = "https://repo.nposaut.ru/#/tools?tool=Burner";
+        project.ControlPanelInfo.NoRepair = true;
+        project.ControlPanelInfo.NoModify = true;
+
         project.GUID = new Guid("6f330b47-2577-43ad-9095-1861ba25889b");
-        //project.UpgradeCode = new Guid("6f330b47-2577-43ad-9095-1861ba25889b");
+        project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
+        project.OutDir = @"..\..\..\installers";
 
         Compiler.BuildMsi(project);
+        Console.WriteLine("done");
+        Console.ReadLine();
     }
 
-    private static Dir MapDirectory(DirectoryInfo di, string MappingPath)
-    {
-        return new Dir(MappingPath,
-                       Enumerable.Empty<WixEntity>()
-                                 .Concat(di.EnumerateDirectories()
-                                           .Select(d => MapDirectory(d, d.Name)))
-                                 .Concat(di.EnumerateFiles()
-                                           .Where(CheckFile)
-                                           .Select(f => new File(f.FullName)))
-                                 .ToArray());
-    }
-
-    private static bool CheckFile(FileInfo file)
+    private static bool CheckFile(string file)
     {
         return
-            !file.Name.Contains(".vhost.exe") &&
-            !file.Name.EndsWith(".pdb");
+            !file.Contains(".vhost.exe") &&
+            !file.EndsWith(".pdb");
     }
 }

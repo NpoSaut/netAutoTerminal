@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <HintPath>..\packages\WixSharp.bin.1.0.20.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
@@ -67,12 +70,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FirmwareBurner\FirmwareBurner.csproj">
-      <Project>{8c7fafeb-0291-44ae-90c1-6e38994d9c1b}</Project>
-      <Name>FirmwareBurner</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\WixSharp.bin.1.0.20.0\build\WixSharp.bin.targets" Condition="Exists('..\packages\WixSharp.bin.1.0.20.0\build\WixSharp.bin.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -92,7 +89,7 @@
   -->
   <UsingTask AssemblyFile="packages\WixSharp.1.0.20.0\build\SetEnvVar.dll" TaskName="SetEnvVar" />
   <PropertyGroup>
-    <PostBuildEvent>cd ..\..
-"$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
