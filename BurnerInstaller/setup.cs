@@ -44,8 +44,8 @@ public class Script
 
         project.DefaultFeature = mainFeature;
 
-        project.BackgroundImage = @"..\..\..\!res\Burner-Icon\background.png";
-        project.BannerImage = @"..\..\..\!res\Burner-Icon\banner.png";
+        //project.BackgroundImage = @"..\..\..\!res\Burner-Icon\background.png";
+        //project.BannerImage = @"..\..\..\!res\Burner-Icon\banner.png";
         project.UI = WUI.WixUI_InstallDir;
         project.CustomUI = new DialogSequence()
             .On(NativeDialogs.WelcomeDlg, Buttons.Next, new ShowDialog(NativeDialogs.InstallDirDlg))
@@ -64,6 +64,8 @@ public class Script
         project.ControlPanelInfo.HelpLink = "https://repo.nposaut.ru/#/tools?tool=Burner";
         project.ControlPanelInfo.NoRepair = true;
         project.ControlPanelInfo.NoModify = true;
+
+        project.SetNetFxPrerequisite("NETFRAMEWORK40CLIENT='#1'", "Программа требует установленного Microsoft .NET Framework 4.0 Client Profile");
 
         project.GUID = new Guid("6f330b47-2577-43ad-9095-1861ba25889b");
         project.MajorUpgradeStrategy = MajorUpgradeStrategy.Default;
