@@ -44,6 +44,8 @@ public class Script
 
         project.DefaultFeature = mainFeature;
 
+        project.BackgroundImage = @"..\..\..\!res\Burner-Icon\background.png";
+        project.BannerImage = @"..\..\..\!res\Burner-Icon\banner.png";
         project.UI = WUI.WixUI_InstallDir;
         project.CustomUI = new DialogSequence()
             .On(NativeDialogs.WelcomeDlg, Buttons.Next, new ShowDialog(NativeDialogs.InstallDirDlg))
