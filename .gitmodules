@@ -10,3 +10,6 @@
 [submodule "FirmwareBurner.BootloadersCatalog/Bootloaders"]
 	path = FirmwareBurner.BootloadersCatalog/Bootloaders
 	url = https://git.nposaut.ru:443/binBootloadersCatalog.git
+[submodule "InstallerTools"]
+	path = InstallerTools
+	url = https://git.nposaut.ru:443/netInstallerTools.git

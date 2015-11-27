@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="493"
+   height="58"
+   id="svg2985"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="banner.svg"
+   inkscape:export-filename="C:\Users\plyusnin\Sources\netFirmwaring\!res\Burner-Icon\banner.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs2987">
+    <linearGradient
+       id="linearGradient3862">
+      <stop
+         style="stop-color:#ffe2ad;stop-opacity:1;"
+         offset="0"
+         id="stop3864" />
+      <stop
+         style="stop-color:#ffcc7e;stop-opacity:1;"
+         offset="1"
+         id="stop3866" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3901">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3903" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop3905" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3819">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop3821" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop3823" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3873">
+      <stop
+         id="stop3875"
+         offset="0"
+         style="stop-color:#838383;stop-opacity:0.27894738;" />
+      <stop
+         id="stop3877"
+         offset="1"
+         style="stop-color:#717171;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3861">
+      <stop
+         style="stop-color:#838383;stop-opacity:0.27894738;"
+         offset="0"
+         id="stop3863" />
+      <stop
+         style="stop-color:#5e5e5e;stop-opacity:0.50526315;"
+         offset="1"
+         id="stop3865" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3842">
+      <stop
+         style="stop-color:#c2c2c2;stop-opacity:1;"
+         offset="0"
+         id="stop3844" />
+      <stop
+         style="stop-color:#e5e5e5;stop-opacity:1;"
+         offset="1"
+         id="stop3846" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3824">
+      <stop
+         style="stop-color:#34e700;stop-opacity:1;"
+         offset="0"
+         id="stop3826" />
+      <stop
+         style="stop-color:#4eff1b;stop-opacity:1;"
+         offset="1"
+         id="stop3828" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3790">
+      <stop
+         style="stop-color:#fae500;stop-opacity:1;"
+         offset="0"
+         id="stop3792" />
+      <stop
+         style="stop-color:#e98b00;stop-opacity:0.7157895;"
+         offset="1"
+         id="stop3794" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3790"
+       id="linearGradient3796"
+       x1="20.057901"
+       y1="21.015701"
+       x2="20.003925"
+       y2="25.123652"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3819"
+       id="linearGradient3855"
+       gradientUnits="userSpaceOnUse"
+       x1="14.715569"
+       y1="13.621327"
+       x2="14.652414"
+       y2="21.768574" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3851">
+      <rect
+         style="fill:url(#linearGradient3855);fill-opacity:1;stroke:none"
+         id="rect3853"
+         width="30.125866"
+         height="28.294313"
+         x="0.69472647"
+         y="0.042582944" />
+    </mask>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient3915"
+       gradientUnits="userSpaceOnUse"
+       x1="14.905041"
+       y1="11.566483"
+       x2="14.905041"
+       y2="20.74122" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3901"
+       id="linearGradient3921"
+       gradientUnits="userSpaceOnUse"
+       x1="14.905041"
+       y1="11.566483"
+       x2="14.905041"
+       y2="20.74122"
+       gradientTransform="matrix(0.97304841,0,0,0.97304841,0.48324752,-0.31334107)" />
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3917">
+      <rect
+         style="fill:url(#linearGradient3921);fill-opacity:1;stroke:none"
+         id="rect3919"
+         width="30.911749"
+         height="27.96192"
+         x="0.60615706"
+         y="-0.27190581" />
+    </mask>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3862"
+       id="radialGradient3868"
+       cx="241.51268"
+       cy="145.33418"
+       fx="241.51268"
+       fy="145.33418"
+       r="246.81737"
+       gradientTransform="matrix(-0.48994668,0.91327196,-1.3749868,-0.73764543,482.97831,61.514395)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="112.45158"
+     inkscape:cy="-14.457769"
+     inkscape:current-layer="layer4"
+     showgrid="false"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:snap-global="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2993"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata2990">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Background"
+     transform="translate(0,-254)">
+    <rect
+       style="fill:url(#radialGradient3868);fill-opacity:1;stroke:none;opacity:0.57976654"
+       id="rect3827"
+       width="493.63474"
+       height="59.25856"
+       x="0"
+       y="253.24678" />
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#050505;fill-opacity:0.03529412;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+       x="-330.18317"
+       y="58.179073"
+       id="text3829"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan3831"
+         x="-330.18317"
+         y="58.179073"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="70.679077"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3833">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="83.179077"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3835">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="95.679077"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3837">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="108.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3839">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="120.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3841">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="133.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3843">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="145.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3845">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="158.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3847">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="170.67906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3849">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="183.17906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3851">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="195.67906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3853">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="208.17906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3855">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="220.67906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3857">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="233.17906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3859">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="245.67906"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3861">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="258.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3863">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="270.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3865">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="283.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3867">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="295.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3869">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="308.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3871">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="320.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3873">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="333.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3875">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="345.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3877">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="358.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3879">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="370.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3881">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="383.17908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3883">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-330.18317"
+         y="395.67908"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3885">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#050505;fill-opacity:0.03529412;stroke:none;font-family:Calibri;-inkscape-font-specification:Calibri"
+       x="-139.86945"
+       y="411.45505"
+       id="text3829-1"
+       sodipodi:linespacing="125%"
+       transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"><tspan
+         sodipodi:role="line"
+         id="tspan3831-8"
+         x="-139.86945"
+         y="411.45505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="423.95505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3833-2">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="436.45505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3835-6">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="448.95505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3837-6">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="461.45505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3839-0">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="473.95505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3841-3">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="486.45505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3843-8">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="498.95505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3845-0">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="511.45505"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3847-1">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="523.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3849-2">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="536.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3851-5">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="548.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3853-0">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="561.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3855-9">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="573.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3857-4">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="586.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3859-7">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="598.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3861-8">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="611.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3863-3">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="623.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3865-5">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="636.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3867-1">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="648.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3869-2">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="661.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3871-0">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="673.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3873-1">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="686.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3875-6">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="698.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3877-4">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="711.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3879-0">НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="723.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3881-6">САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="736.45502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3883-1">    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan><tspan
+         sodipodi:role="line"
+         x="-139.86945"
+         y="748.95502"
+         style="font-weight:bold;fill:#050505;fill-opacity:0.03529412;-inkscape-font-specification:Calibri Bold"
+         id="tspan3885-8">О САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    НПО САУТ    </tspan></text>
+  </g>
+</svg>

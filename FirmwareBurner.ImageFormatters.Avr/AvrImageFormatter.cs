@@ -43,7 +43,7 @@ namespace FirmwareBurner.ImageFormatters.Avr
                                                                                           ICollection<BinaryImageFile<AvrMemoryKind>> Files)
         {
             yield return new DataSection<AvrMemoryKind>(
-                BootloaderInformation.PropertiesTablePlacement,
+                BootloaderInformation.FilesTablePlacement,
                 new FilesTableSectionContent(_checksumProvider, Files));
 
             yield return new DataSection<AvrMemoryKind>(
