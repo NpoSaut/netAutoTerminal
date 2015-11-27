@@ -48,7 +48,6 @@ namespace PackerInstaller
 
             string msi = Compiler.BuildMsi(project);
             InstallerHelper.SignInstaller(msi);
-            Console.ReadLine();
         }
     }
 }

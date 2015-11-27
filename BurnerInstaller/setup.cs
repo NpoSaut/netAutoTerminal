@@ -45,6 +45,5 @@ public class Script
 
         string msi = Compiler.BuildMsi(project);
         InstallerHelper.SignInstaller(msi);
-        Console.ReadLine();
     }
 }
