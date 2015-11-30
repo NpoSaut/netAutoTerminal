@@ -34,9 +34,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Margin="3" Name="NoRecentProjectsLabel"
-                   TextWrapping="Wrap" Visibility="Collapsed"
-                   Text="Нет недавних проектов" />
+        <TextBlock Grid.Row="0" Margin="3" Name="NoRecentProjectsLabel" Visibility="Collapsed"
+                   TextWrapping="Wrap" FontSize="14" TextAlignment="Center" Opacity="0.8"
+                   Text="Нет недавних проектов">
+        </TextBlock>
         <ListBox Grid.Row="0" Margin="2" Name="RecentProjectsList"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ItemsSource="{Binding RecentProjects}"
@@ -47,8 +48,10 @@
 
     <i:Interaction.Triggers>
         <ei:DataTrigger Binding="{Binding Path=RecentProjects.Count}" Value="0" Comparison="Equal">
-            <ei:ChangePropertyAction TargetName="NoRecentProjectsLabel" PropertyName="Visibility" Value="Visible" />
-            <ei:ChangePropertyAction TargetName="RecentProjectsList" PropertyName="Visibility" Value="Collapsed" />
+            <ei:ChangePropertyAction TargetObject="{Binding ElementName=NoRecentProjectsLabel}"
+                                     PropertyName="Visibility" Value="Visible" />
+            <ei:ChangePropertyAction TargetObject="{Binding ElementName=RecentProjectsList}"
+                                     PropertyName="Visibility" Value="Collapsed" />
         </ei:DataTrigger>
         <i:EventTrigger SourceObject="{Binding Path=OpenFileRequest}" EventName="Raised">
             <triggerActions:ShowOpenFileDialog Title="Открыть файл проекта" />
