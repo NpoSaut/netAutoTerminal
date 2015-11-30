@@ -65,7 +65,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallerTools", "Installer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{4E428E9C-7E13-4734-BEDA-2BF79B1AC890}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackerInstaller", "PackerInstaller\PackerInstaller.csproj", "{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FmPackInstaller", "FmPackInstaller\FmPackInstaller.csproj", "{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
