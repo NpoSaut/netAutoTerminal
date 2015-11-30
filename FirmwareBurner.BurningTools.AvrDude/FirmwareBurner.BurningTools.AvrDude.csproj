@@ -39,14 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AvrDudeBody\AvrDudeBodyMarker.cs" />
     <Compile Include="AvrDudeBurningTool.cs" />
     <Compile Include="AvrDudeBurningToolFactory.cs" />
     <Compile Include="Exceptions\AvrDudeException.cs" />
     <Compile Include="Exceptions\DeviceNotConnectedAvrDudeException.cs" />
     <Compile Include="Exceptions\ProgrammerNotConnectedAvrDudeException.cs" />
     <Compile Include="Fuses.cs" />
-    <Compile Include="IChipPseudonameProvider.cs" />
+    <Compile Include="IAvrDudeChipPseudonameProvider.cs" />
     <Compile Include="Parameters\AvrDudeParameter.cs" />
     <Compile Include="Parameters\ChipIdAvrDudeParameter.cs" />
     <Compile Include="Parameters\ConnectionAvrDudeParameter.cs" />
@@ -60,13 +59,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ResourceFileChipPseudonameProvider.cs" />
+    <Compile Include="ResourceFileAvrDudeChipPseudonameProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AvrDudeBody\avrdude.exe" />
+    <Content Include="Tools\AvrDude\avrdude.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Tools\AvrDude-Olimex\avrdude.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="command-line-example.txt" />
-    <EmbeddedResource Include="AvrDudeBody\avrdude.conf" />
+    <None Include="Tools\AvrDude-Olimex\avrdude.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\ChipPseudonames.txt" />
+    <None Include="Tools\AvrDude\avrdude.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">

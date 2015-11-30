@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using AsyncOperations.Progress;
+using ExternalTools.Implementations;
+using ExternalTools.Interfaces;
 using FirmwareBurner.Attributes;
 using FirmwareBurner.Burning;
 using FirmwareBurner.BurningTools.AvrDude;
@@ -25,10 +28,13 @@ namespace FirmwareBurner.Receipts.Avr.BurnerFacades
         private readonly AvrDudeBurningToolFactory _burningToolFactory;
         private readonly IIndexHelper _indexHelper;
 
-        public AvrOverAvrDudeArmUsbTinyBurningToolFacadeFactory(AvrDudeBurningToolFactory BurningToolFactory, IIndexHelper IndexHelper)
+        public AvrOverAvrDudeArmUsbTinyBurningToolFacadeFactory(IIndexHelper IndexHelper, IToolLauncher ToolLauncher,
+                                                                IProgressControllerFactory ProgressControllerFactory,
+                                                                IAvrDudeChipPseudonameProvider ChipPseudonameProvider)
         {
-            _burningToolFactory = BurningToolFactory;
             _indexHelper = IndexHelper;
+            _burningToolFactory = new AvrDudeBurningToolFactory(ToolLauncher, ChipPseudonameProvider, ProgressControllerFactory,
+                                                                new StaticToolBodyFactory(@"Tools\AvrDude-Olimex", "avrdude.exe"));
         }
 
         /// <summary>Создаёт фасад взаимодействия с инструментом прошивки для указанного типа устройства</summary>

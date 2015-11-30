@@ -16,12 +16,12 @@ namespace FirmwareBurner.Receipts.Avr
         public void Initialize()
         {
             _container
-                .RegisterType<IChipPseudonameProvider, ResourceFileChipPseudonameProvider>()
+                .RegisterType<IAvrDudeChipPseudonameProvider, ResourceFileAvrDudeChipPseudonameProvider>()
                 .RegisterType<IBurningToolFacadeFactory<AvrImage>, AvrOverStk500BurningToolFacadeFactory>(new ContainerControlledLifetimeManager())
 
-                .RegisterBurningReceiptFactory<AvrImage, AvrOverAvrDudeArmUsbTinyBurningToolFacadeFactory>()
                 .RegisterBurningReceiptFactory<AvrImage, AvrOverAvrDudeAvrIspBurningToolFacadeFactory>()
                 .RegisterBurningReceiptFactory<AvrImage, AvrOverStk500BurningToolFacadeFactory>()
+                .RegisterBurningReceiptFactory<AvrImage, AvrOverAvrDudeArmUsbTinyBurningToolFacadeFactory>()
                 .RegisterBurningReceiptFactory<AvrImage, AvrToHexFileToolFacadeFactory>();
         }
     }

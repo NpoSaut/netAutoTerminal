@@ -7,11 +7,11 @@ namespace FirmwareBurner.BurningTools.AvrDude
 {
     /// <summary>Ищет псевдоним для названия процессора, исходя из списка в файле <see cref="Resources.ChipPseudonames" />
     /// </summary>
-    public class ResourceFileChipPseudonameProvider : IChipPseudonameProvider
+    public class ResourceFileAvrDudeChipPseudonameProvider : IAvrDudeChipPseudonameProvider
     {
         private readonly Dictionary<string, string> _dictionary;
 
-        public ResourceFileChipPseudonameProvider()
+        public ResourceFileAvrDudeChipPseudonameProvider()
         {
             _dictionary = Resources.ChipPseudonames.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
                                    .Select(line => line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries))
