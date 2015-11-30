@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using FirmwarePacker.LoadingServices;
 using FirmwarePacker.RecentProjects;
 using FirmwarePacking.Annotations;
@@ -26,7 +28,26 @@ namespace FirmwarePacker.ViewModels.Factories
         public SelectProjectViewModel GetViewModel()
         {
             return new SelectProjectViewModel(_loadProjectService, _eventAggregator,
-                                              _recentProjectsService.GetRecentProjects().Select(p => _recentProjectViewModelFactory.GetViewModel(p)).ToList());
+                                              GetRecentViewModels().ToList());
+        }
+
+        private IEnumerable<RecentProjectViewModel> GetRecentViewModels()
+        {
+            List<RecentProject> recentProjects = _recentProjectsService.GetRecentProjects().ToList();
+            foreach (RecentProject project in recentProjects)
+            {
+                RecentProjectViewModel viewModel = null;
+                try
+                {
+                    viewModel = _recentProjectViewModelFactory.GetViewModel(project);
+                }
+                catch (Exception)
+                {
+                    _recentProjectsService.RemoveRecentProject(project.FileName);
+                }
+                if (viewModel != null)
+                    yield return viewModel;
+            }
         }
     }
 }

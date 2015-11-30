@@ -7,8 +7,8 @@
     <ProjectGuid>{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PackerInstaller</RootNamespace>
-    <AssemblyName>PackerInstaller</AssemblyName>
+    <RootNamespace>FmPackInstaller</RootNamespace>
+    <AssemblyName>FmPackInstaller</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
