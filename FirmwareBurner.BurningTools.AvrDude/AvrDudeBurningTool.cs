@@ -117,7 +117,8 @@ namespace FirmwareBurner.BurningTools.AvrDude
             }
             p.WaitForExit();
 
-            if (output.Contains("did not find any USB device \"usb\""))
+            if (output.Contains("did not find any USB device \"usb\"") ||
+                output.Contains("device not found"))
                 throw new ProgrammerNotConnectedAvrDudeException(output);
 
             if (output.Contains("initialization failed"))
