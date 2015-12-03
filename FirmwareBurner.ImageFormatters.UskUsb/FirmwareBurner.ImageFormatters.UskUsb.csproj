@@ -4,13 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F9966C6-A563-42DF-8A00-53AA90AC3BF2}</ProjectGuid>
+    <ProjectGuid>{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FirmwareBurner.BootloadersCatalog</RootNamespace>
-    <AssemblyName>FirmwareBurner.BootloadersCatalog</AssemblyName>
+    <RootNamespace>FirmwareBurner.ImageFormatters.UskUsb</RootNamespace>
+    <AssemblyName>FirmwareBurner.ImageFormatters.UskUsb</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,43 +68,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Catalog\IUskUsbBootloadersCatalog.cs" />
+    <Compile Include="Catalog\UskUsbBootloadersCatalog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XmlBootloaderCatalogModule.cs" />
-    <Compile Include="XmlBootloadersCatalog.cs" />
+    <Compile Include="Sections\FilesTableSectionContent.cs" />
+    <Compile Include="Sections\PropertiesTableContent.cs" />
+    <Compile Include="UskUsbImageFormatter.cs" />
+    <Compile Include="UskUsbImageFormatterCatalog.cs" />
+    <Compile Include="UskUsbImageFormatterFactory.cs" />
+    <Compile Include="UskUsbImagesModule.cs" />
+    <Compile Include="UskUsbBootloaderInformation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Bootloaders\Bootloaders.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AsyncOperations\AsyncOperations.csproj">
+      <Project>{6E69A70E-1915-44ED-AD9C-228DF3532029}</Project>
+      <Name>AsyncOperations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Binary\FirmwareBurner.ImageFormatters.Binary.csproj">
+      <Project>{2B34A3AE-B635-4F22-8982-5ACA97A801CE}</Project>
+      <Name>FirmwareBurner.ImageFormatters.Binary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FirmwareBurner.ImageFormatters.Cortex\FirmwareBurner.ImageFormatters.Cortex.csproj">
+      <Project>{E2D67FE6-60E8-47D9-9FF8-131842BDB86E}</Project>
+      <Name>FirmwareBurner.ImageFormatters.Cortex</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FirmwareBurner.Shared\FirmwareBurner.Shared.csproj">
       <Project>{5AB84540-E4AF-475A-B998-6F66E9BF495A}</Project>
       <Name>FirmwareBurner.Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Bootloaders\Avr\Bootloader_128k.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Bootloaders\Avr\Bootloader_64k.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <EmbeddedResource Include="Bootloaders\Cortex\at91sam7a3.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Bootloaders\Cortex\mdr32f9q2i.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Bootloaders\Cortex\stm32f4.bin">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <None Include="Bootloaders\Usk\usk_bootloader_mdr32f9q2i.bin">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

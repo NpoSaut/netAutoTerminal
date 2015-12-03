@@ -67,6 +67,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FmPackInstaller", "FmPackInstaller\FmPackInstaller.csproj", "{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FirmwareBurner.ImageFormatters.UskUsb", "FirmwareBurner.ImageFormatters.UskUsb\FirmwareBurner.ImageFormatters.UskUsb.csproj", "{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -317,6 +319,16 @@ Global
 		{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D}.Release|x86.ActiveCfg = Release|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -348,6 +360,7 @@ Global
 		{7F9966C6-A563-42DF-8A00-53AA90AC3BF2} = {7BEA27B9-036D-474C-B9AA-A6C750B97348}
 		{7405EB93-2FFA-4597-BB69-5F0843C98FD2} = {281B3551-87CB-435D-9DD4-4C4F0FE5F3A4}
 		{BFC0CA00-B695-4BA9-B1C2-DE3D17BDB39D} = {4E428E9C-7E13-4734-BEDA-2BF79B1AC890}
+		{A8E7E4B9-EB39-4632-BDF6-B54FC3FFC9B3} = {49AD1DB4-091A-47D3-83F2-2C10CEAA9C1B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

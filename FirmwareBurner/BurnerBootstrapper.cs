@@ -4,6 +4,7 @@ using FirmwareBurner.BootloadersCatalog;
 using FirmwareBurner.Burning;
 using FirmwareBurner.ImageFormatters.Avr;
 using FirmwareBurner.ImageFormatters.Cortex;
+using FirmwareBurner.ImageFormatters.UskUsb;
 using FirmwareBurner.Modules;
 using FirmwareBurner.Receipts.Avr;
 using FirmwareBurner.Receipts.Cortex;
@@ -38,6 +39,7 @@ namespace FirmwareBurner
             // Модули сборщиков образов
             mc.AddModule(typeof (AvrImagesModule));
             mc.AddModule(typeof (CortexImagesModule));
+            mc.AddModule(typeof (UskUsbImagesModule));
 
             // Модули рецептов прошивки
             mc.AddModule(typeof (AvrReceiptsModule));
