@@ -47,6 +47,7 @@
     <Compile Include="OpenOcdTool.cs" />
     <Compile Include="OpenOcdToolFactory.cs" />
     <Compile Include="Parameters\BoardConfigurationOpenOcdLaunchParameter.cs" />
+    <Compile Include="Parameters\DisplayTargetsOpenOcdLaunchParameter.cs" />
     <Compile Include="Parameters\OpenOcdLaunchParameter.cs" />
     <Compile Include="Parameters\ParameterKindAttribute.cs" />
     <Compile Include="Parameters\ProgramOpenOcdLaunchParameter.cs" />

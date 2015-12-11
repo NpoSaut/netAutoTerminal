@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using ExternalTools.Interfaces;
 using FirmwareBurner.BurningTools.OpenOcd.Exceptions;
@@ -22,7 +23,8 @@ namespace FirmwareBurner.BurningTools.OpenOcd
 
         public void Burn(string BoardName, string TargetName, string FirmwareHexPath)
         {
-            Process process = _launcher.Execute(_toolBody, GetLaunchParameters(BoardName, TargetName, FirmwareHexPath));
+            var launchParameters = GetLaunchParameters(BoardName, TargetName, FirmwareHexPath).ToList();
+            Process process = _launcher.Execute(_toolBody, launchParameters);
             string output = process.StandardError.ReadToEnd();
 
             CheckOutput(output, "Error: no device found",
@@ -53,6 +55,7 @@ namespace FirmwareBurner.BurningTools.OpenOcd
             yield return new BoardConfigurationOpenOcdLaunchParameter(BoardName);
             if (TargetName != null)
                 yield return new TargetOpenOcdLaunchParameter(TargetName);
+            yield return new DisplayTargetsOpenOcdLaunchParameter();
             yield return new ProgramOpenOcdLaunchParameter(FirmwareHexPath);
             yield return new ShutdownOpenOcdLaunchParameter();
         }

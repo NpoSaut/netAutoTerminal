@@ -8,6 +8,6 @@
         public TargetOpenOcdLaunchParameter(string TargetName) { _targetName = TargetName; }
 
         /// <summary>Возвращает содержимое параметра</summary>
-        protected override string GetParameterContent() { return string.Format("targets {0}.cpu", _targetName); }
+        protected override string GetParameterContent() { return string.Format("\"targets {0}.cpu\"", _targetName); }
     }
 }
