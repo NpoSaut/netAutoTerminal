@@ -33,7 +33,7 @@ namespace FirmwareBurner.ImageFormatters.Binary.FileParsers
             {
                 throw new BadPackageFilenameFormatException(
                     FirmwareFile.RelativePath,
-                    string.Format("Файл должен находиться в папке, обозначающей тип памяти (допустимые значения: {0})", string.Join(", ", _memoryKinds.Keys)));
+                    "Имя файла должно представлять адрес его размещения в HEX-формате (без \"0x\" и расширения");
             }
             return new BinaryImageFile<TMemoryKind>(new Placement<TMemoryKind>(memoryKind, address), FirmwareFile.Content);
         }
