@@ -41,7 +41,8 @@ namespace FirmwareBurner.Burning
                 try
                 {
                     IImageFormatter<TImage> formatter =
-                        _formatterFactoryProvider.GetFormatterFactory(_deviceName, Project.Modules.Select(m => m.FirmwareContent.BootloaderRequirement).ToList())
+                        _formatterFactoryProvider.GetFormatterFactory(_deviceName, Project.Target.CellId, Project.Target.ModificationId,
+                                                                      Project.Modules.Select(m => m.FirmwareContent.BootloaderRequirement).ToList())
                                                  .GetFormatter();
                     image = formatter.GetImage(Project, imageProgress);
                 }
