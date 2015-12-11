@@ -88,6 +88,7 @@
     <Compile Include="Imaging\IImageFormatterFactory.cs" />
     <Compile Include="Imaging\IImageFormatterFactoryProvider.cs" />
     <Compile Include="Imaging\IImageFormattersCatalog.cs" />
+    <Compile Include="Imaging\ImageFormatterCatalogHelper.cs" />
     <Compile Include="Imaging\ImageFormatterException.cs" />
     <Compile Include="Imaging\ImageFormatterInformation.cs" />
     <Compile Include="Imaging\ImageFormatterNotFoundException.cs" />

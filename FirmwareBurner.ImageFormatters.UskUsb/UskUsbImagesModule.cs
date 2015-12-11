@@ -17,7 +17,7 @@ namespace FirmwareBurner.ImageFormatters.UskUsb
                 .RegisterType<IUskUsbBootloadersCatalog, UskUsbBootloadersCatalog>();
 
             _container
-                .RegisterType<IImageFormattersCatalog<CortexImage>, UskUsbImageFormatterCatalog>("Раз", new ContainerControlledLifetimeManager());
+                .RegisterImageFormattersCatalog<CortexImage, UskUsbImageFormatterCatalog>();
         }
     }
 }
