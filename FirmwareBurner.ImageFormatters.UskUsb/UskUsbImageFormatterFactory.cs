@@ -12,7 +12,7 @@ namespace FirmwareBurner.ImageFormatters.UskUsb
         private static readonly IDictionary<string, CortexMemoryKind> _memoryKinds =
             new Dictionary<string, CortexMemoryKind>
             {
-                { "e", CortexMemoryKind.Flash }
+                { "f", CortexMemoryKind.Flash }
             };
 
         private readonly UskUsbBootloaderInformation _bootloaderInformation;
