@@ -27,7 +27,7 @@ namespace FirmwarePacker.Enpacking
 
         private string CombineVersion(PackageVersion Version)
         {
-            return String.Format(string.IsNullOrWhiteSpace(Version.Label) ? "{0}.{1}" : "{0}.{1}\u2009{2}",
+            return String.Format(string.IsNullOrWhiteSpace(Version.Label) ? "{0}.{1}" : "{0}.{1} {2}",
                                  Version.Major, Version.Minor, Version.Label);
         }
     }

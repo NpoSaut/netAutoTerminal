@@ -26,6 +26,9 @@ namespace PackerInstaller
                                       new Dir(mainFeature, InstallerHelper.GetSautProgramLocation(projectName),
                                               new Files(dir.FullName + "\\*.*", InstallerHelper.IsFileDesired)),
 
+                                      // Environment Variables
+                                      new EnvironmentVariable("FmPack", "\"[INSTALLDIR]" + exeFileName + "\""),
+
                                       // Shortcuts
                                       new Dir(mainFeature, @"%ProgramMenu%\saut",
                                               new ExeFileShortcut(projectName, "[INSTALLDIR]" + exeFileName, "") { WorkingDirectory = "INSTALLDIR" }
@@ -44,7 +47,11 @@ namespace PackerInstaller
             project.ResolveWildCards(true)
                    .FindFile(f => f.Name.EndsWith(exeFileName))
                    .First()
-                   .AddAssociation(new FileAssociation("fpc", "application/firmware-project", "Открыть", "\"%1\"") { Icon = "project.ico", Description = "Файл проекта для FmPack" });
+                   .AddAssociation(new FileAssociation("fpc", "application/firmware-project", "Открыть", "\"%1\"")
+                                   {
+                                       Icon = "project.ico",
+                                       Description = "Файл проекта для FmPack"
+                                   });
 
             project.SetBasicThings(new Guid("1E7AA096-4665-4BE0-A5EB-D7EE62616E38"), DotNetVersion.DotNet4);
             project.SetInterface(InstallerInterfaceKind.SelectDirectory);
