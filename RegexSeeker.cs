@@ -11,7 +11,7 @@ namespace Saut.AutoTerminal
     {
         public void SeekForMatches(TextReader Reader, IList<IExpectation> Expectations)
         {
-            string buffer = "";
+            string buffer = string.Empty;
             int readedData;
             while ((readedData = Reader.Read()) >= 0)
             {
@@ -22,8 +22,9 @@ namespace Saut.AutoTerminal
                     Match match = expectation.Regex.Match(buffer);
                     if (match.Success)
                     {
-                        expectation.Activate(match);
-                        return;
+                        buffer = string.Empty;
+                        if (expectation.Activate(match))
+                            return;
                     }
                 }
             }

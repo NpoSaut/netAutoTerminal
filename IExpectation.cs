@@ -5,6 +5,6 @@ namespace Saut.AutoTerminal
     public interface IExpectation
     {
         Regex Regex { get; }
-        void Activate(Match Match);
+        bool Activate(Match Match);
     }
 }
