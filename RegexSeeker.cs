@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -14,6 +15,7 @@ namespace Saut.AutoTerminal
             int readedData;
             while ((readedData = Reader.Read()) >= 0)
             {
+                Console.Write((char)readedData);
                 buffer += (char)readedData;
                 foreach (IExpectation expectation in Expectations)
                 {
