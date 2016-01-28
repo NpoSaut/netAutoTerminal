@@ -2,6 +2,8 @@
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using Saut.AutoTerminal.Implementations;
+using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal
 {
@@ -13,7 +15,7 @@ namespace Saut.AutoTerminal
 
         public void Run()
         {
-            var rs = new RegexSeeker();
+            var rs = new RegexSurfer();
 
             var re = new ManualResetEventSlim(false);
             var t = new Task(() =>

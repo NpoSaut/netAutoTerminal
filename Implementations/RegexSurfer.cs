@@ -4,10 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Saut.AutoTerminal.Exception;
+using Saut.AutoTerminal.Interfaces;
 
-namespace Saut.AutoTerminal
+namespace Saut.AutoTerminal.Implementations
 {
-    public class RegexSeeker
+    public class RegexSurfer
     {
         public void SeekForMatches(TextReader Reader, IList<IExpectation> Expectations)
         {
@@ -32,11 +33,11 @@ namespace Saut.AutoTerminal
         }
     }
 
-    public static class RegexSeekerHelper
+    public static class RegexSurferHelper
     {
-        public static void SeekForMatches(this RegexSeeker Seeker, TextReader Reader, params IExpectation[] Expectations)
+        public static void SeekForMatches(this RegexSurfer Surfer, TextReader Reader, params IExpectation[] Expectations)
         {
-            Seeker.SeekForMatches(Reader, Expectations);
+            Surfer.SeekForMatches(Reader, Expectations);
         }
     }
 }

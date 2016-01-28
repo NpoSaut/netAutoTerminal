@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace Saut.AutoTerminal
+namespace Saut.AutoTerminal.Interfaces
 {
     public interface IExpectation
     {

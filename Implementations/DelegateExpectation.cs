@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using Saut.AutoTerminal.Interfaces;
 
-namespace Saut.AutoTerminal
+namespace Saut.AutoTerminal.Implementations
 {
     public class DelegateExpectation : IExpectation
     {

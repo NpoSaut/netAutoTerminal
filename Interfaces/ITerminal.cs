@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Saut.AutoTerminal
+namespace Saut.AutoTerminal.Interfaces
 {
     public interface ITerminal : IDisposable
     {

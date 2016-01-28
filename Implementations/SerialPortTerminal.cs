@@ -1,8 +1,9 @@
 using System.IO;
 using System.IO.Ports;
 using System.Text;
+using Saut.AutoTerminal.Interfaces;
 
-namespace Saut.AutoTerminal
+namespace Saut.AutoTerminal.Implementations
 {
     public class SerialPortTerminal : ITerminal
     {
@@ -13,7 +14,7 @@ namespace Saut.AutoTerminal
             _port = Port;
             _port.Open();
             Output = new StreamReader(_port.BaseStream, Encoding.UTF8);
-            Input = new StreamWriter(_port.BaseStream, Encoding.UTF8) { AutoFlush = true };
+            Input = new StreamWriter(_port.BaseStream, Encoding.UTF8) { AutoFlush = true, NewLine = "\n" };
         }
 
         public StreamReader Output { get; private set; }
