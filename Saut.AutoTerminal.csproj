@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementations\BarrierExpectation.cs" />
+    <Compile Include="Implementations\CommandExpectation.cs" />
     <Compile Include="Implementations\DelegateExpectation.cs" />
     <Compile Include="Exception\NoMatchesFoundException.cs" />
     <Compile Include="Interfaces\IExpectation.cs" />
