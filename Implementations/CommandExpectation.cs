@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal.Implementations
@@ -9,9 +10,11 @@ namespace Saut.AutoTerminal.Implementations
         private readonly object[] _parameters;
         private readonly ITerminal _terminal;
 
+        [StringFormatMethod("Command")]
         public CommandExpectation(string Pattern, ITerminal Terminal, string Command, params object[] Parameters)
             : this(new Regex(Pattern, RegexOptions.Compiled | RegexOptions.Multiline), Terminal, Command, Parameters) { }
 
+        [StringFormatMethod("Command")]
         public CommandExpectation(Regex Regex, ITerminal Terminal, string Command, params object[] Parameters)
         {
             this.Regex = Regex;
