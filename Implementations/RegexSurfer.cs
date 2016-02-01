@@ -8,8 +8,16 @@ using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal.Implementations
 {
+    /// <summary>Инструмент для поиска регулярных выражений по выводу приложения</summary>
     public class RegexSurfer
     {
+        /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
+        /// <param name="Reader"><see cref="TextReader" /> для чтения из потока вывода приложения</param>
+        /// <param name="Expectations">Список ожиданий от приложения</param>
+        /// <exception cref="NoMatchesFoundException">
+        ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
+        ///     сработало
+        /// </exception>
         public void SeekForMatches(TextReader Reader, IList<IExpectation> Expectations)
         {
             string buffer = string.Empty;
@@ -35,6 +43,14 @@ namespace Saut.AutoTerminal.Implementations
 
     public static class RegexSurferHelper
     {
+        /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
+        /// <param name="Surfer">Инструмент для поиска</param>
+        /// <param name="Reader"><see cref="TextReader" /> для чтения из потока вывода приложения</param>
+        /// <param name="Expectations">Список ожиданий от приложения</param>
+        /// <exception cref="NoMatchesFoundException">
+        ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
+        ///     сработало
+        /// </exception>
         public static void SeekForMatches(this RegexSurfer Surfer, TextReader Reader, params IExpectation[] Expectations)
         {
             Surfer.SeekForMatches(Reader, Expectations);

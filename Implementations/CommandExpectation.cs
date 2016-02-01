@@ -4,6 +4,8 @@ using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal.Implementations
 {
+    /// <summary>Ожидание с вводом команды</summary>
+    /// <remarks>Вводит команду после получения ожидаемого текста</remarks>
     public class CommandExpectation : IExpectation
     {
         private readonly string _command;
