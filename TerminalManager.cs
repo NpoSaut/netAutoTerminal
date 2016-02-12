@@ -22,24 +22,24 @@ namespace Saut.AutoTerminal
                              {
                                  while (!re.IsSet)
                                  {
-                                     _terminal.Input.WriteLine();
+                                     _terminal.WriteLine();
                                      Thread.Sleep(100);
                                  }
                              });
 
-            rs.SeekForMatches(_terminal.Output,
+            rs.SeekForMatches(_terminal,
                               new DelegateExpectation(@"U-Boot", true, Match => t.Start()));
 
-            rs.SeekForMatches(_terminal.Output,
+            rs.SeekForMatches(_terminal,
                               new DelegateExpectation(@"SMDKC100 #", true, Match =>
                                                                            {
                                                                                re.Set();
-                                                                               _terminal.Input.WriteLine("nand erase 60000");
+                                                                               _terminal.WriteLine("nand erase 60000");
                                                                            }));
 
             var bads = new List<int>();
 
-            rs.SeekForMatches(_terminal.Output,
+            rs.SeekForMatches(_terminal,
                               new DelegateExpectation(@"Skipping bad block at  0x(?<bad>[0-9a-fA-F]+)\s*\n", false,
                                                       Match => bads.Add(int.Parse(Match.Groups["bad"].Value, NumberStyles.HexNumber))),
                               new DelegateExpectation("OK", Match => true));

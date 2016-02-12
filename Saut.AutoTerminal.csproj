@@ -34,6 +34,7 @@
       <HintPath>..\packages\JetBrains.Annotations.Redist.7.1\lib\net40\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Build.Tasks.v4.0" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,16 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\EndOfStreamTerminalException.cs" />
+    <Compile Include="Exceptions\TerminalException.cs" />
+    <Compile Include="Exceptions\TimeoutTerminalException.cs" />
     <Compile Include="Implementations\BarrierExpectation.cs" />
     <Compile Include="Implementations\CommandExpectation.cs" />
     <Compile Include="Implementations\DelegateExpectation.cs" />
-    <Compile Include="Exception\NoMatchesFoundException.cs" />
+    <Compile Include="Exceptions\NoMatchesFoundException.cs" />
+    <Compile Include="Implementations\Terminal.cs" />
     <Compile Include="Interfaces\IExpectation.cs" />
     <Compile Include="Interfaces\ITerminal.cs" />
+    <Compile Include="Interfaces\IStreamTerminalCore.cs" />
     <Compile Include="Interfaces\ITerminalFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implementations\RegexSurfer.cs" />
-    <Compile Include="Implementations\SerialPortTerminal.cs" />
+    <Compile Include="Implementations\SerialPortTerminalCore.cs" />
     <Compile Include="TerminalManager.cs" />
   </ItemGroup>
   <ItemGroup>

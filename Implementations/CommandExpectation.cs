@@ -29,7 +29,7 @@ namespace Saut.AutoTerminal.Implementations
 
         public bool Activate(Match Match)
         {
-            _terminal.Input.WriteLine(_command, _parameters);
+            _terminal.WriteLine(_command, _parameters);
             return true;
         }
     }

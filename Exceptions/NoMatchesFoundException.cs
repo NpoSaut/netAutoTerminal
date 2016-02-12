@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Saut.AutoTerminal.Exception
+namespace Saut.AutoTerminal.Exceptions
 {
     /// <Summary>Не найдено совпадений и искомыми шаблонами</Summary>
     [Serializable]
-    public class NoMatchesFoundException : ApplicationException
+    public class NoMatchesFoundException : TerminalException
     {
         public NoMatchesFoundException(string Text, List<string> Expectations) : base("Не найдено совпадений и искомыми шаблонами")
         {

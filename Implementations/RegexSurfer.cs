@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using Saut.AutoTerminal.Exception;
+using Saut.AutoTerminal.Exceptions;
 using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal.Implementations
@@ -13,33 +10,36 @@ namespace Saut.AutoTerminal.Implementations
     public class RegexSurfer
     {
         /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
-        /// <param name="Reader"><see cref="TextReader" /> для чтения из потока вывода приложения</param>
+        /// <param name="Terminal">Терминал для чтения</param>
         /// <param name="Expectations">Список ожиданий от приложения</param>
         /// <exception cref="NoMatchesFoundException">
         ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
         ///     сработало
         /// </exception>
-        public void SeekForMatches(TextReader Reader, IList<IExpectation> Expectations)
+        public void SeekForMatches(ITerminal Terminal, IList<IExpectation> Expectations)
         {
             string buffer = string.Empty;
-            int readedData;
-            while ((readedData = Reader.Read()) >= 0)
+            try
             {
-                //Console.Write((char)readedData);
-                Debug.Write((char)readedData);
-                buffer += (char)readedData;
-                foreach (IExpectation expectation in Expectations)
+                while (true)
                 {
-                    Match match = expectation.Regex.Match(buffer);
-                    if (match.Success)
+                    buffer += Terminal.Read();
+                    foreach (IExpectation expectation in Expectations)
                     {
-                        buffer = string.Empty;
-                        if (expectation.Activate(match))
-                            return;
+                        Match match = expectation.Regex.Match(buffer);
+                        if (match.Success)
+                        {
+                            buffer = string.Empty;
+                            if (expectation.Activate(match))
+                                return;
+                        }
                     }
                 }
             }
-            throw new NoMatchesFoundException(buffer, Expectations.Select(e => e.ToString()).ToList());
+            catch (EndOfStreamTerminalException)
+            {
+                throw new NoMatchesFoundException(buffer, Expectations.Select(expectation => expectation.ToString()).ToList());
+            }
         }
     }
 
@@ -47,15 +47,15 @@ namespace Saut.AutoTerminal.Implementations
     {
         /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
         /// <param name="Surfer">Инструмент для поиска</param>
-        /// <param name="Reader"><see cref="TextReader" /> для чтения из потока вывода приложения</param>
+        /// <param name="Terminal">Терминал для чтения</param>
         /// <param name="Expectations">Список ожиданий от приложения</param>
         /// <exception cref="NoMatchesFoundException">
         ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
         ///     сработало
         /// </exception>
-        public static void SeekForMatches(this RegexSurfer Surfer, TextReader Reader, params IExpectation[] Expectations)
+        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, params IExpectation[] Expectations)
         {
-            Surfer.SeekForMatches(Reader, Expectations);
+            Surfer.SeekForMatches(Terminal, Expectations);
         }
     }
 }
