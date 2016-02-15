@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using Saut.AutoTerminal.Interfaces;
 
-namespace Saut.AutoTerminal.Implementations
+namespace Saut.AutoTerminal.Implementations.Expectations
 {
     /// <summary>Ожидание с вводом команды</summary>
     /// <remarks>Вводит команду после получения ожидаемого текста</remarks>
@@ -26,6 +26,11 @@ namespace Saut.AutoTerminal.Implementations
         }
 
         public Regex Regex { get; private set; }
+
+        public SurfingMethod RequiredSurfingMethod
+        {
+            get { return SurfingMethod.ByCharacter; }
+        }
 
         public bool Activate(Match Match)
         {

@@ -11,6 +11,9 @@ namespace Saut.AutoTerminal.Interfaces
 
         char Read();
 
+        [NotNull]
+        string ReadLine();
+
         [StringFormatMethod("Format")]
         void Write([NotNull] string Format, [NotNull] params object[] Arguments);
 

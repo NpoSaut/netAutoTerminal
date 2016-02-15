@@ -1,11 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Saut.AutoTerminal.Exceptions;
 using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal.Implementations
 {
+    /// <summary>Метод чтения вывода терминала</summary>
+    public enum SurfingMethod
+    {
+        /// <summary>По символу</summary>
+        ByCharacter = 0,
+
+        /// <summary>По строчке</summary>
+        ByLine = 1
+    }
+
     /// <summary>Инструмент для поиска регулярных выражений по выводу приложения</summary>
     public class RegexSurfer
     {
@@ -18,27 +29,37 @@ namespace Saut.AutoTerminal.Implementations
         /// </exception>
         public void SeekForMatches(ITerminal Terminal, IList<IExpectation> Expectations)
         {
-            string buffer = string.Empty;
+            var surfingMethod = Expectations.Min(e => e.RequiredSurfingMethod);
+            var buffer = new StringBuilder();
             try
             {
                 while (true)
                 {
-                    buffer += Terminal.Read();
+                    switch (surfingMethod)
+                    {
+                        case SurfingMethod.ByCharacter:
+                            buffer.Append(Terminal.Read());
+                            break;
+                        case SurfingMethod.ByLine:
+                            buffer.AppendLine(Terminal.ReadLine());
+                            break;
+                    }
+
                     foreach (IExpectation expectation in Expectations)
                     {
-                        Match match = expectation.Regex.Match(buffer);
+                        Match match = expectation.Regex.Match(buffer.ToString());
                         if (match.Success)
                         {
-                            buffer = string.Empty;
                             if (expectation.Activate(match))
                                 return;
+                            buffer.Clear();
                         }
                     }
                 }
             }
             catch (EndOfStreamTerminalException)
             {
-                throw new NoMatchesFoundException(buffer, Expectations.Select(expectation => expectation.ToString()).ToList());
+                throw new NoMatchesFoundException(buffer.ToString(), Expectations.Select(expectation => expectation.ToString()).ToList());
             }
         }
     }

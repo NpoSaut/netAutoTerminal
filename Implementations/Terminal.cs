@@ -14,7 +14,7 @@ namespace Saut.AutoTerminal.Implementations
 
         public string Log
         {
-            get { return _logBuilder.ToString(); }
+            get { return _logBuilder.ToString().Trim('\0'); }
         }
 
         public char Read()
@@ -28,6 +28,24 @@ namespace Saut.AutoTerminal.Implementations
                 _logBuilder.Append(character);
                 Debug.Write(character);
                 return character;
+            }
+            catch (TimeoutException)
+            {
+                throw new TimeoutTerminalException();
+            }
+        }
+
+        public string ReadLine()
+        {
+
+            try
+            {
+                var line = _streamTerminal.Output.ReadLine();
+                if (line == null)
+                    throw new Exception();
+                _logBuilder.AppendLine(line);
+                Debug.WriteLine(line);
+                return line;
             }
             catch (TimeoutException)
             {

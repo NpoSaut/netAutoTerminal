@@ -1,11 +1,15 @@
 ﻿using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using Saut.AutoTerminal.Implementations;
 
 namespace Saut.AutoTerminal.Interfaces
 {
     /// <summary>Ожидание от терминала</summary>
     public interface IExpectation
     {
+        /// <summary>Требуемый метод поиска ожидания</summary>
+        SurfingMethod RequiredSurfingMethod { get; }
+
         /// <summary>Искомое регулярное выражение</summary>
         Regex Regex { get; }
 

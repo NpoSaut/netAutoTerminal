@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Saut.AutoTerminal.Implementations;
+using Saut.AutoTerminal.Implementations.Expectations;
 using Saut.AutoTerminal.Interfaces;
 
 namespace Saut.AutoTerminal
@@ -40,8 +40,6 @@ namespace Saut.AutoTerminal
             var bads = new List<int>();
 
             rs.SeekForMatches(_terminal,
-                              new DelegateExpectation(@"Skipping bad block at  0x(?<bad>[0-9a-fA-F]+)\s*\n", false,
-                                                      Match => bads.Add(int.Parse(Match.Groups["bad"].Value, NumberStyles.HexNumber))),
                               new DelegateExpectation("OK", Match => true));
             t.Wait();
         }

@@ -47,9 +47,10 @@
     <Compile Include="Exceptions\EndOfStreamTerminalException.cs" />
     <Compile Include="Exceptions\TerminalException.cs" />
     <Compile Include="Exceptions\TimeoutTerminalException.cs" />
-    <Compile Include="Implementations\BarrierExpectation.cs" />
-    <Compile Include="Implementations\CommandExpectation.cs" />
-    <Compile Include="Implementations\DelegateExpectation.cs" />
+    <Compile Include="Implementations\Expectations\AbortExpectation.cs" />
+    <Compile Include="Implementations\Expectations\BarrierExpectation.cs" />
+    <Compile Include="Implementations\Expectations\CommandExpectation.cs" />
+    <Compile Include="Implementations\Expectations\DelegateExpectation.cs" />
     <Compile Include="Exceptions\NoMatchesFoundException.cs" />
     <Compile Include="Implementations\Terminal.cs" />
     <Compile Include="Interfaces\IExpectation.cs" />
