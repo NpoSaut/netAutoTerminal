@@ -29,7 +29,8 @@ namespace Saut.AutoTerminal.Implementations
         /// </exception>
         public void SeekForMatches(ITerminal Terminal, IList<IExpectation> Expectations)
         {
-            var surfingMethod = Expectations.Min(e => e.RequiredSurfingMethod);
+            //var surfingMethod = Expectations.Min(e => e.RequiredSurfingMethod);
+            const SurfingMethod surfingMethod = SurfingMethod.ByCharacter;
             var buffer = new StringBuilder();
             try
             {
