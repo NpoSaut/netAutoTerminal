@@ -9,7 +9,8 @@ namespace Saut.AutoTerminal.Implementations.Expectations
     {
         private readonly Func<Match, Exception> _exceptionFactory;
 
-        public AbortExpectation([NotNull] string Pattern, [NotNull] Func<Match, Exception> ExceptionFactory) : this(new Regex(Pattern), ExceptionFactory) { }
+        public AbortExpectation([NotNull] string Pattern, [NotNull] Func<Match, Exception> ExceptionFactory)
+            : this(new Regex(Pattern, RegexOptions.Multiline | RegexOptions.Compiled), ExceptionFactory) { }
 
         public AbortExpectation([NotNull] Regex Regex, [NotNull] Func<Match, Exception> ExceptionFactory)
         {
@@ -29,6 +30,9 @@ namespace Saut.AutoTerminal.Implementations.Expectations
         /// <summary>Реакция на получение регулярного выражения</summary>
         /// <param name="Match">Результат поиска регулярного выражения</param>
         /// <returns>True, если требуется прекратить текущий этап ожидания</returns>
-        public bool Activate(Match Match) { throw _exceptionFactory(Match); }
+        public bool Activate(Match Match)
+        {
+            throw _exceptionFactory(Match);
+        }
     }
 }

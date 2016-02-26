@@ -7,7 +7,8 @@ namespace Saut.AutoTerminal.Implementations.Expectations
     /// <remarks>Просто завершает процесс поиска после обнаружения искомой фразы</remarks>
     public class BarrierExpectation : IExpectation
     {
-        public BarrierExpectation(string Pattern, SurfingMethod RequiredSurfingMethod = SurfingMethod.ByLine) : this(new Regex(Pattern), RequiredSurfingMethod) { }
+        public BarrierExpectation(string Pattern, SurfingMethod RequiredSurfingMethod = SurfingMethod.ByLine)
+            : this(new Regex(Pattern, RegexOptions.Multiline | RegexOptions.Compiled), RequiredSurfingMethod) { }
 
         public BarrierExpectation(Regex Regex, SurfingMethod RequiredSurfingMethod = SurfingMethod.ByLine)
         {
