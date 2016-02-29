@@ -26,7 +26,7 @@ namespace Saut.AutoTerminal.Implementations
                     throw new Exception();
                 var character = (char)x;
                 _logBuilder.Append(character);
-                Debug.Write(character);
+                //Debug.Write(character);
                 return character;
             }
             catch (TimeoutException)
