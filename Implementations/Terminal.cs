@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using Saut.AutoTerminal.Exceptions;
 using Saut.AutoTerminal.Interfaces;
 
@@ -17,7 +18,7 @@ namespace Saut.AutoTerminal.Implementations
             get { return _logBuilder.ToString().Trim('\0'); }
         }
 
-        public char Read()
+        public char Read(CancellationToken CancellationToken)
         {
             try
             {
@@ -35,7 +36,7 @@ namespace Saut.AutoTerminal.Implementations
             }
         }
 
-        public string ReadLine()
+        public string ReadLine(CancellationToken CancellationToken)
         {
 
             try

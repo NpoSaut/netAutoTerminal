@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Saut.AutoTerminal.Exceptions;
 using Saut.AutoTerminal.Interfaces;
 
@@ -22,12 +23,13 @@ namespace Saut.AutoTerminal.Implementations
     {
         /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
         /// <param name="Terminal">Терминал для чтения</param>
+        /// <param name="CancellationToken">Токен отмены поиска</param>
         /// <param name="Expectations">Список ожиданий от приложения</param>
         /// <exception cref="NoMatchesFoundException">
         ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
         ///     сработало
         /// </exception>
-        public void SeekForMatches(ITerminal Terminal, IList<IExpectation> Expectations)
+        public void SeekForMatches(ITerminal Terminal, CancellationToken CancellationToken, IList<IExpectation> Expectations)
         {
             //var surfingMethod = Expectations.Min(e => e.RequiredSurfingMethod);
             const SurfingMethod surfingMethod = SurfingMethod.ByCharacter;
@@ -36,13 +38,14 @@ namespace Saut.AutoTerminal.Implementations
             {
                 while (true)
                 {
+                    CancellationToken.ThrowIfCancellationRequested();
                     switch (surfingMethod)
                     {
                         case SurfingMethod.ByCharacter:
-                            buffer.Append(Terminal.Read());
+                            buffer.Append(Terminal.Read(CancellationToken));
                             break;
                         case SurfingMethod.ByLine:
-                            buffer.AppendLine(Terminal.ReadLine());
+                            buffer.AppendLine(Terminal.ReadLine(CancellationToken));
                             break;
                     }
 
@@ -77,7 +80,21 @@ namespace Saut.AutoTerminal.Implementations
         /// </exception>
         public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, params IExpectation[] Expectations)
         {
-            Surfer.SeekForMatches(Terminal, Expectations);
+            SeekForMatches(Surfer, Terminal, CancellationToken.None, Expectations);
+        }
+
+        /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
+        /// <param name="Surfer">Инструмент для поиска</param>
+        /// <param name="Terminal">Терминал для чтения</param>
+        /// <param name="CancellationToken">Токен для отмены ожидания</param>
+        /// <param name="Expectations">Список ожиданий от приложения</param>
+        /// <exception cref="NoMatchesFoundException">
+        ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
+        ///     сработало
+        /// </exception>
+        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, CancellationToken CancellationToken, params IExpectation[] Expectations)
+        {
+            Surfer.SeekForMatches(Terminal, CancellationToken, Expectations);
         }
     }
 }
