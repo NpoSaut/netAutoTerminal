@@ -47,6 +47,7 @@
     <Compile Include="Exceptions\EndOfStreamTerminalException.cs" />
     <Compile Include="Exceptions\ProcessIsNotConfiguredForInteractionTerminalException.cs" />
     <Compile Include="Exceptions\TerminalException.cs" />
+    <Compile Include="Exceptions\TerminalStreamEndedTerminalException.cs" />
     <Compile Include="Exceptions\TimeoutTerminalException.cs" />
     <Compile Include="Implementations\Cores\ProcessTerminalCore.cs" />
     <Compile Include="Implementations\Cores\SerialPortTerminalCore.cs" />

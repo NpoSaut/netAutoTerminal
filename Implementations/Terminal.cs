@@ -24,7 +24,7 @@ namespace Saut.AutoTerminal.Implementations
             {
                 int x = _streamTerminal.Output.Read();
                 if (x < 0)
-                    throw new Exception();
+                    throw new TerminalStreamEndedTerminalException(Log);
                 var character = (char)x;
                 _logBuilder.Append(character);
                 //Debug.Write(character);
@@ -38,10 +38,9 @@ namespace Saut.AutoTerminal.Implementations
 
         public string ReadLine(CancellationToken CancellationToken)
         {
-
             try
             {
-                var line = _streamTerminal.Output.ReadLine();
+                string line = _streamTerminal.Output.ReadLine();
                 if (line == null)
                     throw new Exception();
                 _logBuilder.AppendLine(line);
