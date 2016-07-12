@@ -45,8 +45,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\EndOfStreamTerminalException.cs" />
+    <Compile Include="Exceptions\ProcessIsNotConfiguredForInteractionTerminalException.cs" />
     <Compile Include="Exceptions\TerminalException.cs" />
     <Compile Include="Exceptions\TimeoutTerminalException.cs" />
+    <Compile Include="Implementations\Cores\ProcessTerminalCore.cs" />
+    <Compile Include="Implementations\Cores\SerialPortTerminalCore.cs" />
     <Compile Include="Implementations\Expectations\AbortExpectation.cs" />
     <Compile Include="Implementations\Expectations\BarrierExpectation.cs" />
     <Compile Include="Implementations\Expectations\CommandExpectation.cs" />
@@ -59,7 +62,6 @@
     <Compile Include="Interfaces\ITerminalFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Implementations\RegexSurfer.cs" />
-    <Compile Include="Implementations\SerialPortTerminalCore.cs" />
     <Compile Include="TerminalManager.cs" />
   </ItemGroup>
   <ItemGroup>

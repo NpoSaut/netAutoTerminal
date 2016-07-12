@@ -4,7 +4,7 @@ using System.Text;
 using JetBrains.Annotations;
 using Saut.AutoTerminal.Interfaces;
 
-namespace Saut.AutoTerminal.Implementations
+namespace Saut.AutoTerminal.Implementations.Cores
 {
     /// <summary>Терминал, работающий через последовательный порт</summary>
     public class SerialPortTerminalCore : IStreamTerminalCore
