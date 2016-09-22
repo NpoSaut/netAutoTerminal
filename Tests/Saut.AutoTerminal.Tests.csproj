@@ -58,7 +58,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Saut.AutoTerminal\Saut.AutoTerminal.csproj">
+    <ProjectReference Include="..\Saut.AutoTerminal.csproj">
       <Project>{65FC4000-1E30-447F-825D-C57FD24904F9}</Project>
       <Name>Saut.AutoTerminal</Name>
     </ProjectReference>
