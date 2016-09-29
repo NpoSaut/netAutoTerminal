@@ -18,38 +18,26 @@ namespace Saut.AutoTerminal.Implementations
             get { return _logBuilder.ToString().Trim('\0'); }
         }
 
-        public char Read(CancellationToken CancellationToken)
+        public char Read(CancellationToken CancellationToken, TimeSpan Timeout)
         {
-            try
+            Stopwatch sw = Stopwatch.StartNew();
+            while (true)
             {
-                int x = _streamTerminal.Output.Read();
-                if (x < 0)
-                    throw new TerminalStreamEndedTerminalException(Log);
-                var character = (char)x;
-                _logBuilder.Append(character);
-                //Debug.Write(character);
-                return character;
-            }
-            catch (TimeoutException)
-            {
-                throw new TimeoutTerminalException();
-            }
-        }
-
-        public string ReadLine(CancellationToken CancellationToken)
-        {
-            try
-            {
-                string line = _streamTerminal.Output.ReadLine();
-                if (line == null)
-                    throw new Exception();
-                _logBuilder.AppendLine(line);
-                Debug.WriteLine(line);
-                return line;
-            }
-            catch (TimeoutException)
-            {
-                throw new TimeoutTerminalException();
+                try
+                {
+                    int x = _streamTerminal.Output.Read();
+                    if (x < 0)
+                        throw new TerminalStreamEndedTerminalException(Log);
+                    var character = (char)x;
+                    _logBuilder.Append(character);
+                    Debug.Write(character);
+                    return character;
+                }
+                catch (TimeoutException)
+                {
+                    if (sw.Elapsed > Timeout)
+                        throw new TimeoutTerminalException();
+                }
             }
         }
 
@@ -57,5 +45,27 @@ namespace Saut.AutoTerminal.Implementations
         public void WriteLine(string Format, params object[] Arguments) { _streamTerminal.Input.WriteLine(Format, Arguments); }
 
         public void Dispose() { _streamTerminal.Dispose(); }
+
+        public string ReadLine(CancellationToken CancellationToken, TimeSpan Timeout)
+        {
+            Stopwatch sw = Stopwatch.StartNew();
+            while (true)
+            {
+                try
+                {
+                    string line = _streamTerminal.Output.ReadLine();
+                    if (line == null)
+                        throw new Exception();
+                    _logBuilder.AppendLine(line);
+                    Debug.WriteLine(line);
+                    return line;
+                }
+                catch (TimeoutException)
+                {
+                    if (sw.Elapsed > Timeout)
+                        throw new TimeoutTerminalException();
+                }
+            }
+        }
     }
 }

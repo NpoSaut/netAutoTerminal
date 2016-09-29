@@ -15,7 +15,7 @@ namespace Saut.AutoTerminal.Implementations.Cores
         {
             _port = Port;
             _port.Open();
-            _port.ReadTimeout = 10000;
+            _port.ReadTimeout = 200;
             _port.BaudRate = BaudRate;
             Output = new StreamReader(_port.BaseStream, Encoding);
             Input = new StreamWriter(_port.BaseStream, Encoding) { AutoFlush = true, NewLine = Ending.GetString() };

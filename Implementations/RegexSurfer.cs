@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,12 +25,13 @@ namespace Saut.AutoTerminal.Implementations
         /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
         /// <param name="Terminal">Терминал для чтения</param>
         /// <param name="CancellationToken">Токен отмены поиска</param>
+        /// <param name="Timeout">Таймаут операции поиска</param>
         /// <param name="Expectations">Список ожиданий от приложения</param>
         /// <exception cref="NoMatchesFoundException">
         ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
         ///     сработало
         /// </exception>
-        public void SeekForMatches(ITerminal Terminal, CancellationToken CancellationToken, IList<IExpectation> Expectations)
+        public void SeekForMatches(ITerminal Terminal, CancellationToken CancellationToken, TimeSpan Timeout, IList<IExpectation> Expectations)
         {
             //var surfingMethod = Expectations.Min(e => e.RequiredSurfingMethod);
             const SurfingMethod surfingMethod = SurfingMethod.ByCharacter;
@@ -42,10 +44,10 @@ namespace Saut.AutoTerminal.Implementations
                     switch (surfingMethod)
                     {
                         case SurfingMethod.ByCharacter:
-                            buffer.Append(Terminal.Read(CancellationToken));
+                            buffer.Append(Terminal.Read(CancellationToken, Timeout));
                             break;
                         case SurfingMethod.ByLine:
-                            buffer.AppendLine(Terminal.ReadLine(CancellationToken));
+                            buffer.AppendLine(Terminal.ReadLine(CancellationToken, Timeout));
                             break;
                     }
 
@@ -70,6 +72,12 @@ namespace Saut.AutoTerminal.Implementations
 
     public static class RegexSurferHelper
     {
+        public static TimeSpan DefaultTimeout
+        {
+            get { return TerminalHelper.DefaultTimeout; }
+            set { TerminalHelper.DefaultTimeout = value; }
+        }
+
         /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
         /// <param name="Surfer">Инструмент для поиска</param>
         /// <param name="Terminal">Терминал для чтения</param>
@@ -78,9 +86,25 @@ namespace Saut.AutoTerminal.Implementations
         ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
         ///     сработало
         /// </exception>
-        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, params IExpectation[] Expectations)
+        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal,
+                                          params IExpectation[] Expectations)
         {
-            SeekForMatches(Surfer, Terminal, CancellationToken.None, Expectations);
+            SeekForMatches(Surfer, Terminal, DefaultTimeout, Expectations);
+        }
+
+        /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
+        /// <param name="Surfer">Инструмент для поиска</param>
+        /// <param name="Terminal">Терминал для чтения</param>
+        /// <param name="Timeout">Таймаут операции поиска</param>
+        /// <param name="Expectations">Список ожиданий от приложения</param>
+        /// <exception cref="NoMatchesFoundException">
+        ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
+        ///     сработало
+        /// </exception>
+        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, TimeSpan Timeout,
+                                          params IExpectation[] Expectations)
+        {
+            SeekForMatches(Surfer, Terminal, CancellationToken.None, Timeout, Expectations);
         }
 
         /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
@@ -92,9 +116,26 @@ namespace Saut.AutoTerminal.Implementations
         ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
         ///     сработало
         /// </exception>
-        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, CancellationToken CancellationToken, params IExpectation[] Expectations)
+        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, CancellationToken CancellationToken,
+                                          params IExpectation[] Expectations)
         {
-            Surfer.SeekForMatches(Terminal, CancellationToken, Expectations);
+            SeekForMatches(Surfer, Terminal, CancellationToken, DefaultTimeout, Expectations);
+        }
+
+        /// <summary>Начинает поиск ожиданий в выводе приложения</summary>
+        /// <param name="Surfer">Инструмент для поиска</param>
+        /// <param name="Terminal">Терминал для чтения</param>
+        /// <param name="CancellationToken">Токен для отмены ожидания</param>
+        /// <param name="Timeout">Таймаут операции поиска</param>
+        /// <param name="Expectations">Список ожиданий от приложения</param>
+        /// <exception cref="NoMatchesFoundException">
+        ///     Вывод приложения был прочитан до конца, но завершающее ожидание так и не
+        ///     сработало
+        /// </exception>
+        public static void SeekForMatches(this RegexSurfer Surfer, ITerminal Terminal, CancellationToken CancellationToken, TimeSpan Timeout,
+                                          params IExpectation[] Expectations)
+        {
+            Surfer.SeekForMatches(Terminal, CancellationToken, Timeout, Expectations);
         }
     }
 }
