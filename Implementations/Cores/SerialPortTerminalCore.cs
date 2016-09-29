@@ -11,13 +11,14 @@ namespace Saut.AutoTerminal.Implementations.Cores
     {
         private readonly SerialPort _port;
 
-        public SerialPortTerminalCore([NotNull] SerialPort Port)
+        public SerialPortTerminalCore([NotNull] SerialPort Port, Encoding Encoding, LineEndings Ending = LineEndings.LF, int BaudRate = 115200)
         {
             _port = Port;
             _port.Open();
             _port.ReadTimeout = 10000;
-            Output = new StreamReader(_port.BaseStream, Encoding.UTF8);
-            Input = new StreamWriter(_port.BaseStream, Encoding.UTF8) { AutoFlush = true, NewLine = "\n" };
+            _port.BaudRate = BaudRate;
+            Output = new StreamReader(_port.BaseStream, Encoding);
+            Input = new StreamWriter(_port.BaseStream, Encoding) { AutoFlush = true, NewLine = Ending.GetString() };
         }
 
         public TextReader Output { get; private set; }
