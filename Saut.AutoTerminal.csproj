@@ -28,5 +28,12 @@
     <Compile Remove="Tests\ConstantTerminalCore.cs" />
     <Compile Remove="Tests\RegexSurferTests.cs" />
     <Compile Remove="Tests\Properties\AssemblyInfo.cs" />
+    <Compile Remove="Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Tests\**" />
   </ItemGroup>
 </Project>
